@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/drawer_title">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/zh_cn"
+                    android:title="@string/lang_chinese" />
+                <item
+                    android:id="@+id/zh_tr"
+                    android:title="@string/lang_chinese_tr" />
+                <item
+                    android:id="@+id/en"
+                    android:title="@string/lang_english" />
+                <item
+                    android:id="@+id/da"
+                    android:title="@string/lang_danish" />
+                <item
+                    android:id="@+id/fr"
+                    android:title="@string/lang_french" />
+                <item
+                    android:id="@+id/ge"
+                    android:title="@string/lang_italian" />
+                <item
+                    android:id="@+id/ko"
+                    android:title="@string/lang_korean" />
+                <item
+                    android:id="@+id/br"
+                    android:title="@string/lang_braz" />
+                <item
+                    android:id="@+id/ru"
+                    android:title="@string/lang_russian" />
+                <item
+                    android:id="@+id/sp"
+                    android:title="@string/lang_spanish" />
+                <item
+                    android:id="@+id/tu"
+                    android:title="@string/lang_turkish" />
+                <item
+                    android:id="@+id/uk"
+                    android:title="@string/lang_ukrainian" />
+                <item
+                    android:id="@+id/vi"
+                    android:title="@string/lang_vietnamese" />
+            </group>
+        </menu>
+    </item>
+</menu>
