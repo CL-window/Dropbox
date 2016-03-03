@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Bootstrap Manual</string>
-    
+
     <string name="action_about">About</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="manual">Manual</string>
+    <string name="bootstrap">Bootstrap</string>
+    <string name="getting_started">Getting Started</string>
+    <string name="css">CSS</string>
+    <string name="components">Components</string>
+    <string name="javascript">JavaScript</string>
 
     <string name="drawer_title">Translations/Languages</string>
 
@@ -29,4 +35,5 @@
         For more information, see https://support.google.com/admob/answer/3052638
     <!- -->
     <string name="banner_ad_unit_id">pub-5718760427715517</string>
+    <string name="title_activity_page">Bootstrap Manual</string>
 </resources>
