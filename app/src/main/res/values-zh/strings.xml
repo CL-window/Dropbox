@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_share">分享</string>
+    <string name="share_info">安装《Bootstrap 手册》, 随时随地学习Bootstrap</string>
+    <string name="app_name">Bootstrap 手册</string>
+    <string name="action_about">关于</string>
+    <string name="open">在浏览器中打开</string>
+    <string name="components">组件</string>
+    <string name="css">CSS全局样式</string>
+    <string name="drawer_title">翻译的语言</string>
+    <string name="getting_started">入门</string>
+    <string name="javascript">Javascript插件</string>
+    <string name="manual">手册页</string>
+    <string name="title_activity_page">Bootstrap 手册</string>
+</resources>

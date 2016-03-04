@@ -1,28 +1,30 @@
 package cn.kejin.learn;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mWebsites.put(R.id.zh_tr, "https://kkbruce.tw/bs3/");
         mWebsites.put(R.id.en, "http://getbootstrap.com/");
         mWebsites.put(R.id.da, "http://getbootstrap.dk/");
-        mWebsites.put(R.id.fr, "http://www.oneskyapp.com/fr/docs/bootstrap/getting-started/");
+        mWebsites.put(R.id.fr, "http://www.oneskyapp.com/fr/docs/bootstrap/");
         mWebsites.put(R.id.ge, "http://holdirbootstrap.de/");
         mWebsites.put(R.id.it, "http://www.hackerstribe.com/guide/IT-bootstrap-3.1.1/");
         mWebsites.put(R.id.ko, "http://bootstrapk.com/");
@@ -67,22 +69,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private static HashMap<Integer, String> mAssetsDirs = new HashMap<>();
     static {
-        /**
-         *
-         zh
-         en
-         da
-         fr
-         de
-         it
-         ko
-         pt
-         ru
-         es
-         tr
-         uk
-         vi
-         */
         mAssetsDirs.put(R.id.zh_cn, "zh-cn");
         mAssetsDirs.put(R.id.zh_tr, "zh-tr");
         mAssetsDirs.put(R.id.en, "en");
@@ -117,13 +103,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mLangIds.put("vi", R.id.vi);
     }
 
-    private static HashMap<Integer, String> mPagePath = new HashMap<>();
+    private static HashMap<Integer, PagesName> mPagePath = new HashMap<>();
     static {
-        mPagePath.put(R.id.bootstrap, "");
-        mPagePath.put(R.id.getting_start, "getting-started/");
-        mPagePath.put(R.id.css, "css/");
-        mPagePath.put(R.id.components, "components/");
-        mPagePath.put(R.id.javascript, "javascript/");
+        mPagePath.put(R.id.zh_cn, new PagesName());
+        mPagePath.put(R.id.zh_tr, new PagesName("GettingStarted", "CSS", "Components", "JavaScript"));
+        mPagePath.put(R.id.en, new PagesName());
+        mPagePath.put(R.id.da, new PagesName());
+        mPagePath.put(R.id.fr, new PagesName());
+        mPagePath.put(R.id.ge, new PagesName());
+        mPagePath.put(R.id.it, new PagesName());
+        mPagePath.put(R.id.ko, new PagesName());
+        mPagePath.put(R.id.br, new PagesName());
+        mPagePath.put(R.id.ru, new PagesName());
+        mPagePath.put(R.id.sp, new PagesName());
+        mPagePath.put(R.id.tu, new PagesName());
+        mPagePath.put(R.id.uk, new PagesName());
+        mPagePath.put(R.id.vi, new PagesName());
+
+    }
+
+    private static class PagesName
+    {
+        public String mGettingStarted = "getting-started";
+        public String mCss = "css";
+        public String mComponents = "components";
+        public String mJavaScript = "javascript";
+
+        public PagesName()
+        {
+            //
+        }
+
+        public PagesName(String gs, String css, String comp, String js)
+        {
+            mGettingStarted = gs;
+            mCss = css;
+            mComponents = comp;
+            mJavaScript = js;
+        }
+
+        public String getPageName(int itemId)
+        {
+            switch (itemId) {
+                case R.id.getting_start:
+                    return mGettingStarted;
+                case R.id.css:
+                    return mCss;
+                case R.id.components:
+                    return mComponents;
+                case R.id.javascript:
+                    return mJavaScript;
+            }
+            return "";
+        }
     }
 
     private DrawerLayout mDrawerLayout = null;
@@ -134,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private NavigationView mNavigationView = null;
 
+    private String mCurrentUrl = "";
     private MenuItem mCurLangItem = null;
     private MenuItem mCurPageItem = null;
 
@@ -153,7 +186,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void loadPage()
     {
-        String url = mWebsites.get(mCurLangItem.getItemId())+mPagePath.get(mCurPageItem.getItemId());
+        int pageId = mCurPageItem.getItemId();
+        int langId = mCurLangItem.getItemId();
+        PagesName pagesName = mPagePath.get(langId);
+        String url = mWebsites.get(langId)+ pagesName.getPageName(pageId);
+
+        mCurrentUrl = url;
         mWebView.loadUrl(url);
     }
 
@@ -173,6 +211,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mCurPageItem.setChecked(true);
 
         mDrawerLayout.openDrawer(GravityCompat.START);
+        mDrawerLayout.postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            }
+        }, 1000);
         loadPage();
     }
 
@@ -193,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         settings.setSupportZoom(false);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
 
+        mWebView.setHorizontalScrollBarEnabled(false);
         mWebView.setWebChromeClient(new WebChromeClient()
         {
             @Override
@@ -205,14 +252,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mWebView.setWebViewClient(new WebViewClient()
         {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            public boolean shouldOverrideUrlLoading(WebView view, final String url)
             {
-                Log.e(TAG, "URL: " + url);
-                if (url.equals("http://getbootstrap.com/getting-started#download")) {
-                    return false;
+                if (url.equals(mCurrentUrl) || url.equals(mCurrentUrl + "/")) {
+                    view.loadUrl(url);
                 }
-//                view.loadUrl(url);
-                return true; //super.shouldOverrideUrlLoading(view, url);
+                else {
+
+                    Snackbar.make(view, url, Snackbar.LENGTH_LONG).setAction(getString(R.string.open), new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(url));
+                            startActivity(intent);
+                        }
+                    }).show();
+                }
+
+                return true;
             }
 
             @Override
@@ -248,12 +307,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
+
         toggle.syncState();
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
     }
-
 
     @Override
     public void onBackPressed()
@@ -276,6 +335,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        switch (item.getItemId()) {
+            case R.id.action_about:
+                View infoView = View.inflate(this, R.layout.layout_about_info, null);
+                infoView.findViewById(R.id.github).setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("https://github.com/liungkejin"));
+                        startActivity(intent);
+                    }
+                });
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setView(infoView);
+                builder.setCancelable(true);
+                builder.create().show();
+                break;
+
+            case R.id.action_share:
+                Intent intent=new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.action_share));
+                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_info));
+                startActivity(Intent.createChooser(intent, getTitle()));
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -294,6 +380,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 mCurPageItem.setChecked(false);
                 mCurPageItem = menuItem;
+                mCurPageItem.setChecked(true);
                 loadPage();
                 break;
 
@@ -303,6 +390,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 mCurLangItem.setChecked(false);
                 mCurLangItem = menuItem;
+                mCurLangItem.setChecked(true);
                 loadPage();
                 break;
         }
