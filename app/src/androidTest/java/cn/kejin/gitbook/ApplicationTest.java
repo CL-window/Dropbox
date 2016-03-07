@@ -1,9 +1,4 @@
-/*
- * Copyright (c) 2015 Shanghai Sweetyi Information Technology Co. Ltd.  All Rights Reserved
- * 版权声明 (c) 2015 上海甜邑信息技术有限公司. 版权所有! 保留最终解释权.
- */
-
-package cn.kejin.learn;
+package cn.kejin.gitbook;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
