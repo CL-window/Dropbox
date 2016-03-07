@@ -14,6 +14,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,8 @@ import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -32,6 +36,8 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private final static String TAG = "MainActivity";
+
+    private Tracker mTracker = AnalyticsApplication.getDefaultTracker();
 
     private final static String BASE_URL = "http://getbootstrap.com";
     /**
@@ -182,6 +188,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupWebView();
 
         setupApplication();
+
+        mTracker.setScreenName(TAG);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void loadPage()
@@ -314,15 +323,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mNavigationView.setNavigationItemSelectedListener(this);
     }
 
+    private boolean mBackFlag = false;
     @Override
-    public void onBackPressed()
+    public boolean onKeyDown(int keycode, KeyEvent event)
     {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (keycode == KeyEvent.KEYCODE_BACK) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
+
+            if (!mBackFlag) {
+                mBackFlag = true;
+                Snackbar.make(mDrawerLayout, getString(R.string.press_one_more), Snackbar.LENGTH_SHORT).show();
+                mDrawerLayout.postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        mBackFlag = false;
+                    }
+                }, 2000);
+                return true;
+            }
+
+            mBackFlag = false;
         }
-        else {
-            super.onBackPressed();
-        }
+
+        return super.onKeyDown(keycode, event);
     }
 
     @Override

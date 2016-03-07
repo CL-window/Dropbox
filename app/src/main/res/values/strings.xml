@@ -39,4 +39,6 @@
     <!- -->
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-5718760427715517/3778241385</string>
     <string name="title_activity_page">Bootstrap Manual</string>
+
+    <string name="press_one_more">Press back again to exit</string>
 </resources>

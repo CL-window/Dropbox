@@ -12,4 +12,5 @@
     <string name="javascript">Javascript插件</string>
     <string name="manual">手册页</string>
     <string name="title_activity_page">Bootstrap 手册</string>
+    <string name="press_one_more">再按一次退出</string>
 </resources>
