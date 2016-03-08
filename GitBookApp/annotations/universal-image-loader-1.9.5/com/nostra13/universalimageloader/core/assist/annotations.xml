@@ -1,0 +1,68 @@
+<root>
+    <item name='com.nostra13.universalimageloader.core.assist.FailReason.FailType NETWORK_DENIED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.LoadedFrom MEMORY_CACHE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ViewScaleType CROP'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.QueueProcessingType FIFO'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.QueueProcessingType LIFO'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ImageSize com.nostra13.universalimageloader.core.assist.ImageSize scale(float)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.LoadedFrom DISC_CACHE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ImageScaleType EXACTLY'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ImageScaleType EXACTLY_STRETCHED'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.FailReason.FailType OUT_OF_MEMORY'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ImageSize com.nostra13.universalimageloader.core.assist.ImageSize scaleDown(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ImageScaleType NONE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ImageScaleType NONE_SAFE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ViewScaleType FIT_INSIDE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.LoadedFrom NETWORK'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ViewScaleType com.nostra13.universalimageloader.core.assist.ViewScaleType fromImageView(android.widget.ImageView)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ImageScaleType IN_SAMPLE_POWER_OF_2'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ImageScaleType IN_SAMPLE_INT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.FailReason.FailType IO_ERROR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.FailReason.FailType UNKNOWN'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.FailReason.FailType DECODING_ERROR'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.ViewScaleType com.nostra13.universalimageloader.core.assist.ViewScaleType fromImageView(android.widget.ImageView) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

@@ -1,0 +1,62 @@
+<root>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder ERROR_NO_IMAGE_STREAM'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder android.graphics.Bitmap considerExactScaleAndOrientatiton(android.graphics.Bitmap, com.nostra13.universalimageloader.core.decode.ImageDecodingInfo, int, boolean) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder ERROR_CANT_DECODE_IMAGE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder android.graphics.Bitmap considerExactScaleAndOrientatiton(android.graphics.Bitmap, com.nostra13.universalimageloader.core.decode.ImageDecodingInfo, int, boolean) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder com.nostra13.universalimageloader.core.decode.BaseImageDecoder.ImageFileInfo defineImageSizeAndRotation(java.io.InputStream, com.nostra13.universalimageloader.core.decode.ImageDecodingInfo) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder LOG_FLIP_IMAGE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.ImageDecoder android.graphics.Bitmap decode(com.nostra13.universalimageloader.core.decode.ImageDecodingInfo) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.ImageDecodingInfo ImageDecodingInfo(java.lang.String, java.lang.String, java.lang.String, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType, com.nostra13.universalimageloader.core.download.ImageDownloader, com.nostra13.universalimageloader.core.DisplayImageOptions) 6'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder LOG_SUBSAMPLE_IMAGE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder com.nostra13.universalimageloader.core.decode.BaseImageDecoder.ExifInfo defineExifOrientation(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder java.io.InputStream resetStream(java.io.InputStream, com.nostra13.universalimageloader.core.decode.ImageDecodingInfo) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder java.io.InputStream getImageStream(com.nostra13.universalimageloader.core.decode.ImageDecodingInfo) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder android.graphics.BitmapFactory.Options prepareDecodingOptions(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.decode.ImageDecodingInfo) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder LOG_ROTATE_IMAGE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder LOG_SCALE_IMAGE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder android.graphics.Bitmap decode(com.nostra13.universalimageloader.core.decode.ImageDecodingInfo) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder android.graphics.BitmapFactory.Options prepareDecodingOptions(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.decode.ImageDecodingInfo)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.BaseImageDecoder com.nostra13.universalimageloader.core.decode.BaseImageDecoder.ImageFileInfo defineImageSizeAndRotation(java.io.InputStream, com.nostra13.universalimageloader.core.decode.ImageDecodingInfo)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.decode.ImageDecodingInfo android.graphics.BitmapFactory.Options getDecodingOptions()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

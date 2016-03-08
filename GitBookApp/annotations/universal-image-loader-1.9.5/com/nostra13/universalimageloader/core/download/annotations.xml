@@ -1,0 +1,59 @@
+<root>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.io.InputStream getStreamFromDrawable(java.lang.String, java.lang.Object) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme HTTP'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme DRAWABLE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.io.InputStream getStreamFromFile(java.lang.String, java.lang.Object) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme ASSETS'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.io.InputStream getStreamFromNetwork(java.lang.String, java.lang.Object)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme HTTPS'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader BaseImageDownloader(android.content.Context) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader ALLOWED_URI_CHARS'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme CONTENT'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader CONTENT_CONTACTS_URI_PREFIX'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader boolean shouldBeProcessed(java.net.HttpURLConnection) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme FILE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme ofUri(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme java.lang.String crop(java.lang.String) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader BaseImageDownloader(android.content.Context, int, int) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.io.InputStream getStreamFromAssets(java.lang.String, java.lang.Object) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme UNKNOWN'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.net.HttpURLConnection createConnection(java.lang.String, java.lang.Object)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>
