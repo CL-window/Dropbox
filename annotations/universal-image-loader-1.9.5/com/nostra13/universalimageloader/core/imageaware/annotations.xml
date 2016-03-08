@@ -1,0 +1,71 @@
+<root>
+    <item name='com.nostra13.universalimageloader.core.imageaware.NonViewAware com.nostra13.universalimageloader.core.assist.ViewScaleType getScaleType()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.NonViewAware scaleType'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ViewAware ViewAware(android.view.View) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ViewAware void setImageBitmapInto(android.graphics.Bitmap, android.view.View) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ImageViewAware void setImageBitmapInto(android.graphics.Bitmap, android.view.View) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ViewAware WARN_CANT_SET_DRAWABLE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ViewAware WARN_CANT_SET_BITMAP'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ImageViewAware void setImageDrawableInto(android.graphics.drawable.Drawable, android.view.View) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ImageViewAware ImageViewAware(android.widget.ImageView, boolean) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.NonViewAware NonViewAware(java.lang.String, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ViewAware com.nostra13.universalimageloader.core.assist.ViewScaleType getScaleType()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.NonViewAware NonViewAware(java.lang.String, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType) 2'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.NonViewAware NonViewAware(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ViewAware ViewAware(android.view.View, boolean) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.NonViewAware NonViewAware(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.NonViewAware imageSize'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ImageAware com.nostra13.universalimageloader.core.assist.ViewScaleType getScaleType()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ViewAware void setImageDrawableInto(android.graphics.drawable.Drawable, android.view.View) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ImageViewAware ImageViewAware(android.widget.ImageView) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.imageaware.ImageViewAware com.nostra13.universalimageloader.core.assist.ViewScaleType getScaleType()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

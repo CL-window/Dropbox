@@ -1,0 +1,95 @@
+<root>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer.CircleDrawable mBitmapRect'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer.CircleDrawable CircleDrawable(android.graphics.Bitmap, java.lang.Integer, float) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.BitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer.RoundedVignetteDrawable void onBoundsChange(android.graphics.Rect) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer.RoundedDrawable mBitmapRect'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer.CircleDrawable void onBoundsChange(android.graphics.Rect) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer.CircleDrawable mRect'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer.RoundedDrawable mRect'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer.CircleDrawable void draw(android.graphics.Canvas) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer.RoundedDrawable void draw(android.graphics.Canvas) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.BitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer.RoundedDrawable RoundedDrawable(android.graphics.Bitmap, int, int) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer.CircleDrawable bitmapShader'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer.RoundedDrawable void onBoundsChange(android.graphics.Rect) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer.RoundedDrawable bitmapShader'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer.RoundedDrawable paint'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer void display(android.graphics.Bitmap, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.LoadedFrom) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer.CircleDrawable paint'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

@@ -1,0 +1,260 @@
+<root>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.DisplayImageOptions, com.nostra13.universalimageloader.core.listener.ImageLoadingListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder preProcessor(com.nostra13.universalimageloader.core.process.BitmapProcessor)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, android.widget.ImageView, com.nostra13.universalimageloader.core.DisplayImageOptions, com.nostra13.universalimageloader.core.listener.ImageLoadingListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder memoryCache(com.nostra13.universalimageloader.cache.memory.MemoryCache)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder defaultDisplayImageOptions(com.nostra13.universalimageloader.core.DisplayImageOptions)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder imageDownloader(com.nostra13.universalimageloader.core.download.ImageDownloader)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder showImageForEmptyUri(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder considerExifParams(boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder diskCache(com.nostra13.universalimageloader.cache.disc.DiskCache)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder delayBeforeLoading(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder discCache(com.nostra13.universalimageloader.cache.disc.DiskCache)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory com.nostra13.universalimageloader.core.download.ImageDownloader createImageDownloader(android.content.Context) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration build()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder postProcessor(com.nostra13.universalimageloader.core.process.BitmapProcessor)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.DisplayImageOptions, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.listener.ImageLoadingListener, com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder cacheInMemory()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, android.widget.ImageView) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder cloneFrom(com.nostra13.universalimageloader.core.DisplayImageOptions) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder cacheOnDisk(boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder diskCacheExtraOptions(int, int, com.nostra13.universalimageloader.core.process.BitmapProcessor)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder tasksProcessingOrder(com.nostra13.universalimageloader.core.assist.QueueProcessingType)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.DisplayImageOptions, com.nostra13.universalimageloader.core.listener.ImageLoadingListener, com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader java.lang.String getLoadingUriForView(com.nostra13.universalimageloader.core.imageaware.ImageAware) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory com.nostra13.universalimageloader.cache.disc.DiskCache createDiskCache(android.content.Context, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator, long, int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, android.widget.ImageView, com.nostra13.universalimageloader.core.DisplayImageOptions, com.nostra13.universalimageloader.core.listener.ImageLoadingListener, com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void cancelDisplayTask(com.nostra13.universalimageloader.core.imageaware.ImageAware) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder bitmapConfig(android.graphics.Bitmap.Config)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions com.nostra13.universalimageloader.core.DisplayImageOptions createSimple()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder memoryCacheSize(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder displayer(com.nostra13.universalimageloader.core.display.BitmapDisplayer)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder cacheInMemory(boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory com.nostra13.universalimageloader.cache.memory.MemoryCache createMemoryCache(android.content.Context, int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder cacheOnDisc(boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder cacheOnDisc()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder resetViewBeforeLoading()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder showStubImage(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory com.nostra13.universalimageloader.core.display.BitmapDisplayer createBitmapDisplayer()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder showImageOnFail(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder denyCacheImageMultipleSizesInMemory()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder threadPoolSize(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration com.nostra13.universalimageloader.core.ImageLoaderConfiguration createDefault(android.content.Context)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder memoryCacheExtraOptions(int, int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder writeDebugLogs()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder handler(android.os.Handler)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder showImageOnFail(android.graphics.drawable.Drawable)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder discCacheExtraOptions(int, int, com.nostra13.universalimageloader.core.process.BitmapProcessor)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder decodingOptions(android.graphics.BitmapFactory.Options) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, android.widget.ImageView, com.nostra13.universalimageloader.core.assist.ImageSize) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader java.lang.String getLoadingUriForView(android.widget.ImageView) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder diskCacheSize(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder imageDecoder(com.nostra13.universalimageloader.core.decode.ImageDecoder)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder resetViewBeforeLoading(boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory java.util.concurrent.Executor createExecutor(int, int, com.nostra13.universalimageloader.core.assist.QueueProcessingType)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void init(com.nostra13.universalimageloader.core.ImageLoaderConfiguration) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder taskExecutor(java.util.concurrent.Executor)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, android.widget.ImageView, com.nostra13.universalimageloader.core.listener.ImageLoadingListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder diskCacheFileCount(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions build()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration com.nostra13.universalimageloader.core.ImageLoaderConfiguration createDefault(android.content.Context) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.listener.ImageLoadingListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder DEFAULT_TASK_PROCESSING_TYPE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder showImageOnLoading(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder showImageForEmptyUri(android.graphics.drawable.Drawable)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder Builder(android.content.Context) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder discCacheFileNameGenerator(com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder extraForDownloader(java.lang.Object)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory com.nostra13.universalimageloader.core.download.ImageDownloader createImageDownloader(android.content.Context)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder decodingOptions(android.graphics.BitmapFactory.Options)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder discCacheFileCount(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, com.nostra13.universalimageloader.core.imageaware.ImageAware) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder imageScaleType(com.nostra13.universalimageloader.core.assist.ImageScaleType)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder memoryCacheSizePercentage(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder displayer(com.nostra13.universalimageloader.core.display.BitmapDisplayer) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void cancelDisplayTask(android.widget.ImageView) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory com.nostra13.universalimageloader.cache.disc.DiskCache createDiskCache(android.content.Context, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator, long, int) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder showImageOnLoading(android.graphics.drawable.Drawable)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, android.widget.ImageView, com.nostra13.universalimageloader.core.DisplayImageOptions) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory com.nostra13.universalimageloader.core.decode.ImageDecoder createImageDecoder(boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder bitmapConfig(android.graphics.Bitmap.Config) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder discCacheSize(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder diskCacheFileNameGenerator(com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DisplayImageOptions.Builder com.nostra13.universalimageloader.core.DisplayImageOptions.Builder cloneFrom(com.nostra13.universalimageloader.core.DisplayImageOptions)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoader void displayImage(java.lang.String, com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.DisplayImageOptions) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder threadPriority(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.DefaultConfigurationFactory com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator createFileNameGenerator()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder com.nostra13.universalimageloader.core.ImageLoaderConfiguration.Builder taskExecutorForCachedImages(java.util.concurrent.Executor)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>

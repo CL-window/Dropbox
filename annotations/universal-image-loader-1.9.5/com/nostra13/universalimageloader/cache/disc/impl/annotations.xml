@@ -1,0 +1,92 @@
+<root>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache fileNameGenerator'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache LimitedAgeDiskCache(java.io.File, java.io.File, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator, long) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache UnlimitedDiskCache(java.io.File, java.io.File, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator) 2'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache BaseDiskCache(java.io.File) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache UnlimitedDiskCache(java.io.File, java.io.File, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache boolean save(java.lang.String, java.io.InputStream, com.nostra13.universalimageloader.utils.IoUtils.CopyListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache java.io.File getFile(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache java.io.File get(java.lang.String) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache java.io.File getDirectory()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache java.io.File get(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache boolean save(java.lang.String, android.graphics.Bitmap) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache LimitedAgeDiskCache(java.io.File, java.io.File, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator, long) 2'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache java.io.File get(java.lang.String) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache boolean remove(java.lang.String) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache BaseDiskCache(java.io.File, java.io.File) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache boolean remove(java.lang.String) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache UnlimitedDiskCache(java.io.File, java.io.File) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache LimitedAgeDiskCache(java.io.File, long) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache java.io.File get(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache boolean save(java.lang.String, android.graphics.Bitmap) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache UnlimitedDiskCache(java.io.File) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache BaseDiskCache(java.io.File, java.io.File, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator) 2'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache cacheDir'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.BaseDiskCache BaseDiskCache(java.io.File, java.io.File, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache LimitedAgeDiskCache(java.io.File, java.io.File, long) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache boolean save(java.lang.String, java.io.InputStream, com.nostra13.universalimageloader.utils.IoUtils.CopyListener) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+</root>
