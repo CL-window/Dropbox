@@ -5,85 +5,102 @@ package cn.kejin.gitbook.networks
  * Date: 2016/3/8
  */
 
+import android.content.Context
+import cn.kejin.gitbook.UserAccount
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import okhttp3.*
 
 import java.util.concurrent.TimeUnit
-
-import okhttp3.OkHttpClient
 
 /**
  * Control all network jobs, GitBook REST APIs
  */
 class NetworkManager private constructor()// init
 {
+    companion object {
+        val TAG = "NetworkManager"
 
-    val mGson = GsonBuilder().create()
-    private var mHttpClient = OkHttpClient.Builder().connectTimeout(DEF_CONNECT_TIMEOUT_SEC.toLong(), TimeUnit.SECONDS).readTimeout((DEF_CONNECT_TIMEOUT_SEC * 2).toLong(), TimeUnit.SECONDS).writeTimeout((DEF_CONNECT_TIMEOUT_SEC * 2).toLong(), TimeUnit.SECONDS).build()
+        val BASE_URL = "https://api.gitbook.com/"
+
+        val JSON_TYPE = MediaType.parse("application/json; charset:utf-8")
+
+        val DEF_CONNECT_TIMEOUT_SEC = 5
+
+        val instance = NetworkManager()
+    }
+
+    private var mHttpClient = OkHttpClient.Builder()
+            .authenticator({ route, response ->
+                var value = UserAccount.getTokenOrPwd();
+                response.request().newBuilder().addHeader("Authorization",
+                        Credentials.basic(UserAccount.mUser.name, value)).build()
+            })
+            .connectTimeout(DEF_CONNECT_TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
+            .readTimeout((DEF_CONNECT_TIMEOUT_SEC * 2).toLong(), TimeUnit.SECONDS)
+            .writeTimeout((DEF_CONNECT_TIMEOUT_SEC * 2).toLong(), TimeUnit.SECONDS).build()
 
     /**
      * setting okhttpclient 'connect', 'read' and 'write' timeout,
      * the unit is TimeUnit.MILLISECONDS
-     * if value <= 0, then will not change
-     * @param connect if (connect > 0) set connect timeout
+     * @param connect set connect timeout
      * *
-     * @param read    if (read > 0) set read timeout
+     * @param read set read timeout
      * *
-     * @param write   if (write > 0) set write timeout
+     * @param write set write timeout
      */
-    fun setHttpTimeout(connect: Long, read: Long, write: Long) {
-        if (connect <= 0 && read <= 0 && write <= 0) {
-            return
-        }
+    fun setHttpTimeout(connect: Long = mHttpClient.connectTimeoutMillis().toLong(),
+                       read: Long = mHttpClient.readTimeoutMillis().toLong(),
+                       write: Long = mHttpClient.writeTimeoutMillis().toLong()) {
 
-        val builder = mHttpClient.newBuilder()
-
-        if (connect > 0) {
-            builder.connectTimeout(connect, TimeUnit.MILLISECONDS)
-        }
-        if (read > 0) {
-            builder.readTimeout(read, TimeUnit.MILLISECONDS)
-        }
-        if (write > 0) {
-            builder.writeTimeout(write, TimeUnit.MILLISECONDS)
-        }
-
-        mHttpClient = builder.build()
+        mHttpClient =  mHttpClient.newBuilder()
+                .connectTimeout(connect, TimeUnit.MILLISECONDS)
+                .readTimeout(read, TimeUnit.MILLISECONDS)
+                .writeTimeout(write, TimeUnit.MICROSECONDS).build();
     }
 
     /**
      * get absolute URL
      */
-    fun getAbsUrl(uri: String?): String {
-        var uri = uri
-        if (uri == null) {
-            uri = ""
-        }
+    fun getAbsUrl(uri: String): String {
 
-        if (uri.startsWith("/")) {
-            uri = uri.substring(1, uri.length)
-        }
-        return BASE_URL + uri
+        return BASE_URL + if (uri.trim().startsWith("/")) { "/" + uri } else { uri }
     }
 
     /**
-     * Base GET, POST Method
+     * get method
      */
-    operator fun get(uri: String) {
-        //
+    fun get(uri : String, callback: HttpCallback<Models.BaseResp>) {
+        val req = Request.Builder().url(uri).get().build()
+        mHttpClient.newCall(req).enqueue(callback)
     }
 
-    companion object {
-        val TAG = "NetworkManager"
+    /**
+     * post method
+     */
+    fun post(uri : String, json : String,
+             callback: HttpCallback<Models.BaseResp>, auth : Boolean = false) {
 
-        val instance = NetworkManager()
+        val body = RequestBody.create(JSON_TYPE, json);
+        val builder = Request.Builder();
 
-        val BASE_URL = "https://api.gitbook.com/"
+        if (auth) {
+            var value = UserAccount.getTokenOrPwd();
+            if (value.isNullOrEmpty()) {
+                callback.onFailure(HttpCallback.E_NOT_SIGN, "not singed")
+                return;
+            }
 
-        private val DEF_CONNECT_TIMEOUT_SEC = 5
+            builder.addHeader("Authorization", Credentials.basic(UserAccount.mUser.name, value));
+        }
+
+        builder.addHeader("Content-Type", "application/json").url(getAbsUrl(uri)).post(body);
+
+        mHttpClient.newCall(builder.build()).enqueue(callback);
     }
 
     /**
      * REST APIs
      */
+
 }

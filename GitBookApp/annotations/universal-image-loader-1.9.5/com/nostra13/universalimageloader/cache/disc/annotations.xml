@@ -1,11 +1,11 @@
 <root>
-    <item name='com.nostra13.universalimageloader.cache.disc.DiskCache java.io.File getDirectory()'>
+    <item name='com.nostra13.universalimageloader.cache.disc.DiskCache boolean save(java.lang.String, java.io.InputStream, com.nostra13.universalimageloader.utils.IoUtils.CopyListener) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.cache.disc.DiskCache boolean save(java.lang.String, java.io.InputStream, com.nostra13.universalimageloader.utils.IoUtils.CopyListener) 1'>
+    <item name='com.nostra13.universalimageloader.cache.disc.DiskCache java.io.File getDirectory()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>

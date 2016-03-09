@@ -8,6 +8,9 @@
     <item name='android.support.v4.media.MediaDescriptionCompatApi21.Builder void setIconBitmap(java.lang.Object, android.graphics.Bitmap) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='android.support.v4.media.MediaMetadataCompatApi21.Builder java.lang.Object newInstance()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='android.support.v4.media.MediaMetadataCompatApi21.Builder void putString(java.lang.Object, java.lang.String, java.lang.String) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -20,13 +23,7 @@
     <item name='android.support.v4.media.MediaDescriptionCompatApi21 java.lang.CharSequence getSubtitle(java.lang.Object) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='android.support.v4.media.MediaMetadataCompatApi21.Builder java.lang.Object newInstance()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='android.support.v4.media.MediaDescriptionCompatApi21 java.lang.String getMediaId(java.lang.Object) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.media.MediaDescriptionCompatApi21.Builder java.lang.Object newInstance()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.MediaDescriptionCompatApi21 android.os.Bundle getExtras(java.lang.Object) 0'>
@@ -63,6 +60,9 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.MediaDescriptionCompatApi21 android.graphics.Bitmap getIconBitmap(java.lang.Object) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='android.support.v4.media.MediaDescriptionCompatApi21.Builder java.lang.Object newInstance()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.MediaMetadataCompatApi21.Builder void putRating(java.lang.Object, java.lang.String, java.lang.Object) 0'>

@@ -1,4 +1,7 @@
 <root>
+    <item name='com.nostra13.universalimageloader.cache.disc.impl.ext.DiskLruCache.Editor java.io.OutputStream newOutputStream(int)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache LruDiskCache(java.io.File, java.io.File, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator, long, int) 2'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -16,9 +19,6 @@
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
-    </item>
-    <item name='com.nostra13.universalimageloader.cache.disc.impl.ext.DiskLruCache.Editor java.io.OutputStream newOutputStream(int)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache LruDiskCache(java.io.File, com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator, long) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>

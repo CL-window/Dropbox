@@ -29,7 +29,16 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
+    <item name='com.nostra13.universalimageloader.cache.memory.BaseMemoryCache java.util.Collection&lt;java.lang.String&gt; keys()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='com.nostra13.universalimageloader.cache.memory.BaseMemoryCache boolean put(java.lang.String, android.graphics.Bitmap) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.cache.memory.MemoryCache java.util.Collection&lt;java.lang.String&gt; keys()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
@@ -47,15 +56,6 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.cache.memory.BaseMemoryCache java.util.Collection&lt;java.lang.String&gt; keys()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.cache.memory.BaseMemoryCache java.lang.ref.Reference&lt;android.graphics.Bitmap&gt; createReference(android.graphics.Bitmap)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
-    </item>
     <item name='com.nostra13.universalimageloader.cache.memory.LimitedMemoryCache android.graphics.Bitmap remove(java.lang.String) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
@@ -68,13 +68,13 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.cache.memory.MemoryCache java.util.Collection&lt;java.lang.String&gt; keys()'>
+    <item name='com.nostra13.universalimageloader.cache.memory.LimitedMemoryCache boolean put(java.lang.String, android.graphics.Bitmap) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.cache.memory.LimitedMemoryCache boolean put(java.lang.String, android.graphics.Bitmap) 1'>
+    <item name='com.nostra13.universalimageloader.cache.memory.BaseMemoryCache java.lang.ref.Reference&lt;android.graphics.Bitmap&gt; createReference(android.graphics.Bitmap)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>

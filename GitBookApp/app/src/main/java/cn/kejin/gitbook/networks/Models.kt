@@ -16,7 +16,7 @@ class Models {
     /**
      * just for generic
      */
-    class BaseReq//
+    open class BaseReq//
 
 
     /**

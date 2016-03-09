@@ -14,7 +14,7 @@
     <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme ASSETS'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.io.InputStream getStreamFromNetwork(java.lang.String, java.lang.Object)'>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.net.HttpURLConnection createConnection(java.lang.String, java.lang.Object)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme HTTPS'>
@@ -38,9 +38,6 @@
     <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme FILE'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme ofUri(java.lang.String)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme java.lang.String crop(java.lang.String) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -50,10 +47,13 @@
     <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.io.InputStream getStreamFromAssets(java.lang.String, java.lang.Object) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme ofUri(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='com.nostra13.universalimageloader.core.download.ImageDownloader.Scheme UNKNOWN'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.net.HttpURLConnection createConnection(java.lang.String, java.lang.Object)'>
+    <item name='com.nostra13.universalimageloader.core.download.BaseImageDownloader java.io.InputStream getStreamFromNetwork(java.lang.String, java.lang.Object)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
 </root>

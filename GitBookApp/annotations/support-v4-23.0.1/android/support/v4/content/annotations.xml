@@ -1,4 +1,7 @@
 <root>
+    <item name='android.support.v4.content.FileProvider android.database.Cursor query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='android.support.v4.content.PermissionChecker int checkSelfPermission(android.content.Context, java.lang.String) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -14,10 +17,10 @@
     <item name='android.support.v4.content.LocalBroadcastManager void sendBroadcastSync(android.content.Intent) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='android.support.v4.content.FileProvider android.database.Cursor query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)'>
+    <item name='android.support.v4.content.IntentCompat EXTRA_HTML_TEXT'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='android.support.v4.content.IntentCompat EXTRA_HTML_TEXT'>
+    <item name='android.support.v4.content.FileProvider java.lang.String getType(android.net.Uri)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.content.FileProvider void attachInfo(android.content.Context, android.content.pm.ProviderInfo) 1'>
@@ -78,9 +81,6 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.content.CursorLoader CursorLoader(android.content.Context) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.content.FileProvider java.lang.String getType(android.net.Uri)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.content.AsyncTaskLoader AsyncTaskLoader(android.content.Context) 0'>

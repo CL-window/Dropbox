@@ -1,4 +1,7 @@
 <root>
+    <item name='com.nostra13.universalimageloader.utils.StorageUtils java.io.File getCacheDirectory(android.content.Context, boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='com.nostra13.universalimageloader.utils.IoUtils boolean copyStream(java.io.InputStream, java.io.OutputStream, com.nostra13.universalimageloader.utils.IoUtils.CopyListener, int) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -8,43 +11,34 @@
     <item name='com.nostra13.universalimageloader.utils.ImageSizeUtils int computeMinImageSampleSize(com.nostra13.universalimageloader.core.assist.ImageSize) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.utils.StorageUtils java.io.File getCacheDirectory(android.content.Context)'>
+    <item name='com.nostra13.universalimageloader.utils.ImageSizeUtils com.nostra13.universalimageloader.core.assist.ImageSize defineTargetSizeForView(com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.ImageSize)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.utils.ImageSizeUtils int computeImageSampleSize(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType, boolean) 2'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.utils.StorageUtils java.io.File getCacheDirectory(android.content.Context, boolean)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils java.util.List&lt;java.lang.String&gt; findCacheKeysForImageUri(java.lang.String, com.nostra13.universalimageloader.cache.memory.MemoryCache) 1'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.utils.ImageSizeUtils com.nostra13.universalimageloader.core.assist.ImageSize defineTargetSizeForView(com.nostra13.universalimageloader.core.imageaware.ImageAware, com.nostra13.universalimageloader.core.assist.ImageSize)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.utils.StorageUtils java.io.File getIndividualCacheDirectory(android.content.Context)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils java.util.List&lt;android.graphics.Bitmap&gt; findCachedBitmapsForImageUri(java.lang.String, com.nostra13.universalimageloader.cache.memory.MemoryCache)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils void removeFromCache(java.lang.String, com.nostra13.universalimageloader.cache.memory.MemoryCache) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.utils.StorageUtils java.io.File getIndividualCacheDirectory(android.content.Context, java.lang.String)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.utils.ImageSizeUtils int computeImageSampleSize(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType, boolean) 0'>
+    <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils java.util.List&lt;java.lang.String&gt; findCacheKeysForImageUri(java.lang.String, com.nostra13.universalimageloader.cache.memory.MemoryCache) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils java.util.Comparator&lt;java.lang.String&gt; createFuzzyKeyComparator()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils void removeFromCache(java.lang.String, com.nostra13.universalimageloader.cache.memory.MemoryCache) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.utils.ImageSizeUtils int computeImageSampleSize(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType, boolean) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='com.nostra13.universalimageloader.utils.ImageSizeUtils int computeImageSampleSize(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType, boolean) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils java.util.List&lt;java.lang.String&gt; findCacheKeysForImageUri(java.lang.String, com.nostra13.universalimageloader.cache.memory.MemoryCache)'>
+    <item name='com.nostra13.universalimageloader.utils.StorageUtils java.io.File getIndividualCacheDirectory(android.content.Context)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.utils.IoUtils boolean copyStream(java.io.InputStream, java.io.OutputStream, com.nostra13.universalimageloader.utils.IoUtils.CopyListener) 0'>
@@ -56,6 +50,9 @@
     <item name='com.nostra13.universalimageloader.utils.DiskCacheUtils java.io.File findInCache(java.lang.String, com.nostra13.universalimageloader.cache.disc.DiskCache) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils java.util.List&lt;java.lang.String&gt; findCacheKeysForImageUri(java.lang.String, com.nostra13.universalimageloader.cache.memory.MemoryCache)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='com.nostra13.universalimageloader.utils.DiskCacheUtils boolean removeFromCache(java.lang.String, com.nostra13.universalimageloader.cache.disc.DiskCache) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -63,6 +60,9 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.utils.MemoryCacheUtils java.util.List&lt;android.graphics.Bitmap&gt; findCachedBitmapsForImageUri(java.lang.String, com.nostra13.universalimageloader.cache.memory.MemoryCache) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.utils.StorageUtils java.io.File getCacheDirectory(android.content.Context)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.utils.ImageSizeUtils float computeImageScale(com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ImageSize, com.nostra13.universalimageloader.core.assist.ViewScaleType, boolean) 0'>

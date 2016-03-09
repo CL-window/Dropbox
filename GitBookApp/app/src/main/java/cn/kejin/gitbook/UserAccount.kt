@@ -5,12 +5,45 @@ package cn.kejin.gitbook
  * Date: 2016/3/8
  */
 
+import android.content.Context
+import android.util.Log
 import cn.kejin.gitbook.networks.Models
 
 /**
  * save user account information
  */
-class UserAccount {
+class UserAccount
+{
+    companion object {
+        val TAG = "UserAccount"
+
+        val PREF_NAME = "USER"
+        val KEY_PREF = "info"
+
+        val mUser by lazy { UserAccount() }
+
+        fun setUserAccount(account: Models.MyAccount = Models.MyAccount()) {
+            mUser.setFrom(account)
+        }
+
+
+        /**
+         * clear user information
+         */
+        fun signout() {
+            setUserAccount()
+        }
+
+        /**
+         * if has token, not use password
+         */
+        fun getTokenOrPwd() : String
+        {
+            return if (!mUser.token.isNullOrEmpty()) { mUser.token } else { mUser.password }
+        }
+    }
+
+
     var id = ""
     var type = ""
     var username = ""
@@ -25,38 +58,74 @@ class UserAccount {
 
     var token = ""
 
+    // clear it after signed in
+    var password = ""
+
     var github_username = ""
     var github_token = ""
 
-    companion object {
+    init {
+        restoreFromPref()
+    }
 
-        val mUser = UserAccount()
+    fun saveToPreference()
+    {
+        var pref = MainApplication.instance.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-        fun setUserAccount(account: Models.MyAccount?) {
-            var account = account
-            if (account == null) {
-                account = Models.MyAccount()
-            }
+        var editor = pref.edit();
+        editor.putString(KEY_PREF, Utils.mGson.toJson(mUser))
+        editor.commit()
+    }
 
-            mUser.id = account.id
-            mUser.type = account.type
-            mUser.username = account.username
-            mUser.name = account.name
-            mUser.location = account.location
-            mUser.website = account.website
-            mUser.email = account.email
-            mUser.profile = account.urls.profile
-            mUser.avatar = account.urls.avatar
-            mUser.token = account.token
-            mUser.github_token = account.github.token
-            mUser.github_username = account.github.username
+    fun restoreFromPref()
+    {
+        var pref = MainApplication.instance.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+
+        var value = pref.getString(KEY_PREF, "")
+
+        try {
+            val user = Utils.mGson.fromJson(value, UserAccount::class.java)
+
+            mUser.setFrom(user)
         }
-
-        /**
-         * clear user information
-         */
-        fun signout() {
-            setUserAccount(null)
+        catch(e : Exception) {
+            Log.e(TAG, "restore user account exception: " + e.message);
+            mUser.setFrom(UserAccount())
         }
     }
+
+    fun setFrom(user : UserAccount)
+    {
+        this.id = user.id
+        this.type = user.type
+        this.username = user.username
+        this.name = user.name
+        this.location = user.location
+        this.website = user.website
+        this.email = user.email
+        this.profile = user.profile
+        this.avatar = user.avatar
+        this.token = user.token
+        this.github_token = user.github_token
+        this.github_username = user.github_username
+    }
+
+    fun setFrom(account: Models.MyAccount)
+    {
+        this.id = account.id
+        this.type = account.type
+        this.username = account.username
+        this.name = account.name
+        this.location = account.location
+        this.website = account.website
+        this.email = account.email
+        this.profile = account.urls.profile
+        this.avatar = account.urls.avatar
+        this.token = account.token
+        this.github_token = account.github.token
+        this.github_username = account.github.username
+
+        saveToPreference()
+    }
+
 }

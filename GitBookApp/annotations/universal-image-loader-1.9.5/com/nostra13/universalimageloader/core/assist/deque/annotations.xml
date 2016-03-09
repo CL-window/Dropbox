@@ -1,9 +1,18 @@
 <root>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E removeFirst()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.LIFOLinkedBlockingDeque boolean offer(T) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E remove()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E removeLast()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque boolean offer(E, long, java.util.concurrent.TimeUnit) 2'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
@@ -23,22 +32,19 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E takeLast()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque boolean offerFirst(E, long, java.util.concurrent.TimeUnit) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E removeFirst()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E element()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E removeLast()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E takeFirst()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
@@ -47,13 +53,13 @@
     <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque void putLast(E) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque java.util.Iterator&lt;E&gt; iterator()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E element()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E pop()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque java.util.Iterator&lt;E&gt; iterator()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
@@ -80,17 +86,32 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque int drainTo(java.util.Collection&lt;? super E&gt;, int) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque void push(E) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E takeFirst()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E getLast()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque java.util.Iterator&lt;E&gt; descendingIterator()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque int drainTo(java.util.Collection&lt;? super E&gt;, int) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque java.util.Iterator&lt;E&gt; iterator()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque void push(E) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E take()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque java.lang.Object[] toArray()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque void push(E) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
@@ -98,7 +119,7 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque java.util.Iterator&lt;E&gt; descendingIterator()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E getFirst()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.Deque void addLast(E) 0'>
@@ -119,10 +140,7 @@
     <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque boolean offerLast(E, long, java.util.concurrent.TimeUnit) 2'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LIFOLinkedBlockingDeque T remove()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque java.lang.Object[] toArray()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque T[] toArray(T[])'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.Deque boolean offer(E) 0'>
@@ -131,31 +149,16 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E take()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E getFirst()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
-    </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque void addLast(E) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E take()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E element()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E pop()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.Deque boolean offerFirst(E) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E element()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
@@ -185,16 +188,16 @@
     <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque boolean offer(E, long, java.util.concurrent.TimeUnit) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E getLast()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque int drainTo(java.util.Collection&lt;? super E&gt;) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque java.util.Iterator&lt;E&gt; descendingIterator()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque int drainTo(java.util.Collection&lt;? super E&gt;) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E takeFirst()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E removeLast()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque boolean offer(E, long, java.util.concurrent.TimeUnit) 0'>
@@ -218,17 +221,11 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E removeFirst()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque void addFirst(E) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque java.util.Iterator&lt;E&gt; iterator()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque void addLast(E) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
@@ -242,10 +239,19 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E takeFirst()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque void putFirst(E) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.Deque void addFirst(E) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E remove()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
@@ -257,34 +263,10 @@
     <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque boolean offerLast(E, long, java.util.concurrent.TimeUnit) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E removeLast()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E element()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E getLast()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque void put(E) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque T[] toArray(T[])'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque boolean offerFirst(E) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque java.util.Iterator&lt;E&gt; descendingIterator()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque boolean offerFirst(E, long, java.util.concurrent.TimeUnit) 2'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E removeFirst()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E takeLast()'>
@@ -293,7 +275,28 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E remove()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque E take()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E getFirst()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque boolean offerFirst(E) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque boolean offerFirst(E, long, java.util.concurrent.TimeUnit) 2'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E pop()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
@@ -323,13 +326,10 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque java.util.Iterator&lt;E&gt; iterator()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque java.util.Iterator&lt;E&gt; iterator()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E pop()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E getLast()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.Deque void push(E) 0'>
@@ -338,22 +338,22 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LIFOLinkedBlockingDeque T remove()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque boolean add(E) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E getFirst()'>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E remove()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='com.nostra13.universalimageloader.core.assist.deque.LinkedBlockingDeque E takeLast()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='com.nostra13.universalimageloader.core.assist.deque.BlockingDeque boolean offerLast(E, long, java.util.concurrent.TimeUnit) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
-    </item>
-    <item name='com.nostra13.universalimageloader.core.assist.deque.Deque E element()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>

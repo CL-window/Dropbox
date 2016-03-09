@@ -41,6 +41,9 @@
     <item name='android.support.v4.media.session.MediaSessionCompatApi14 void registerRemoteControlClient(android.content.Context, java.lang.Object) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='android.support.v4.media.session.MediaSessionCompatApi19 java.lang.Object createMetadataUpdateListener(android.support.v4.media.session.MediaSessionCompatApi14.Callback)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='android.support.v4.media.session.MediaControllerCompatApi21.TransportControls void skipToNext(java.lang.Object) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -53,6 +56,9 @@
     <item name='android.support.v4.media.session.MediaSessionCompatApi14 void setState(java.lang.Object, int) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='android.support.v4.media.session.MediaSessionCompatApi18 java.lang.Object createPlaybackPositionUpdateListener(android.support.v4.media.session.MediaSessionCompatApi14.Callback)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='android.support.v4.media.session.MediaSessionCompatApi18 void setTransportControlFlags(java.lang.Object, long) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -63,9 +69,6 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.session.MediaControllerCompatApi21.PlaybackInfo int getLegacyAudioStream(java.lang.Object) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.media.session.MediaSessionCompatApi19 java.lang.Object createMetadataUpdateListener(android.support.v4.media.session.MediaSessionCompatApi14.Callback)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.session.MediaSessionCompatApi14 void unregisterRemoteControlClient(android.content.Context, java.lang.Object) 0'>
@@ -92,19 +95,16 @@
     <item name='android.support.v4.media.session.MediaControllerCompatApi21.TransportControls void skipToQueueItem(java.lang.Object, long) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='android.support.v4.media.session.MediaControllerCompatApi21.TransportControls void rewind(java.lang.Object) 0'>
+    <item name='android.support.v4.media.session.MediaSessionCompatApi14 java.lang.Object createRemoteControlClient(android.app.PendingIntent)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='android.support.v4.media.session.MediaSessionCompatApi14 java.lang.Object createRemoteControlClient(android.app.PendingIntent)'>
+    <item name='android.support.v4.media.session.MediaControllerCompatApi21.TransportControls void rewind(java.lang.Object) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.session.MediaControllerCompatApi21.PlaybackInfo int getPlaybackType(java.lang.Object) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.session.MediaControllerCompatApi21.TransportControls void skipToPrevious(java.lang.Object) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.media.session.MediaSessionCompatApi18 java.lang.Object createPlaybackPositionUpdateListener(android.support.v4.media.session.MediaSessionCompatApi14.Callback)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.session.MediaControllerCompatApi21.PlaybackInfo android.media.AudioAttributes getAudioAttributes(java.lang.Object) 0'>

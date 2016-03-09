@@ -1,7 +1,4 @@
 <root>
-    <item name='kotlin.ArrayIntrinsicsKt double[] doubleArrayOf(double...)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='kotlin.ArrayIntrinsicsKt byte[] byteArrayOf(byte...) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -14,10 +11,10 @@
     <item name='kotlin.ArrayIntrinsicsKt float[] floatArrayOf(float...)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='kotlin.ArrayIntrinsicsKt byte[] byteArrayOf(byte...)'>
+    <item name='kotlin.ArrayIntrinsicsKt double[] doubleArrayOf(double...)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='kotlin.ArrayIntrinsicsKt boolean[] booleanArrayOf(boolean...)'>
+    <item name='kotlin.Unit java.lang.String toString()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='kotlin.UninitializedPropertyAccessException UninitializedPropertyAccessException(java.lang.String, java.lang.Throwable) 1'>
@@ -38,13 +35,13 @@
     <item name='kotlin.Unit INSTANCE'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='kotlin.ArrayIntrinsicsKt byte[] byteArrayOf(byte...)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='kotlin.UninitializedPropertyAccessException UninitializedPropertyAccessException(java.lang.Throwable) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='kotlin.ArrayIntrinsicsKt long[] longArrayOf(long...) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='kotlin.ArrayIntrinsicsKt int[] intArrayOf(int...)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='kotlin.DeprecationLevel HIDDEN'>
@@ -59,10 +56,13 @@
     <item name='kotlin.ArrayIntrinsicsKt short[] shortArrayOf(short...)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='kotlin.UninitializedPropertyAccessException UninitializedPropertyAccessException(java.lang.String, java.lang.Throwable) 0'>
+    <item name='kotlin.ArrayIntrinsicsKt boolean[] booleanArrayOf(boolean...)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='kotlin.Unit java.lang.String toString()'>
+    <item name='kotlin.ArrayIntrinsicsKt int[] intArrayOf(int...)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='kotlin.UninitializedPropertyAccessException UninitializedPropertyAccessException(java.lang.String, java.lang.Throwable) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='kotlin.ArrayIntrinsicsKt float[] floatArrayOf(float...) 0'>

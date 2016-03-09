@@ -1,17 +1,8 @@
 <root>
-    <item name='android.support.v4.util.LruCache java.util.Map&lt;K,V&gt; snapshot()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='android.support.v4.util.ArrayMap boolean removeAll(java.util.Collection&lt;?&gt;) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.util.LruCache V remove(K) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.util.AtomicFile java.io.FileOutputStream startWrite()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.util.AtomicFile byte[] readFully()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.util.TimeUtils void formatDuration(long, java.io.PrintWriter) 1'>
@@ -20,7 +11,19 @@
     <item name='android.support.v4.util.ArrayMap boolean containsAll(java.util.Collection&lt;?&gt;) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='android.support.v4.util.Pair android.support.v4.util.Pair&lt;A,B&gt; create(A, B)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='android.support.v4.util.LruCache java.util.Map&lt;K,V&gt; snapshot()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='android.support.v4.util.AtomicFile java.io.FileInputStream openRead()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='android.support.v4.util.TimeUtils void formatDuration(long, java.lang.StringBuilder) 1'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='android.support.v4.util.AtomicFile java.io.FileOutputStream startWrite()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.util.ArrayMap void putAll(java.util.Map&lt;? extends K,? extends V&gt;) 0'>
@@ -35,15 +38,6 @@
     <item name='android.support.v4.util.SimpleArrayMap void putAll(android.support.v4.util.SimpleArrayMap&lt;? extends K,? extends V&gt;) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='android.support.v4.util.Pair android.support.v4.util.Pair&lt;A,B&gt; create(A, B)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.util.AtomicFile java.io.File getBaseFile()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.util.AtomicFile java.io.FileInputStream openRead()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='android.support.v4.util.TimeUtils void formatDuration(long, java.io.PrintWriter, int) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -51,6 +45,12 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.util.AtomicFile AtomicFile(java.io.File) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='android.support.v4.util.AtomicFile byte[] readFully()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='android.support.v4.util.AtomicFile java.io.File getBaseFile()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.util.LruCache V get(K) 0'>

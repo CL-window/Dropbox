@@ -1,4 +1,7 @@
 <root>
+    <item name='android.support.v4.media.routing.MediaRouterJellybean.RouteGroup java.util.List getGroupedRoutes(java.lang.Object)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='android.support.v4.media.routing.MediaRouterJellybean.RouteCategory int getSupportedTypes(java.lang.Object) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
@@ -6,9 +9,6 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.routing.MediaRouterJellybean.RouteInfo int getSupportedTypes(java.lang.Object) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.media.routing.MediaRouterJellybean.RouteCategory java.util.List getRoutes(java.lang.Object)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.routing.MediaRouterJellybean.SelectRouteWorkaround void selectRoute(java.lang.Object, int, java.lang.Object) 2'>
@@ -24,9 +24,6 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.routing.MediaRouterJellybean.UserRouteInfo void setRemoteControlClient(java.lang.Object, java.lang.Object) 0'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='android.support.v4.media.routing.MediaRouterJellybean.RouteGroup java.util.List getGroupedRoutes(java.lang.Object)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.routing.MediaRouterJellybean.RouteInfo int getPlaybackStream(java.lang.Object) 0'>
@@ -51,6 +48,9 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.routing.MediaRouterJellybeanMr1.RouteInfo boolean isEnabled(java.lang.Object) 0'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='android.support.v4.media.routing.MediaRouterJellybean.RouteCategory java.util.List getRoutes(java.lang.Object)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='android.support.v4.media.routing.MediaRouterJellybeanMr2.RouteInfo java.lang.CharSequence getDescription(java.lang.Object) 0'>

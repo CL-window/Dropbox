@@ -2,10 +2,13 @@
     <item name='okhttp3.internal.framed.ErrorCode COMPRESSION_ERROR'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder socket(java.net.Socket, java.lang.String, okio.BufferedSource, okio.BufferedSink)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='okhttp3.internal.framed.FramedConnection okhttp3.internal.framed.FramedStream newStream(java.util.List&lt;okhttp3.internal.framed.Header&gt;, boolean, boolean) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.FramedConnection okhttp3.internal.framed.Ping ping()'>
+    <item name='okhttp3.internal.framed.FramedConnection okhttp3.internal.framed.FramedStream newStream(java.util.List&lt;okhttp3.internal.framed.Header&gt;, boolean, boolean)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.Header value'>
@@ -17,37 +20,25 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
+    <item name='okhttp3.internal.framed.Spdy3 okhttp3.internal.framed.FrameWriter newWriter(okio.BufferedSink, boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='okhttp3.internal.framed.Header Header(okio.ByteString, okio.ByteString) 1'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.Http2 okhttp3.internal.framed.FrameWriter newWriter(okio.BufferedSink, boolean)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.Spdy3 okhttp3.Protocol getProtocol()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.FramedConnection okhttp3.internal.framed.FramedStream newStream(java.util.List&lt;okhttp3.internal.framed.Header&gt;, boolean, boolean)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.FramedConnection okhttp3.internal.framed.FramedStream pushStream(int, java.util.List&lt;okhttp3.internal.framed.Header&gt;, boolean)'>
+    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder listener(okhttp3.internal.framed.FramedConnection.Listener)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.Header Header(okio.ByteString, java.lang.String) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.Variant okhttp3.Protocol getProtocol()'>
+    <item name='okhttp3.internal.framed.Variant okhttp3.internal.framed.FrameWriter newWriter(okio.BufferedSink, boolean)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder socket(java.net.Socket, java.lang.String, okio.BufferedSource, okio.BufferedSink)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.Http2 okhttp3.Protocol getProtocol()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.Spdy3 okhttp3.internal.framed.FrameWriter newWriter(okio.BufferedSink, boolean)'>
+    <item name='okhttp3.internal.framed.Http2 okhttp3.internal.framed.FrameWriter newWriter(okio.BufferedSink, boolean)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.FrameWriter void rstStream(int, okhttp3.internal.framed.ErrorCode) 1'>
@@ -56,20 +47,17 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='okhttp3.internal.framed.FramedStream okhttp3.internal.framed.FramedConnection getConnection()'>
+    <item name='okhttp3.internal.framed.Http2 okhttp3.Protocol getProtocol()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder pushObserver(okhttp3.internal.framed.PushObserver)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.ErrorCode UNSUPPORTED_VERSION'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.Variant okhttp3.internal.framed.FrameWriter newWriter(okio.BufferedSink, boolean)'>
+    <item name='okhttp3.internal.framed.Variant okhttp3.Protocol getProtocol()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
+    </item>
+    <item name='okhttp3.internal.framed.ErrorCode UNSUPPORTED_VERSION'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.ErrorCode STREAM_CLOSED'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
@@ -86,19 +74,25 @@
     <item name='okhttp3.internal.framed.FramedStream void reply(java.util.List&lt;okhttp3.internal.framed.Header&gt;, boolean) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection build()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.Spdy3 okhttp3.internal.framed.FrameReader newReader(okio.BufferedSource, boolean)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
     <item name='okhttp3.internal.framed.HeadersMode SPDY_SYN_STREAM'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection build()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.ErrorCode STREAM_IN_USE'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder pushObserver(okhttp3.internal.framed.PushObserver)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='okhttp3.internal.framed.Spdy3 okhttp3.Protocol getProtocol()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='okhttp3.internal.framed.ErrorCode CANCEL'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder protocol(okhttp3.Protocol)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.ErrorCode CONNECT_ERROR'>
@@ -110,13 +104,10 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder listener(okhttp3.internal.framed.FramedConnection.Listener)'>
+    <item name='okhttp3.internal.framed.FramedConnection okhttp3.internal.framed.Ping ping()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.ErrorCode HTTP_1_1_REQUIRED'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.FramedStream okio.Timeout readTimeout()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.FrameReader.Handler void rstStream(int, okhttp3.internal.framed.ErrorCode) 1'>
@@ -125,10 +116,7 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='okhttp3.internal.framed.FramedStream okio.Sink getSink()'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder protocol(okhttp3.Protocol)'>
+    <item name='okhttp3.internal.framed.FramedStream java.util.List&lt;okhttp3.internal.framed.Header&gt; getRequestHeaders()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.FrameWriter void goAway(int, okhttp3.internal.framed.ErrorCode, byte[]) 2'>
@@ -146,10 +134,10 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='okhttp3.internal.framed.FramedStream okio.Source getSource()'>
+    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder socket(java.net.Socket) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder socket(java.net.Socket) 0'>
+    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder socket(java.net.Socket)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.ErrorCode FLOW_CONTROL_ERROR'>
@@ -158,28 +146,25 @@
     <item name='okhttp3.internal.framed.ErrorCode INADEQUATE_SECURITY'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.FramedStream java.util.List&lt;okhttp3.internal.framed.Header&gt; getRequestHeaders()'>
+    <item name='okhttp3.internal.framed.FramedStream okio.Sink getSink()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.PushObserver CANCEL'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.HeadersMode HTTP_20_HEADERS'>
+    <item name='okhttp3.internal.framed.FramedStream okio.Source getSource()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.Header name'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='okhttp3.internal.framed.Variant okhttp3.internal.framed.FrameReader newReader(okio.BufferedSource, boolean)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
-            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
-        </annotation>
     </item>
     <item name='okhttp3.internal.framed.FramedStream okio.Timeout writeTimeout()'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
-    <item name='okhttp3.internal.framed.Http2 okhttp3.internal.framed.FrameReader newReader(okio.BufferedSource, boolean)'>
+    <item name='okhttp3.internal.framed.HeadersMode HTTP_20_HEADERS'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='okhttp3.internal.framed.FramedStream okio.Timeout readTimeout()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='okhttp3.internal.framed.Header name'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.PushObserver boolean onData(int, okio.BufferedSource, int, boolean) 1'>
@@ -187,6 +172,9 @@
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
+    </item>
+    <item name='okhttp3.internal.framed.FramedStream okhttp3.internal.framed.FramedConnection getConnection()'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.ErrorCode NO_ERROR'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
@@ -201,6 +189,9 @@
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.ErrorCode FRAME_TOO_LARGE'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='okhttp3.internal.framed.Spdy3 okhttp3.internal.framed.FrameReader newReader(okio.BufferedSource, boolean)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='okhttp3.internal.framed.ErrorCode PROTOCOL_ERROR'>
@@ -221,6 +212,9 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
+    <item name='okhttp3.internal.framed.Http2 okhttp3.internal.framed.FrameReader newReader(okio.BufferedSource, boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
     <item name='okhttp3.internal.framed.FramedConnection.Listener void onSettings(okhttp3.internal.framed.FramedConnection) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
         <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
@@ -235,6 +229,12 @@
     </item>
     <item name='okhttp3.internal.framed.ErrorCode STREAM_ALREADY_CLOSED'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
+    </item>
+    <item name='okhttp3.internal.framed.Variant okhttp3.internal.framed.FrameReader newReader(okio.BufferedSource, boolean)'>
+        <annotation name='org.jetbrains.annotations.NotNull'/>
+        <annotation name='org.jetbrains.kannotator.runtime.annotations.Propagated'>
+            <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
+        </annotation>
     </item>
     <item name='okhttp3.internal.framed.FrameWriter void settings(okhttp3.internal.framed.Settings) 0'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
@@ -266,7 +266,7 @@
             <val name="value" val="{org.jetbrains.kannotator.controlFlow.builder.analysis.NullabilityKey.class}"/>
         </annotation>
     </item>
-    <item name='okhttp3.internal.framed.FramedConnection.Builder okhttp3.internal.framed.FramedConnection.Builder socket(java.net.Socket)'>
+    <item name='okhttp3.internal.framed.FramedConnection okhttp3.internal.framed.FramedStream pushStream(int, java.util.List&lt;okhttp3.internal.framed.Header&gt;, boolean)'>
         <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
 </root>
