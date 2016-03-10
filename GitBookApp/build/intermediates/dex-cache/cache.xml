@@ -2,81 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\liungkejin\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-runtime\1.0.0\8739b3cd3bf98584cf2d1cabf59b55dbd5f7349d\kotlin-runtime-1.0.0.jar"
+        jar="C:\Users\xoracle\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-android-extensions\1.0.0\fb2a8cb603d38cf15f607b3a314698d9e9481522\kotlin-android-extensions-1.0.0.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="8739b3cd3bf98584cf2d1cabf59b55dbd5f7349d">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\kotlin-runtime-1.0.0_5bc2760aabe3ed531c2dbddef94a1429f19522fb.jar" />
-    </item>
-    <item
-        jar="C:\Users\liungkejin\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.2.0\f7873a2ebde246a45c2a8d6f3247108b4c88a879\okhttp-3.2.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\okhttp-3.2.0_bf0fd7e83f7d3388122cefea9255e075d3c54774.jar" />
-    </item>
-    <item
-        jar="F:\GitHub\Workspace\Dropbox\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1_bfaf816bfb90f5636346c17e06073eae8973789d.jar" />
-    </item>
-    <item
-        jar="C:\Users\liungkejin\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="98476622f10715998eacf9240d6b479f12c66143">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\okio-1.6.0_573bcbaff5da987ea43a33081ea28b3f3180e421.jar" />
-    </item>
-    <item
-        jar="F:\GitHub\Workspace\Dropbox\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.0.1_267c6fc39dce47f7087c1f174439f3d6da9bcd4f.jar" />
-    </item>
-    <item
-        jar="F:\GitHub\Workspace\Dropbox\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.0.1_c87c29a89e8a46e70a1eb6b096f14bed5783301d.jar" />
-    </item>
-    <item
-        jar="D:\MySoftware\AndroidStudio\AppData\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1_4929f8c821a089062dab7bf8dad29ed33ddffefd.jar" />
-    </item>
-    <item
-        jar="F:\GitHub\Workspace\Dropbox\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.0.1_28f440f4ea38aea91bc5dd908da0adcc335be7be.jar" />
-    </item>
-    <item
-        jar="C:\Users\liungkejin\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.5\442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375\universal-image-loader-1.9.5.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.5_5e49c0a42b07eb013498ddc42a6df83b5b8b9267.jar" />
-    </item>
-    <item
-        jar="C:\Users\liungkejin\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.0.0\2db5ac6eb2746708e77e4c439625f9331c25e766\kotlin-stdlib-1.0.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="2db5ac6eb2746708e77e4c439625f9331c25e766">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\kotlin-stdlib-1.0.0_66b08c10d37c2ce5dea2ba9776f14edae7e4cff5.jar" />
-    </item>
-    <item
-        jar="C:\Users\liungkejin\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.6.2\f1bc476cc167b18e66c297df599b2377131a8947\gson-2.6.2.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
-        <dex dex="F:\GitHub\Workspace\Dropbox\app\build\intermediates\pre-dexed\debug\gson-2.6.2_8c24886ed80208c0aba5944701f4d7e30b397f48.jar" />
+        sha1="fb2a8cb603d38cf15f607b3a314698d9e9481522">
+        <dex dex="C:\Users\xoracle\Desktop\Workspace\GitHub\Dropbox\GitBookApp\app\build\intermediates\pre-dexed\debug\kotlin-android-extensions-1.0.0_12001e53687d8ee80026756f33c72dfe8d4c947e.jar" />
     </item>
 
 </items>
