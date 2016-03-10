@@ -4,6 +4,8 @@ import android.app.ActivityManager
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.support.design.widget.Snackbar
+import android.view.View
 import com.google.gson.GsonBuilder
 
 /**
@@ -39,3 +41,6 @@ class Utils
 
     }
 }
+
+internal fun snack(view: View, msg : String, len : Int = Snackbar.LENGTH_SHORT) =
+        Snackbar.make(view, msg, len).show()

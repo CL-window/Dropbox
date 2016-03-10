@@ -1,99 +1,146 @@
 package cn.kejin.gitbook
 
+import android.app.Fragment
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.view.View
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.Menu
+import android.view.KeyEvent
 import android.view.MenuItem
+import cn.kejin.gitbook.fragments.ExploreFragment
+import cn.kejin.gitbook.fragments.MyBooksFragment
+import cn.kejin.gitbook.fragments.ProfileFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+/**
+ * Manager All Fragment
+ *
+ * TODO: 自定义menu
+ */
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener
+{
+    companion object {
+        val TAG = "MainActivity"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
-
-        val fab = findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() }
-
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.setDrawerListener(toggle)
-        toggle.syncState()
-
-        val navigationView = findViewById(R.id.nav_view) as NavigationView
-        navigationView.setNavigationItemSelectedListener(this)
+        val F_EXPLORE = "Explore"
+        val F_MY_BOOK = "MyBooks"
+        val F_PROFILE = "Profile"
     }
 
-    override fun onBackPressed() {
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
+    private val exploreFragment: ExploreFragment by lazy { ExploreFragment() }
+    private val myBooksFragment: MyBooksFragment by lazy { MyBooksFragment() }
+    private val profileFragment: ProfileFragment by lazy { ProfileFragment() }
+
+    private var mBackFlag = false;
+    private val mContentId = R.id.fragmentContent;
+    private var mLastSelectedItem = R.id.actionExplore;
+
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
+        super.onCreate(savedInstanceState)
+
+        navView.setNavigationItemSelectedListener(this)
+        navView.menu.findItem(mLastSelectedItem).isChecked = true
+
+        if (savedInstanceState == null) {
+            addFragment(exploreFragment, F_EXPLORE)
+        }
+    }
+
+    override fun getLayoutId(): Int = R.layout.activity_main
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean
+    {
+        return if (keyCode == KeyEvent.KEYCODE_BACK && !mBackFlag) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            else if (mLastSelectedItem != R.id.actionExplore) {
+                replaceFragment(R.id.actionExplore)
+            }
+            else {
+                mBackFlag = true;
+                snack(drawerLayout, R.string.press_again)
+                MainApplication.handler.postDelayed({ mBackFlag = false }, 2000)
+            }
+
+            true
         }
         else {
-            super.onBackPressed()
+            super.onKeyDown(keyCode, event)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
+    override fun onNavigationItemSelected(item: MenuItem?): Boolean
+    {
+        closeDrawer()
+
+        if (item != null && item.itemId != mLastSelectedItem) {
+            when (item.itemId) {
+                R.id.actionSettings -> {
+                    startActivity(Intent(this, SettingsActivity::class.java))
+                    return true;
+                };
+
+                R.id.actionAbout -> {
+                    startActivity(Intent(this, AboutActivity::class.java))
+                    return true
+                }
+            }
+
+            replaceFragment(item.itemId)
+        }
+
+        return true;
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
+    override fun setSupportActionBar(toolbar: Toolbar?)
+    {
+        super.setSupportActionBar(toolbar)
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true
+        if (toolbar != null) {
+            val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                    R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+            drawerLayout.setDrawerListener(toggle)
+            toggle.syncState()
         }
-
-        return super.onOptionsItemSelected(item)
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
+    private fun addFragment(fragment: Fragment, tag : String) =
+            fragmentManager.beginTransaction().add(mContentId, fragment, tag).commit()
 
-        when (item.itemId) {
-            R.id.nav_camera -> println("yes")
-            R.id.nav_slideshow -> println("yes");
-        }
-        val id = item.itemId
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        }
-        else if (id == R.id.nav_gallery) {
+    private fun replaceFragment(itemId: Int)
+    {
 
-        }
-        else if (id == R.id.nav_slideshow) {
-
-        }
-        else if (id == R.id.nav_manage) {
-
-        }
-        else if (id == R.id.nav_share) {
-
-        }
-        else if (id == R.id.nav_send) {
-
+        when (itemId) {
+            mLastSelectedItem -> return
+            R.id.actionExplore -> replaceFragment(exploreFragment, F_EXPLORE)
+            R.id.actionMyBooks -> replaceFragment(myBooksFragment, F_MY_BOOK)
+            R.id.actionProfile -> replaceFragment(profileFragment, F_PROFILE)
+            else -> return
         }
 
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        drawer.closeDrawer(GravityCompat.START)
-        return true
+        navView.menu.findItem(mLastSelectedItem)?.isChecked = false
+        navView.menu.findItem(itemId)?.isChecked = true;
+
+        mLastSelectedItem = itemId;
     }
+
+    private fun replaceFragment(fragment: Fragment, tag: String) =
+            fragmentManager.beginTransaction().replace(mContentId, fragment, tag).addToBackStack(null).commit()
+
+    fun openDrawer() =
+            if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.openDrawer(GravityCompat.START)
+            } else {}
+
+    fun closeDrawer() =
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else {}
+
 }

@@ -4,23 +4,7 @@
         "source": "F:\\GitHub\\Workspace\\Dropbox\\GitBookApp\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
     },
     {
-        "merged": "F:\\Android\\Workspace\\GitBook\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
-        "source": "F:\\Android\\Workspace\\GitBook\\app\\src\\main\\res\\menu\\main.xml"
-    },
-    {
-        "merged": "F:\\Android\\Workspace\\GitBook\\app\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main_drawer.xml",
-        "source": "F:\\Android\\Workspace\\GitBook\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
-    },
-    {
-        "merged": "F:\\GitHub\\Workspace\\Dropbox\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
-        "source": "F:\\GitHub\\Workspace\\Dropbox\\app\\src\\main\\res\\menu\\main.xml"
-    },
-    {
-        "merged": "F:\\GitHub\\Workspace\\Dropbox\\GitBookApp\\app\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
-        "source": "F:\\GitHub\\Workspace\\Dropbox\\GitBookApp\\app\\src\\main\\res\\menu\\main.xml"
-    },
-    {
-        "merged": "F:\\GitHub\\Workspace\\Dropbox\\app\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main_drawer.xml",
-        "source": "F:\\GitHub\\Workspace\\Dropbox\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
+        "merged": "F:\\GitHub\\Workspace\\Dropbox\\GitBookApp\\app\\build\\intermediates\\res\\merged\\debug\\menu\\frag_explore.xml",
+        "source": "F:\\GitHub\\Workspace\\Dropbox\\GitBookApp\\app\\src\\main\\res\\menu\\frag_explore.xml"
     }
 ]
