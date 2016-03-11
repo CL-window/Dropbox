@@ -71,6 +71,10 @@ abstract class BaseActivity : AppCompatActivity()
         }
     }
 
+    fun inflateView(id:Int) : View? = if (id > 0) View.inflate(this, id, null) else null
+
+    fun startActivity(clz : Class<*>) = startActivity(Intent(this, clz))
+
     fun snack(view: View, id : Int, len : Int = Snackbar.LENGTH_SHORT) = snack(view, getString(id), len)
 
     abstract fun getLayoutId() : Int;
