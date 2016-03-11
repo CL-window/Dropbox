@@ -52,7 +52,6 @@ class MainActivity : BaseActivity()
 
     private var mBackFlag = false;
     private val mContentId = R.id.fragmentContent;
-    private var mCurSelectedPos = 0;
 
     /**
      * All Menu Items
@@ -79,22 +78,14 @@ class MainActivity : BaseActivity()
     {
         super.onCreate(savedInstanceState)
 
-        navList.addHeaderView(View.inflate(this, R.layout.layout_nav_header, null))
+        navList.addHeaderView(View.inflate(this, R.layout.layout_nav_header, null), null, false)
         navList.adapter = mMenuAdapter
         navList.choiceMode = ListView.CHOICE_MODE_SINGLE
         navList.onItemClickListener = AdapterView.OnItemClickListener {
-            adapterView, view, pos, id -> processListMenuItemClicked(pos-navList.headerViewsCount)
+            adapterView, view, pos, id -> mMenuAdapter.mCurSelectedPos = (pos-navList.headerViewsCount)
         }
-//        navList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//                throw UnsupportedOperationException()
-//            }
-//
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                throw UnsupportedOperationException()
-//            }
-//        }
 
+        mMenuAdapter.mCurSelectedPos = 0
         if (savedInstanceState == null) {
             addFragment(exploreFragment, M_EXPLORE)
         }
@@ -109,10 +100,9 @@ class MainActivity : BaseActivity()
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
-            else if (mCurSelectedPos != 0) {
-                mCurSelectedPos = 0
+            else if (mMenuAdapter.mCurSelectedPos != 0) {
                 closeDrawer()
-                mMenuAdapter.notifyDataSetChanged()
+                mMenuAdapter.mCurSelectedPos = 0
             }
             else {
                 mBackFlag = true;
@@ -126,49 +116,6 @@ class MainActivity : BaseActivity()
             super.onKeyDown(keyCode, event)
         }
     }
-
-    fun processListMenuItemClicked(pos : Int)
-    {
-        Log.e(TAG, "Pos: " + pos)
-        if (pos in 0..mMenuItems.size-1) {
-            val item = mMenuItems[pos];
-            val back = mCurSelectedPos;
-            mCurSelectedPos = pos;
-            when (item.key) {
-                M_EXPLORE -> replaceFragment(exploreFragment, item.key)
-                M_MY_BOOK -> replaceFragment(myBooksFragment, item.key)
-                M_PROFILE -> replaceFragment(profileFragment, item.key)
-                M_SETTING -> startActivity(SettingsActivity::class.java)
-                M_ABOUT -> startActivity(AboutActivity::class.java)
-                else -> mCurSelectedPos = back;
-            }
-        }
-
-        closeDrawer()
-        mMenuAdapter.notifyDataSetChanged()
-    }
-//    override fun onNavigationItemSelected(item: MenuItem?): Boolean
-//    {
-//        closeDrawer()
-//
-//        if (item != null && item.itemId != mLastSelectedItem) {
-//            when (item.itemId) {
-//                R.id.actionSettings -> {
-//                    startActivity(Intent(this, SettingsActivity::class.java))
-//                    return true;
-//                };
-//
-//                R.id.actionAbout -> {
-//                    startActivity(Intent(this, AboutActivity::class.java))
-//                    return true
-//                }
-//            }
-//
-//            replaceFragment(item.itemId)
-//        }
-//
-//        return true;
-//    }
 
     override fun setSupportActionBar(toolbar: Toolbar?)
     {
@@ -206,34 +153,70 @@ class MainActivity : BaseActivity()
                                      val icon : Int = 0,
                                      val type : Int = TYPE_NORMAL)
     {
-        var enable = true
+        var selectable = true
 
         constructor() : this("", 0, 0, TYPE_SEPARATOR)
         constructor(strId : Int) : this("", strId, 0, TYPE_NO_ICON)
 
-        fun getDestination() : Any? = when (key) {
-                M_EXPLORE -> exploreFragment
-                M_MY_BOOK -> myBooksFragment
-                M_PROFILE -> profileFragment
-                M_SETTING -> SettingsActivity::class.java
-                M_ABOUT -> AboutActivity::class.java
-                else -> null
+        init {
+            selectable = type == TYPE_NORMAL
+        }
+
+        fun select() : Boolean
+        {
+            var result = false;
+
+            if (selectable) {
+                when (key) {
+                    M_EXPLORE -> {
+                        replaceFragment(exploreFragment, key)
+                        result =  true;
+                    }
+                    M_MY_BOOK -> {
+                        if (UserAccount.isSignedIn()) {
+                            replaceFragment(myBooksFragment, key)
+                            result =  true;
+                        }
+                        else {
+                            startActivity(LoginActivity::class.java)
+                        }
+                    }
+                    M_PROFILE -> {
+                        if (UserAccount.isSignedIn()) {
+                            replaceFragment(profileFragment, key)
+                            result =  true;
+                        }
+                        else {
+                            startActivity(LoginActivity::class.java)
+                        }
+                    }
+                    M_SETTING -> startActivity(SettingsActivity::class.java)
+                    M_ABOUT -> startActivity(AboutActivity::class.java)
+                }
             }
+
+            if (result) {
+                closeDrawer()
+            }
+
+            return result
+        }
     }
 
 
     private inner class MenuItemAdapter : BaseAdapter()
     {
-        fun selectItem()
-        {
-            //
-        }
-
+        var mCurSelectedPos = 0
+            set(pos) {
+                if (pos in 0..mMenuItems.size-1 &&
+                        pos != mCurSelectedPos && mMenuItems[pos].select()) {
+                    field = pos
+                    mMenuAdapter.notifyDataSetChanged()
+                }
+            }
 
         override fun getView(pos: Int, convertView: View?, parent: ViewGroup?): View?
         {
-            Log.e(TAG, "View Pos: " + pos)
-
             var view = convertView
 
             val item = mMenuItems[pos]
@@ -250,13 +233,26 @@ class MainActivity : BaseActivity()
 
                         textView.text = getString(item.strId)?:""
                         iconView.setImageDrawable(icon)
-                    }
 
-                    if (pos == mCurSelectedPos) {
-                        view?.setBackgroundColor(Color.LTGRAY)
-                    }
-                    else {
-                        view?.setBackgroundColor(Color.TRANSPARENT)
+                        var bgColor = Color.TRANSPARENT
+                        var textColor = resources.getColor(R.color.textPrimary);
+                        var iconColor = resources.getColor(R.color.textSecondary);
+
+                        if (item.selectable) {
+                            if (pos == mCurSelectedPos) {
+                                bgColor = Color.LTGRAY
+                                iconColor = resources.getColor(R.color.colorPrimary)
+                                textColor = iconColor
+                            }
+                        }
+                        else {
+                            textColor = Color.LTGRAY
+                            iconColor = textColor
+                        }
+
+                        view.setBackgroundColor(bgColor)
+                        iconView.setColorFilter(iconColor)
+                        textView.setTextColor(textColor)
                     }
 
                 }
@@ -267,10 +263,14 @@ class MainActivity : BaseActivity()
                         textView.text = getString(item.strId)?:""
                     }
                     view?.setBackgroundColor(Color.TRANSPARENT)
+                    view?.isClickable = false
+                    view?.isEnabled = false
                 }
 
                 TYPE_SEPARATOR -> {
                     view?.setBackgroundColor(Color.TRANSPARENT)
+                    view?.isClickable = false
+                    view?.isEnabled = false
                 }
             }
             return view
@@ -283,20 +283,20 @@ class MainActivity : BaseActivity()
 
         override fun getCount(): Int = mMenuItems.size
 
-        override fun getItemViewType(pos: Int): Int =
-                if (pos in 0..mMenuItems.size-1) { mMenuItems[pos].type } else {0}
-
-        override fun getViewTypeCount(): Int = mMenuTypes.size
-
-        fun setIconColor(icon : Drawable)
+//        override fun getItemViewType(pos: Int): Int = pos
+//
+//        override fun getViewTypeCount(): Int = mMenuTypes.size
+        override fun areAllItemsEnabled(): Boolean  = false
+        override fun isEnabled(pos :Int): Boolean
         {
-            var textColorSecondary = android.R.attr.textColorSecondary;
-            var value = TypedValue();
-            if (!theme.resolveAttribute(textColorSecondary, value, true)) {
-                return;
+            var item = getItem(pos)
+            if (item != null) {
+                item = item as ListMenuItem
+
+                return item.selectable
             }
 
-            icon.setColorFilter(resources.getColor(value.resourceId), PorterDuff.Mode.MULTIPLY);
+            return false
         }
     }
 

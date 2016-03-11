@@ -3,7 +3,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="?attr/listPreferredItemHeightSmall"
-    android:minHeight="?attr/listPreferredItemHeightSmall">
+    android:minHeight="?attr/listPreferredItemHeightSmall"
+    android:layout_marginTop="10dp">
 
     <ImageView
         android:id="@+id/icon"

@@ -20,27 +20,25 @@ class UserAccount
         val PREF_NAME = "USER"
         val KEY_PREF = "info"
 
-        val mUser by lazy { UserAccount() }
+        val mUser = UserAccount()
 
-        fun setUserAccount(account: Models.MyAccount = Models.MyAccount()) {
-            mUser.setFrom(account)
-        }
+        fun initalizeUserAccount() = mUser.restoreFromPref()
 
+        fun setUserAccount(account: Models.MyAccount = Models.MyAccount()) = mUser.setFrom(account)
 
         /**
          * clear user information
          */
-        fun signout() {
-            setUserAccount()
-        }
+        fun signout() = setUserAccount()
 
         /**
          * if has token, not use password
          */
-        fun getTokenOrPwd() : String
-        {
-            return if (!mUser.token.isNullOrEmpty()) { mUser.token } else { mUser.password }
-        }
+        fun getTokenOrPwd() : String  =
+                if (!mUser.token.isNullOrEmpty()) { mUser.token } else { mUser.password }
+
+
+        fun isSignedIn() : Boolean = !mUser.token.isNullOrEmpty()
     }
 
 
@@ -64,9 +62,6 @@ class UserAccount
     var github_username = ""
     var github_token = ""
 
-    init {
-        restoreFromPref()
-    }
 
     fun saveToPreference()
     {

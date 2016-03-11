@@ -12,7 +12,7 @@ class MainApplication : Application()
 {
     companion object {
         // global context
-        var instance : MainApplication by Delegates.notNull()
+        lateinit var instance : MainApplication
 
         // global handler
         val handler : Handler by lazy { Handler() }
@@ -22,5 +22,7 @@ class MainApplication : Application()
         super.onCreate()
 
         instance = this
+
+        UserAccount.initalizeUserAccount()
     }
 }
