@@ -1,7 +1,9 @@
 package cn.kejin.gitbook.networks
 
+import cn.kejin.gitbook.GSON
 import cn.kejin.gitbook.MainApplication
 import cn.kejin.gitbook.Utils
+import cn.kejin.gitbook.isNetworkConnected
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -35,7 +37,7 @@ abstract class HttpCallback<Model : Models.BaseResp> (val cls : Class<Model>) : 
         call?.cancel();
 
         post {
-            if (!Utils.isNetworkConnected()) {
+            if (!isNetworkConnected()) {
                 onFailure(E_NO_NETWORK, "no network")
             }
             else {
@@ -49,7 +51,7 @@ abstract class HttpCallback<Model : Models.BaseResp> (val cls : Class<Model>) : 
             val msg = resp.message();
 
             try {
-                var model = Utils.mGson.fromJson(msg, cls)
+                var model = GSON.fromJson(msg, cls)
                 if (model.code != 0) {
                     post { onFailure(model.code, model.error) }
                 }

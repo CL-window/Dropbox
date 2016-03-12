@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -22,7 +23,11 @@ import cn.kejin.gitbook.fragments.BaseFragment
 import cn.kejin.gitbook.fragments.ExploreFragment
 import cn.kejin.gitbook.fragments.MyBooksFragment
 import cn.kejin.gitbook.fragments.ProfileFragment
+import cn.kejin.gitbook.networks.NetworkManager
+import com.nostra13.universalimageloader.core.DisplayImageOptions
+import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_nav_header.*
 
 /**
  * Manager All Fragment
@@ -78,14 +83,7 @@ class MainActivity : BaseActivity()
     {
         super.onCreate(savedInstanceState)
 
-        navList.addHeaderView(View.inflate(this, R.layout.layout_nav_header, null), null, false)
-        navList.adapter = mMenuAdapter
-        navList.choiceMode = ListView.CHOICE_MODE_SINGLE
-        navList.onItemClickListener = AdapterView.OnItemClickListener {
-            adapterView, view, pos, id -> mMenuAdapter.mCurSelectedPos = (pos-navList.headerViewsCount)
-        }
-
-        mMenuAdapter.mCurSelectedPos = 0
+        initializeNavigationView()
         if (savedInstanceState == null) {
             addFragment(exploreFragment, M_EXPLORE)
         }
@@ -93,6 +91,53 @@ class MainActivity : BaseActivity()
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
+    private fun initializeNavigationView()
+    {
+        // menu items
+        navList.addHeaderView(inflateView(R.layout.layout_nav_header), null, false)
+        navList.adapter = mMenuAdapter
+        navList.choiceMode = ListView.CHOICE_MODE_SINGLE
+        navList.onItemClickListener = AdapterView.OnItemClickListener {
+            adapterView, view, pos, id -> mMenuAdapter.mCurSelectedPos = (pos-navList.headerViewsCount)
+        }
+
+        mMenuAdapter.mCurSelectedPos = 0
+
+        // header view
+        loginButton?.setOnClickListener({startActivity(LoginActivity::class.java)})
+        registerButton?.setOnClickListener({
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(NetworkManager.REGISTER_URL)))
+        })
+
+        onUserStateChanged(mLastUserInfo)
+    }
+
+    override fun onUserStateChanged(last: UserAccount, now: UserAccount)
+    {
+        if (now.token.isNullOrEmpty()) {
+            userLayout?.visibility = View.GONE
+            loginLayout?.visibility = View.VISIBLE
+            return;
+        }
+
+        if (last.token.isNullOrEmpty() && !now.token.isNullOrEmpty()) {
+            userLayout?.visibility = View.VISIBLE
+            loginLayout?.visibility = View.GONE
+        }
+
+
+        if (now.avatar != last.avatar && avatarImage != null) {
+            ImageLoader.getInstance().displayImage(now.avatar, avatarImage)
+        }
+
+        if (now.name != last.name || now.username != last.username) {
+            userName?.text = "${now.name} (${now.username})"
+        }
+
+        if (now.email != last.email) {
+            userEmail?.text = now.email
+        }
+    }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean
     {

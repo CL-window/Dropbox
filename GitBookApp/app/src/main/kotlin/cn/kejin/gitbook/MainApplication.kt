@@ -1,7 +1,14 @@
 package cn.kejin.gitbook
 
 import android.app.Application
+import android.graphics.Bitmap
+import android.graphics.Typeface
 import android.os.Handler
+import android.view.View
+import com.nostra13.universalimageloader.core.ImageLoader
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
+import com.nostra13.universalimageloader.core.assist.FailReason
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener
 import kotlin.properties.Delegates
 
 /**
@@ -14,6 +21,7 @@ class MainApplication : Application()
         // global context
         lateinit var instance : MainApplication
 
+
         // global handler
         val handler : Handler by lazy { Handler() }
     }
@@ -23,6 +31,8 @@ class MainApplication : Application()
 
         instance = this
 
-        UserAccount.initalizeUserAccount()
+        UserAccount.initializeUserAccount()
+
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this))
     }
 }

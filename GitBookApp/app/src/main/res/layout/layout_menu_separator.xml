@@ -5,7 +5,7 @@
     android:minHeight="15dp">
 
     <View android:layout_width="match_parent"
-          android:layout_height="1px"
+          android:layout_height="1dp"
           android:layout_gravity="center"
           android:background="?android:attr/listDivider"/>
 </FrameLayout>

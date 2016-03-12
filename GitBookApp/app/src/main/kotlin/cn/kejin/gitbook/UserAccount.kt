@@ -22,7 +22,7 @@ class UserAccount
 
         val mUser = UserAccount()
 
-        fun initalizeUserAccount() = mUser.restoreFromPref()
+        fun initializeUserAccount() = mUser.restoreFromPref()
 
         fun setUserAccount(account: Models.MyAccount = Models.MyAccount()) = mUser.setFrom(account)
 
@@ -68,7 +68,7 @@ class UserAccount
         var pref = MainApplication.instance.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
         var editor = pref.edit();
-        editor.putString(KEY_PREF, Utils.mGson.toJson(mUser))
+        editor.putString(KEY_PREF, GSON.toJson(mUser))
         editor.commit()
     }
 
@@ -79,7 +79,7 @@ class UserAccount
         var value = pref.getString(KEY_PREF, "")
 
         try {
-            val user = Utils.mGson.fromJson(value, UserAccount::class.java)
+            val user = GSON.fromJson(value, UserAccount::class.java)
 
             mUser.setFrom(user)
         }

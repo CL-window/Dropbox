@@ -5,12 +5,8 @@ package cn.kejin.gitbook.networks
  * Date: 2016/3/8
  */
 
-import android.content.Context
 import cn.kejin.gitbook.UserAccount
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import okhttp3.*
-
 import java.util.concurrent.TimeUnit
 
 /**
@@ -21,7 +17,8 @@ class NetworkManager private constructor()// init
     companion object {
         val TAG = "NetworkManager"
 
-        val BASE_URL = "https://api.gitbook.com/"
+        val REGISTER_URL = "https://www.gitbook.com/join"
+        val BASE_API_URL = "https://api.gitbook.com/"
 
         val JSON_TYPE = MediaType.parse("application/json; charset:utf-8")
 
@@ -64,7 +61,7 @@ class NetworkManager private constructor()// init
      */
     fun getAbsUrl(uri: String): String {
 
-        return BASE_URL + if (uri.trim().startsWith("/")) { "/" + uri } else { uri }
+        return BASE_API_URL + if (uri.trim().startsWith("/")) { "/" + uri } else { uri }
     }
 
     /**

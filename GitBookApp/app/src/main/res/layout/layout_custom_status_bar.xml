@@ -4,6 +4,6 @@
     android:id="@+id/customStatusBar"
     android:layout_width="match_parent"
     android:layout_height="25dp"
-    android:background="@color/colorPrimary"
-    android:visibility="gone">
+    android:background="?attr/colorPrimary"
+    android:visibility="visible">
 </FrameLayout>

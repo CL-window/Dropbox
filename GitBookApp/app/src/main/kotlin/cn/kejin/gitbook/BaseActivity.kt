@@ -26,9 +26,15 @@ abstract class BaseActivity : AppCompatActivity()
      */
     var mStatusBarTranslucentFlag = false;
 
+    /**
+     * the last time user information
+     */
+    var mLastUserInfo = UserAccount.mUser;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        translucentStatusBar()
         var layoutId = getLayoutId();
         if (layoutId > 0) {
             setContentView(layoutId)
@@ -40,7 +46,6 @@ abstract class BaseActivity : AppCompatActivity()
         if (!mStatusBarTranslucentFlag &&
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             this.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            this.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
             mStatusBarTranslucentFlag = true
         }
     }
@@ -48,6 +53,11 @@ abstract class BaseActivity : AppCompatActivity()
     override fun onResume() {
         super.onResume()
         mStartFlag = false;
+
+        if (mLastUserInfo != UserAccount.mUser) {
+            onUserStateChanged(mLastUserInfo)
+        }
+        mLastUserInfo = UserAccount.mUser
     }
 
     override fun startActivity(intent: Intent?) {
@@ -77,23 +87,11 @@ abstract class BaseActivity : AppCompatActivity()
 
     fun snack(view: View, id : Int, len : Int = Snackbar.LENGTH_SHORT) = snack(view, getString(id), len)
 
-    abstract fun getLayoutId() : Int;
-
     /**
-     * Control the content view of this activity
+     * signed
+     * 0:
      */
-//    protected inner abstract class BaseContentViewController(
-//            val mActivity : BaseActivity = this@BaseActivity)
-//    {
-//        init {
-//            setContentView(getViewId())
-//        }
-//
-//        protected abstract fun getViewId() : Int;
-//
-//        protected fun setFinishView(id : Int)
-//        {
-//            findViewById(id)?.setOnClickListener { finish() }
-//        }
-//    }
+    open fun onUserStateChanged(last : UserAccount, now : UserAccount = UserAccount.mUser) {}
+
+    abstract fun getLayoutId() : Int;
 }
