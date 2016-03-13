@@ -5,15 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="cn.kejin.gitbook.MainActivity">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <!--<include layout="@layout/layout_custom_status_bar" />-->
+        <include layout="@layout/layout_custom_status_bar" />
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -30,6 +28,7 @@
         </android.support.design.widget.AppBarLayout>
 
     </LinearLayout>
+
     <include layout="@layout/layout_main_content"/>
 
 </android.support.design.widget.CoordinatorLayout>

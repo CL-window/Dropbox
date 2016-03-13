@@ -39,15 +39,7 @@ class MainActivity : BaseActivity()
     companion object {
         val TAG = "MainActivity"
 
-        val M_EXPLORE = "Explore"
-        val M_MY_BOOK = "MyBooks"
-        val M_PROFILE = "Profile"
-        val M_SETTING = "Setting"
-        val M_ABOUT = "About"
-
-        val TYPE_NORMAL = 1
-        val TYPE_NO_ICON = 2
-        val TYPE_SEPARATOR = 3
+        val M_LOGIN = "LoginOrRegister"
 
     }
 
@@ -61,21 +53,47 @@ class MainActivity : BaseActivity()
     /**
      * All Menu Items
      */
+    private val M_SIGN = "Sign"
+    private val M_MY_BOOKS = "MyBooks"
+    private val M_MY_PROFILE = "MyProfile"
 
+    private val M_EXPLORE = "Explore"
+    private val M_HELP = "Help"
+
+    private val M_SETTING = "Setting"
+    private val M_ABOUT = "About"
+
+    private val mMenuKeys = listOf(
+            M_SIGN, M_MY_BOOKS, M_MY_PROFILE, M_EXPLORE, M_HELP, M_SETTING, M_ABOUT)
+
+
+    private val TYPE_NORMAL = 1
+    private val TYPE_NO_ICON = 2
+    private val TYPE_SEPARATOR = 3
     private val mMenuTypes: Map<Int, Int> = mapOf(
             TYPE_NORMAL to R.layout.layout_menu_normal,
             TYPE_NO_ICON to R.layout.layout_menu_subheader,
             TYPE_SEPARATOR to R.layout.layout_menu_separator
     )
 
-    private val mMenuItems : Array<ListMenuItem> = arrayOf(
-            ListMenuItem(M_EXPLORE, R.string.action_explore, R.drawable.ic_explore),
-            ListMenuItem(M_MY_BOOK, R.string.action_my_books, R.drawable.ic_book),
-            ListMenuItem(M_PROFILE, R.string.action_profile, R.drawable.ic_account_circle),
+    private val mSignMenuItem = ListMenuItem(M_SIGN, R.string.action_sign, R.drawable.ic_person_pin_white_48dp)
+    private val mMyBooksMenuItem = ListMenuItem(M_MY_BOOKS, R.string.action_my_books, R.drawable.ic_book)
+    private val mMyProfileMenuItem = ListMenuItem(M_MY_PROFILE, R.string.action_my_profile, R.drawable.ic_account_circle)
+
+    private val mMenuItems : MutableList<ListMenuItem> = mutableListOf(
+            ListMenuItem(R.string.sub_menu_home),
+
             ListMenuItem(),
+            ListMenuItem(R.string.sub_menu_gitbook),
+            ListMenuItem(M_EXPLORE, R.string.action_explore, R.drawable.ic_explore),
+            ListMenuItem(M_HELP, R.string.actionn_help, R.drawable.ic_help_black_48dp),
+
+            ListMenuItem(),
+            ListMenuItem(R.string.sub_menu_more),
             ListMenuItem(M_SETTING, R.string.action_settings, R.drawable.ic_settings_black),
             ListMenuItem(M_ABOUT, R.string.action_about, R.drawable.ic_book)
     )
+
 
     private val mMenuAdapter : MenuItemAdapter by lazy { MenuItemAdapter() }
 
@@ -98,33 +116,46 @@ class MainActivity : BaseActivity()
         navList.adapter = mMenuAdapter
         navList.choiceMode = ListView.CHOICE_MODE_SINGLE
         navList.onItemClickListener = AdapterView.OnItemClickListener {
-            adapterView, view, pos, id -> mMenuAdapter.mCurSelectedPos = (pos-navList.headerViewsCount)
+            adapterView, view, pos, id ->
+                var item = mMenuAdapter.getItem(pos-navList.headerViewsCount)
+                if (item != null) {
+                    item = item as ListMenuItem
+                    mMenuAdapter.mCurSelectedItemKey = item.key
+                }
         }
+//
+//        // header view
+//        loginButton?.setOnClickListener({startActivity(LoginActivity::class.java)})
+//        registerButton?.setOnClickListener({
+//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(NetworkManager.REGISTER_URL)))
+//        })
 
-        mMenuAdapter.mCurSelectedPos = 0
-
-        // header view
-        loginButton?.setOnClickListener({startActivity(LoginActivity::class.java)})
-        registerButton?.setOnClickListener({
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(NetworkManager.REGISTER_URL)))
-        })
-
-        onUserStateChanged(mLastUserInfo)
+        onUserStateChanged(UserAccount())
     }
 
     override fun onUserStateChanged(last: UserAccount, now: UserAccount)
     {
-        if (now.token.isNullOrEmpty()) {
+        if (!now.isSignedIn()) {
+            mMenuItems.remove(mMyBooksMenuItem)
+            mMenuItems.remove(mMyProfileMenuItem)
+            mMenuItems.add(1, mSignMenuItem)
+            mMenuAdapter.notifyDataSetChanged()
+
             userLayout?.visibility = View.GONE
-            loginLayout?.visibility = View.VISIBLE
             return;
         }
 
-        if (last.token.isNullOrEmpty() && !now.token.isNullOrEmpty()) {
-            userLayout?.visibility = View.VISIBLE
-            loginLayout?.visibility = View.GONE
-        }
+        if (!last.isSignedIn()) {
+            mMenuItems.remove(mMyBooksMenuItem)
+            mMenuItems.remove(mMyProfileMenuItem)
+            mMenuItems.remove(mSignMenuItem)
 
+            mMenuItems.add(1, mMyBooksMenuItem)
+            mMenuItems.add(2, mMyProfileMenuItem)
+            mMenuAdapter.notifyDataSetChanged()
+
+            userLayout?.visibility = View.VISIBLE
+        }
 
         if (now.avatar != last.avatar && avatarImage != null) {
             ImageLoader.getInstance().displayImage(now.avatar, avatarImage)
@@ -145,9 +176,9 @@ class MainActivity : BaseActivity()
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
-            else if (mMenuAdapter.mCurSelectedPos != 0) {
+            else if (mMenuAdapter.mCurSelectedItemKey != M_EXPLORE) {
                 closeDrawer()
-                mMenuAdapter.mCurSelectedPos = 0
+                mMenuAdapter.mCurSelectedItemKey = M_EXPLORE
             }
             else {
                 mBackFlag = true;
@@ -213,34 +244,39 @@ class MainActivity : BaseActivity()
 
             if (selectable) {
                 when (key) {
-                    M_EXPLORE -> {
-                        replaceFragment(exploreFragment, key)
-                        result =  true;
+                    M_SIGN -> {
+                        startActivity(SignActivity::class.java)
                     }
-                    M_MY_BOOK -> {
+                    M_MY_BOOKS -> {
                         if (UserAccount.isSignedIn()) {
                             replaceFragment(myBooksFragment, key)
                             result =  true;
                         }
                         else {
-                            startActivity(LoginActivity::class.java)
+                            startActivity(SignActivity::class.java)
                         }
                     }
-                    M_PROFILE -> {
+                    M_MY_PROFILE -> {
                         if (UserAccount.isSignedIn()) {
                             replaceFragment(profileFragment, key)
                             result =  true;
                         }
                         else {
-                            startActivity(LoginActivity::class.java)
+                            startActivity(SignActivity::class.java)
                         }
                     }
+
+                    M_EXPLORE -> {
+                        replaceFragment(exploreFragment, key)
+                        result =  true;
+                    }
+                    M_HELP -> {
+                        startActivity(HelpActivity::class.java)
+                    }
+
                     M_SETTING -> startActivity(SettingsActivity::class.java)
                     M_ABOUT -> startActivity(AboutActivity::class.java)
                 }
-            }
-
-            if (result) {
                 closeDrawer()
             }
 
@@ -251,29 +287,37 @@ class MainActivity : BaseActivity()
 
     private inner class MenuItemAdapter : BaseAdapter()
     {
-        var mCurSelectedPos = 0
-            set(pos) {
-                if (pos in 0..mMenuItems.size-1 &&
-                        pos != mCurSelectedPos && mMenuItems[pos].select()) {
-                    field = pos
-                    mMenuAdapter.notifyDataSetChanged()
+        var mCurSelectedItemKey = M_EXPLORE
+            set(key) {
+                if (mCurSelectedItemKey != key) {
+                    var item = findItemByKey(key)
+                    if (item != null && item.select()) {
+                        field = key
+                        mMenuAdapter.notifyDataSetChanged()
+                    }
                 }
             }
 
+        fun findItemByKey(key : String) : ListMenuItem?
+        {
+            for (item in mMenuItems) {
+                if (item.key == key) {
+                    return item;
+                }
+            }
+            return null
+        }
+
         override fun getView(pos: Int, convertView: View?, parent: ViewGroup?): View?
         {
-            var view = convertView
-
             val item = mMenuItems[pos]
-            if (view == null) {
-                view = inflateView(mMenuTypes[item.type] ?:0)
-            }
+            val view = inflateView(mMenuTypes[item.type] ?:0)
 
             when(item.type) {
                 TYPE_NORMAL -> {
                     if (view != null) {
-                        var iconView = view.findViewById(R.id.icon) as ImageView
-                        var textView = view.findViewById(R.id.text) as TextView
+                        var iconView = view.findViewById(R.id.menuIcon) as ImageView
+                        var textView = view.findViewById(R.id.menuText) as TextView
                         var icon = resources.getDrawable(item.icon);
 
                         textView.text = getString(item.strId)?:""
@@ -284,7 +328,7 @@ class MainActivity : BaseActivity()
                         var iconColor = resources.getColor(R.color.textSecondary);
 
                         if (item.selectable) {
-                            if (pos == mCurSelectedPos) {
+                            if (item.key == mCurSelectedItemKey) {
                                 bgColor = Color.LTGRAY
                                 iconColor = resources.getColor(R.color.colorPrimary)
                                 textColor = iconColor

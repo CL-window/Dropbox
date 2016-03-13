@@ -38,7 +38,7 @@ class UserAccount
                 if (!mUser.token.isNullOrEmpty()) { mUser.token } else { mUser.password }
 
 
-        fun isSignedIn() : Boolean = !mUser.token.isNullOrEmpty()
+        fun isSignedIn() : Boolean = mUser.isSignedIn()
     }
 
 
@@ -62,6 +62,7 @@ class UserAccount
     var github_username = ""
     var github_token = ""
 
+    fun isSignedIn() : Boolean = !token.isNullOrEmpty()
 
     fun saveToPreference()
     {

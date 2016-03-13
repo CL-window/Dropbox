@@ -11,13 +11,16 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="?attr/colorPrimary">
-        <!--<include-->
-            <!--layout="@layout/layout_logo_small"-->
-            <!--android:gravity="top|center_vertical"/>-->
+
+        <!--<include layout="@layout/layout_vertical_logo"-->
+                 <!--android:layout_width="wrap_content"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:layout_gravity="center" />-->
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_gitbook_logo"/>
     </LinearLayout>
 
@@ -27,6 +30,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
@@ -39,61 +43,29 @@
             android:visibility="visible">
             <ImageView
                 android:id="@+id/avatarImage"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/vector_drawable_ic_access_alarm_24px" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_account_circle_white_48dp" />
 
-            <cn.kejin.gitbook.views.CustomTextView
+            <TextView
                 android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:paddingLeft="10dp"
                 android:gravity="center_vertical"
                 android:text="Kejin"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-            <cn.kejin.gitbook.views.CustomTextView
+            <TextView
                 android:id="@+id/userEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:paddingLeft="10dp"
                 android:text="liungkejin@gmail.com"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/loginLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
-            android:gravity="bottom">
-
-            <cn.kejin.gitbook.views.CustomTextView
-                android:id="@+id/loginButton"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="Login"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:typeface="monospace"
-                android:background="#552196f3"/>
-
-            <cn.kejin.gitbook.views.CustomTextView
-                android:id="@+id/registerButton"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text="Register"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:background="#5520A6a1"/>
-
         </LinearLayout>
     </FrameLayout>
 </FrameLayout>

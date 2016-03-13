@@ -6,7 +6,7 @@
     android:minHeight="?attr/listPreferredItemHeightSmall">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/menuIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginLeft="15dp"
@@ -16,7 +16,7 @@
         android:src="@drawable/ic_menu_camera"/>
 
     <cn.kejin.gitbook.views.CustomTextView
-        android:id="@+id/text"
+        android:id="@+id/menuText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
