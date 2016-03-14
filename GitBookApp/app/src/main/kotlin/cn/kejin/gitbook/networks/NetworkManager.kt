@@ -6,6 +6,7 @@ package cn.kejin.gitbook.networks
  */
 
 import cn.kejin.gitbook.UserAccount
+import cn.kejin.gitbook.common.Debug
 import okhttp3.*
 import java.util.concurrent.TimeUnit
 
@@ -17,6 +18,7 @@ class NetworkManager private constructor()// init
     companion object {
         val TAG = "NetworkManager"
 
+        val RESET_PWD_URL = "https://www.gitbook.com/settings/password/reset"
         val REGISTER_URL = "https://www.gitbook.com/join"
         val BASE_API_URL = "https://api.gitbook.com/"
 
@@ -29,7 +31,7 @@ class NetworkManager private constructor()// init
 
     private var mHttpClient = OkHttpClient.Builder()
             .authenticator({ route, response ->
-                var value = UserAccount.getTokenOrPwd();
+                var value = UserAccount.getToken();
                 response.request().newBuilder().addHeader("Authorization",
                         Credentials.basic(UserAccount.mUser.name, value)).build()
             })
@@ -67,9 +69,20 @@ class NetworkManager private constructor()// init
     /**
      * get method
      */
-    fun get(uri : String, callback: HttpCallback<Models.BaseResp>) {
-        val req = Request.Builder().url(uri).get().build()
-        mHttpClient.newCall(req).enqueue(callback)
+    fun get(uri : String, callback: HttpCallback<Models.BaseResp>, auth: Boolean = false) {
+
+        val builder = Request.Builder().url(uri).get()
+        if (auth) {
+            var value = UserAccount.getToken();
+            if (value.isNullOrEmpty()) {
+                callback.onFailure(HttpCallback.E_NOT_SIGN, "not singed")
+                return;
+            }
+
+            builder.addHeader("Authorization", Credentials.basic(UserAccount.mUser.name, value));
+        }
+
+        mHttpClient.newCall(builder.build()).enqueue(callback)
     }
 
     /**
@@ -82,7 +95,7 @@ class NetworkManager private constructor()// init
         val builder = Request.Builder();
 
         if (auth) {
-            var value = UserAccount.getTokenOrPwd();
+            var value = UserAccount.getToken();
             if (value.isNullOrEmpty()) {
                 callback.onFailure(HttpCallback.E_NOT_SIGN, "not singed")
                 return;
@@ -100,4 +113,18 @@ class NetworkManager private constructor()// init
      * REST APIs
      */
 
+    /**
+     * Sign In to user account
+     * Method: GET
+     */
+    fun signIn(username : String, pwd : String, callback: HttpCallback<Models.MyAccount>)
+    {
+        val url = getAbsUrl("account")
+
+        val builder = Request.Builder().url(url).get()
+        builder.addHeader("Authorization", Credentials.basic(username, pwd));
+
+        Debug.e(TAG, "URL: " + url + " : " + builder.toString())
+        mHttpClient.newCall(builder.build()).enqueue(callback)
+    }
 }

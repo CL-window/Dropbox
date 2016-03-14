@@ -20,32 +20,14 @@ class ExploreFragment : BaseFragment()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?)
-    {
-        if (menu != null) {
-            inflater?.inflate(R.menu.frag_explore, menu)
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean
-    {
-        when (item?.itemId) {
-            R.id.actionSearch -> startSearchActivity()
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_explore
 
     override fun initializeView(view: View)
     {
-//        val toolbar = view.findViewById(R.id.toolbar) as Toolbar
-//        mActivity.setSupportActionBar(toolbar)
+        view.findViewById(R.id.menuButton)?.setOnClickListener({mActivity.openDrawer() })
+        view.findViewById(R.id.searchButton)?.setOnClickListener({startSearchActivity()})
     }
 
     private fun startSearchActivity()

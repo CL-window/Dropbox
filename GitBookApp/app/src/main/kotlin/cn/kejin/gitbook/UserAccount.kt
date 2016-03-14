@@ -7,6 +7,7 @@ package cn.kejin.gitbook
 
 import android.content.Context
 import android.util.Log
+import cn.kejin.gitbook.common.GSON
 import cn.kejin.gitbook.networks.Models
 
 /**
@@ -34,8 +35,7 @@ class UserAccount
         /**
          * if has token, not use password
          */
-        fun getTokenOrPwd() : String  =
-                if (!mUser.token.isNullOrEmpty()) { mUser.token } else { mUser.password }
+        fun getToken() : String  = mUser.token
 
 
         fun isSignedIn() : Boolean = mUser.isSignedIn()
@@ -56,11 +56,24 @@ class UserAccount
 
     var token = ""
 
-    // clear it after signed in
-    var password = ""
-
     var github_username = ""
     var github_token = ""
+
+    operator override fun equals(other: Any?): Boolean {
+        return other is UserAccount &&
+                other.id == id &&
+                other.type == type &&
+                other.username == username &&
+                other.name == name &&
+                other.location == location &&
+                other.website == website &&
+                other.email == email &&
+                other.profile == profile &&
+                other.avatar == avatar &&
+                other.token == token &&
+                other.github_username == github_username &&
+                other.github_token == github_token;
+    }
 
     fun isSignedIn() : Boolean = !token.isNullOrEmpty()
 

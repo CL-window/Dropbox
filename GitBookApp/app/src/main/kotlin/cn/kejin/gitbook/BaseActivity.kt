@@ -1,12 +1,17 @@
 package cn.kejin.gitbook
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
+import android.widget.ProgressBar
 import android.widget.TextView
 import kotlinx.android.synthetic.main.layout_custom_status_bar.*
 
@@ -81,11 +86,59 @@ abstract class BaseActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * show progress dialog
+     */
+    private var progressDialog : AlertDialog? = null
+
+    fun showProgressDialog()
+    {
+        if (progressDialog == null) {
+            progressDialog = AlertDialog.Builder(this, R.style.TransDialog)
+                    .setView(ProgressBar(this))
+                    .setCancelable(true)
+                    .create()
+        }
+
+        if (progressDialog?.isShowing ?:true) {
+            return;
+        }
+
+        progressDialog?.show()
+    }
+
+    fun dismissProgressDialog()
+    {
+        progressDialog?.dismiss()
+    }
+
+    /**
+     * post
+     */
+    fun post (r : () -> Unit) = MainApplication.handler.post { r() }
+
+    fun postDelay (r : () -> Unit, delay : Long) = MainApplication.handler.postDelayed(r, delay)
+
+    /**
+     * inflate view
+     */
     fun inflateView(id:Int) : View? = if (id > 0) View.inflate(this, id, null) else null
 
+    /**
+     * start activity
+     */
     fun startActivity(clz : Class<*>) = startActivity(Intent(this, clz))
 
-    fun snack(view: View, id : Int, len : Int = Snackbar.LENGTH_SHORT) = snack(view, getString(id), len)
+    /**
+     * open browser
+     */
+    fun startBrowser(uri : String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
+
+
+    /**
+     * show snack bar
+     */
+    fun snack(view: View, id : Int, len : Int = Snackbar.LENGTH_SHORT) = cn.kejin.gitbook.common.snack(view, getString(id), len)
 
     /**
      * signed

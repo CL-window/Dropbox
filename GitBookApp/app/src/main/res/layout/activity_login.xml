@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <include layout="@layout/layout_custom_status_bar" />
+        <include layout="@layout/layout_color_status_bar" />
         <!--<FrameLayout-->
             <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
             <!--android:id="@+id/customStatusBar"-->
@@ -28,11 +28,11 @@
 
             <ImageView
                 android:id="@+id/menuCloseButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
-                android:padding="12dp"
+                android:padding="15dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/vector_drawable_ic_arrow_back_48px" />
 
@@ -41,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:singleLine="true"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="60dp"
                 android:layout_gravity="left"
                 android:text="@string/login_title"
                 android:textColor="@color/textLogo"
@@ -85,6 +85,7 @@
                     android:orientation="vertical">
 
                     <cn.kejin.gitbook.views.CustomEditText
+                        android:id="@+id/userNameEdit"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginBottom="5dp"
@@ -102,6 +103,7 @@
                         android:textCursorDrawable="@drawable/color_cursor"/>
 
                     <cn.kejin.gitbook.views.CustomEditText
+                        android:id="@+id/passwordEdit"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginTop="5dp"
@@ -128,6 +130,7 @@
                         android:gravity="center_vertical|right">
 
                         <cn.kejin.gitbook.views.CustomTextView
+                            android:id="@+id/forgotPwdBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -136,6 +139,7 @@
                             android:text="@string/login_forgot_pwd"/>
                     </LinearLayout>
                     <cn.kejin.gitbook.views.CustomTextView
+                        android:id="@+id/signIn"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:gravity="center"
@@ -143,9 +147,12 @@
                         android:text="@string/login_signin_btn"
                         android:textAllCaps="false"
                         android:textSize="16sp"
+                        android:clickable="true"
+                        android:focusableInTouchMode="true"
                         android:background="@drawable/bg_signin_btn"/>
 
                     <cn.kejin.gitbook.views.CustomTextView
+                        android:id="@+id/signUp"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="15dp"
@@ -154,6 +161,7 @@
                         android:text="@string/login_signup_btn"
                         android:textAllCaps="false"
                         android:textSize="16sp"
+                        android:clickable="true"
                         android:background="@drawable/bg_signup_btn"/>
 
                 </LinearLayout>

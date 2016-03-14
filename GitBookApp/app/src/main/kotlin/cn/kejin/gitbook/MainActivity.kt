@@ -39,8 +39,8 @@ class MainActivity : BaseActivity()
     companion object {
         val TAG = "MainActivity"
 
-        val M_LOGIN = "LoginOrRegister"
 
+        val REQ_SIGN = 100
     }
 
     private val exploreFragment: ExploreFragment by lazy { ExploreFragment() }
@@ -223,6 +223,23 @@ class MainActivity : BaseActivity()
             } else {}
 
 
+    private fun startSignInActivity()
+    {
+        val intent = Intent(this, SignActivity::class.java)
+        startActivityForResult(intent, REQ_SIGN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            when (requestCode) {
+                REQ_SIGN -> {
+                    openDrawer()
+                }
+            }
+        }
+    }
 
     private inner class ListMenuItem(val key : String,
                                      val strId : Int,
@@ -245,7 +262,7 @@ class MainActivity : BaseActivity()
             if (selectable) {
                 when (key) {
                     M_SIGN -> {
-                        startActivity(SignActivity::class.java)
+                        startSignInActivity()
                     }
                     M_MY_BOOKS -> {
                         if (UserAccount.isSignedIn()) {
@@ -253,7 +270,7 @@ class MainActivity : BaseActivity()
                             result =  true;
                         }
                         else {
-                            startActivity(SignActivity::class.java)
+                            startSignInActivity()
                         }
                     }
                     M_MY_PROFILE -> {
@@ -262,7 +279,7 @@ class MainActivity : BaseActivity()
                             result =  true;
                         }
                         else {
-                            startActivity(SignActivity::class.java)
+                            startSignInActivity()
                         }
                     }
 

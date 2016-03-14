@@ -4,6 +4,6 @@
     android:id="@+id/customStatusBar"
     android:layout_width="match_parent"
     android:layout_height="25dp"
-    android:background="#11000000"
+    android:background="#33212121"
     android:visibility="visible">
 </FrameLayout>

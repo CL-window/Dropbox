@@ -19,4 +19,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <!-- for progress dialog -->
+    <style name="TransDialog" parent="@android:style/Theme.Dialog">
+        <!--<item name="android:indeterminateDrawable">@drawable/ic_circle_progress</item>-->
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->
+        <item name="android:backgroundDimEnabled">true</item><!--模糊-->
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
 </resources>

@@ -1,15 +1,9 @@
 package cn.kejin.gitbook
 
 import android.app.Application
-import android.graphics.Bitmap
-import android.graphics.Typeface
 import android.os.Handler
-import android.view.View
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
-import com.nostra13.universalimageloader.core.assist.FailReason
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener
-import kotlin.properties.Delegates
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -23,8 +17,14 @@ class MainApplication : Application()
 
 
         // global handler
-        val handler : Handler by lazy { Handler() }
+        val handler : Handler = Handler()
     }
+//
+//    val handler : Handler = Handler()
+//
+//    fun post (r : ()->Unit) {
+//        handler.post({ r })
+//    }
 
     override fun onCreate() {
         super.onCreate()

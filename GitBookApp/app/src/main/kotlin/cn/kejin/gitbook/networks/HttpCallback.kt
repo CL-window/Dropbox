@@ -1,9 +1,11 @@
 package cn.kejin.gitbook.networks
 
-import cn.kejin.gitbook.GSON
+import android.os.Handler
+
+import cn.kejin.gitbook.common.GSON
 import cn.kejin.gitbook.MainApplication
-import cn.kejin.gitbook.Utils
-import cn.kejin.gitbook.isNetworkConnected
+import cn.kejin.gitbook.common.Debug
+import cn.kejin.gitbook.common.isNetworkConnected
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -29,48 +31,54 @@ abstract class HttpCallback<Model : Models.BaseResp> (val cls : Class<Model>) : 
 
     }
 
-    private fun post(r : (()->Unit) ) {
-        MainApplication.handler.post { r };
+    private fun post(r : ()->Unit ) {
+        MainApplication.handler.post({ r() });
     }
 
     override fun onFailure(call: Call?, e: IOException?) {
         call?.cancel();
 
-        post {
-            if (!isNetworkConnected()) {
-                onFailure(E_NO_NETWORK, "no network")
-            }
-            else {
-                onFailure(E_UNKNOWN, e?.message?:"unknown")
-            }
+        if (!isNetworkConnected()) {
+            onFailure(E_NO_NETWORK, "no network")
+        }
+        else {
+            onFailure(E_UNKNOWN, e?.message?:"unknown")
         }
     }
 
     override fun onResponse(call: Call?, resp: Response?) {
         if (resp != null) {
-            val msg = resp.message();
+            val msg = resp.body().string();
 
             try {
+                Debug.e(cls, msg)
                 var model = GSON.fromJson(msg, cls)
-                if (model.code != 0) {
-                    post { onFailure(model.code, model.error) }
+                if (model == null || model.code != 0) {
+                    onFailure(model.code, model.error)
                 }
                 else {
-                    post { onSuccess(model) }
+                    onSuccess(model)
                 }
             }
             catch(e : Exception) {
-                post { onFailure(E_GSON, e.message?:"unknown") }
+                onFailure(E_GSON, e.message?:"unknown")
             }
         }
         else {
-            MainApplication.handler.post {
-                onFailure(E_UNKNOWN, "unknown")
-            }
+            onFailure(E_UNKNOWN, "unknown")
         }
     }
 
-    abstract fun onSuccess(model : Model);
+    /**
+     * this method run in thread
+     */
+    open fun onSuccess(model: Model) = post { onResponse(true, model) }
 
-    abstract fun onFailure(code : Int, msg : String);
+    fun onFailure(code : Int, msg : String)
+    {
+        Debug.e(this.cls, msg);
+        post { onResponse(false, null, code, msg) }
+    }
+
+    abstract fun onResponse(success : Boolean, model : Model?, code : Int=0, msg : String="")
 }
