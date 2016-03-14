@@ -23,4 +23,10 @@
 
     <string name="press_again">Press again to exit</string>
 
+    <string name="login_title">Login to Your Account</string>
+    <string name="login_username">Username or Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_signin_btn">Sign In</string>
+    <string name="login_signup_btn">Sign up for GitBook</string>
+    <string name="login_forgot_pwd">Forgot Password?</string>
 </resources>

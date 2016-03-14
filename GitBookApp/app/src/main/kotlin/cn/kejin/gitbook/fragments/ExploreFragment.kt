@@ -44,8 +44,8 @@ class ExploreFragment : BaseFragment()
 
     override fun initializeView(view: View)
     {
-        val toolbar = view.findViewById(R.id.toolbar) as Toolbar
-        mActivity.setSupportActionBar(toolbar)
+//        val toolbar = view.findViewById(R.id.toolbar) as Toolbar
+//        mActivity.setSupportActionBar(toolbar)
     }
 
     private fun startSearchActivity()

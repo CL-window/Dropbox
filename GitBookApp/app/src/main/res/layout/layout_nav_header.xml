@@ -5,24 +5,24 @@
              android:minHeight="200dp"
              android:paddingBottom="10dp">
 
-    <LinearLayout
+    <FrameLayout
         android:gravity="top|center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="?attr/colorPrimary">
+        android:background="@drawable/bg_header">
 
         <!--<include layout="@layout/layout_vertical_logo"-->
                  <!--android:layout_width="wrap_content"-->
                  <!--android:layout_height="wrap_content"-->
                  <!--android:layout_gravity="center" />-->
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="bottom|right"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_gitbook_logo"/>
-    </LinearLayout>
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_account_circle_white_48dp" />
 
-            <TextView
+            <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -57,14 +57,16 @@
                 android:text="Kejin"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-            <TextView
+            <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/userEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:paddingLeft="10dp"
+                android:textColor="@color/white"
                 android:text="liungkejin@gmail.com"/>
         </LinearLayout>
     </FrameLayout>
