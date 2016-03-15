@@ -10,14 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <FrameLayout
             android:id="@+id/customStatusBar"
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:background="@color/signin_btn_color"
-            android:visibility="visible"></FrameLayout>
-
+            android:visibility="visible">
+        </FrameLayout>
         <FrameLayout
             android:id="@+id/customTitleBar"
             android:layout_width="match_parent"
@@ -30,7 +29,7 @@
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:padding="15dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/vector_drawable_ic_arrow_back_48px" />
@@ -38,10 +37,10 @@
             <cn.kejin.gitbook.views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:layout_marginLeft="65dp"
                 android:gravity="center"
                 android:singleLine="true"
+                android:layout_marginLeft="65dp"
+                android:layout_gravity="left"
                 android:text="@string/login_title"
                 android:textColor="@color/textLogo"
                 android:textSize="19sp" />
@@ -70,13 +69,13 @@
                     layout="@layout/layout_horizontal_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="50dp"
-                    android:layout_marginTop="50dp" />
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="50dp"/>
                 <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@drawable/ic_gitbook_logo"-->
-                <!--android:layout_margin="20dp"/>-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:src="@drawable/ic_gitbook_logo"-->
+                    <!--android:layout_margin="20dp"/>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,17 +88,17 @@
                         android:layout_height="45dp"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/bg_login_input"
-                        android:cursorVisible="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
                         android:gravity="center_vertical"
                         android:hint="@string/login_username"
                         android:inputType="text"
                         android:paddingLeft="15dp"
                         android:singleLine="true"
                         android:textColor="@color/textPrimary"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/color_cursor"/>
 
                     <cn.kejin.gitbook.views.CustomEditText
                         android:id="@+id/passwordEdit"
@@ -107,72 +106,63 @@
                         android:layout_height="45dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/bg_login_input"
-                        android:cursorVisible="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
                         android:gravity="center_vertical"
                         android:hint="@string/login_password"
                         android:inputType="textPassword"
                         android:paddingLeft="15dp"
                         android:singleLine="true"
                         android:textColor="@color/textPrimary"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/color_cursor" />
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical|right"
-                        android:orientation="horizontal"
+                        android:paddingTop="15dp"
                         android:paddingBottom="15dp"
-                        android:paddingTop="15dp">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical|right">
 
                         <cn.kejin.gitbook.views.CustomTextView
                             android:id="@+id/forgotPwdBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/login_forgot_pwd"
-                            android:textColor="@color/textPrimary"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="@string/login_forgot_pwd"/>
                     </LinearLayout>
-
-                    <LinearLayout
+                    <cn.kejin.gitbook.views.CustomTextView
+                        android:id="@+id/signIn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_signin_btn">
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:text="@string/login_signin_btn"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:clickable="true"
+                        android:focusableInTouchMode="true"
+                        android:background="@drawable/bg_signin_btn"
+                        android:foreground="?android:attr/selectableItemBackground"/>
 
-                        <cn.kejin.gitbook.views.CustomTextView
-                            android:id="@+id/signIn"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:gravity="center"
-                            android:text="@string/login_signin_btn"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <cn.kejin.gitbook.views.CustomTextView
+                        android:id="@+id/signUp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginTop="15dp"
-                        android:background="@drawable/bg_signup_btn">
-
-                        <cn.kejin.gitbook.views.CustomTextView
-                            android:id="@+id/signUp"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:gravity="center"
-                            android:text="@string/login_signup_btn"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="16sp" />
-                    </LinearLayout>
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:text="@string/login_signup_btn"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:background="@drawable/bg_signup_btn"/>
 
                 </LinearLayout>
 

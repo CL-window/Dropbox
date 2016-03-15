@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.layout_custom_status_bar.*
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/10
  */
-abstract class BaseActivity : AppCompatActivity()
+abstract class BaseActivity : AppCompatActivity(), UserAccount.UserStateListener
 {
     /**
      * prevent start activity twice
@@ -31,10 +31,6 @@ abstract class BaseActivity : AppCompatActivity()
      */
     var mStatusBarTranslucentFlag = false;
 
-    /**
-     * the last time user information
-     */
-    var mLastUserInfo = UserAccount.mUser;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +40,7 @@ abstract class BaseActivity : AppCompatActivity()
         if (layoutId > 0) {
             setContentView(layoutId)
         }
+
     }
 
     protected fun translucentStatusBar()
@@ -58,11 +55,6 @@ abstract class BaseActivity : AppCompatActivity()
     override fun onResume() {
         super.onResume()
         mStartFlag = false;
-
-        if (mLastUserInfo != UserAccount.mUser) {
-            onUserStateChanged(mLastUserInfo)
-        }
-        mLastUserInfo = UserAccount.mUser
     }
 
     override fun startActivity(intent: Intent?) {
@@ -86,10 +78,18 @@ abstract class BaseActivity : AppCompatActivity()
         }
     }
 
+    override fun onUserInfoChanged(last: UserAccount, now: UserAccount) {}
+
+    override fun onUserSignIn(user: UserAccount) { }
+
+    override fun onUserSignOut() { }
+
+    override fun onUserSignRefresh(user: UserAccount) { }
+
     /**
      * show progress dialog
      */
-    private var progressDialog : AlertDialog? = null
+    var progressDialog : AlertDialog? = null
 
     fun showProgressDialog()
     {
@@ -139,12 +139,6 @@ abstract class BaseActivity : AppCompatActivity()
      * show snack bar
      */
     fun snack(view: View, id : Int, len : Int = Snackbar.LENGTH_SHORT) = cn.kejin.gitbook.common.snack(view, getString(id), len)
-
-    /**
-     * signed
-     * 0:
-     */
-    open fun onUserStateChanged(last : UserAccount, now : UserAccount = UserAccount.mUser) {}
 
     abstract fun getLayoutId() : Int;
 }

@@ -34,6 +34,8 @@
     <string name="password_is_empty">Password is empty!</string>
     <string name="login_failed">Sign In failed!</string>
     <string name="login_success">Sign In Success!</string>
+    <string name="login_cancelled">Sign In Cancelled</string>
 
     <string name="no_network">No network connection</string>
+    <string name="exit_account">Exit</string>
 </resources>

@@ -19,12 +19,6 @@ class MainApplication : Application()
         // global handler
         val handler : Handler = Handler()
     }
-//
-//    val handler : Handler = Handler()
-//
-//    fun post (r : ()->Unit) {
-//        handler.post({ r })
-//    }
 
     override fun onCreate() {
         super.onCreate()

@@ -25,7 +25,7 @@
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:background="@android:color/transparent"
+                android:background="?android:attr/selectableItemBackground"
                 android:padding="15dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/vector_drawable_ic_menu_black_48px" />
@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:singleLine="true"
-                android:layout_marginLeft="60dp"
+                android:layout_marginLeft="65dp"
                 android:layout_gravity="left|center_vertical"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
@@ -47,29 +47,25 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|right"
-                android:background="@android:color/transparent"
+                android:background="?android:attr/selectableItemBackground"
                 android:padding="12dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/vector_drawable_ic_search_black_48px" />
 
         </FrameLayout>
 
-        <!--<android.support.design.widget.AppBarLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:theme="@style/AppTheme.AppBarOverlay">-->
-
-            <!--<android.support.v7.widget.Toolbar-->
-                <!--android:id="@+id/toolbar"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="?attr/actionBarSize"-->
-                <!--android:background="?attr/colorPrimary"-->
-                <!--app:popupTheme="@style/AppTheme.PopupOverlay"/>-->
-
-        <!--</android.support.design.widget.AppBarLayout>-->
-
     </LinearLayout>
 
-    <include layout="@layout/layout_main_content"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/layout_horizontal_logo"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -1,36 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-             android:minHeight="200dp"
-             android:paddingBottom="10dp">
+    android:background="@drawable/bg_header"
+    android:minHeight="200dp">
 
-    <FrameLayout
-        android:gravity="top|center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_header">
-
-        <!--<include layout="@layout/layout_vertical_logo"-->
-                 <!--android:layout_width="wrap_content"-->
-                 <!--android:layout_height="wrap_content"-->
-                 <!--android:layout_gravity="center" />-->
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="bottom|right"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_gitbook_logo"/>
-    </FrameLayout>
+    <!--<FrameLayout-->
+    <!--android:gravity="top|center_horizontal"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@drawable/bg_header">-->
+    <!--<ImageView-->
+    <!--android:layout_width="48dp"-->
+    <!--android:layout_height="48dp"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:paddingTop="5dp"-->
+    <!--android:layout_gravity="bottom|right"-->
+    <!--android:scaleType="fitCenter"-->
+    <!--android:src="@drawable/ic_gitbook_logo"/>-->
+    <!--</FrameLayout>-->
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:layout_gravity="bottom"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
@@ -38,36 +36,49 @@
             android:id="@+id/userLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="bottom"
+            android:orientation="vertical"
             android:visibility="visible">
-            <ImageView
+
+            <cn.kejin.gitbook.views.CircleImageView
                 android:id="@+id/avatarImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_account_circle_white_48dp" />
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="10dp"
+                android:src="@android:color/transparent" />
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/userName"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:paddingLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:singleLine="true"
+                android:paddingLeft="10dp"
                 android:text="Kejin"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/userEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:singleLine="true"
                 android:paddingLeft="10dp"
-                android:textColor="@color/white"
-                android:text="liungkejin@gmail.com"/>
+                android:text="liungkejin@gmail.com"
+                android:textColor="#DDDDDD"
+                android:textSize="13sp" />
         </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/exitAccount"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="bottom|right"
+            android:contentDescription="@string/exit_account"
+            android:scaleType="fitCenter"
+            android:src="@drawable/vector_drawable_ic_exit_to_app_white___px" />
     </FrameLayout>
+
 </FrameLayout>

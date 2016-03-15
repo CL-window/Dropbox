@@ -54,7 +54,8 @@ class SignActivity : BaseActivity()
         }
 
         showProgressDialog()
-        NetworkManager.instance.signIn(username.toString(), password.toString(),
+        progressDialog?.setCanceledOnTouchOutside(false)
+        val call = NetworkManager.instance.signIn(username.toString(), password.toString(),
                 object : HttpCallback<Models.MyAccount>(Models.MyAccount::class.java) {
                     override fun onResponse(success: Boolean, model: Models.MyAccount?, code: Int, msg: String) {
                         if (success) {
@@ -72,5 +73,10 @@ class SignActivity : BaseActivity()
                         dismissProgressDialog()
                     }
         })
+
+        progressDialog?.setOnCancelListener {
+            call.cancel()
+            snack(userNameEdit, R.string.login_cancelled)
+        }
     }
 }

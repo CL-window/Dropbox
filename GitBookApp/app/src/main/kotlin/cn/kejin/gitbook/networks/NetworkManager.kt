@@ -30,11 +30,11 @@ class NetworkManager private constructor()// init
     }
 
     private var mHttpClient = OkHttpClient.Builder()
-            .authenticator({ route, response ->
-                var value = UserAccount.getToken();
-                response.request().newBuilder().addHeader("Authorization",
-                        Credentials.basic(UserAccount.mUser.name, value)).build()
-            })
+//            .authenticator({ route, response ->
+//                var value = UserAccount.getToken();
+//                response.request().newBuilder().addHeader("Authorization",
+//                        Credentials.basic(UserAccount.mUser.name, value)).build()
+//            })
             .connectTimeout(DEF_CONNECT_TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
             .readTimeout((DEF_CONNECT_TIMEOUT_SEC * 2).toLong(), TimeUnit.SECONDS)
             .writeTimeout((DEF_CONNECT_TIMEOUT_SEC * 2).toLong(), TimeUnit.SECONDS).build()
@@ -69,27 +69,30 @@ class NetworkManager private constructor()// init
     /**
      * get method
      */
-    fun get(uri : String, callback: HttpCallback<Models.BaseResp>, auth: Boolean = false) {
-
+    fun get(uri : String, callback: HttpCallback<Models.BaseResp>, auth: Boolean = false) : Call?
+    {
         val builder = Request.Builder().url(uri).get()
         if (auth) {
             var value = UserAccount.getToken();
             if (value.isNullOrEmpty()) {
                 callback.onFailure(HttpCallback.E_NOT_SIGN, "not singed")
-                return;
+                return null;
             }
 
             builder.addHeader("Authorization", Credentials.basic(UserAccount.mUser.name, value));
         }
 
-        mHttpClient.newCall(builder.build()).enqueue(callback)
+        var call = mHttpClient.newCall(builder.build());
+        call .enqueue(callback)
+
+        return call;
     }
 
     /**
      * post method
      */
     fun post(uri : String, json : String,
-             callback: HttpCallback<Models.BaseResp>, auth : Boolean = false) {
+             callback: HttpCallback<Models.BaseResp>, auth : Boolean = false) : Call? {
 
         val body = RequestBody.create(JSON_TYPE, json);
         val builder = Request.Builder();
@@ -98,7 +101,7 @@ class NetworkManager private constructor()// init
             var value = UserAccount.getToken();
             if (value.isNullOrEmpty()) {
                 callback.onFailure(HttpCallback.E_NOT_SIGN, "not singed")
-                return;
+                return null;
             }
 
             builder.addHeader("Authorization", Credentials.basic(UserAccount.mUser.name, value));
@@ -106,7 +109,10 @@ class NetworkManager private constructor()// init
 
         builder.addHeader("Content-Type", "application/json").url(getAbsUrl(uri)).post(body);
 
-        mHttpClient.newCall(builder.build()).enqueue(callback);
+        var call = mHttpClient.newCall(builder.build())
+        call.enqueue(callback);
+
+        return call;
     }
 
     /**
@@ -117,14 +123,17 @@ class NetworkManager private constructor()// init
      * Sign In to user account
      * Method: GET
      */
-    fun signIn(username : String, pwd : String, callback: HttpCallback<Models.MyAccount>)
+    fun signIn(username : String, pwd : String, callback: HttpCallback<Models.MyAccount>) : Call
     {
         val url = getAbsUrl("account")
+        Debug.e(TAG, "URL: $url , UserName: $username, Pwd: $pwd")
 
         val builder = Request.Builder().url(url).get()
         builder.addHeader("Authorization", Credentials.basic(username, pwd));
 
-        Debug.e(TAG, "URL: " + url + " : " + builder.toString())
-        mHttpClient.newCall(builder.build()).enqueue(callback)
+        val call = mHttpClient.newCall(builder.build())
+        call.enqueue(callback)
+
+        return call
     }
 }

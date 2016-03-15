@@ -9,6 +9,7 @@ import android.content.Context
 import android.util.Log
 import cn.kejin.gitbook.common.GSON
 import cn.kejin.gitbook.networks.Models
+import com.google.gson.Gson
 
 /**
  * save user account information
@@ -39,8 +40,13 @@ class UserAccount
 
 
         fun isSignedIn() : Boolean = mUser.isSignedIn()
+
+        fun addUserStateListener(listener: UserStateListener) = mUser.addUserStateListener(listener)
+        fun removeUserStateListener(listener: UserStateListener) = mUser.removeUserStateListener(listener)
     }
 
+    constructor()
+    constructor(user : UserAccount) { copyFrom(user) }
 
     var id = ""
     var type = ""
@@ -59,21 +65,6 @@ class UserAccount
     var github_username = ""
     var github_token = ""
 
-    operator override fun equals(other: Any?): Boolean {
-        return other is UserAccount &&
-                other.id == id &&
-                other.type == type &&
-                other.username == username &&
-                other.name == name &&
-                other.location == location &&
-                other.website == website &&
-                other.email == email &&
-                other.profile == profile &&
-                other.avatar == avatar &&
-                other.token == token &&
-                other.github_username == github_username &&
-                other.github_token == github_token;
-    }
 
     fun isSignedIn() : Boolean = !token.isNullOrEmpty()
 
@@ -94,16 +85,17 @@ class UserAccount
 
         try {
             val user = GSON.fromJson(value, UserAccount::class.java)
-
-            mUser.setFrom(user)
+            if (user != null) {
+                mUser.copyFrom(user)
+            }
         }
         catch(e : Exception) {
             Log.e(TAG, "restore user account exception: " + e.message);
-            mUser.setFrom(UserAccount())
+            mUser.copyFrom(UserAccount())
         }
     }
 
-    fun setFrom(user : UserAccount)
+    private fun copyFrom(user : UserAccount)
     {
         this.id = user.id
         this.type = user.type
@@ -121,6 +113,8 @@ class UserAccount
 
     fun setFrom(account: Models.MyAccount)
     {
+        val last = UserAccount(this)
+
         this.id = account.id
         this.type = account.type
         this.username = account.username
@@ -135,6 +129,54 @@ class UserAccount
         this.github_username = account.github.username
 
         saveToPreference()
+
+        checkUserState(last)
     }
 
+    private fun checkUserState(last : UserAccount)
+    {
+        val lastToken = last.token;
+        if (lastToken.isNullOrEmpty()) {
+            if (!token.isNullOrEmpty() && mListeners.isNotEmpty()) {
+                mListeners.forEach { it.onUserSignIn(this@UserAccount) }
+            }
+        }
+        else {
+            if (token.isNullOrEmpty()) {
+                if (mListeners.isNotEmpty()) {
+                    mListeners.forEach { it.onUserSignOut() }
+                }
+            }
+            else if (token != lastToken){
+
+                if (mListeners.isNotEmpty()) {
+                    mListeners.forEach { it.onUserSignRefresh(this@UserAccount) }
+                }
+            }
+            else {
+                if (mListeners.isNotEmpty()) {
+                    mListeners.forEach { it.onUserInfoChanged(last, this@UserAccount) }
+                }
+            }
+        }
+    }
+
+    var mListeners = mutableSetOf<UserStateListener>();
+
+    fun addUserStateListener(listener: UserStateListener) = mListeners.add(listener)
+    fun removeUserStateListener(listener: UserStateListener) = mListeners.remove(listener)
+
+    interface UserStateListener
+    {
+        fun onUserInfoChanged(last : UserAccount, now : UserAccount)
+
+        fun onUserSignIn(user : UserAccount)
+
+        fun onUserSignOut()
+
+        /**
+         * refresh login state
+         */
+        fun onUserSignRefresh(user : UserAccount)
+    }
 }

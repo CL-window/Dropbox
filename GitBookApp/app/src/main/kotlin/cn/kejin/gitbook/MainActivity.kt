@@ -19,6 +19,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import cn.kejin.gitbook.common.Debug
 import cn.kejin.gitbook.fragments.BaseFragment
 import cn.kejin.gitbook.fragments.ExploreFragment
 import cn.kejin.gitbook.fragments.MyBooksFragment
@@ -123,51 +124,61 @@ class MainActivity : BaseActivity()
                     mMenuAdapter.mCurSelectedItemKey = item.key
                 }
         }
-//
-//        // header view
-//        loginButton?.setOnClickListener({startActivity(LoginActivity::class.java)})
-//        registerButton?.setOnClickListener({
-//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(NetworkManager.REGISTER_URL)))
-//        })
 
-        onUserStateChanged(UserAccount())
+        // register user account listener
+        UserAccount.addUserStateListener(this)
+
+        exitAccount?.setOnClickListener {
+            UserAccount.signout()
+        }
+
+        // initialize user account
+        if (UserAccount.isSignedIn()) {
+            onUserSignIn(UserAccount.mUser)
+        }
+        else {
+            onUserSignOut()
+        }
     }
 
-    override fun onUserStateChanged(last: UserAccount, now: UserAccount)
+    private fun setupUserLayout(now: UserAccount = UserAccount.mUser)
     {
-        if (!now.isSignedIn()) {
-            mMenuItems.remove(mMyBooksMenuItem)
-            mMenuItems.remove(mMyProfileMenuItem)
-            mMenuItems.add(1, mSignMenuItem)
-            mMenuAdapter.notifyDataSetChanged()
+        userEmail?.text = now.email
+        userName?.text = "${now.name} (${now.username})"
+        ImageLoader.getInstance().displayImage(now.avatar, avatarImage as ImageView)
+    }
 
-            userLayout?.visibility = View.GONE
-            return;
-        }
+    override fun onResume() {
+        super.onResume()
+    }
 
-        if (!last.isSignedIn()) {
-            mMenuItems.remove(mMyBooksMenuItem)
-            mMenuItems.remove(mMyProfileMenuItem)
-            mMenuItems.remove(mSignMenuItem)
+    override fun onUserSignIn(user: UserAccount) {
+        mMenuItems.remove(mMyBooksMenuItem)
+        mMenuItems.remove(mMyProfileMenuItem)
+        mMenuItems.remove(mSignMenuItem)
 
-            mMenuItems.add(1, mMyBooksMenuItem)
-            mMenuItems.add(2, mMyProfileMenuItem)
-            mMenuAdapter.notifyDataSetChanged()
+        mMenuItems.add(1, mMyBooksMenuItem)
+        mMenuItems.add(2, mMyProfileMenuItem)
+        mMenuAdapter.notifyDataSetChanged()
 
-            userLayout?.visibility = View.VISIBLE
-        }
+        userLayout?.visibility = View.VISIBLE
 
-        if (now.avatar != last.avatar && avatarImage != null) {
-            ImageLoader.getInstance().displayImage(now.avatar, avatarImage)
-        }
+        setupUserLayout(user)
+    }
 
-        if (now.name != last.name || now.username != last.username) {
-            userName?.text = "${now.name} (${now.username})"
-        }
+    override fun onUserSignOut() {
+        mMenuItems.remove(mMyBooksMenuItem)
+        mMenuItems.remove(mMyProfileMenuItem)
+        mMenuItems.add(1, mSignMenuItem)
+        mMenuAdapter.notifyDataSetChanged()
 
-        if (now.email != last.email) {
-            userEmail?.text = now.email
-        }
+        userLayout?.visibility = View.GONE
+        setupUserLayout()
+    }
+
+    override fun onUserInfoChanged(last: UserAccount, now: UserAccount)
+    {
+        setupUserLayout(now)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean
@@ -232,6 +243,8 @@ class MainActivity : BaseActivity()
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     {
         super.onActivityResult(requestCode, resultCode, data)
+
+        Debug.e(TAG, "Req: " + requestCode + " rescode: " + resultCode + data?.toString())
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 REQ_SIGN -> {
