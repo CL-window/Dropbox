@@ -15,7 +15,7 @@ import java.io.IOException
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/9
  */
-abstract class HttpCallback<Model : Models.BaseResp> (val cls : Class<Model>) : Callback
+abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
 {
     companion object {
         val TAG = "HttpCallback"
@@ -52,8 +52,9 @@ abstract class HttpCallback<Model : Models.BaseResp> (val cls : Class<Model>) : 
 
             try {
                 Debug.e(cls, msg)
-                var model = GSON.fromJson(msg, cls)
-                if (model == null || model.code != 0) {
+                var model: Model = GSON.fromJson(msg, cls) ?: throw Exception("parse json failed")
+
+                if (model is Models.BaseResp && model.code != 0) {
                     onFailure(model.code, model.error)
                 }
                 else {

@@ -13,13 +13,14 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.TextView
+import cn.kejin.gitbook.networks.Models
 import kotlinx.android.synthetic.main.layout_custom_status_bar.*
 
 /**
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/10
  */
-abstract class BaseActivity : AppCompatActivity(), UserAccount.UserStateListener
+abstract class BaseActivity : AppCompatActivity()
 {
     /**
      * prevent start activity twice
@@ -31,6 +32,15 @@ abstract class BaseActivity : AppCompatActivity(), UserAccount.UserStateListener
      */
     var mStatusBarTranslucentFlag = false;
 
+    /**
+     * last user state
+     */
+    var mLastUserState = UserAccount.get()
+
+    /**
+     * progress dialog
+     */
+    var progressDialog : AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +50,6 @@ abstract class BaseActivity : AppCompatActivity(), UserAccount.UserStateListener
         if (layoutId > 0) {
             setContentView(layoutId)
         }
-
     }
 
     protected fun translucentStatusBar()
@@ -55,6 +64,8 @@ abstract class BaseActivity : AppCompatActivity(), UserAccount.UserStateListener
     override fun onResume() {
         super.onResume()
         mStartFlag = false;
+
+        checkUserState()
     }
 
     override fun startActivity(intent: Intent?) {
@@ -78,19 +89,19 @@ abstract class BaseActivity : AppCompatActivity(), UserAccount.UserStateListener
         }
     }
 
-    override fun onUserInfoChanged(last: UserAccount, now: UserAccount) {}
-
-    override fun onUserSignIn(user: UserAccount) { }
-
-    override fun onUserSignOut() { }
-
-    override fun onUserSignRefresh(user: UserAccount) { }
+    protected fun checkUserState() {
+        val cur = UserAccount.get()
+        if (!mLastUserState.equals(cur)) {
+            onUserStateChanged(mLastUserState, cur)
+        }
+        mLastUserState = cur;
+    }
+    open fun onUserStateChanged(last : Models.MyAccount,
+                                now : Models.MyAccount = UserAccount.get()) {}
 
     /**
      * show progress dialog
      */
-    var progressDialog : AlertDialog? = null
-
     fun showProgressDialog()
     {
         if (progressDialog == null) {

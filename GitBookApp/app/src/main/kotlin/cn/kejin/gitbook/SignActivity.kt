@@ -59,7 +59,7 @@ class SignActivity : BaseActivity()
                 object : HttpCallback<Models.MyAccount>(Models.MyAccount::class.java) {
                     override fun onResponse(success: Boolean, model: Models.MyAccount?, code: Int, msg: String) {
                         if (success) {
-                            UserAccount.setUserAccount(model!!)
+                            UserAccount.set(model!!)
                             snack(userNameEdit, R.string.login_success)
                             postDelay({ setResult(RESULT_OK); finish() }, 500)
                         }

@@ -24,6 +24,7 @@ import cn.kejin.gitbook.fragments.BaseFragment
 import cn.kejin.gitbook.fragments.ExploreFragment
 import cn.kejin.gitbook.fragments.MyBooksFragment
 import cn.kejin.gitbook.fragments.ProfileFragment
+import cn.kejin.gitbook.networks.Models
 import cn.kejin.gitbook.networks.NetworkManager
 import com.nostra13.universalimageloader.core.DisplayImageOptions
 import com.nostra13.universalimageloader.core.ImageLoader
@@ -125,60 +126,41 @@ class MainActivity : BaseActivity()
                 }
         }
 
-        // register user account listener
-        UserAccount.addUserStateListener(this)
-
         exitAccount?.setOnClickListener {
-            UserAccount.signout()
+            UserAccount.signOut()
+            checkUserState()
         }
 
-        // initialize user account
-        if (UserAccount.isSignedIn()) {
-            onUserSignIn(UserAccount.mUser)
-        }
-        else {
-            onUserSignOut()
-        }
+        onUserStateChanged(Models.MyAccount())
     }
 
-    private fun setupUserLayout(now: UserAccount = UserAccount.mUser)
-    {
+    override fun onUserStateChanged(last: Models.MyAccount, now: Models.MyAccount) {
+        if (!now.isSingedIn()) {
+            // signed out
+            mMenuItems.remove(mMyBooksMenuItem)
+            mMenuItems.remove(mMyProfileMenuItem)
+            mMenuItems.add(1, mSignMenuItem)
+            mMenuAdapter.notifyDataSetChanged()
+
+            userLayout?.visibility = View.GONE
+            return;
+        }
+
+        if (!last.isSingedIn()) {
+            mMenuItems.remove(mMyBooksMenuItem)
+            mMenuItems.remove(mMyProfileMenuItem)
+            mMenuItems.remove(mSignMenuItem)
+
+            mMenuItems.add(1, mMyBooksMenuItem)
+            mMenuItems.add(2, mMyProfileMenuItem)
+            mMenuAdapter.notifyDataSetChanged()
+
+            userLayout?.visibility = View.VISIBLE
+        }
+
         userEmail?.text = now.email
-        userName?.text = "${now.name} (${now.username})"
-        ImageLoader.getInstance().displayImage(now.avatar, avatarImage as ImageView)
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onUserSignIn(user: UserAccount) {
-        mMenuItems.remove(mMyBooksMenuItem)
-        mMenuItems.remove(mMyProfileMenuItem)
-        mMenuItems.remove(mSignMenuItem)
-
-        mMenuItems.add(1, mMyBooksMenuItem)
-        mMenuItems.add(2, mMyProfileMenuItem)
-        mMenuAdapter.notifyDataSetChanged()
-
-        userLayout?.visibility = View.VISIBLE
-
-        setupUserLayout(user)
-    }
-
-    override fun onUserSignOut() {
-        mMenuItems.remove(mMyBooksMenuItem)
-        mMenuItems.remove(mMyProfileMenuItem)
-        mMenuItems.add(1, mSignMenuItem)
-        mMenuAdapter.notifyDataSetChanged()
-
-        userLayout?.visibility = View.GONE
-        setupUserLayout()
-    }
-
-    override fun onUserInfoChanged(last: UserAccount, now: UserAccount)
-    {
-        setupUserLayout(now)
+        userName?.text = "${now.name} ( ${now.username} )"
+        ImageLoader.getInstance().displayImage(now.urls.avatar, avatarImage as ImageView)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean
@@ -223,11 +205,7 @@ class MainActivity : BaseActivity()
     private fun replaceFragment(fragment: Fragment, tag: String) =
             fragmentManager.beginTransaction().replace(mContentId, fragment, tag).addToBackStack(null).commit()
 
-    fun openDrawer() =
-            if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                drawerLayout.openDrawer(GravityCompat.START)
-            } else {}
-
+    fun openDrawer() = drawerLayout.openDrawer(GravityCompat.START)
     fun closeDrawer() =
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
@@ -249,6 +227,7 @@ class MainActivity : BaseActivity()
             when (requestCode) {
                 REQ_SIGN -> {
                     openDrawer()
+                    postDelay({closeDrawer()}, 1000)
                 }
             }
         }

@@ -15,9 +15,12 @@ class MainApplication : Application()
         // global context
         lateinit var instance : MainApplication
 
+        // global preference
+        fun getSharedPref(name : String) = instance.getSharedPreferences(name, MODE_PRIVATE)
 
         // global handler
         val handler : Handler = Handler()
+
     }
 
     override fun onCreate() {
@@ -25,7 +28,7 @@ class MainApplication : Application()
 
         instance = this
 
-        UserAccount.initializeUserAccount()
+        UserAccount.restore()
 
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this))
     }

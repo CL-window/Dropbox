@@ -1,5 +1,6 @@
 package cn.kejin.gitbook.networks
 
+import cn.kejin.gitbook.common.GSON
 import com.google.gson.annotations.SerializedName
 
 import java.util.ArrayList
@@ -55,7 +56,7 @@ class Models {
     /**
      * Basic Account Info
      */
-    open class Account : BaseResp() {
+    open class Account {
         var id = ""
         var type = ""
         var username = ""
@@ -85,6 +86,45 @@ class Models {
             var username = ""
             var token = ""
         }
+
+        fun copy() : MyAccount {
+            var a = MyAccount()
+            a.id = id;
+            a.type = type;
+            a.username = username;
+            a.name = name;
+            a.location = location;
+            a.website = website;
+            a.email = email;
+            a.urls.avatar = urls.avatar
+            a.urls.profile = urls.profile
+            a.token = token;
+            a.github.username = github.username;
+            a.github.token = github.token;
+
+            return a;
+        }
+
+        fun isSingedIn() = !token.isNullOrEmpty()
+
+        override fun equals(other: Any?): Boolean {
+            if (other is MyAccount) {
+                try {
+                    return GSON.toJson(this).equals(GSON.toJson(other))
+                }
+                catch (e : Exception) {
+                    return false
+                }
+            }
+            return false
+        }
+
+        override fun hashCode(): Int{
+            var result = token.hashCode()
+            result += 31 * result + github.hashCode()
+            return result
+        }
+
     }
 
     /**
@@ -186,11 +226,71 @@ class Models {
     /**
      * A topic
      */
-    class ATopic {
+    class ATopic : BaseResp() {
         var id = ""
         var name = ""
         var books = 0
     }
 
     class Topics : Pagination<ATopic>()//
+
+    /**
+     * A Book branch
+     */
+    class ABranch {
+        var name = ""
+        var urls = URLs()
+
+        inner class URLs {
+            var website = ""
+            var epub = ""
+            var pdf = ""
+            var mobi = ""
+        }
+
+        var current = false
+    }
+
+    /**
+     * Book Contents
+     */
+    class BookContents {
+        inner class Next {
+            var path = ""
+            var title = ""
+            var level = "0"
+            var exists = false
+            var external = false
+            var introduction = false
+        }
+        inner class Chapter {
+            var index = 0
+            var title = ""
+            var introduction = false
+            var level = "0"
+            var path = ""
+            var percent = 0.0
+            var done = false
+
+            var prev = Next()
+            var next = Next()
+        }
+
+        inner class Progress {
+            var prevPercent : Double = 0.0
+            var percent : Double = 0.0
+
+            var chapters : List<Chapter> = listOf()
+
+            var current = Chapter()
+        }
+
+        inner class Sections {
+            var type = ""
+            var content = ""
+        }
+
+        var progress = Progress()
+        var sections = Sections()
+    }
 }
