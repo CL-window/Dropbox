@@ -31,7 +31,7 @@ abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
 
     }
 
-    private fun post(r : ()->Unit ) {
+    protected  fun post(r : ()->Unit ) {
         MainApplication.handler.post({ r() });
     }
 
@@ -52,14 +52,7 @@ abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
 
             try {
                 Debug.e(cls, msg)
-                var model: Model = GSON.fromJson(msg, cls) ?: throw Exception("parse json failed")
-
-                if (model is Models.BaseResp && model.code != 0) {
-                    onFailure(model.code, model.error)
-                }
-                else {
-                    onSuccess(model)
-                }
+                onSuccess(msg)
             }
             catch(e : Exception) {
                 onFailure(E_GSON, e.message?:"unknown")
@@ -73,7 +66,18 @@ abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
     /**
      * this method run in thread
      */
-    open fun onSuccess(model: Model) = post { onResponse(true, model) }
+    open fun onSuccess(body : String) {
+        var model: Model = GSON.fromJson(body, cls) ?: throw Exception("parse json failed")
+
+        if (model is Models.BaseResp && model.code != 0) {
+            onFailure(model.code, model.error)
+        }
+        else {
+            post {
+                onResponse(true, model)
+            }
+        }
+    }
 
     fun onFailure(code : Int, msg : String)
     {

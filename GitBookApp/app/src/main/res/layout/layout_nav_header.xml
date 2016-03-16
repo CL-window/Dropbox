@@ -45,7 +45,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
-                android:src="@android:color/transparent" />
+                android:src="@drawable/ic_default_avatar" />
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/userName"

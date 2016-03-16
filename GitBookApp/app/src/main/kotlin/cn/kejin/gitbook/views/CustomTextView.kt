@@ -2,6 +2,7 @@ package cn.kejin.gitbook.views
 
 import android.content.Context
 import android.graphics.Typeface
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.widget.TextView
 
@@ -33,5 +34,7 @@ class CustomTextView(context: Context?,
         if (customTypeface != null) {
             typeface = customTypeface
         }
+
+        ellipsize = TextUtils.TruncateAt.END
     }
 }

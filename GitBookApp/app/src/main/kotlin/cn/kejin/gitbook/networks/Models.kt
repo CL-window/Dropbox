@@ -226,7 +226,7 @@ class Models {
     /**
      * A topic
      */
-    class ATopic : BaseResp() {
+    class ATopic{
         var id = ""
         var name = ""
         var books = 0
@@ -292,5 +292,101 @@ class Models {
 
         var progress = Progress()
         var sections = Sections()
+    }
+
+    /////////////////////////// Parse Html -> Model //////////////////////////////
+
+    /**
+     * WWW Author
+     */
+    class WWWAuthor {
+        var avatar = "" // avatar url
+        var name = ""
+        var url = ""
+        var join_time = ""
+            set(value) {
+                field = value.removePrefix("Joined On ")
+            }
+    }
+    /**
+     * WWW book
+     */
+    class WWWBook {
+        var title = "" // title
+        var details = ""; // details url
+        var star_num = "0" // number of star
+            set(value) {
+                field = getNumString(value)
+            }
+
+        var pub_time = "" // publish time
+        var summary = ""
+
+        var author : WWWAuthor = WWWAuthor()
+    }
+
+    class WWWTopic {
+        var url = "" // topic url
+
+        var name = ""
+
+        var num = "0"
+            set(value) {
+                field = getNumString(value)
+            }
+
+        var letter = ""
+    }
+
+    /**
+     * Parse explore html
+     * https://www.gitbook.com/explore
+     */
+    class WWWExplorePage {
+        var books : List<WWWBook> = listOf()
+        var topics : List<WWWTopic> = listOf()
+    }
+
+    /**
+     * https://www.gitbook.com/topics
+     */
+    class WWWTopicsPage {
+        var topics : List<WWWTopic> = listOf()
+    }
+
+    /**
+     * https://
+     */
+    class WWWSearchPage {
+        var books : List<WWWBook> = listOf()
+        var authors : List<WWWAuthor> = listOf()
+
+        var sum_book = "0"
+            set(value) {
+                field = getNumString(value)
+            }
+
+        var sum_author = "0"
+            set(value) {
+                field = getNumString(value)
+            }
+    }
+
+    companion object {
+        fun getNumString(value: String) : String
+        {
+            var n = ""
+            for(c in value) {
+                if (c.isDigit()) {
+                    n += c;
+                }
+                else if (n.isNotEmpty()) {
+                    break;
+                }
+            }
+
+            if (n.isEmpty()) n="0"
+            return n
+        }
     }
 }

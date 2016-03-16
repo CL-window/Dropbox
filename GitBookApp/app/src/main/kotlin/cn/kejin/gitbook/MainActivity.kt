@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import cn.kejin.gitbook.common.Debug
+import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.fragments.BaseFragment
 import cn.kejin.gitbook.fragments.ExploreFragment
 import cn.kejin.gitbook.fragments.MyBooksFragment
@@ -160,7 +161,7 @@ class MainActivity : BaseActivity()
 
         userEmail?.text = now.email
         userName?.text = "${now.name} ( ${now.username} )"
-        ImageLoader.getInstance().displayImage(now.urls.avatar, avatarImage as ImageView)
+        displayAvatar(now.urls.avatar, avatarImage as ImageView)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean

@@ -8,6 +8,9 @@ package cn.kejin.gitbook.networks
 import cn.kejin.gitbook.UserAccount
 import cn.kejin.gitbook.common.Debug
 import okhttp3.*
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -23,6 +26,7 @@ class NetworkManager private constructor()// init
         val RESET_PWD_URL = "https://www.gitbook.com/settings/password/reset"
         val REGISTER_URL = "https://www.gitbook.com/join"
         val BASE_API_URL = "https://api.gitbook.com/"
+        val BASE_WWW_URL = "https://www.gitbook.com/"
 
         val JSON_TYPE = MediaType.parse("application/json; charset:utf-8")
 
@@ -63,9 +67,12 @@ class NetworkManager private constructor()// init
     /**
      * get absolute URL
      */
-    fun getAbsUrl(uri: String): String {
-
+    fun getApiAbsUrl(uri: String): String {
         return BASE_API_URL + if (uri.trim().startsWith("/")) { "/" + uri } else { uri }
+    }
+
+    fun getWWWAbsUrl(uri: String): String {
+        return BASE_WWW_URL + if (uri.trim().startsWith("/")) { "/" + uri } else { uri }
     }
 
     /**
@@ -75,7 +82,7 @@ class NetworkManager private constructor()// init
     {
         var url = uri;
         if (!uri.startsWith("http") && !uri.startsWith("https")) {
-            url = getAbsUrl(uri);
+            url = getApiAbsUrl(uri);
         }
 
         Debug.e(TAG, "Method: GET, URL: $url, Auth: $auth")
@@ -104,7 +111,7 @@ class NetworkManager private constructor()// init
 
         var url = uri;
         if (!uri.startsWith("http") && !uri.startsWith("https")) {
-            url = getAbsUrl(uri);
+            url = getApiAbsUrl(uri);
         }
 
         Debug.e(TAG, "Method: GET, URL: $url, Auth: $auth, Json: $json")
@@ -139,7 +146,7 @@ class NetworkManager private constructor()// init
      */
     fun signIn(username : String, pwd : String, callback: HttpCallback<Models.MyAccount>) : Call
     {
-        val url = getAbsUrl("account")
+        val url = getApiAbsUrl("account")
         Debug.e(TAG, "URL: $url , UserName: $username, Pwd: $pwd")
 
         val builder = Request.Builder().url(url).get()
@@ -184,7 +191,7 @@ class NetworkManager private constructor()// init
     /**
      * get author's avatar url
      */
-    fun getAuthorAvatarUrl(name : String) = getAbsUrl("/author/$name/avatar")
+    fun getAuthorAvatarUrl(name : String) = getApiAbsUrl("/author/$name/avatar")
 
     ////////////////////// Topics ///////////////////////////////////////////////////////////
     /**
@@ -256,5 +263,75 @@ class NetworkManager private constructor()// init
         url += "v/$version/$filename"
 
         return get(url, callback)
+    }
+
+
+    //////////////////////// WWW API ///////////////////////////////////////////////////////////
+    fun getExploreBooks(page: Int, callback : HttpCallback<Models.WWWExplorePage>) : Call? {
+        val url = getWWWAbsUrl("/explore?page=$page")
+
+        return get(url, object : HttpCallback<Models.WWWExplorePage>(Models.WWWExplorePage::class.java) {
+            override fun onSuccess(body: String) {
+                val page = Models.WWWExplorePage()
+
+                val doc = Jsoup.parse(body)
+                // TODO: parse html
+
+                post { onResponse(true, page) }
+            }
+
+            override fun onResponse(success: Boolean, model: Models.WWWExplorePage?, code: Int, msg: String) {
+                callback.onResponse(success, model, code, msg)
+            }
+        })
+    }
+
+    fun getTopicsPage(callback : HttpCallback<Models.WWWTopicsPage>) : Call? {
+        val url = getWWWAbsUrl("/explore/topics")
+
+        return get(url, object : HttpCallback<Models.WWWTopicsPage>(Models.WWWTopicsPage::class.java) {
+            override fun onSuccess(body: String) {
+                val page = Models.WWWTopicsPage()
+
+                val doc = Jsoup.parse(body)
+                // TODO: parse html
+
+                post { onResponse(true, page) }
+            }
+
+
+            override fun onResponse(success: Boolean, model: Models.WWWTopicsPage?, code: Int, msg: String) {
+                callback.onResponse(success, model, code, msg)
+            }
+        })
+    }
+
+    enum class  SearchType { books, authors }
+
+    enum class  SearchSort { default,  stars , updated }
+
+    fun getSearchPage(key:String, sort:SearchSort, type:SearchType, callback : HttpCallback<Models.WWWSearchPage>) : Call? {
+        var csort = sort
+        if (type == SearchType.authors && sort == SearchSort.stars) {
+            csort = SearchSort.default
+        }
+
+        val url = getWWWAbsUrl("/search?key=$key&sort=$csort&type=$type")
+
+        return get(url, object : HttpCallback<Models.WWWSearchPage>(Models.WWWSearchPage::class.java) {
+            override fun onSuccess(body: String) {
+                val page = Models.WWWSearchPage()
+
+                val doc = Jsoup.parse(body)
+                // TODO: parse html
+
+                post { onResponse(true, page) }
+            }
+
+
+            override fun onResponse(success: Boolean, model: Models.WWWSearchPage?, code: Int, msg: String) {
+                callback.onResponse(success, model, code, msg)
+            }
+        })
     }
 }

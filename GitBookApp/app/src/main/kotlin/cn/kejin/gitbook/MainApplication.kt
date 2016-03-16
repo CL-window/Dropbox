@@ -1,9 +1,14 @@
 package cn.kejin.gitbook
 
 import android.app.Application
+import android.os.Environment
 import android.os.Handler
+import com.nostra13.universalimageloader.cache.disc.DiskCache
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache
+import com.nostra13.universalimageloader.core.DisplayImageOptions
 import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
+import java.io.File
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -12,6 +17,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
 class MainApplication : Application()
 {
     companion object {
+        val APP_DIR = File(Environment.getExternalStorageDirectory(), "GitBook")
+
         // global context
         lateinit var instance : MainApplication
 
@@ -30,6 +37,16 @@ class MainApplication : Application()
 
         UserAccount.restore()
 
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this))
+        val display = DisplayImageOptions.Builder()
+                .cacheOnDisk(true)
+                .build()
+
+        val conf = ImageLoaderConfiguration.Builder(this)
+                .diskCache(UnlimitedDiskCache(cacheDir))
+                .diskCacheSize(10 * 1024 * 1024)  // 10 MB
+                .defaultDisplayImageOptions(display)
+                .build()
+
+        ImageLoader.getInstance().init(conf)
     }
 }
