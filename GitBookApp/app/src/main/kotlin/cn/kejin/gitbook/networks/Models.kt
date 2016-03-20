@@ -343,24 +343,36 @@ class Models {
      * https://www.gitbook.com/explore
      */
     class WWWExplorePage {
-        var books : List<WWWBook> = listOf()
-        var topics : List<WWWTopic> = listOf()
+        var books : MutableList<WWWBook> = mutableListOf()
+        var topics : MutableList<WWWTopic> = mutableListOf()
     }
 
     /**
      * https://www.gitbook.com/topics
      */
     class WWWTopicsPage {
-        var topics : List<WWWTopic> = listOf()
+        var topics : MutableList<WWWTopic> = mutableListOf()
     }
 
     /**
      * https://
      */
-    class WWWSearchPage {
-        var books : List<WWWBook> = listOf()
-        var authors : List<WWWAuthor> = listOf()
+    class WWWSearchBookPage {
+        var books : MutableList<WWWBook> = mutableListOf()
 
+        var sum_book = "0"
+            set(value) {
+                field = getNumString(value)
+            }
+
+        var sum_author = "0"
+            set(value) {
+                field = getNumString(value)
+            }
+    }
+
+    class WWWSearchAuthorPage {
+        var authors : MutableList<WWWAuthor> = mutableListOf()
         var sum_book = "0"
             set(value) {
                 field = getNumString(value)

@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:background="@color/signin_btn_color"
-            android:visibility="visible"></FrameLayout>
+            android:visibility="visible"/>
 
         <FrameLayout
             android:id="@+id/customTitleBar"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                android:layout_marginLeft="65dp"
+                android:layout_marginLeft="75dp"
                 android:gravity="center"
                 android:singleLine="true"
                 android:text="@string/login_title"
