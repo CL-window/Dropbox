@@ -69,13 +69,11 @@ class NetworkManager private constructor()// init
     /**
      * get absolute URL
      */
-    fun getApiAbsUrl(uri: String): String {
-        return BASE_API_URL + if (uri.trim().startsWith("/")) { "/" + uri } else { uri }
-    }
+    fun getApiAbsUrl(uri: String): String =
+            BASE_API_URL.removeSuffix("/") + "/" + uri.removePrefix("/")
 
-    fun getWWWAbsUrl(uri: String): String {
-        return BASE_WWW_URL + if (uri.trim().startsWith("/")) { "/" + uri } else { uri }
-    }
+    fun getWWWAbsUrl(uri: String): String =
+            BASE_WWW_URL.removeSuffix("/") + "/" + uri.removePrefix("/")
 
     /**
      * get method
@@ -354,24 +352,31 @@ class NetworkManager private constructor()// init
         return topic;
     }
 
-    fun getExploreBooks(page: Int, callback : HttpCallback<Models.WWWExplorePage>) : Call? {
+    fun parseExplorePage(body: String) : Models.WWWExplorePage
+    {
+        val ePage = Models.WWWExplorePage()
+
+        val doc = Jsoup.parse(body)
+        val books = doc.getElementsByClass("book");
+        for (book in books) {
+            ePage.books.add(parseABook(book));
+        }
+
+        val topics = doc.getElementsByClass("topics-list")
+        for (topic in topics) {
+            ePage.topics.add(parseATopic(topic));
+        }
+
+        return ePage
+    }
+
+    fun getExplorePage(page: Int, callback : HttpCallback<Models.WWWExplorePage>) : Call? {
         val url = getWWWAbsUrl("/explore?page=$page")
 
         return get(url, object : HttpCallback<Models.WWWExplorePage>(Models.WWWExplorePage::class.java) {
             override fun onSuccess(body: String) {
-                val ePage = Models.WWWExplorePage()
 
-                val doc = Jsoup.parse(body)
-                val books = doc.getElementsByClass("book");
-                for (book in books) {
-                    ePage.books.add(parseABook(book));
-                }
-
-                val topics = doc.getElementsByClass("topics-list")
-                for (topic in topics) {
-                    ePage.topics.add(parseATopic(topic));
-                }
-
+                val ePage = parseExplorePage(body)
                 post { onResponse(true, ePage) }
             }
 

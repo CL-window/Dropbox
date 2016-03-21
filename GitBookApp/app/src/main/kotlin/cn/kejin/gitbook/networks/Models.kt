@@ -307,6 +307,10 @@ class Models {
             set(value) {
                 field = value.removePrefix("Joined On ")
             }
+
+        override fun toString(): String {
+            return "[$name, $join_time, $url, $avatar]"
+        }
     }
     /**
      * WWW book
@@ -323,6 +327,10 @@ class Models {
         var summary = ""
 
         var author : WWWAuthor = WWWAuthor()
+
+        override fun toString(): String {
+            return "Book ($title, $details, $star_num, $pub_time, $summary, $author)"
+        }
     }
 
     class WWWTopic {
@@ -336,6 +344,10 @@ class Models {
             }
 
         var letter = ""
+
+        override fun toString(): String {
+            return "Topic ($name, $num, $letter, $url)"
+        }
     }
 
     /**
@@ -345,6 +357,15 @@ class Models {
     class WWWExplorePage {
         var books : MutableList<WWWBook> = mutableListOf()
         var topics : MutableList<WWWTopic> = mutableListOf()
+
+        override fun toString(): String {
+            var str = "ExplorePage (${books.size}:Books, ${topics.size}:Topics){\n"
+            books.forEach { str += "$it\n" }
+            str += "\n";
+            topics.forEach { str += "$it\n" }
+            str += "\n}"
+            return str
+        }
     }
 
     /**
@@ -352,6 +373,14 @@ class Models {
      */
     class WWWTopicsPage {
         var topics : MutableList<WWWTopic> = mutableListOf()
+
+        override fun toString(): String {
+            var str = "TopicPage {\n"
+            topics.forEach { str += "$it\n" }
+            str += "\n}"
+
+            return str
+        }
     }
 
     /**
@@ -369,6 +398,14 @@ class Models {
             set(value) {
                 field = getNumString(value)
             }
+
+        override fun toString(): String {
+            var str = "TopicPage ($sum_book:Books, $sum_author:Authors){\n"
+            books.forEach { str += "$it\n" }
+            str += "\n}"
+
+            return str
+        }
     }
 
     class WWWSearchAuthorPage {
@@ -382,6 +419,14 @@ class Models {
             set(value) {
                 field = getNumString(value)
             }
+
+        override fun toString(): String {
+            var str = "TopicPage ($sum_book:Books, $sum_author:Authors){\n"
+            authors.forEach { str += "$it\n" }
+            str += "\n}"
+
+            return str
+        }
     }
 
     companion object {
