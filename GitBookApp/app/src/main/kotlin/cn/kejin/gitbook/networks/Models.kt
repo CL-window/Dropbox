@@ -363,7 +363,7 @@ class Models {
             books.forEach { str += "$it\n" }
             str += "\n";
             topics.forEach { str += "$it\n" }
-            str += "\n}"
+            str += "}\n"
             return str
         }
     }
@@ -375,9 +375,9 @@ class Models {
         var topics : MutableList<WWWTopic> = mutableListOf()
 
         override fun toString(): String {
-            var str = "TopicPage {\n"
+            var str = "TopicPage (${topics.size}:Topics){\n"
             topics.forEach { str += "$it\n" }
-            str += "\n}"
+            str += "}\n"
 
             return str
         }
@@ -402,7 +402,7 @@ class Models {
         override fun toString(): String {
             var str = "TopicPage ($sum_book:Books, $sum_author:Authors){\n"
             books.forEach { str += "$it\n" }
-            str += "\n}"
+            str += "}\n"
 
             return str
         }
@@ -423,7 +423,7 @@ class Models {
         override fun toString(): String {
             var str = "TopicPage ($sum_book:Books, $sum_author:Authors){\n"
             authors.forEach { str += "$it\n" }
-            str += "\n}"
+            str += "}\n"
 
             return str
         }

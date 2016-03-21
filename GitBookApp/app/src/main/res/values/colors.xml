@@ -17,4 +17,5 @@
 
     <color name="white">#FFFFFFFF</color>
     <color name="dark">#000000</color>
+    <color name="bg_gray">#F1F1F1</color>
 </resources>

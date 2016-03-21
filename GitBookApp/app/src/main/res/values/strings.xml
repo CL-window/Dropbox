@@ -39,4 +39,5 @@
     <string name="no_network">No network connection</string>
     <string name="exit_account">Exit</string>
     <string name="published_string">Published By</string>
+    <string name="all_topics">All Topics</string>
 </resources>

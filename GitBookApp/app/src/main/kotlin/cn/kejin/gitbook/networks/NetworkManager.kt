@@ -38,11 +38,11 @@ class NetworkManager private constructor()// init
     }
 
     private var mHttpClient = OkHttpClient.Builder()
-//            .authenticator({ route, response ->
-//                var value = UserAccount.getToken();
-//                response.request().newBuilder().addHeader("Authorization",
-//                        Credentials.basic(UserAccount.mUser.name, value)).build()
-//            })
+            //            .authenticator({ route, response ->
+            //                var value = UserAccount.getToken();
+            //                response.request().newBuilder().addHeader("Authorization",
+            //                        Credentials.basic(UserAccount.mUser.name, value)).build()
+            //            })
             .connectTimeout(DEF_CONNECT_TIMEOUT_SEC.toLong(), TimeUnit.SECONDS)
             .readTimeout((DEF_CONNECT_TIMEOUT_SEC * 2).toLong(), TimeUnit.SECONDS)
             .writeTimeout((DEF_CONNECT_TIMEOUT_SEC * 2).toLong(), TimeUnit.SECONDS).build()
@@ -60,7 +60,7 @@ class NetworkManager private constructor()// init
                        read: Long = mHttpClient.readTimeoutMillis().toLong(),
                        write: Long = mHttpClient.writeTimeoutMillis().toLong()) {
 
-        mHttpClient =  mHttpClient.newBuilder()
+        mHttpClient = mHttpClient.newBuilder()
                 .connectTimeout(connect, TimeUnit.MILLISECONDS)
                 .readTimeout(read, TimeUnit.MILLISECONDS)
                 .writeTimeout(write, TimeUnit.MICROSECONDS).build();
@@ -78,8 +78,7 @@ class NetworkManager private constructor()// init
     /**
      * get method
      */
-    fun <Model> get(uri : String, callback: HttpCallback<Model>, auth: Boolean = false) : Call?
-    {
+    fun <Model> get(uri: String, callback: HttpCallback<Model>, auth: Boolean = false): Call? {
         var url = uri;
         if (!uri.startsWith("http") && !uri.startsWith("https")) {
             url = getApiAbsUrl(uri);
@@ -98,7 +97,7 @@ class NetworkManager private constructor()// init
         }
 
         var call = mHttpClient.newCall(builder.build());
-        call .enqueue(callback)
+        call.enqueue(callback)
 
         return call;
     }
@@ -106,8 +105,8 @@ class NetworkManager private constructor()// init
     /**
      * post method
      */
-    fun <Model> post(uri : String, json : String,
-             callback: HttpCallback<Model>, auth : Boolean = false) : Call? {
+    fun <Model> post(uri: String, json: String,
+                     callback: HttpCallback<Model>, auth: Boolean = false): Call? {
 
         var url = uri;
         if (!uri.startsWith("http") && !uri.startsWith("https")) {
@@ -144,8 +143,7 @@ class NetworkManager private constructor()// init
      * Sign In to user account
      * Method: GET
      */
-    fun signIn(username : String, pwd : String, callback: HttpCallback<Models.MyAccount>) : Call
-    {
+    fun signIn(username: String, pwd: String, callback: HttpCallback<Models.MyAccount>): Call {
         val url = getApiAbsUrl("account")
         Debug.e(TAG, "URL: $url , UserName: $username, Pwd: $pwd")
 
@@ -162,7 +160,7 @@ class NetworkManager private constructor()// init
     /**
      * List my books. This includes books from organizations the user can access.
      */
-    fun getMyBooks(page: Int, limit: Int = DEF_PAGE_LIMIT, callback : HttpCallback<Models.Books>)
+    fun getMyBooks(page: Int, limit: Int = DEF_PAGE_LIMIT, callback: HttpCallback<Models.Books>)
             = get("/books?page=$page&limit=$limit", callback, true)
 
     /**
@@ -180,18 +178,18 @@ class NetworkManager private constructor()// init
     /**
      * get details about a book
      */
-    fun getBookDetail(id : String, callback : HttpCallback<Models.ABookDetail>) = get("/book/$id", callback)
+    fun getBookDetail(id: String, callback: HttpCallback<Models.ABookDetail>) = get("/book/$id", callback)
 
     ///////////////////// Authors ///////////////////////////////////////////////////////////
     /**
      * get details about author
      */
-    fun getAuthorDetail(name : String, callback : HttpCallback<Models.Account>) = get("/author/$name", callback)
+    fun getAuthorDetail(name: String, callback: HttpCallback<Models.Account>) = get("/author/$name", callback)
 
     /**
      * get author's avatar url
      */
-    fun getAuthorAvatarUrl(name : String) = getApiAbsUrl("/author/$name/avatar")
+    fun getAuthorAvatarUrl(name: String) = getApiAbsUrl("/author/$name/avatar")
 
     ////////////////////// Topics ///////////////////////////////////////////////////////////
     /**
@@ -203,13 +201,13 @@ class NetworkManager private constructor()// init
     /**
      * search topics of 'key'
      */
-    fun searchTopics(key : String, page: Int, limit: Int = DEF_PAGE_LIMIT, callback: HttpCallback<Models.Topics>)
+    fun searchTopics(key: String, page: Int, limit: Int = DEF_PAGE_LIMIT, callback: HttpCallback<Models.Topics>)
             = get("/topics?key=$key&page=$page&limit=$limit", callback)
 
     /**
      * get specified topic
      */
-    fun getTopic(id : String, callback: HttpCallback<Models.ATopic>)
+    fun getTopic(id: String, callback: HttpCallback<Models.ATopic>)
             = get("/topic/$id", callback)
 
 
@@ -217,28 +215,28 @@ class NetworkManager private constructor()// init
     /**
      * get all branches for a book
      */
-    fun getBookBranches(id: String, callback : HttpCallback<List<Models.ABranch>>)
+    fun getBookBranches(id: String, callback: HttpCallback<List<Models.ABranch>>)
             = get("/book/$id/versions/branches", callback)
 
-    fun getBookVersionTags(id: String, callback : HttpCallback<List<Models.ABranch>>)
+    fun getBookVersionTags(id: String, callback: HttpCallback<List<Models.ABranch>>)
             = get("/book/$id/versions/tags", callback)
 
 
     //////////////////// Contents //////////////////////////////////////////////////////////////
-    fun getBookContents(id : String,
-                        file : String,
-                        lang : String  = "",
-                        callback : HttpCallback<Models.BookContents>) : Call? {
+    fun getBookContents(id: String,
+                        file: String,
+                        lang: String = "",
+                        callback: HttpCallback<Models.BookContents>): Call? {
 
         var filename = file;
         var index = file.lastIndexOf('.')
         if (index > 0) {
-            filename.removeRange(index..file.length-1)
+            filename.removeRange(index..file.length - 1)
             filename += ".json"
         }
 
         var url = "/book/$id/contents/"
-        if (!lang.isNullOrEmpty())  {
+        if (!lang.isNullOrEmpty()) {
             url += "/$lang/";
         }
         url += filename
@@ -246,18 +244,18 @@ class NetworkManager private constructor()// init
         return get(url, callback)
     }
 
-    fun getBookVersionContents(id : String, version : String, file : String, lang : String = "",
-                               callback: HttpCallback<Models.BookContents>) : Call? {
+    fun getBookVersionContents(id: String, version: String, file: String, lang: String = "",
+                               callback: HttpCallback<Models.BookContents>): Call? {
 
         var filename = file;
         var index = file.lastIndexOf('.')
         if (index > 0) {
-            filename.removeRange(index..file.length-1)
+            filename.removeRange(index..file.length - 1)
             filename += ".json"
         }
 
         var url = "/book/$id/contents/"
-        if (!lang.isNullOrEmpty())  {
+        if (!lang.isNullOrEmpty()) {
             url += "/$lang/";
         }
         url += "v/$version/$filename"
@@ -269,69 +267,39 @@ class NetworkManager private constructor()// init
     //////////////////////// WWW API ///////////////////////////////////////////////////////////
     /**
      * parse a book html
-     *
-    <div class="book-inner">
-    <div class="book-header">
-        <a href="/book/frontendmasters/front-end-handbook/details"><h4>Front-end Handbook</h4></a>
-    </div>
-    <div class="book-meta">
-    <span class="meta">
-        <i class="octicon octicon-star"></i> 1K
-    </span>
-    <span class="meta">
-        <i class="octicon octicon-clock"></i> on Mar 8th
-    </span>
-    </div>
-    <div class="book-summary">
-        <p>The resources and tools for learning about the practice of front-end development. Written by Cody Lindley sponsored by</p>
-    </div>
-    </div>
-    <div class="book-footer">
-    <div class="author">
-        <a href="/@frontendmasters" class="author-avatar">
-        <img src="https://s.gravatar.com/avatar/3634db7785a8dd45853029aa4d60f5c5?s=220&amp;d=https%3A%2F%2Fwww.gitbook.com%2Fassets%2Fimages%2Favatars%2Fuser.png">
-    </a>
-    <span>Published by</span>
-        <span> <a href="/@frontendmasters">Frontend Masters</a></span>
-    </div>
-
-    </div>
      */
-    private fun parseABook(e: Element) : Models.WWWBook
-    {
+    fun parseABook(e: Element): Models.WWWBook {
         var book = Models.WWWBook();
-        if (e.hasClass("book-inner") && e.hasClass("book-footer")) {
-            val header = e.getElementsByClass("book-header")
-            if (header.isNotEmpty()) {
-                val href = header[0].getElementsByTag("a")
-                if (href.isNotEmpty()) {
-                    book.details = href[0].attr("href");
-                    book.title = href[0].text();
-                }
+        val header = e.getElementsByClass("book-header")
+        if (header.isNotEmpty()) {
+            val href = header[0].getElementsByTag("a")
+            if (href.isNotEmpty()) {
+                book.details = href[0].attr("href");
+                book.title = href[0].text();
             }
+        }
 
-            val meta = e.getElementsByClass("book-meta")
-            if (meta.isNotEmpty()) {
-                val info = meta[0].getElementsByTag("span");
-                if (info.size == 2) {
-                    book.star_num = info[0].text();
-                    book.pub_time = info[1].text();
-                }
+        val meta = e.getElementsByClass("book-meta")
+        if (meta.isNotEmpty()) {
+            val info = meta[0].getElementsByTag("span");
+            if (info.size == 2) {
+                book.star_num = info[0].text();
+                book.pub_time = info[1].text();
             }
+        }
 
-            val summary = e.getElementsByClass("book-summary");
-            if (summary.isNotEmpty()) {
-                book.summary = summary[0].text()
-            }
+        val summary = e.getElementsByClass("book-summary");
+        if (summary.isNotEmpty()) {
+            book.summary = summary[0].text()
+        }
 
-            val author = e.getElementsByClass("book-footer");
-            if (author.isNotEmpty()) {
-                val links = author[0].getElementsByTag("a");
-                if (links.size == 2) {
-                    book.author.avatar = links[0].getElementsByTag("img").attr("src")
-                    book.author.url = links[1].attr("href")
-                    book.author.name = links[1].text()
-                }
+        val author = e.getElementsByClass("book-footer");
+        if (author.isNotEmpty()) {
+            val links = author[0].getElementsByTag("a");
+            if (links.size == 2) {
+                book.author.avatar = links[0].getElementsByTag("img").attr("src")
+                book.author.url = links[1].attr("href")
+                book.author.name = links[1].text()
             }
         }
 
@@ -339,7 +307,7 @@ class NetworkManager private constructor()// init
     }
 
 
-    private fun parseATopic(e : Element) : Models.WWWTopic {
+    fun parseATopic(e: Element): Models.WWWTopic {
         var topic = Models.WWWTopic();
 
         val a = e.getElementsByTag("a");
@@ -352,8 +320,7 @@ class NetworkManager private constructor()// init
         return topic;
     }
 
-    fun parseExplorePage(body: String) : Models.WWWExplorePage
-    {
+    fun parseExplorePage(body: String): Models.WWWExplorePage {
         val ePage = Models.WWWExplorePage()
 
         val doc = Jsoup.parse(body)
@@ -362,15 +329,17 @@ class NetworkManager private constructor()// init
             ePage.books.add(parseABook(book));
         }
 
-        val topics = doc.getElementsByClass("topics-list")
-        for (topic in topics) {
-            ePage.topics.add(parseATopic(topic));
+        val topicsList = doc.getElementsByClass("topics-list")
+        if (topicsList.isNotEmpty()) {
+            for (topic in topicsList[0].getElementsByTag("li")) {
+                ePage.topics.add(parseATopic(topic));
+            }
         }
 
         return ePage
     }
 
-    fun getExplorePage(page: Int, callback : HttpCallback<Models.WWWExplorePage>) : Call? {
+    fun getExplorePage(page: Int, callback: HttpCallback<Models.WWWExplorePage>): Call? {
         val url = getWWWAbsUrl("/explore?page=$page")
 
         return get(url, object : HttpCallback<Models.WWWExplorePage>(Models.WWWExplorePage::class.java) {
@@ -386,34 +355,41 @@ class NetworkManager private constructor()// init
         })
     }
 
-    fun getTopicsPage(callback : HttpCallback<Models.WWWTopicsPage>) : Call? {
+    fun parseTopicsPage(body: String): Models.WWWTopicsPage {
+        val page = Models.WWWTopicsPage()
+
+        val doc = Jsoup.parse(body)
+        val topicsList = doc.getElementsByClass("topics-byname");
+        topicsList.forEach {
+            it.children().forEach {
+                topic ->
+                val t = Models.WWWTopic();
+                if (topic.className() == "entry letter") {
+                    t.letter = topic.text()
+                }
+                else {
+                    val link = topic.getElementsByTag("a");
+                    t.url = link.attr("href");
+                    t.name = link.text();
+
+                    t.num = topic.getElementsByTag("span").text();
+                }
+
+                page.topics.add(t)
+            }
+        }
+
+        return page
+    }
+
+    fun getTopicsPage(callback: HttpCallback<Models.WWWTopicsPage>): Call? {
         val url = getWWWAbsUrl("/explore/topics")
 
         return get(url, object : HttpCallback<Models.WWWTopicsPage>(Models.WWWTopicsPage::class.java) {
             override fun onSuccess(body: String) {
-                val page = Models.WWWTopicsPage()
-
-                val doc = Jsoup.parse(body)
-                val topics = doc.getElementsByClass("topics-byname");
-                for (topic in topics) {
-                    val t = Models.WWWTopic();
-                    if (topic.className() == "entry letter") {
-                        t.letter = topic.text()
-                    }
-                    else {
-                        val link = topic.getElementsByTag("a");
-                        t.url = link.attr("href");
-                        t.name = link.text();
-
-                        t.num = topic.getElementsByTag("span").text();
-                    }
-
-                    page.topics.add(t)
-                }
-
+                val page = parseTopicsPage(body)
                 post { onResponse(true, page) }
             }
-
 
             override fun onResponse(success: Boolean, model: Models.WWWTopicsPage?, code: Int, msg: String) {
                 callback.onResponse(success, model, code, msg)
@@ -421,25 +397,76 @@ class NetworkManager private constructor()// init
         })
     }
 
-    enum class  SearchSort { default,  stars , updated }
+    enum class SearchSort { default, stars, updated }
 
-    fun getSearchBookPage(key:String, sort:SearchSort,
-                          callback : HttpCallback<Models.WWWSearchBookPage>) : Call? {
-        val url = getWWWAbsUrl("/search?key=$key&sort=$sort&type=books")
+    fun parseAAuthor(author: Element): Models.WWWAuthor {
+        val w = Models.WWWAuthor();
+        w.avatar = author.getElementsByTag("img").attr("src")
+        val infos = author.getElementsByClass("user-infos");
+        if (infos.isNotEmpty()) {
+            val tag = infos[0].getElementsByTag("a");
+            w.url = tag.attr("href");
+            w.name = tag.text();
+        }
+
+        w.join_time = author.getElementsByTag("p").text()
+
+        return w;
+    }
+
+    fun parseBookSearchPage(body: String) : Models.WWWSearchBookPage {
+        val page = Models.WWWSearchBookPage()
+
+        val doc = Jsoup.parse(body)
+        val head = doc.getElementsByClass("pagehead")
+        if (head.isNotEmpty()) {
+            val menu = head[0].getElementsByClass("menu")
+            if (menu.isNotEmpty()) {
+                val m = menu[0].getElementsByTag("a")
+                if (m.size == 2) {
+                    page.sum_book = m[0].text()
+                    page.sum_author = m[1].text()
+                }
+            }
+        }
+
+        doc.getElementsByClass("book").forEach { page.books.add(parseABook(it)) };
+
+        return page;
+    }
+
+    fun parseAuthorSearchPage(body: String) : Models.WWWSearchAuthorPage {
+        val page = Models.WWWSearchAuthorPage()
+
+        val doc = Jsoup.parse(body)
+        val head = doc.getElementsByClass("pagehead")
+        if (head.isNotEmpty()) {
+            val menu = head[0].getElementsByClass("menu")
+            if (menu.isNotEmpty()) {
+                val m = menu[0].getElementsByTag("a")
+                if (m.size == 2) {
+                    page.sum_book = m[0].text()
+                    page.sum_author = m[1].text()
+                }
+            }
+        }
+
+        doc.getElementsByClass("user-inner").forEach {
+            page.authors.add(parseAAuthor(it))
+        };
+
+        return page;
+    }
+
+    fun getSearchBookPage(key: String, sort: SearchSort,
+                          callback: HttpCallback<Models.WWWSearchBookPage>): Call? {
+        val url = getWWWAbsUrl("/search?q=$key&sort=$sort&type=books")
 
         return get(url, object : HttpCallback<Models.WWWSearchBookPage>(Models.WWWSearchBookPage::class.java) {
             override fun onSuccess(body: String) {
-                val page = Models.WWWSearchBookPage()
-
-                val doc = Jsoup.parse(body)
-                val books = doc.getElementsByClass("book");
-                for (book in books) {
-                    page.books.add(parseABook(book));
-                }
-
+                val page = parseBookSearchPage(body)
                 post { onResponse(true, page) }
             }
-
 
             override fun onResponse(success: Boolean, model: Models.WWWSearchBookPage?, code: Int, msg: String) {
                 callback.onResponse(success, model, code, msg)
@@ -447,40 +474,20 @@ class NetworkManager private constructor()// init
         })
     }
 
-    fun getSearchAuthorPage(key:String, sort:SearchSort,
-                            callback : HttpCallback<Models.WWWSearchAuthorPage>) : Call? {
-
+    fun getSearchAuthorPage(key: String, sort: SearchSort,
+                            callback: HttpCallback<Models.WWWSearchAuthorPage>): Call? {
         var csort = sort;
         if (sort == SearchSort.stars) {
             csort = SearchSort.default;
         }
 
-        val url = getWWWAbsUrl("/search?key=$key&sort=$csort&type=authors")
+        val url = getWWWAbsUrl("/search?q=$key&sort=$csort&type=authors")
 
         return get(url, object : HttpCallback<Models.WWWSearchAuthorPage>(Models.WWWSearchAuthorPage::class.java) {
             override fun onSuccess(body: String) {
-                val page = Models.WWWSearchAuthorPage()
-
-                val doc = Jsoup.parse(body)
-                val authors = doc.getElementsByClass("user-inner");
-                for (author in authors) {
-                    val w = Models.WWWAuthor();
-                    w.avatar = author.getElementsByTag("img").attr("src")
-                    val infos = author.getElementsByClass("user-infos");
-                    if (infos.isNotEmpty()) {
-                        val tag = infos[0].getElementsByTag("a");
-                        w.url = tag.attr("href");
-                        w.name = tag.text();
-                    }
-
-                    w.join_time = author.getElementsByTag("p").text()
-
-                    page.authors.add(w)
-                }
-
+                val page = parseAuthorSearchPage(body)
                 post { onResponse(true, page) }
             }
-
 
             override fun onResponse(success: Boolean, model: Models.WWWSearchAuthorPage?, code: Int, msg: String) {
                 callback.onResponse(success, model, code, msg)

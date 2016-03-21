@@ -16,7 +16,7 @@ class BooksAdapter(activity: Activity) :
         BaseRecyclerAdapter<Models.ABook, BooksAdapter.BookViewHolder>(activity)
 {
     override fun onCreateViewHolder(parent: ViewGroup?, pos: Int): BookViewHolder? {
-        return BookViewHolder(inflateView(R.layout.list_item_book, parent))
+        return BookViewHolder(inflateView(R.layout.item_book, parent))
     }
 
     inner class BookViewHolder(itemView: View) :
