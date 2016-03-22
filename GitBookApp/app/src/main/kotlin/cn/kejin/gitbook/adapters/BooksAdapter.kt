@@ -15,7 +15,7 @@ import cn.kejin.gitbook.networks.Models
 class BooksAdapter(activity: Activity) :
         BaseRecyclerAdapter<Models.ABook, BooksAdapter.BookViewHolder>(activity)
 {
-    override fun onCreateViewHolder(parent: ViewGroup?, pos: Int): BookViewHolder? {
+    override fun onCreateViewHolder(parent: ViewGroup?, type: Int): BookViewHolder? {
         return BookViewHolder(inflateView(R.layout.item_book, parent))
     }
 

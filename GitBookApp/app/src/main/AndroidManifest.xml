@@ -53,6 +53,11 @@
                   android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+
+        <activity android:name=".AllTopicsActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

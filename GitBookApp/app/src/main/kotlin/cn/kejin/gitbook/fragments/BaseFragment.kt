@@ -1,16 +1,11 @@
 package cn.kejin.gitbook.fragments
 
-import android.app.Activity
 import android.app.Fragment
-import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import cn.kejin.gitbook.BaseActivity
-import cn.kejin.gitbook.MainActivity
-import cn.kejin.gitbook.R
-import kotlinx.android.synthetic.main.layout_custom_status_bar.*
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -32,7 +27,9 @@ abstract class BaseFragment : Fragment()
 //        }
 //    }
 
-    protected val mActivity : MainActivity by lazy { activity as MainActivity }
+    fun startActivity(clz : Class<*>) {
+        startActivity(Intent(activity, clz))
+    }
 
     override fun onCreateView(inflater: LayoutInflater?,
                               container: ViewGroup?,
