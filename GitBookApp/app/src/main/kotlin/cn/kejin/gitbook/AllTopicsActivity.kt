@@ -6,8 +6,6 @@ package cn.kejin.gitbook
  */
 class AllTopicsActivity : BaseActivity()
 {
-    override fun getLayoutId(): Int {
-        throw UnsupportedOperationException()
-    }
+    override fun getLayoutId(): Int = 0
 
 }

@@ -1,11 +1,11 @@
 package cn.kejin.gitbook.networks
 
 import android.os.Handler
+import android.view.View
 
-import cn.kejin.gitbook.common.GSON
 import cn.kejin.gitbook.MainApplication
-import cn.kejin.gitbook.common.Debug
-import cn.kejin.gitbook.common.isNetworkConnected
+import cn.kejin.gitbook.R
+import cn.kejin.gitbook.common.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -29,6 +29,21 @@ abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
 
         val E_UNKNOWN = 9999
 
+        fun processException(code: Int, msg: String, view: View?) {
+            Debug.e(TAG, "HttpE: $code, $msg");
+            var errStrId :Int = when (code) {
+                E_NO_NETWORK -> R.string.no_network
+                E_NOT_SIGN ->  R.string.not_sign
+                else -> R.string.unknown_problem
+            }
+
+            if (view == null) {
+                toast(errStrId)
+            }
+            else {
+                snack(view, errStrId)
+            }
+        }
     }
 
     protected  fun post(r : ()->Unit ) {

@@ -204,7 +204,7 @@ class MainActivity : BaseActivity()
 
 
     private fun replaceFragment(fragment: Fragment, tag: String) =
-            fragmentManager.beginTransaction().replace(mContentId, fragment, tag).addToBackStack(null).commit()
+            fragmentManager.beginTransaction().replace(mContentId, fragment, tag).addToBackStack(tag).commit()
 
     fun openDrawer() = drawerLayout.openDrawer(GravityCompat.START)
     fun closeDrawer() =

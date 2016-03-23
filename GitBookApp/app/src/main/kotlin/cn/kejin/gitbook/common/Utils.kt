@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.Toast
 import cn.kejin.gitbook.MainApplication
 import cn.kejin.gitbook.R
 import com.google.gson.GsonBuilder
@@ -33,8 +34,18 @@ internal val GSON by lazy { GsonBuilder().create() }
 /**
  * Global snack show
  */
+internal fun snack(view: View, msg: Int, len : Int = Snackbar.LENGTH_SHORT) =
+        snack(view, MainApplication.instance.getString(msg), len)
 internal fun snack(view: View, msg : String, len : Int = Snackbar.LENGTH_SHORT) =
         Snackbar.make(view, msg, len).show()
+
+/**
+ * Global toast show
+ */
+internal fun toast(msg: Int, len: Int = Toast.LENGTH_SHORT) =
+        toast(MainApplication.instance.getString(msg), len)
+internal fun toast(msg :String, len : Int = Toast.LENGTH_SHORT) =
+        Toast.makeText(MainApplication.instance, msg, len).show()
 
 /**
  * get current process name

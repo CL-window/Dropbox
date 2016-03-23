@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
               android:layout_width="wrap_content"
-              android:layout_height="30dp"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:layout_marginLeft="10dp"
-              android:layout_marginRight="10dp"
-              android:gravity="center"
-              android:layout_gravity="center"
-    android:background="@drawable/bg_topic">
+              android:layout_height="match_parent"
+
+              android:background="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground">
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg_topic"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
         <cn.kejin.gitbook.views.CustomTextView
+            android:id="@+id/topic"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Programming"
-            android:singleLine="true"
-            android:textSize="12sp"
+            android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:textColor="@color/textPrimary"/>
+            android:singleLine="true"
+            android:text="Programming"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
 
     </LinearLayout>
 </LinearLayout>

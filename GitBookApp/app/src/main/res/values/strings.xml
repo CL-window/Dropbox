@@ -36,7 +36,11 @@
     <string name="login_success">Sign In Success!</string>
     <string name="login_cancelled">Sign In Cancelled</string>
 
+    <!-- Exception string -->
     <string name="no_network">No network connection</string>
+    <string name="not_sign">Please sign in</string>
+    <string name="unknown_problem">Em.. There is a problem</string>
+
     <string name="exit_account">Exit</string>
     <string name="published_string">Published By</string>
     <string name="all_topics">All Topics</string>

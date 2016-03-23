@@ -31,6 +31,12 @@ abstract class BaseRecyclerAdapter<Model, Holder: BaseRecyclerAdapter.BaseViewHo
         notifyItemInserted(index)
     }
 
+    fun addAll(list: Collection<Model>) {
+        val insertPos = data.size
+        data.addAll(list)
+        notifyItemRangeInserted(insertPos, list.size)
+    }
+
     fun removeAt(index: Int) {
         data.removeAt(index)
         notifyItemRemoved(index)

@@ -320,7 +320,7 @@ class Models {
         var details = ""; // details url
         var star_num = "0" // number of star
             set(value) {
-                field = getNumString(value)
+                field = value.trim() //getNumString(value)
             }
 
         var pub_time = "" // publish time
