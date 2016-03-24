@@ -67,7 +67,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
 
             <LinearLayout
                 android:id="@+id/topicsLayout"
@@ -81,8 +83,7 @@
                     android:id="@+id/topicsHorList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:paddingLeft="10dp"/>
+                    android:layout_weight="1"/>
 
                 <LinearLayout
                     android:id="@+id/allTopics"
@@ -115,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <!-- Books-->
-            <android.support.v7.widget.RecyclerView
+            <cn.kejin.gitbook.views.ExRecyclerView
                 android:id="@+id/booksRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

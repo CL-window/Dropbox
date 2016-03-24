@@ -27,6 +27,8 @@ abstract class BaseFragment : Fragment()
 //        }
 //    }
 
+    protected var rootView : View? = null;
+
     fun startActivity(clz : Class<*>) {
         startActivity(Intent(activity, clz))
     }
@@ -34,13 +36,20 @@ abstract class BaseFragment : Fragment()
     override fun onCreateView(inflater: LayoutInflater?,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-        var view = inflater?.inflate(getLayoutId(), container, false)
-        if (view != null) {
-            initializeView(view)
+        if (rootView == null) {
+            rootView = inflater?.inflate(getLayoutId(), container, false)
+            if (rootView != null) {
+                initializeView(rootView as View)
+            }
+        }
+        else {
+            val parent = (rootView as View).parent
+            if (parent != null) {
+                (parent as ViewGroup).removeView(rootView)
+            }
         }
 
-        return view;
+        return rootView;
     }
 
     abstract fun getLayoutId() : Int

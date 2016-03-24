@@ -5,10 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.support.v7.widget.Toolbar
+import android.support.v7.widget.*
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -21,6 +18,7 @@ import cn.kejin.gitbook.common.snack
 import cn.kejin.gitbook.networks.HttpCallback
 import cn.kejin.gitbook.networks.Models
 import cn.kejin.gitbook.networks.NetworkManager
+import cn.kejin.gitbook.views.ExRecyclerView
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -133,7 +131,7 @@ class ExploreFragment : BaseMainFragment()
     lateinit var topicsHorList : RecyclerView
     lateinit var topicsAdapter: TopicsAdapter
 
-    lateinit var booksList : RecyclerView
+    lateinit var booksList : ExRecyclerView
     lateinit var booksAdapter : BooksAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,10 +155,11 @@ class ExploreFragment : BaseMainFragment()
         topicsAdapter = TopicsAdapter(mainActivity)
         topicsHorList.adapter = topicsAdapter
 
-        booksList = view.findViewById(R.id.booksRecyclerView) as RecyclerView
-        booksList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        booksList = view.findViewById(R.id.booksRecyclerView) as ExRecyclerView
+        booksList.layoutManager = GridLayoutManager(activity, 2)
         booksAdapter = BooksAdapter(mainActivity)
         booksList.adapter = booksAdapter
+        booksList.addFooter(View.inflate(mainActivity, R.layout.layout_list_footer, null))
 
         swipeRefresh.setOnRefreshListener { exploredPageIndex = 0 }
         exploredPageIndex = 0
@@ -194,7 +193,7 @@ class ExploreFragment : BaseMainFragment()
         inner class Holder(itemView: View) : BaseViewHolder<Models.WWWTopic>(itemView) {
             override fun bindView(model: Models.WWWTopic, pos: Int) {
                 val text = findView(R.id.topic) as TextView;
-                text.text = "${model.name} | ${model.num}"
+                text.text = "${model.name}  | ${model.num}"
             }
         }
     }

@@ -2,6 +2,7 @@ package cn.kejin.gitbook.views
 
 import android.content.Context
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.AttributeSet
@@ -85,12 +86,14 @@ class ExRecyclerView(context: Context?, attrs: AttributeSet?, defStyle: Int) : R
     }
 
     private fun configGridLayoutManager(layoutManager: GridLayoutManager) {
+        val oldLookup = layoutManager.spanSizeLookup;
+        val spanCount = layoutManager.spanCount;
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 if (isHeaderOrFooterPos(position)) {
-                    return layoutManager.spanCount
+                    return spanCount
                 }
-                return layoutManager.spanSizeLookup.getSpanSize(position - headerViews.size)
+                return oldLookup.getSpanSize(position - headerViews.size)
             }
         }
     }
@@ -193,4 +196,66 @@ class ExRecyclerView(context: Context?, attrs: AttributeSet?, defStyle: Int) : R
         }
     }
 
+    /**
+     * get first visible and last visible item position
+     */
+    private fun getVisiblePos() : Pair<Int, Int> {
+        if (layoutManager == null) {
+            return Pair(0, 0)
+        }
+
+        var first = 0
+        var last = 0
+        when (layoutManager) {
+            is GridLayoutManager -> {
+                first = (layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
+                last = (layoutManager as GridLayoutManager).findLastVisibleItemPosition()
+            }
+
+            is LinearLayoutManager -> {
+                first = (layoutManager as LinearLayoutManager).findFirstVisibleItemPosition();
+                last = (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+            }
+
+            is StaggeredGridLayoutManager -> {
+                var firstPos : IntArray = IntArray(2, {0});
+                (layoutManager as StaggeredGridLayoutManager).findFirstVisibleItemPositions(firstPos)
+
+                var lastPos : IntArray = IntArray(2, {0});
+                (layoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(lastPos)
+
+                first = firstPos.min()?:0
+                last = lastPos.max()?:0
+            }
+        }
+
+        return Pair(first, last)
+    }
+
+    var isLoadingMore = false
+        private set
+
+    var loadMoreEnable = false
+    var loadMoreListener : OnLoadMoreListener? = null
+
+    override fun onScrollStateChanged(state: Int) {
+        super.onScrollStateChanged(state)
+        val wrapperSize = wrapperAdapter?.itemCount?:0
+        if (!isLoadingMore &&
+                loadMoreEnable && wrapperSize > 0) {
+            val visPos = getVisiblePos()
+            if (visPos.second >= headerViews.size+wrapperSize) {
+                isLoadingMore = true
+                loadMoreListener?.onLoadMore()
+            }
+        }
+    }
+
+    fun endLoadMore() {
+        isLoadingMore = false
+    }
+
+    interface OnLoadMoreListener {
+        fun onLoadMore()
+    }
 }
