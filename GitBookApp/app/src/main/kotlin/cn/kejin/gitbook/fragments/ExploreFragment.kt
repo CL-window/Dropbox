@@ -14,7 +14,10 @@ import cn.kejin.gitbook.R
 import cn.kejin.gitbook.SearchActivity
 import cn.kejin.gitbook.adapters.BaseRecyclerAdapter
 import cn.kejin.gitbook.adapters.BooksAdapter
+import cn.kejin.gitbook.common.dpToPx
 import cn.kejin.gitbook.common.snack
+import cn.kejin.gitbook.controllers.PageController
+import cn.kejin.gitbook.controllers.PageViewController
 import cn.kejin.gitbook.networks.HttpCallback
 import cn.kejin.gitbook.networks.Models
 import cn.kejin.gitbook.networks.NetworkManager
@@ -32,98 +35,6 @@ class ExploreFragment : BaseMainFragment()
         val ONE_PAGE_BOOKS_NUM = 9
     }
 
-    enum class Status {
-        NONE,
-        REFRESHING,
-        LOADING_MORE,
-        SUCCESS,
-        FAILED,
-        NO_MORE
-    }
-
-    private var currentStatus = Status.NONE
-    set(value) {
-        if (value != field) {
-            when ((field to value)) {
-                (Status.LOADING_MORE to Status.SUCCESS) -> {
-                    //
-                }
-                (Status.LOADING_MORE to Status.NO_MORE) -> {
-                    //
-                }
-                (Status.LOADING_MORE to Status.FAILED) -> {
-                    //
-                }
-
-                (Status.SUCCESS to Status.LOADING_MORE) -> {
-                    //
-                }
-                (Status.NO_MORE to Status.LOADING_MORE) -> {
-                    //
-                }
-                (Status.FAILED to Status.LOADING_MORE) -> {
-                    //
-                }
-
-                (Status.REFRESHING to Status.SUCCESS),
-                (Status.REFRESHING to Status.FAILED),
-                (Status.REFRESHING to Status.NO_MORE),
-                (Status.REFRESHING to Status.NONE) -> {
-                    swipeRefresh.isRefreshing = false
-                }
-
-                (Status.SUCCESS to Status.REFRESHING),
-                (Status.FAILED to Status.REFRESHING) ,
-                (Status.NO_MORE to Status.REFRESHING) ,
-                (Status.NONE to Status.REFRESHING) ,
-                (Status.LOADING_MORE to Status.REFRESHING) -> {
-                    swipeRefresh.post({swipeRefresh.isRefreshing=true})
-                }
-            }
-            field = value
-        }
-    }
-
-    private var isRequesting = false;
-    private var exploredPageIndex = -1
-    set(value) {
-        if (value >=0 && !isRequesting) {
-            isRequesting = true
-            if (value == 0) {
-                currentStatus = Status.REFRESHING
-            }
-            else {
-                currentStatus = Status.LOADING_MORE
-            }
-
-            NetworkManager.instance.getExplorePage(value,
-                    object : HttpCallback<Models.WWWExplorePage>(Models.WWWExplorePage::class.java) {
-                override fun onResponse(success: Boolean, model: Models.WWWExplorePage?, code: Int, msg: String) {
-                    if (success) {
-                        if (model!!.books.size < ONE_PAGE_BOOKS_NUM) {
-                            currentStatus = Status.NO_MORE
-                        }
-                        else {
-                            currentStatus = Status.SUCCESS
-                            field = value;
-                        }
-
-                        bindModelToView(model)
-                    }
-                    else {
-                        processException(code, msg, view)
-                        currentStatus = Status.FAILED
-                    }
-
-                    isRequesting = false
-                }
-            })
-        }
-        else if (value == 0) {
-            swipeRefresh.isRefreshing = false
-        }
-    }
-
     lateinit var swipeRefresh : SwipeRefreshLayout
 
     lateinit var topicsLayout : LinearLayout
@@ -133,6 +44,8 @@ class ExploreFragment : BaseMainFragment()
 
     lateinit var booksList : ExRecyclerView
     lateinit var booksAdapter : BooksAdapter
+
+    lateinit var pageViewCtrl : PageViewController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -147,6 +60,7 @@ class ExploreFragment : BaseMainFragment()
         view.findViewById(R.id.allTopics)?.setOnClickListener({startActivity(AllTopicsActivity::class.java)})
 
         swipeRefresh = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
+        swipeRefresh.setDistanceToTriggerSync(dpToPx(150f))
 
         topicsLayout = view.findViewById(R.id.topicsLayout) as LinearLayout
 
@@ -159,22 +73,42 @@ class ExploreFragment : BaseMainFragment()
         booksList.layoutManager = GridLayoutManager(activity, 2)
         booksAdapter = BooksAdapter(mainActivity)
         booksList.adapter = booksAdapter
-        booksList.addFooter(View.inflate(mainActivity, R.layout.layout_list_footer, null))
 
-        swipeRefresh.setOnRefreshListener { exploredPageIndex = 0 }
-        exploredPageIndex = 0
+        pageViewCtrl = PageViewController(swipeRefresh, booksList, pageCallback)
+
+        pageViewCtrl.refresh()
     }
 
     /**
-     * refresh all data from server
+     * load data from server
      */
-    fun refreshDataFromServer() {
-        exploredPageIndex = 0
+    private val pageCallback  = object : PageController.PageCallback {
+        override fun onLoading(page: Int) {
+            NetworkManager.instance.getExplorePage(page,
+                    object : HttpCallback<Models.WWWExplorePage>(Models.WWWExplorePage::class.java) {
+                        override fun onResponse(success: Boolean, model: Models.WWWExplorePage?, code: Int, msg: String) {
+                            var result = PageController.Result.SUCCESS
+                            if (success) {
+                                if (model!!.books.size < ONE_PAGE_BOOKS_NUM) {
+                                    result = PageController.Result.NO_MORE
+                                }
+
+                                bindModelToView(page, model)
+                            }
+                            else {
+                                processException(code, msg, view)
+                                result = PageController.Result.FAILED
+                            }
+
+                            pageViewCtrl.finish(result)
+                        }
+                    })
+        }
     }
 
-    fun bindModelToView(model : Models.WWWExplorePage)
+    fun bindModelToView(page : Int, model : Models.WWWExplorePage)
     {
-        if (exploredPageIndex == 0) {
+        if (page == 0) {
             topicsAdapter.set(model.topics)
             booksAdapter.set(model.books)
         }

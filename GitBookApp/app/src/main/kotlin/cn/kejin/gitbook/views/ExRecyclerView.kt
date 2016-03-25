@@ -13,32 +13,34 @@ import android.view.ViewGroup
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/22
  */
-class ExRecyclerView(context: Context?, attrs: AttributeSet?, defStyle: Int) : RecyclerView(context, attrs, defStyle) {
+class ExRecyclerView: RecyclerView {
     companion object {
         val TAG = "ExRecyclerView"
 
     }
+    private val headerViews: MutableList<View> = mutableListOf();
 
-    val headerViews: MutableList<View> = mutableListOf();
-    val footerViews: MutableList<View> = mutableListOf();
+    private val footerViews: MutableList<View> = mutableListOf();
 
     var wrapperAdapter: Adapter<ViewHolder>? = null;
 
-    constructor(context: Context?) : this(context, null, 0)
+    constructor(context: Context?) : super(context, null, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs, 0)
+
+    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 
     init {
         super.setAdapter(AdapterWrapper())
     }
 
-    fun addHeader(view: View) {
-        if (!headerViews.contains(view)) {
-            headerViews.add(view)
-            setFullSpan(view)
+    fun containsHeader(view: View) : Boolean = headerViews.contains(view)
 
-            adapter?.notifyItemInserted(headerViews.size)
-        }
+    fun addHeader(view: View) {
+        headerViews.add(view)
+        setFullSpan(view)
+
+        adapter?.notifyItemInserted(headerViews.size)
     }
 
     fun removeHeader(view: View) {
@@ -50,13 +52,12 @@ class ExRecyclerView(context: Context?, attrs: AttributeSet?, defStyle: Int) : R
         }
     }
 
+    fun containsFooter(view : View) : Boolean = footerViews.contains(view)
     fun addFooter(view: View) {
-        if (!footerViews.contains(view)) {
-            footerViews.add(view)
-            setFullSpan(view)
+        footerViews.add(view)
+        setFullSpan(view)
 
-            adapter?.notifyItemInserted(adapter.itemCount)
-        }
+        adapter?.notifyItemInserted(adapter.itemCount)
     }
 
     fun removeFooter(view: View) {
@@ -197,7 +198,7 @@ class ExRecyclerView(context: Context?, attrs: AttributeSet?, defStyle: Int) : R
     }
 
     /**
-     * get first visible and last visible item position
+     * get first and last visible item position
      */
     private fun getVisiblePos() : Pair<Int, Int> {
         if (layoutManager == null) {
@@ -235,16 +236,14 @@ class ExRecyclerView(context: Context?, attrs: AttributeSet?, defStyle: Int) : R
     var isLoadingMore = false
         private set
 
-    var loadMoreEnable = false
     var loadMoreListener : OnLoadMoreListener? = null
 
     override fun onScrollStateChanged(state: Int) {
         super.onScrollStateChanged(state)
         val wrapperSize = wrapperAdapter?.itemCount?:0
-        if (!isLoadingMore &&
-                loadMoreEnable && wrapperSize > 0) {
+        if (loadMoreListener != null && wrapperSize > 0) {
             val visPos = getVisiblePos()
-            if (visPos.second >= headerViews.size+wrapperSize) {
+            if (visPos.second+1 >= headerViews.size+wrapperSize) {
                 isLoadingMore = true
                 loadMoreListener?.onLoadMore()
             }
@@ -252,7 +251,7 @@ class ExRecyclerView(context: Context?, attrs: AttributeSet?, defStyle: Int) : R
     }
 
     fun endLoadMore() {
-        isLoadingMore = false
+        //isLoadingMore = false
     }
 
     interface OnLoadMoreListener {

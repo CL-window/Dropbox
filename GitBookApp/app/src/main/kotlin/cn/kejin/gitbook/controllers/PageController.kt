@@ -4,20 +4,17 @@ package cn.kejin.gitbook.controllers
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/24
  */
-open class PageController
-{
-    constructor():this(null)
-    constructor(cb: PageCallback?) {
-        callback = cb;
-    }
 
+/**
+ * 控制页面的 index,
+ */
+class PageController(val callback: PageCallback)
+{
     enum class Result {
         SUCCESS,
         FAILED,
         NO_MORE
     }
-
-    var callback : PageCallback? = null;
 
     var isRequesting = false;
         private set(value) {
@@ -33,40 +30,46 @@ open class PageController
             field = value
         }
 
-
+    /**
+     * Refresh Page
+     */
     fun refresh() : Boolean {
         if (isRequesting) {
             return false;
         }
 
         exploredPageIndex = 0
-        callback?.onRefresh(exploredPageIndex)
+        callback.onLoading(exploredPageIndex)
         return true;
     }
 
+    /**
+     * Load One More Page
+     */
     fun loadMore() : Boolean {
         if (isRequesting) {
             return false;
         }
         exploredPageIndex += 1
-        callback?.onLoadMore(exploredPageIndex)
+        callback.onLoading(exploredPageIndex)
         return true;
     }
 
+    /**
+     * Reload Current Page
+     */
     fun reload() : Boolean {
         if (isRequesting) {
             return false
         }
         exploredPageIndex = exploredPageIndex
-        if (exploredPageIndex == 0) {
-            callback?.onRefresh(exploredPageIndex)
-        }
-        else {
-            callback?.onLoadMore(exploredPageIndex)
-        }
+        callback.onLoading(exploredPageIndex)
         return true;
     }
 
+    /**
+     * Finish current request
+     */
     fun finish(res: Result) {
         when (res) {
             Result.FAILED,
@@ -85,7 +88,6 @@ open class PageController
     }
 
     interface PageCallback {
-        fun onRefresh(page : Int)
-        fun onLoadMore(page : Int)
+        fun onLoading(page : Int)
     }
 }

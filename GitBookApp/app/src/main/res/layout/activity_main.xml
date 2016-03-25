@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:divider="@null"
+            android:scrollbars="none"
             android:listSelector="?attr/selectableItemBackground"
             android:background="@android:color/white"/>
 

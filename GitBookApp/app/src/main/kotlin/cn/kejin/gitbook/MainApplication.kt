@@ -3,6 +3,8 @@ package cn.kejin.gitbook
 import android.app.Application
 import android.os.Environment
 import android.os.Handler
+import android.util.DisplayMetrics
+import android.view.WindowManager
 import com.nostra13.universalimageloader.cache.disc.DiskCache
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache
 import com.nostra13.universalimageloader.core.DisplayImageOptions
@@ -28,12 +30,15 @@ class MainApplication : Application()
         // global handler
         val handler : Handler = Handler()
 
+        val displayMetrics = DisplayMetrics()
     }
 
     override fun onCreate() {
         super.onCreate()
 
         instance = this
+
+        displayMetrics.setTo(resources.displayMetrics)
 
         UserAccount.restore()
 

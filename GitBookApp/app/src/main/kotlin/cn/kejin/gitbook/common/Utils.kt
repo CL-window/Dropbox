@@ -72,7 +72,7 @@ internal fun isNetworkConnected(context: Context = MainApplication.instance) : B
 
     val info = cm.activeNetworkInfo;
 
-    return info.isConnected && info.state == NetworkInfo.State.CONNECTED;
+    return info != null && info.isConnected && info.state == NetworkInfo.State.CONNECTED;
 }
 
 /**
@@ -88,7 +88,23 @@ internal fun  dismissSoftInputMethod(context: Context, windowToken : IBinder)
  * Display Avatar
  */
 private val avatarDisplayOption = DisplayImageOptions.Builder()
+        .cacheInMemory(true)
+        .cacheOnDisk(true)
         .showImageOnFail(R.drawable.ic_default_avatar)
         .showImageForEmptyUri(R.drawable.ic_default_avatar).build()
 internal fun displayAvatar(url : String, view : ImageView)
         = ImageLoader.getInstance().displayImage(url, view, avatarDisplayOption)
+
+/**
+ * Dp to px
+ */
+internal fun dpToPx(dp : Float,
+                    density : Float = MainApplication.displayMetrics.density) : Int
+                = (dp * density + 0.5f).toInt();
+
+/**
+ * Px to Dp
+ */
+internal fun pxToDp(px : Float,
+                    density : Float = MainApplication.displayMetrics.density) : Int
+                = (px / density + 0.5f).toInt();
