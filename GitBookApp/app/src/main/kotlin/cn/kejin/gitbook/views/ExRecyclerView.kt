@@ -238,10 +238,18 @@ class ExRecyclerView: RecyclerView {
 
     var loadMoreListener : OnLoadMoreListener? = null
 
+    fun setOnLoadMoreListener(r : ()->Any) {
+        loadMoreListener = object : OnLoadMoreListener {
+            override fun onLoadMore() {
+                r()
+            }
+        }
+    }
+
     override fun onScrollStateChanged(state: Int) {
         super.onScrollStateChanged(state)
         val wrapperSize = wrapperAdapter?.itemCount?:0
-        if (loadMoreListener != null && wrapperSize > 0) {
+        if (!isLoadingMore && loadMoreListener != null && wrapperSize > 0) {
             val visPos = getVisiblePos()
             if (visPos.second+1 >= headerViews.size+wrapperSize) {
                 isLoadingMore = true
@@ -251,7 +259,7 @@ class ExRecyclerView: RecyclerView {
     }
 
     fun endLoadMore() {
-        //isLoadingMore = false
+        isLoadingMore = false
     }
 
     interface OnLoadMoreListener {

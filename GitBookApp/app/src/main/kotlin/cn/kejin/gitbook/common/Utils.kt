@@ -88,9 +88,11 @@ internal fun  dismissSoftInputMethod(context: Context, windowToken : IBinder)
  * Display Avatar
  */
 private val avatarDisplayOption = DisplayImageOptions.Builder()
+        .resetViewBeforeLoading(true)
         .cacheInMemory(true)
         .cacheOnDisk(true)
         .showImageOnFail(R.drawable.ic_default_avatar)
+        .showImageOnLoading(R.drawable.ic_default_avatar)
         .showImageForEmptyUri(R.drawable.ic_default_avatar).build()
 internal fun displayAvatar(url : String, view : ImageView)
         = ImageLoader.getInstance().displayImage(url, view, avatarDisplayOption)

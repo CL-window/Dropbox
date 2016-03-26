@@ -14,18 +14,16 @@ import android.widget.TextView
 /**
  * for custom font
  */
-class CustomTextView(context: Context?,
-                     attrs: AttributeSet?,
-                     defStyleAttr: Int) : TextView(context, attrs, defStyleAttr)
+class CustomTextView : TextView
 {
     companion object {
         val CUS_TYPEFACE_PATH = "Roboto-Regular.ttf"
         var customTypeface : Typeface? = null
     }
 
-    constructor(context: Context?) : this(context, null, 0)
-    constructor(context: Context?, attrs: AttributeSet?) : this (context, attrs, 0)
-
+    constructor(context: Context?) : super(context, null, 0)
+    constructor(context: Context?, attrs: AttributeSet?) : super (context, attrs, 0)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
     init {
         if (customTypeface == null && context != null) {
             customTypeface = Typeface.createFromAsset(context.assets, CUS_TYPEFACE_PATH)

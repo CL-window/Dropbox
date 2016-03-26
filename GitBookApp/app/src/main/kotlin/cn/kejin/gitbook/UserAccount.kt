@@ -5,8 +5,8 @@ package cn.kejin.gitbook
  * Date: 2016/3/8
  */
 
-import cn.kejin.gitbook.common.Debug
 import cn.kejin.gitbook.common.GSON
+import cn.kejin.gitbook.common.warn
 import cn.kejin.gitbook.networks.Models
 import okhttp3.Credentials
 
@@ -58,7 +58,7 @@ class UserAccount {
                 user = GSON.fromJson(value, Models.MyAccount::class.java)?: Models.MyAccount();
             }
             catch(e: Exception) {
-                Debug.e(TAG, "restore user account exception: " + e.message);
+                warn(TAG, "restore user account exception: " + e.message);
                 user = Models.MyAccount()
             }
         }

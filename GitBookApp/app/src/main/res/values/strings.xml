@@ -45,6 +45,6 @@
     <string name="published_string">Published By</string>
     <string name="all_topics">All Topics</string>
     <string name="is_loading">Loading</string>
-    <string name="click_to_reload">Click To Reload</string>
+    <string name="click_to_reload">Reload</string>
     <string name="no_more_data">No More Data</string>
 </resources>

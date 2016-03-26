@@ -1,12 +1,10 @@
 package cn.kejin.gitbook;
 
-import cn.kejin.gitbook.common.Debug
-import cn.kejin.gitbook.networks.HttpCallback
-import cn.kejin.gitbook.networks.Models
 import cn.kejin.gitbook.networks.NetworkManager
-import okhttp3.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
 import org.junit.Test
 
 class MainUnitTest {
@@ -19,7 +17,7 @@ class MainUnitTest {
             url = nm.getApiAbsUrl(uri);
         }
 
-        Debug.e(NetworkManager.TAG, "Method: GET, URL: $url")
+        println("Method: GET, URL: $url")
 
         val builder = Request.Builder().url(url).get()
 
@@ -36,7 +34,7 @@ class MainUnitTest {
             url = nm.getApiAbsUrl(uri);
         }
 
-        Debug.e(NetworkManager.TAG, "Method: GET, URL: $url, Json: $json")
+        println("Method: GET, URL: $url, Json: $json")
 
         val body = RequestBody.create(NetworkManager.JSON_TYPE, json);
         val builder = Request.Builder();

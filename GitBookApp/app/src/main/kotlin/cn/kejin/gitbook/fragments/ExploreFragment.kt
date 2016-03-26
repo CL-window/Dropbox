@@ -1,12 +1,13 @@
 package cn.kejin.gitbook.fragments
 
 import android.app.Activity
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.*
-import android.view.*
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import cn.kejin.gitbook.AllTopicsActivity
@@ -15,9 +16,9 @@ import cn.kejin.gitbook.SearchActivity
 import cn.kejin.gitbook.adapters.BaseRecyclerAdapter
 import cn.kejin.gitbook.adapters.BooksAdapter
 import cn.kejin.gitbook.common.dpToPx
-import cn.kejin.gitbook.common.snack
+import cn.kejin.gitbook.common.error
 import cn.kejin.gitbook.controllers.PageController
-import cn.kejin.gitbook.controllers.PageViewController
+import cn.kejin.gitbook.controllers.PageDriver
 import cn.kejin.gitbook.networks.HttpCallback
 import cn.kejin.gitbook.networks.Models
 import cn.kejin.gitbook.networks.NetworkManager
@@ -45,7 +46,7 @@ class ExploreFragment : BaseMainFragment()
     lateinit var booksList : ExRecyclerView
     lateinit var booksAdapter : BooksAdapter
 
-    lateinit var pageViewCtrl : PageViewController
+    lateinit var pageDriver : PageDriver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +61,7 @@ class ExploreFragment : BaseMainFragment()
         view.findViewById(R.id.allTopics)?.setOnClickListener({startActivity(AllTopicsActivity::class.java)})
 
         swipeRefresh = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
-        swipeRefresh.setDistanceToTriggerSync(dpToPx(150f))
+        swipeRefresh.setDistanceToTriggerSync(dpToPx(130f))
 
         topicsLayout = view.findViewById(R.id.topicsLayout) as LinearLayout
 
@@ -74,15 +75,18 @@ class ExploreFragment : BaseMainFragment()
         booksAdapter = BooksAdapter(mainActivity)
         booksList.adapter = booksAdapter
 
-        pageViewCtrl = PageViewController(swipeRefresh, booksList, pageCallback)
-
-        pageViewCtrl.refresh()
+        pageDriver = PageDriver(swipeRefresh, booksList, pageCallback)
+        pageDriver.refresh()
     }
 
     /**
      * load data from server
      */
-    private val pageCallback  = object : PageController.PageCallback {
+    private val pageCallback  = object : PageDriver.ICallback {
+        override fun onRefreshFailed() {
+            error(TAG, "refresh failed")
+        }
+
         override fun onLoading(page: Int) {
             NetworkManager.instance.getExplorePage(page,
                     object : HttpCallback<Models.WWWExplorePage>(Models.WWWExplorePage::class.java) {
@@ -100,7 +104,7 @@ class ExploreFragment : BaseMainFragment()
                                 result = PageController.Result.FAILED
                             }
 
-                            pageViewCtrl.finish(result)
+                            pageDriver.finish(result)
                         }
                     })
         }

@@ -1,41 +1,27 @@
 package cn.kejin.gitbook
 
-import android.app.Activity
 import android.app.Fragment
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
-import android.util.Log
-import android.util.TypedValue
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import cn.kejin.gitbook.common.Debug
 import cn.kejin.gitbook.common.displayAvatar
-import cn.kejin.gitbook.fragments.BaseFragment
 import cn.kejin.gitbook.fragments.ExploreFragment
 import cn.kejin.gitbook.fragments.MyBooksFragment
 import cn.kejin.gitbook.fragments.ProfileFragment
 import cn.kejin.gitbook.networks.Models
-import cn.kejin.gitbook.networks.NetworkManager
-import com.nostra13.universalimageloader.core.DisplayImageOptions
-import com.nostra13.universalimageloader.core.ImageLoader
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_nav_header.*
 
 /**
  * Manager All Fragment
  *
- * TODO: 自定义menu
  */
 class MainActivity : BaseActivity()
 {
@@ -223,7 +209,6 @@ class MainActivity : BaseActivity()
     {
         super.onActivityResult(requestCode, resultCode, data)
 
-        Debug.e(TAG, "Req: " + requestCode + " rescode: " + resultCode + data?.toString())
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 REQ_SIGN -> {

@@ -44,10 +44,8 @@ class BooksAdapter(activity: Activity) :
             val author = findView(R.id.author) as TextView
             author.text = model.author.name
 
-            avatar.setOnClickListener({ startAuthorActivity() })
-            author.setOnClickListener({ startAuthorActivity() })
-
             itemView.setOnClickListener({ startBookDetailActivity() })
+            findView(R.id.authorLayout).setOnClickListener({ startAuthorActivity() })
         }
     }
 

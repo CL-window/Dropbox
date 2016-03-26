@@ -6,9 +6,13 @@ package cn.kejin.gitbook.controllers
  */
 
 /**
- * 控制页面的 index,
+ * 1. pageIndex = 0, loading this page, eg Refresh
+ * 2. pageIndex += 1, load next page,
+ *      if load failed or no more data, pageIndex roll back, and page locked
+ *      if load failed, it need call refresh or reload to unlock this page,
+ *      if no more data, it need refresh all data to unlock
  */
-class PageController(val callback: PageCallback)
+abstract class PageController
 {
     enum class Result {
         SUCCESS,
@@ -16,78 +20,123 @@ class PageController(val callback: PageCallback)
         NO_MORE
     }
 
-    var isRequesting = false;
-        private set(value) {
-            field = value
-        }
+    /**
+     * the result of last request
+     */
+    var lastResult = Result.SUCCESS
+        private set
 
-    var exploredPageIndex = 0
-        private set(value) {
-            if (isRequesting) {
-                return;
-            }
-            isRequesting = true
-            field = value
-        }
+    /**
+     * has loaded page index
+     */
+    var loadedPageIndex = -1
+        private set
+
+    /**
+     * current loading page index
+     * and it the request guard
+     */
+    var loadingPageIndex = -1
+        private set
+
+
+    fun isRequesting() = loadingPageIndex != -1
+
+    fun isRefreshing() = loadingPageIndex == 0
+
+    fun isLoadingMore() = loadingPageIndex > 0
 
     /**
      * Refresh Page
      */
     fun refresh() : Boolean {
-        if (isRequesting) {
-            return false;
-        }
-
-        exploredPageIndex = 0
-        callback.onLoading(exploredPageIndex)
-        return true;
+        return loading(0)
     }
 
     /**
      * Load One More Page
+     * if no more data, can't loading
      */
     fun loadMore() : Boolean {
-        if (isRequesting) {
+        if (lastResult == Result.NO_MORE) {
             return false;
         }
-        exploredPageIndex += 1
-        callback.onLoading(exploredPageIndex)
-        return true;
+        return loading(loadedPageIndex+1)
     }
 
-    /**
-     * Reload Current Page
-     */
-    fun reload() : Boolean {
-        if (isRequesting) {
-            return false
+    @Synchronized
+    private fun loading(page:Int): Boolean{
+        if (isRequesting()) {
+            return false;
         }
-        exploredPageIndex = exploredPageIndex
-        callback.onLoading(exploredPageIndex)
-        return true;
+
+        loadingPageIndex = page;
+
+        if (isRefreshing()) {
+            onRefresh();
+        }
+        else if (isLoadingMore()) {
+            onLoadMore(page);
+        }
+
+        onLoading(loadingPageIndex)
+        return true
     }
 
     /**
      * Finish current request
      */
-    fun finish(res: Result) {
-        when (res) {
-            Result.FAILED,
-            Result.NO_MORE -> {
-                if (exploredPageIndex > 0) {
-                    exploredPageIndex -= 1
-                }
+    fun finish(result: Result) {
+        when (result) {
+            Result.SUCCESS -> {
+                loadedPageIndex = loadingPageIndex
             }
 
-            else -> {
-                //
+            Result.FAILED -> {
+            }
+
+            Result.NO_MORE -> {
             }
         }
 
-        isRequesting = false
+        if (isRefreshing()) {
+            onRefreshFinish(result, lastResult)
+        }
+        else {
+            onLoadMoreFinish(result, lastResult, loadingPageIndex)
+        }
+
+        onFinish(result, lastResult, loadedPageIndex, loadingPageIndex)
+
+        lastResult = result
+        loadingPageIndex = -1
     }
 
-    interface PageCallback {
-        fun onLoading(page : Int)
+    /**
+     * call before onLoading while refresh
+     */
+    abstract fun onRefresh()
+    abstract fun onRefreshFinish(result: Result, lastResult: Result)
+
+    /**
+     * call before onLoading while load more
+     */
+    abstract fun onLoadMore(page: Int)
+    abstract fun onLoadMoreFinish(result: Result, lastResult: Result, loadingPage : Int)
+
+    /**
+     * do loading
+     */
+    abstract fun onLoading(page: Int)
+
+    /**
+     * call before loadingPageIndex and lastResult be reset,
+     * @param res Current request result
+     * @param lastRes last request result
+     * @param loadedPage current loaded page index
+     * @param loadingPage current loading page index
+     */
+    open fun onFinish(result: Result, lastResult: Result, loadedPage : Int, loadingPage: Int) {
+        //
     }
 }

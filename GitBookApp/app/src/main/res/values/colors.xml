@@ -9,6 +9,7 @@
     <color name="textPrimary">#FF212121</color>
     <color name="textSecondary">#FFAAAAAA</color>
     <color name="textLogo">#4e4e4e</color>
+    <color name="selectableItemBackground">#36474F</color>
 
     <color name="login_bg_color">#FDFDFE</color>
     <color name="login_edit_bg_color">#F4F7F9</color>

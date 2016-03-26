@@ -30,7 +30,7 @@ abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
         val E_UNKNOWN = 9999
 
         fun processException(code: Int, msg: String, view: View?) {
-            Debug.e(TAG, "HttpE: $code, $msg");
+            error(TAG, "HttpE: $code, $msg");
             var errStrId :Int = when (code) {
                 E_NO_NETWORK -> R.string.no_network
                 E_NOT_SIGN ->  R.string.not_sign
@@ -63,10 +63,9 @@ abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
 
     override fun onResponse(call: Call?, resp: Response?) {
         if (resp != null) {
-            val msg = resp.body().string();
-
             try {
-                Debug.e(cls, msg)
+                val msg = resp.body().string();
+                error(cls, msg)
                 onSuccess(msg)
             }
             catch(e : Exception) {
@@ -96,7 +95,7 @@ abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
 
     fun onFailure(code : Int, msg : String)
     {
-        Debug.e(this.cls, msg);
+        error(this.cls, msg);
         post { onResponse(false, null, code, msg) }
     }
 

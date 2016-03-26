@@ -6,13 +6,11 @@ package cn.kejin.gitbook.networks
  */
 
 import cn.kejin.gitbook.UserAccount
-import cn.kejin.gitbook.common.Debug
+import cn.kejin.gitbook.common.debug
+import cn.kejin.gitbook.common.error
 import okhttp3.*
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import org.jsoup.select.Elements
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -84,7 +82,7 @@ class NetworkManager private constructor()// init
             url = getApiAbsUrl(uri);
         }
 
-        Debug.e(TAG, "Method: GET, URL: $url, Auth: $auth")
+        error(TAG, "Method: GET, URL: $url, Auth: $auth")
 
         val builder = Request.Builder().url(url).get()
         if (auth) {
@@ -113,7 +111,7 @@ class NetworkManager private constructor()// init
             url = getApiAbsUrl(uri);
         }
 
-        Debug.e(TAG, "Method: GET, URL: $url, Auth: $auth, Json: $json")
+        error(TAG, "Method: GET, URL: $url, Auth: $auth, Json: $json")
 
         val body = RequestBody.create(JSON_TYPE, json);
         val builder = Request.Builder();
@@ -145,7 +143,7 @@ class NetworkManager private constructor()// init
      */
     fun signIn(username: String, pwd: String, callback: HttpCallback<Models.MyAccount>): Call {
         val url = getApiAbsUrl("account")
-        Debug.e(TAG, "URL: $url , UserName: $username, Pwd: $pwd")
+        error(TAG, "URL: $url , UserName: $username, Pwd: $pwd")
 
         val builder = Request.Builder().url(url).get()
         builder.addHeader("Authorization", Credentials.basic(username, pwd));
