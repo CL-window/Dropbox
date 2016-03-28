@@ -1,16 +1,11 @@
 package cn.kejin.gitbook
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import cn.kejin.gitbook.common.dismissSoftInputMethod
-import cn.kejin.gitbook.networks.HttpCallback
-import cn.kejin.gitbook.networks.Models
-import cn.kejin.gitbook.networks.NetworkManager
+import cn.kejin.gitbook.common.snack
+import cn.kejin.gitbook.networks.*
 import kotlinx.android.synthetic.main.activity_login.*
-
-import cn.kejin.gitbook.common.snack;
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -30,8 +25,8 @@ class SignActivity : BaseActivity()
     private fun initializeContentView()
     {
         menuCloseButton?.setOnClickListener({finish()})
-        forgotPwdBtn?.setOnClickListener({startBrowser(NetworkManager.RESET_PWD_URL)})
-        signUp?.setOnClickListener({startBrowser(NetworkManager.REGISTER_URL)})
+        forgotPwdBtn?.setOnClickListener({startBrowser(WWWApi.RESET_PWD_URL)})
+        signUp?.setOnClickListener({startBrowser(WWWApi.REGISTER_URL)})
 
         signIn?.setOnClickListener({startSignInToAccount()})
     }
@@ -55,27 +50,23 @@ class SignActivity : BaseActivity()
 
         showProgressDialog()
         progressDialog?.setCanceledOnTouchOutside(false)
-        val call = NetworkManager.instance.signIn(username.toString(), password.toString(),
+        val call = RestApiImpl.instance.signIn(username.toString(), password.toString(),
                 object : HttpCallback<Models.MyAccount>(Models.MyAccount::class.java) {
-                    override fun onResponse(success: Boolean, model: Models.MyAccount?, code: Int, msg: String) {
-                        if (success) {
+                    override fun onResponse(model: Models.MyAccount?, exception: HttpException?) {
+                        if (exception == null) {
                             UserAccount.set(model!!)
                             snack(userNameEdit, R.string.login_success)
                             postDelay({ setResult(RESULT_OK); finish() }, 500)
                         }
                         else {
-                            var message = getString(R.string.login_failed)
-                            when (code) {
-                                E_NO_NETWORK -> message = getString(R.string.no_network);
-                            }
-                            snack(userNameEdit, message, Snackbar.LENGTH_LONG)
+                            snack(userNameEdit, R.string.login_failed, Snackbar.LENGTH_LONG)
                         }
                         dismissProgressDialog()
                     }
         })
 
         progressDialog?.setOnCancelListener {
-            call.cancel()
+            call?.cancel()
             snack(userNameEdit, R.string.login_cancelled)
         }
     }

@@ -6,6 +6,7 @@ import android.view.View
 import cn.kejin.gitbook.MainApplication
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.common.*
+import com.google.gson.Gson
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -15,65 +16,37 @@ import java.io.IOException
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/9
  */
-abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
+abstract class HttpCallback<Model> (val cls : Class<Model>,
+                                    val gson: Gson = GSON,
+                                    val handler: Handler = MainApplication.handler) : Callback
 {
-    companion object {
-        val TAG = "HttpCallback"
-
-        val E_NO_NETWORK = 1000
-
-        val E_NOT_SIGN = 1001
-
-        // Gson parse error
-        val E_GSON = 1002
-
-        val E_UNKNOWN = 9999
-
-        fun processException(code: Int, msg: String, view: View?) {
-            error(TAG, "HttpE: $code, $msg");
-            var errStrId :Int = when (code) {
-                E_NO_NETWORK -> R.string.no_network
-                E_NOT_SIGN ->  R.string.not_sign
-                else -> R.string.unknown_problem
-            }
-
-            if (view == null) {
-                toast(errStrId)
-            }
-            else {
-                snack(view, errStrId)
-            }
-        }
-    }
-
-    protected  fun post(r : ()->Unit ) {
-        MainApplication.handler.post({ r() });
+    protected fun post(r : ()->Unit ) {
+        handler.post({ r() });
     }
 
     override fun onFailure(call: Call?, e: IOException?) {
         call?.cancel();
 
         if (!isNetworkConnected()) {
-            onFailure(E_NO_NETWORK, "no network")
+            onFailure(HttpException.E_NO_NETWORK, "no network")
         }
         else {
-            onFailure(E_UNKNOWN, e?.message?:"unknown")
+            onFailure(HttpException.E_OTHER, e?.message?:"unknown")
         }
     }
 
     override fun onResponse(call: Call?, resp: Response?) {
         if (resp != null) {
             try {
-                val msg = resp.body().string();
-                error(cls, msg)
+                val msg = resp.body()?.string()?:"";
                 onSuccess(msg)
             }
             catch(e : Exception) {
-                onFailure(E_GSON, e.message?:"unknown")
+                onFailure(HttpException.E_GSON_PARSE, e.message?:"unknown")
             }
         }
         else {
-            onFailure(E_UNKNOWN, "unknown")
+            onFailure(HttpException.E_OTHER, "unknown")
         }
     }
 
@@ -81,23 +54,26 @@ abstract class HttpCallback<Model> (val cls : Class<Model>) : Callback
      * this method run in thread
      */
     open fun onSuccess(body : String) {
-        var model: Model = GSON.fromJson(body, cls) ?: throw Exception("parse json failed")
+        info(cls, "Success: $body")
+        var model: Model = gson.fromJson(body, cls) ?: throw Exception("parse json failed")
 
         if (model is Models.BaseResp && model.code != 0) {
             onFailure(model.code, model.error)
         }
         else {
             post {
-                onResponse(true, model)
+                onResponse(model)
             }
         }
     }
 
-    fun onFailure(code : Int, msg : String)
-    {
-        error(this.cls, msg);
-        post { onResponse(false, null, code, msg) }
+    fun onFailure(code : Int, msg : String) {
+        error(this.cls, "Failure: $code, $msg");
+        post { onResponse(null, HttpException(code, msg)) }
     }
 
-    abstract fun onResponse(success : Boolean, model : Model?, code : Int=0, msg : String="")
+    /**
+     * failed if exception != null
+     */
+    abstract fun onResponse(model : Model?, exception:HttpException?=null)
 }

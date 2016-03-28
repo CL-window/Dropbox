@@ -35,7 +35,7 @@ abstract class BaseActivity : AppCompatActivity()
     /**
      * last user state
      */
-    var mLastUserState = UserAccount.get()
+    var mLastUserState = UserAccount.user
 
     /**
      * progress dialog
@@ -90,14 +90,14 @@ abstract class BaseActivity : AppCompatActivity()
     }
 
     protected fun checkUserState() {
-        val cur = UserAccount.get()
+        val cur = UserAccount.user
         if (!mLastUserState.equals(cur)) {
             onUserStateChanged(mLastUserState, cur)
         }
         mLastUserState = cur;
     }
     open fun onUserStateChanged(last : Models.MyAccount,
-                                now : Models.MyAccount = UserAccount.get()) {}
+                                now : Models.MyAccount = UserAccount.user) {}
 
     /**
      * show progress dialog
@@ -144,12 +144,6 @@ abstract class BaseActivity : AppCompatActivity()
      * open browser
      */
     fun startBrowser(uri : String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
-
-
-    /**
-     * show snack bar
-     */
-    fun snack(view: View, id : Int, len : Int = Snackbar.LENGTH_SHORT) = cn.kejin.gitbook.common.snack(view, getString(id), len)
 
     abstract fun getLayoutId() : Int;
 }

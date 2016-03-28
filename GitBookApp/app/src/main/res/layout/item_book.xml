@@ -47,7 +47,7 @@
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/vector_drawable_ic_star_black___px"/>
+                android:src="@drawable/ic_vector_star_gray_24dp"/>
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/starNum"
@@ -63,7 +63,7 @@
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/vector_drawable_ic_access_time_black___px"/>
+                android:src="@drawable/ic_vector_time_gray_24dp"/>
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/pubTime"

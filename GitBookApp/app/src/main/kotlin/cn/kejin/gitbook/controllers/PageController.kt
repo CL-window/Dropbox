@@ -48,9 +48,14 @@ abstract class PageController
 
     /**
      * Refresh Page
+     * @return whether do refresh success
      */
     fun refresh() : Boolean {
-        return loading(0)
+        if (!loading(0)) {
+            onRefreshBlocked()
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -58,10 +63,12 @@ abstract class PageController
      * if no more data, can't loading
      */
     fun loadMore() : Boolean {
-        if (lastResult == Result.NO_MORE) {
+        val index = loadedPageIndex + 1
+        if (lastResult == Result.NO_MORE || !loading(index)) {
+            onLoadMoreBlocked(index)
             return false;
         }
-        return loading(loadedPageIndex+1)
+        return true
     }
 
     @Synchronized
@@ -113,15 +120,38 @@ abstract class PageController
     }
 
     /**
-     * call before onLoading while refresh
+     * call it before onLoading while refresh
      */
     abstract fun onRefresh()
-    abstract fun onRefreshFinish(result: Result, lastResult: Result)
 
     /**
-     * call before onLoading while load more
+     * call it if there has page is loading, can't do refresh
+     */
+    open fun onRefreshBlocked() {
+        //
+    }
+
+    /**
+     * call it before onFinish
+     */
+    abstract fun onRefreshFinish(result: Result, lastResult: Result)
+
+
+    /**
+     * call it before onLoading while load more
      */
     abstract fun onLoadMore(page: Int)
+
+    /**
+     * call it if there has page is loading, can't do load more
+     */
+    open fun onLoadMoreBlocked(page: Int) {
+        //
+    }
+
+    /**
+     * call it before onFinish
+     */
     abstract fun onLoadMoreFinish(result: Result, lastResult: Result, loadingPage : Int)
 
     /**
@@ -129,10 +159,11 @@ abstract class PageController
      */
     abstract fun onLoading(page: Int)
 
+
     /**
      * call before loadingPageIndex and lastResult be reset,
-     * @param res Current request result
-     * @param lastRes last request result
+     * @param result Current request result
+     * @param lastResult last request result
      * @param loadedPage current loaded page index
      * @param loadingPage current loading page index
      */

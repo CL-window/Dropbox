@@ -29,7 +29,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="15dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/vector_drawable_ic_menu_black_48px"/>
+                android:src="@drawable/ic_vector_menu_white_48dp"/>
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/title"
@@ -51,7 +51,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="12dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/vector_drawable_ic_search_black_48px"/>
+                android:src="@drawable/ic_vector_search_white_48px"/>
 
         </FrameLayout>
 

@@ -19,9 +19,7 @@ import cn.kejin.gitbook.common.dpToPx
 import cn.kejin.gitbook.common.error
 import cn.kejin.gitbook.controllers.PageController
 import cn.kejin.gitbook.controllers.PageDriver
-import cn.kejin.gitbook.networks.HttpCallback
-import cn.kejin.gitbook.networks.Models
-import cn.kejin.gitbook.networks.NetworkManager
+import cn.kejin.gitbook.networks.*
 import cn.kejin.gitbook.views.ExRecyclerView
 
 /**
@@ -88,11 +86,11 @@ class ExploreFragment : BaseMainFragment()
         }
 
         override fun onLoading(page: Int) {
-            NetworkManager.instance.getExplorePage(page,
+            WWWApiImpl.instance.getExplorePage(page,
                     object : HttpCallback<Models.WWWExplorePage>(Models.WWWExplorePage::class.java) {
-                        override fun onResponse(success: Boolean, model: Models.WWWExplorePage?, code: Int, msg: String) {
+                        override fun onResponse(model: Models.WWWExplorePage?, exception: HttpException?) {
                             var result = PageController.Result.SUCCESS
-                            if (success) {
+                            if (exception == null) {
                                 if (model!!.books.size < ONE_PAGE_BOOKS_NUM) {
                                     result = PageController.Result.NO_MORE
                                 }
@@ -100,7 +98,7 @@ class ExploreFragment : BaseMainFragment()
                                 bindModelToView(page, model)
                             }
                             else {
-                                processException(code, msg, view)
+                                exception.process(view)
                                 result = PageController.Result.FAILED
                             }
 

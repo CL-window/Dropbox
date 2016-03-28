@@ -82,7 +82,7 @@
             android:layout_gravity="bottom|right"
             android:contentDescription="@string/exit_account"
             android:scaleType="fitCenter"
-            android:src="@drawable/vector_drawable_ic_exit_to_app_white___px" />
+            android:src="@drawable/ic_vector_exit_white_48dp" />
     </FrameLayout>
 
 </FrameLayout>

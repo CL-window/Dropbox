@@ -23,7 +23,7 @@
             android:paddingLeft="5dp"
             android:gravity="center"
             android:text="@string/is_loading"
-            android:textColor="@color/textPrimary"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -42,7 +42,7 @@
             android:paddingLeft="10dp"
             android:gravity="center"
             android:text="@string/click_to_reload"
-            android:textColor="@color/textPrimary"
+            android:textColor="@color/black"
             android:textAllCaps="true"
             android:textSize="16sp"/>
     </LinearLayout>
@@ -61,7 +61,7 @@
             android:paddingLeft="5dp"
             android:gravity="center"
             android:text="@string/no_more_data"
-            android:textColor="@color/textPrimary"
+            android:textColor="@color/black"
             android:textSize="16sp"/>
     </LinearLayout>
 </FrameLayout>

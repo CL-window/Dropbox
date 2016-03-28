@@ -42,6 +42,10 @@ class MainApplication : Application()
 
         UserAccount.restore()
 
+        initImageLoader()
+    }
+
+    fun initImageLoader() {
         val display = DisplayImageOptions.Builder()
                 .cacheOnDisk(true)
                 .build()

@@ -33,7 +33,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="15dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/vector_drawable_ic_arrow_back_48px" />
+                android:src="@drawable/ic_vector_arrow_white_48dp" />
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:layout_width="wrap_content"
@@ -171,7 +171,8 @@
                             android:text="@string/login_signup_btn"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:layout_weight="1"/>
                     </LinearLayout>
 
                 </LinearLayout>

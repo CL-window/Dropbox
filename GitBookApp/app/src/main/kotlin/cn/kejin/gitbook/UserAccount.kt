@@ -22,9 +22,10 @@ class UserAccount {
         val PREF_NAME = "USER"
         val KEY_PREF = "info"
 
-        private var user = Models.MyAccount()
+        var user = Models.MyAccount()
+            get() = field.copy()
+            private set
 
-        fun get(): Models.MyAccount = user.copy()
         fun set(account: Models.MyAccount): Models.MyAccount {
             val back = user;
             user = account;
@@ -32,10 +33,13 @@ class UserAccount {
             return back
         }
 
-        fun isSignedIn() = !user.token.isNullOrEmpty()
-
         fun getToken(): String = user.token
 
+        fun isSignedIn() = !user.token.isNullOrEmpty()
+
+        /**
+         * Basic auth
+         */
         fun getAuthValue() = Credentials.basic(user.name, user.token)
 
         /**
@@ -63,13 +67,14 @@ class UserAccount {
             }
         }
 
+        /**
+         * save user info to shared preferences
+         */
         private fun save() {
             val pref = MainApplication.getSharedPref(PREF_NAME)
             var editor = pref.edit();
             editor.putString(KEY_PREF, GSON.toJson(user))
             editor.commit()
         }
-
     }
-
 }
