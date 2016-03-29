@@ -6,27 +6,17 @@ import okhttp3.Call
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/28
  */
-interface RestApi {
+interface RestApi : Network {
     companion object {
-        val impl : RestApi =  RestApiImpl.instance
-
-
         val DEF_PAGE_LIMIT = 20
-
-        val BASE_URL = "https://api.gitbook.com/"
-
-        /**
-         * get absolute Url
-         */
-        fun getAbsUrl(uri: String)
-                = BASE_URL.removeSuffix("/") + "/" + uri.removePrefix("/")
-
-        /**
-         * get author's avatar url
-         */
-        fun getAuthorAvatarUrl(name: String)
-                = getAbsUrl("/author/$name/avatar")
     }
+
+    fun getAbsUrl(uri: String) = Network.getApiAbsUrl(uri)
+
+    /**
+     * get author's avatar url
+     */
+    fun getAuthorAvatarUrl(name: String) = Network.getApiAbsUrl("/author/$name/avatar")
 
     /**********************************APIs*************************************************/
     /**

@@ -4,7 +4,6 @@ import cn.kejin.gitbook.common.info
 import okhttp3.Call
 import okhttp3.Credentials
 import okhttp3.Request
-import org.jsoup.nodes.Element
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -16,8 +15,6 @@ class RestApiImpl private constructor(val requester: HttpRequester= HttpRequeste
         val TAG="RestApiImpl"
         val instance=RestApiImpl()
     }
-
-    fun getAbsUrl(uri: String) = RestApi.getAbsUrl(uri)
 
     /**
      * Special

@@ -6,22 +6,12 @@ import okhttp3.Call
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/29
  */
-interface WWWApi
-{
+interface WWWApi : Network {
     companion object {
-        val impl : WWWApi
-            get() = WWWApiImpl.instance
-
-        val BASE_URL = "https://www.gitbook.com/"
-
-        val RESET_PWD_URL = getAbsUrl("/settings/password/reset")
-
-        val REGISTER_URL = getAbsUrl("/join")
-
-        fun getAbsUrl(uri: String): String =
-                BASE_URL.removeSuffix("/") + "/" + uri.removePrefix("/")
+        val impl = WWWApiImpl.instance
     }
 
+    fun getAbsUrl(uri: String): String = Network.getWWWAbsUrl(uri)
 
     /*****************************APIs***********************************/
 

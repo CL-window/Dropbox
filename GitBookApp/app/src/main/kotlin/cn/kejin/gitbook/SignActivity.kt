@@ -25,8 +25,8 @@ class SignActivity : BaseActivity()
     private fun initializeContentView()
     {
         menuCloseButton?.setOnClickListener({finish()})
-        forgotPwdBtn?.setOnClickListener({startBrowser(WWWApi.RESET_PWD_URL)})
-        signUp?.setOnClickListener({startBrowser(WWWApi.REGISTER_URL)})
+        forgotPwdBtn?.setOnClickListener({startBrowser(Network.RESET_PWD_URL)})
+        signUp?.setOnClickListener({startBrowser(Network.REGISTER_URL)})
 
         signIn?.setOnClickListener({startSignInToAccount()})
     }

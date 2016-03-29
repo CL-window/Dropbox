@@ -8,12 +8,11 @@ import org.jsoup.nodes.Element
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/29
  */
-class WWWApiImpl private constructor(val requester: HttpRequester= HttpRequester()) : WWWApi
+class WWWApiImpl private constructor(val requester: HttpRequester= Network.defRequester) : WWWApi
 {
     companion object {
         val TAG = "WWWApiImpl"
         val instance = WWWApiImpl()
-
 
         /****************** Parse Methods ***********************/
 
@@ -194,8 +193,6 @@ class WWWApiImpl private constructor(val requester: HttpRequester= HttpRequester
             return page;
         }
     }
-
-    fun getAbsUrl(uri: String) = WWWApi.getAbsUrl(uri)
 
     override fun getExplorePage(page: Int,
                                 callback: HttpCallback<Models.WWWExplorePage>): Call? {

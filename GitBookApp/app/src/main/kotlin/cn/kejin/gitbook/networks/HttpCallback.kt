@@ -7,6 +7,7 @@ import cn.kejin.gitbook.MainApplication
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.common.*
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -17,9 +18,14 @@ import java.io.IOException
  * Date: 2016/3/9
  */
 abstract class HttpCallback<Model> (val cls : Class<Model>,
-                                    val gson: Gson = GSON,
-                                    val handler: Handler = MainApplication.handler) : Callback
+                                    val gson: Gson = HttpCallback.defGson,
+                                    val handler: Handler = HttpCallback.defHandler) : Callback
 {
+    companion object {
+        val defGson : Gson by lazy { GsonBuilder().create() }
+        val defHandler = Handler()
+    }
+
     protected fun post(r : ()->Unit ) {
         handler.post({ r() });
     }
