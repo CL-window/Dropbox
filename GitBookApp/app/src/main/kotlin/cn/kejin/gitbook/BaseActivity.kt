@@ -1,20 +1,15 @@
 package cn.kejin.gitbook
 
-import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.ProgressBar
-import android.widget.TextView
-import cn.kejin.gitbook.networks.Models
-import kotlinx.android.synthetic.main.layout_custom_status_bar.*
+import cn.kejin.gitbook.entities.MyAccount
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -49,6 +44,10 @@ abstract class BaseActivity : AppCompatActivity()
         var layoutId = getLayoutId();
         if (layoutId > 0) {
             setContentView(layoutId)
+            if (!mStatusBarTranslucentFlag) {
+                findViewById(R.id.customStatusBar)?.visibility=View.GONE
+                findViewById(R.id.customColorStatusBar)?.visibility=View.GONE
+            }
         }
     }
 
@@ -96,8 +95,9 @@ abstract class BaseActivity : AppCompatActivity()
         }
         mLastUserState = cur;
     }
-    open fun onUserStateChanged(last : Models.MyAccount,
-                                now : Models.MyAccount = UserAccount.user) {}
+
+    open fun onUserStateChanged(last : MyAccount,
+                                now : MyAccount = UserAccount.user) {}
 
     /**
      * show progress dialog

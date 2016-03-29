@@ -8,7 +8,7 @@ package cn.kejin.gitbook.entities
 /**
  * A Book branch
  */
-class ABranch {
+class ABranch : BaseResp() {
     var name = ""
     var urls = URLs()
 

@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * One Book Model
  */
-open class ABook{
+open class ABook : BaseResp() {
     var id = ""
     var name = ""
     var title = ""

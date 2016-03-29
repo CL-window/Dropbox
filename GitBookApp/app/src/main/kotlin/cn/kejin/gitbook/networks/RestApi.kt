@@ -1,22 +1,23 @@
 package cn.kejin.gitbook.networks
 
+import cn.kejin.gitbook.entities.*
 import okhttp3.Call
 
 /**
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/28
  */
-interface RestApi : Network {
+interface RestApi : Net {
     companion object {
         val DEF_PAGE_LIMIT = 20
     }
 
-    fun getAbsUrl(uri: String) = Network.getApiAbsUrl(uri)
+    fun getAbsUrl(uri: String) = Net.getApiAbsUrl(uri)
 
     /**
      * get author's avatar url
      */
-    fun getAuthorAvatarUrl(name: String) = Network.getApiAbsUrl("/author/$name/avatar")
+    fun getAuthorAvatarUrl(name: String) = Net.getApiAbsUrl("/author/$name/avatar")
 
     /**********************************APIs*************************************************/
     /**
@@ -24,7 +25,7 @@ interface RestApi : Network {
      */
     fun signIn(username: String,
                pwd: String,
-               callback: HttpCallback<Models.MyAccount>): Call?
+               callback: HttpCallback<MyAccount>): Call?
 
     ////////////////////   Books  //////////////////////////////////////////////////////////
     /**
@@ -32,34 +33,34 @@ interface RestApi : Network {
      */
     fun getMyBooks(page: Int,
                    limit: Int = DEF_PAGE_LIMIT,
-                   callback: HttpCallback<Models.Books>): Call?
+                   callback: HttpCallback<Books>): Call?
 
     /**
      * List books by myself
      */
     fun getMyAuthBooks(page: Int,
                        limit: Int = DEF_PAGE_LIMIT,
-                       callback: HttpCallback<Models.Books>): Call?
+                       callback: HttpCallback<Books>): Call?
 
     /**
      * get all public books
      */
     fun getPublicBooks(page: Int,
                        limit: Int = DEF_PAGE_LIMIT,
-                       callback: HttpCallback<Models.Books>): Call?
+                       callback: HttpCallback<Books>): Call?
 
     /**
      * get details about a book
      */
     fun getBookDetail(id: String,
-                      callback: HttpCallback<Models.ABookDetail>): Call?
+                      callback: HttpCallback<ABookDetail>): Call?
 
     ///////////////////// Authors ///////////////////////////////////////////////////////////
     /**
      * get details about author
      */
     fun getAuthorDetail(name: String,
-                        callback: HttpCallback<Models.Account>): Call?
+                        callback: HttpCallback<Account>): Call?
 
 
     ////////////////////// Topics ///////////////////////////////////////////////////////////
@@ -68,7 +69,7 @@ interface RestApi : Network {
      */
     fun getAllTopics(page: Int,
                      limit: Int = DEF_PAGE_LIMIT,
-                     callback: HttpCallback<Models.Topics>): Call?
+                     callback: HttpCallback<Topics>): Call?
 
     /**
      * search topics of 'key'
@@ -76,13 +77,13 @@ interface RestApi : Network {
     fun searchTopics(key: String,
                      page: Int,
                      limit: Int = DEF_PAGE_LIMIT,
-                     callback: HttpCallback<Models.Topics>): Call?
+                     callback: HttpCallback<Topics>): Call?
 
     /**
      * get specified topic
      */
     fun getTopic(id: String,
-                 callback: HttpCallback<Models.ATopic>): Call?
+                 callback: HttpCallback<ATopic>): Call?
 
 
     //////////////////// Versions //////////////////////////////////////////////////////////////
@@ -90,21 +91,21 @@ interface RestApi : Network {
      * get all branches for a book
      */
     fun getBookBranches(id: String,
-                        callback: HttpCallback<List<Models.ABranch>>): Call?
+                        callback: HttpCallback<List<ABranch>>): Call?
 
     fun getBookVersionTags(id: String,
-                           callback: HttpCallback<List<Models.ABranch>>): Call?
+                           callback: HttpCallback<List<ABranch>>): Call?
 
 
     //////////////////// Contents //////////////////////////////////////////////////////////////
     fun getBookContents(id: String,
                         file: String,
                         lang: String = "",
-                        callback: HttpCallback<Models.BookContents>): Call?
+                        callback: HttpCallback<ABookContent>): Call?
 
     fun getBookVersionContents(id: String,
                                version: String,
                                file: String,
                                lang: String = "",
-                               callback: HttpCallback<Models.BookContents>): Call?
+                               callback: HttpCallback<ABookContent>): Call?
 }

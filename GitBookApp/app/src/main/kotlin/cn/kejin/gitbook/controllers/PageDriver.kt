@@ -13,11 +13,11 @@ import cn.kejin.gitbook.views.ExRecyclerView
 /**
  * Control 'SwipeRefreshLayout' and 'ExRecyclerView' driver page
  */
-class PageDriver(val refreshLayout: SwipeRefreshLayout,
+class PageDriver(val refreshLayout: SwipeRefreshLayout?,
                  val exListView: ExRecyclerView,
                  val callback: ICallback) : PageController() {
     init {
-        refreshLayout.setOnRefreshListener { refresh() }
+        refreshLayout?.setOnRefreshListener { refresh() }
 
         exListView.setOnLoadMoreListener {
             if (!loadMore()) {
@@ -31,7 +31,7 @@ class PageDriver(val refreshLayout: SwipeRefreshLayout,
     }
 
     override fun onRefresh() {
-        if (!refreshLayout.isRefreshing) {
+        if (refreshLayout!= null && !refreshLayout.isRefreshing) {
             refreshLayout.post({ refreshLayout.isRefreshing = true })
         }
     }
@@ -72,7 +72,7 @@ class PageDriver(val refreshLayout: SwipeRefreshLayout,
     }
 
     override fun onFinish(result: Result, lastResult: Result, loadedPage: Int, loadingPage: Int) {
-        refreshLayout.post({ refreshLayout.isRefreshing = false })
+        refreshLayout?.post({ refreshLayout.isRefreshing = false })
     }
 
     /**

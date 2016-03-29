@@ -9,23 +9,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.common.displayAvatar
-import cn.kejin.gitbook.networks.Models
+import cn.kejin.gitbook.entities.WWWBook
 
 /**
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/16
  */
 class BooksAdapter(activity: Activity) :
-        BaseRecyclerAdapter<Models.WWWBook, BooksAdapter.BookViewHolder>(activity)
+        BaseRecyclerAdapter<WWWBook, BooksAdapter.BookViewHolder>(activity)
 {
     override fun onCreateViewHolder(parent: ViewGroup?, type: Int): BookViewHolder? {
         return BookViewHolder(inflateView(R.layout.item_book, parent))
     }
 
     inner class BookViewHolder(itemView: View) :
-            BaseRecyclerAdapter.BaseViewHolder<Models.WWWBook>(itemView)
+            BaseRecyclerAdapter.BaseViewHolder<WWWBook>(itemView)
     {
-        override fun bindView(model: Models.WWWBook, pos: Int) {
+        override fun bindView(model: WWWBook, pos: Int) {
             val title = findView(R.id.title) as TextView
             title.text = model.title
 

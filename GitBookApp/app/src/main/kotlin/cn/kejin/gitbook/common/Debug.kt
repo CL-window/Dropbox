@@ -7,7 +7,7 @@ import android.util.Log
  * Date: 2016/3/15
  */
 
-val DEBUG = true
+val DEBUG = false
 
 internal fun error (tag : String, msg : String) : Any
         = if (DEBUG) {Log.e(tag, msg)} else {println("$tag : $msg")}

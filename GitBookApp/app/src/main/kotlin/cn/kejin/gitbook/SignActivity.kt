@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import cn.kejin.gitbook.common.dismissSoftInputMethod
 import cn.kejin.gitbook.common.snack
+import cn.kejin.gitbook.entities.MyAccount
 import cn.kejin.gitbook.networks.*
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -25,8 +26,8 @@ class SignActivity : BaseActivity()
     private fun initializeContentView()
     {
         menuCloseButton?.setOnClickListener({finish()})
-        forgotPwdBtn?.setOnClickListener({startBrowser(Network.RESET_PWD_URL)})
-        signUp?.setOnClickListener({startBrowser(Network.REGISTER_URL)})
+        forgotPwdBtn?.setOnClickListener({startBrowser(Net.RESET_PWD_URL)})
+        signUp?.setOnClickListener({startBrowser(Net.REGISTER_URL)})
 
         signIn?.setOnClickListener({startSignInToAccount()})
     }
@@ -51,8 +52,8 @@ class SignActivity : BaseActivity()
         showProgressDialog()
         progressDialog?.setCanceledOnTouchOutside(false)
         val call = RestApiImpl.instance.signIn(username.toString(), password.toString(),
-                object : HttpCallback<Models.MyAccount>(Models.MyAccount::class.java) {
-                    override fun onResponse(model: Models.MyAccount?, exception: HttpException?) {
+                object : HttpCallback<MyAccount>(MyAccount::class.java) {
+                    override fun onResponse(model: MyAccount?, exception: HttpException?) {
                         if (exception == null) {
                             UserAccount.set(model!!)
                             snack(userNameEdit, R.string.login_success)

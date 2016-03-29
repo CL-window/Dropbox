@@ -1,6 +1,7 @@
 package cn.kejin.gitbook.networks
 
 import cn.kejin.gitbook.common.info
+import cn.kejin.gitbook.entities.*
 import okhttp3.Call
 import okhttp3.Credentials
 import okhttp3.Request
@@ -16,12 +17,16 @@ class RestApiImpl private constructor(val requester: HttpRequester= HttpRequeste
         val instance=RestApiImpl()
     }
 
+    fun <Model> get(uri: String, callback: HttpCallback<Model>, auth: Boolean = false): Call?
+            = requester.get(getAbsUrl(uri), callback, auth)
+
+
     /**
      * Special
      */
     override fun signIn(username: String,
                         pwd: String,
-                        callback: HttpCallback<Models.MyAccount>): Call? {
+                        callback: HttpCallback<MyAccount>): Call? {
         val url = getAbsUrl("account")
         info(TAG, "URL: $url , UserName: $username, Pwd: $pwd")
 
@@ -36,54 +41,54 @@ class RestApiImpl private constructor(val requester: HttpRequester= HttpRequeste
 
     override fun getMyBooks(page: Int,
                             limit: Int,
-                            callback: HttpCallback<Models.Books>): Call?
-            = requester.get("/books?page=$page&limit=$limit", callback, true)
+                            callback: HttpCallback<Books>): Call?
+            = get("/books?page=$page&limit=$limit", callback, true)
 
     override fun getMyAuthBooks(page: Int,
                                 limit: Int,
-                                callback: HttpCallback<Models.Books>): Call?
-            = requester.get("/books/author?page=$page&limit=$limit", callback, true)
+                                callback: HttpCallback<Books>): Call?
+            = get("/books/author?page=$page&limit=$limit", callback, true)
 
     override fun getPublicBooks(page: Int,
                                 limit: Int,
-                                callback: HttpCallback<Models.Books>): Call?
-            = requester.get("/books/all?page=$page&limit=$limit", callback)
+                                callback: HttpCallback<Books>): Call?
+            = get("/books/all?page=$page&limit=$limit", callback)
 
     override fun getBookDetail(id: String,
-                               callback: HttpCallback<Models.ABookDetail>): Call?
-            = requester.get("/book/$id", callback)
+                               callback: HttpCallback<ABookDetail>): Call?
+            = get("/book/$id", callback)
 
     override fun getAuthorDetail(name: String,
-                                 callback: HttpCallback<Models.Account>): Call?
-            = requester.get("/author/$name", callback)
+                                 callback: HttpCallback<Account>): Call?
+            = get("/author/$name", callback)
 
     override fun getAllTopics(page: Int,
                               limit: Int,
-                              callback: HttpCallback<Models.Topics>): Call?
-            = requester.get("/topics?page=$page&limit=$limit", callback)
+                              callback: HttpCallback<Topics>): Call?
+            = get("/topics?page=$page&limit=$limit", callback)
 
     override fun searchTopics(key: String,
                               page: Int,
                               limit: Int,
-                              callback: HttpCallback<Models.Topics>): Call?
-            = requester.get("/topics?key=$key&page=$page&limit=$limit", callback)
+                              callback: HttpCallback<Topics>): Call?
+            = get("/topics?key=$key&page=$page&limit=$limit", callback)
 
     override fun getTopic(id: String,
-                          callback: HttpCallback<Models.ATopic>): Call?
-            = requester.get("/topic/$id", callback)
+                          callback: HttpCallback<ATopic>): Call?
+            = get("/topic/$id", callback)
 
     override fun getBookBranches(id: String,
-                                 callback: HttpCallback<List<Models.ABranch>>): Call?
-            = requester.get("/book/$id/versions/branches", callback)
+                                 callback: HttpCallback<List<ABranch>>): Call?
+            = get("/book/$id/versions/branches", callback)
 
     override fun getBookVersionTags(id: String,
-                                    callback: HttpCallback<List<Models.ABranch>>): Call?
-            = requester.get("/book/$id/versions/tags", callback)
+                                    callback: HttpCallback<List<ABranch>>): Call?
+            = get("/book/$id/versions/tags", callback)
 
     override fun getBookContents(id: String,
                                  file: String,
                                  lang: String,
-                                 callback: HttpCallback<Models.BookContents>): Call? {
+                                 callback: HttpCallback<ABookContent>): Call? {
         var filename = file;
         var index = file.lastIndexOf('.')
         if (index > 0) {
@@ -97,14 +102,14 @@ class RestApiImpl private constructor(val requester: HttpRequester= HttpRequeste
         }
         url += filename
 
-        return requester.get(url, callback)
+        return get(url, callback)
     }
 
     override fun getBookVersionContents(id: String,
                                         version: String,
                                         file: String,
                                         lang: String,
-                                        callback: HttpCallback<Models.BookContents>): Call? {
+                                        callback: HttpCallback<ABookContent>): Call? {
         var filename = file;
         var index = file.lastIndexOf('.')
         if (index > 0) {
@@ -118,6 +123,6 @@ class RestApiImpl private constructor(val requester: HttpRequester= HttpRequeste
         }
         url += "v/$version/$filename"
 
-        return requester.get(url, callback)
+        return get(url, callback)
     }
 }

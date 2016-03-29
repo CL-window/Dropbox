@@ -72,6 +72,30 @@ class HttpRequester
         return call;
     }
 
+
+    /**
+     * post method sync
+     */
+    fun post(url: String, json: String, auth: Boolean = false): Response? {
+
+        info(TAG, "Method: POST, URL: $url, Auth: $auth, Json: $json")
+
+        val body = RequestBody.create(JSON_TYPE, json);
+        val builder = Request.Builder();
+
+        if (auth) {
+            if (!UserAccount.isSignedIn()) {
+                return null;
+            }
+
+            builder.addHeader("Authorization", UserAccount.getAuthValue());
+        }
+
+        builder.addHeader("Content-Type", "application/json").url(url).post(body);
+
+        return httpClient.newCall(builder.build()).execute()
+    }
+
     /**
      * post method async
      */

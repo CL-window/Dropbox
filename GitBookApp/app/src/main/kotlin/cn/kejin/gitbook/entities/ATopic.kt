@@ -7,7 +7,7 @@ package cn.kejin.gitbook.entities
 /**
  * A topic
  */
-class ATopic{
+class ATopic : BaseResp() {
     var id = ""
     var name = ""
     var books = 0

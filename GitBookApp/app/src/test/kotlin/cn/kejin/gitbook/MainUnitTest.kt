@@ -1,6 +1,7 @@
 package cn.kejin.gitbook;
 
-import cn.kejin.gitbook.networks.NetworkManager
+import cn.kejin.gitbook.entities.*
+import cn.kejin.gitbook.networks.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
@@ -8,51 +9,30 @@ import org.jsoup.Jsoup
 import org.junit.Test
 
 class MainUnitTest {
-    val nm = NetworkManager.instance
-    val okHttp = OkHttpClient()
+    val requester = HttpRequester()
+
+    val restApi = RestApiImpl.instance
 
     fun get(uri: String): String {
-        var url = uri;
-        if (!uri.startsWith("http") && !uri.startsWith("https")) {
-            url = nm.getApiAbsUrl(uri);
-        }
-
-        println("Method: GET, URL: $url")
-
-        val builder = Request.Builder().url(url).get()
-
-        return okHttp.newCall(builder.build()).execute().body().string();
+        return requester.get(uri)?.body()?.string()?:"";
     }
 
     /**
      * post method
      */
     fun post(uri: String, json: String): String {
-
-        var url = uri;
-        if (!uri.startsWith("http") && !uri.startsWith("https")) {
-            url = nm.getApiAbsUrl(uri);
-        }
-
-        println("Method: GET, URL: $url, Json: $json")
-
-        val body = RequestBody.create(NetworkManager.JSON_TYPE, json);
-        val builder = Request.Builder();
-
-        builder.addHeader("Content-Type", "application/json").url(url).post(body);
-
-        return okHttp.newCall(builder.build()).execute().body().string()
+        return requester.post(uri, json)?.body()?.string()?:"";
     }
 
     fun getExplorePage(page: Int) {
-        val body = get(nm.getWWWAbsUrl("/explore?page=$page"))
+        val body = get(Net.getWWWAbsUrl("/explore?page=$page"))
 
-        val epage = nm.parseExplorePage(body)
+        val epage = WWWExplorePage.parse(body)
 
         println("Model: $epage")
     }
 
-    //@Test
+    @Test
     fun testParseABook() {
         val html = """
         <div class="book">
@@ -88,11 +68,11 @@ class MainUnitTest {
 
         val books = doc.getElementsByClass("book")
         for (book in books) {
-            println(nm.parseABook(book))
+            println(WWWBook.parse(book))
         }
     }
 
-    //@Test
+    @Test
     fun testParseATopic() {
         val html = """<li>
             <a href="/explore/topic/programming">
@@ -105,14 +85,14 @@ class MainUnitTest {
         val topics = doc.getElementsByTag("li")
         assert(topics.isNotEmpty(), { println("Topic Size: ${topics.size}") })
 
-        println(nm.parseATopic(topics[0]))
+        println(WWWTopic.parse(topics[0]))
     }
 
 
     /**
      * 测试解析explore页面
      */
-    //@Test
+    @Test
     fun testParseExplorePage() {
         getExplorePage(0)
     }
@@ -120,12 +100,12 @@ class MainUnitTest {
     /**
      * 测试解析 topics 页面
      */
-    //@Test
+    @Test
     fun testParseTopicsPage() {
 
-        val body = get(nm.getWWWAbsUrl("/explore/topics"))
+        val body = get(Net.getWWWAbsUrl("/explore/topics"))
 
-        println(nm.parseTopicsPage(body))
+        println(WWWTopicsPage.parse(body))
     }
 
     /**
@@ -136,10 +116,10 @@ class MainUnitTest {
         val key = "abc"
         val csort = "default"
 
-        val books = get(nm.getWWWAbsUrl("/search?q=$key&sort=$csort&type=books"))
-        println(nm.parseBookSearchPage(books))
+        val books = get(Net.getWWWAbsUrl("/search?q=$key&sort=$csort&type=books"))
+        println(WWWSearchBookPage.parse(books))
 
-        val authors = get(nm.getWWWAbsUrl("/search?q=$key&sort=$csort&type=authors"))
-        println(nm.parseAuthorSearchPage(authors))
+        val authors = get(Net.getWWWAbsUrl("/search?q=$key&sort=$csort&type=authors"))
+        println(WWWSearchAuthorPage.parse(authors))
     }
 }

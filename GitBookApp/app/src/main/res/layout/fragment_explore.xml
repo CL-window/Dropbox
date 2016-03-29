@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <FrameLayout
             android:id="@+id/customTitleBar"
             android:layout_width="match_parent"
@@ -45,13 +44,14 @@
 
             <ImageView
                 android:id="@+id/searchButton"
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|right"
                 android:background="?android:attr/selectableItemBackground"
-                android:padding="12dp"
+                android:padding="15dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_vector_search_white_48px"/>
+                android:src="@drawable/ic_vector_search_white_48dp"/>
+
 
         </FrameLayout>
 

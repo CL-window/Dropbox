@@ -19,6 +19,8 @@ import cn.kejin.gitbook.common.dpToPx
 import cn.kejin.gitbook.common.error
 import cn.kejin.gitbook.controllers.PageController
 import cn.kejin.gitbook.controllers.PageDriver
+import cn.kejin.gitbook.entities.WWWExplorePage
+import cn.kejin.gitbook.entities.WWWTopic
 import cn.kejin.gitbook.networks.*
 import cn.kejin.gitbook.views.ExRecyclerView
 
@@ -87,8 +89,8 @@ class ExploreFragment : BaseMainFragment()
 
         override fun onLoading(page: Int) {
             WWWApiImpl.instance.getExplorePage(page,
-                    object : HttpCallback<Models.WWWExplorePage>(Models.WWWExplorePage::class.java) {
-                        override fun onResponse(model: Models.WWWExplorePage?, exception: HttpException?) {
+                    object : HttpCallback<WWWExplorePage>(WWWExplorePage::class.java) {
+                        override fun onResponse(model: WWWExplorePage?, exception: HttpException?) {
                             var result = PageController.Result.SUCCESS
                             if (exception == null) {
                                 if (model!!.books.size < ONE_PAGE_BOOKS_NUM) {
@@ -108,7 +110,7 @@ class ExploreFragment : BaseMainFragment()
         }
     }
 
-    fun bindModelToView(page : Int, model : Models.WWWExplorePage)
+    fun bindModelToView(page : Int, model : WWWExplorePage)
     {
         if (page == 0) {
             topicsAdapter.set(model.topics)
@@ -120,14 +122,14 @@ class ExploreFragment : BaseMainFragment()
     }
 
     inner class TopicsAdapter(activity: Activity) :
-            BaseRecyclerAdapter<Models.WWWTopic, TopicsAdapter.Holder>(activity)
+            BaseRecyclerAdapter<WWWTopic, TopicsAdapter.Holder>(activity)
     {
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder? {
-            return Holder(inflateView(R.layout.item_topic, parent))
+            return Holder(inflateView(R.layout.item_topic_tag, parent))
         }
 
-        inner class Holder(itemView: View) : BaseViewHolder<Models.WWWTopic>(itemView) {
-            override fun bindView(model: Models.WWWTopic, pos: Int) {
+        inner class Holder(itemView: View) : BaseViewHolder<WWWTopic>(itemView) {
+            override fun bindView(model: WWWTopic, pos: Int) {
                 val text = findView(R.id.topic) as TextView;
                 text.text = "${model.name}  | ${model.num}"
             }

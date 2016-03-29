@@ -6,6 +6,7 @@ import android.view.View
 import cn.kejin.gitbook.MainApplication
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.common.*
+import cn.kejin.gitbook.entities.BaseResp
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Call
@@ -63,7 +64,7 @@ abstract class HttpCallback<Model> (val cls : Class<Model>,
         info(cls, "Success: $body")
         var model: Model = gson.fromJson(body, cls) ?: throw Exception("parse json failed")
 
-        if (model is Models.BaseResp && model.code != 0) {
+        if (model is BaseResp && model.code != 0) {
             onFailure(model.code, model.error)
         }
         else {

@@ -1,29 +1,30 @@
 package cn.kejin.gitbook.networks
 
+import cn.kejin.gitbook.entities.*
 import okhttp3.Call
 
 /**
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/29
  */
-interface WWWApi : Network {
+interface WWWApi : Net {
     companion object {
-        val impl = WWWApiImpl.instance
+//        val impl = WWWApiImpl.instance
     }
 
-    fun getAbsUrl(uri: String): String = Network.getWWWAbsUrl(uri)
+    fun getAbsUrl(uri: String): String = Net.getWWWAbsUrl(uri)
 
     /*****************************APIs***********************************/
 
     /**
      * get books and topics info in explore page
      */
-    fun getExplorePage(page: Int, callback: HttpCallback<Models.WWWExplorePage>): Call?
+    fun getExplorePage(page: Int, callback: HttpCallback<WWWExplorePage>): Call?
 
     /**
      * get topics page
      */
-    fun getTopicsPage(callback: HttpCallback<Models.WWWTopicsPage>): Call?
+    fun getTopicsPage(callback: HttpCallback<WWWTopicsPage>): Call?
 
 
     /**
@@ -36,19 +37,19 @@ interface WWWApi : Network {
      */
     fun getSearchBookPage(key: String,
                           sort: SearchSort,
-                          callback: HttpCallback<Models.WWWSearchBookPage>): Call?
+                          callback: HttpCallback<WWWSearchBookPage>): Call?
 
     /**
      * get all searched authors
      */
     fun getSearchAuthorPage(key: String,
                             sort: SearchSort,
-                            callback: HttpCallback<Models.WWWSearchAuthorPage>): Call?
+                            callback: HttpCallback<WWWSearchAuthorPage>): Call?
 
     /**
      * get all topics books
      */
     fun getTopicBookPage(topic: String,
                          latest: Boolean,
-                         callback: HttpCallback<Models.WWWExplorePage>): Call?
+                         callback: HttpCallback<WWWExplorePage>): Call?
 }

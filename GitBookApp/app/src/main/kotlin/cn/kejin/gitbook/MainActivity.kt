@@ -13,10 +13,10 @@ import android.view.ViewGroup
 import android.widget.*
 import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.common.snack
+import cn.kejin.gitbook.entities.MyAccount
 import cn.kejin.gitbook.fragments.ExploreFragment
 import cn.kejin.gitbook.fragments.MyBooksFragment
 import cn.kejin.gitbook.fragments.ProfileFragment
-import cn.kejin.gitbook.networks.Models
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_nav_header.*
 
@@ -119,10 +119,10 @@ class MainActivity : BaseActivity()
             checkUserState()
         }
 
-        onUserStateChanged(Models.MyAccount())
+        onUserStateChanged(MyAccount())
     }
 
-    override fun onUserStateChanged(last: Models.MyAccount, now: Models.MyAccount) {
+    override fun onUserStateChanged(last: MyAccount, now: MyAccount) {
         if (!now.isSingedIn()) {
             // signed out
             mMenuItems.remove(mMyBooksMenuItem)

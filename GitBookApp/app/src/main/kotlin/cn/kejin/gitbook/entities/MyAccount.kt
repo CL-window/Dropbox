@@ -1,7 +1,6 @@
 package cn.kejin.gitbook.entities
 
 import cn.kejin.gitbook.common.GSON
-import cn.kejin.gitbook.networks.Models
 
 /**
  * Author: Kejin ( Liang Ke Jin )

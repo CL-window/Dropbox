@@ -4,9 +4,13 @@ package cn.kejin.gitbook.networks
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/29
  */
-interface Network
+interface Net
 {
     companion object {
+
+        val restApi : RestApi = RestApiImpl.instance
+        val wwwApi : WWWApi = WWWApiImpl.instance
+
         /**
          * default http client
          */

@@ -18,6 +18,7 @@ class ExRecyclerView: RecyclerView {
         val TAG = "ExRecyclerView"
 
     }
+
     private val headerViews: MutableList<View> = mutableListOf();
 
     private val footerViews: MutableList<View> = mutableListOf();

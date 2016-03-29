@@ -7,7 +7,7 @@ package cn.kejin.gitbook
 
 import cn.kejin.gitbook.common.GSON
 import cn.kejin.gitbook.common.warn
-import cn.kejin.gitbook.networks.Models
+import cn.kejin.gitbook.entities.MyAccount
 import okhttp3.Credentials
 
 /**
@@ -22,11 +22,11 @@ class UserAccount {
         val PREF_NAME = "USER"
         val KEY_PREF = "info"
 
-        var user = Models.MyAccount()
+        var user = MyAccount()
             get() = field.copy()
             private set
 
-        fun set(account: Models.MyAccount): Models.MyAccount {
+        fun set(account: MyAccount): MyAccount {
             val back = user;
             user = account;
             save()
@@ -45,7 +45,7 @@ class UserAccount {
         /**
          * clear user information
          */
-        fun signOut() = set(Models.MyAccount())
+        fun signOut() = set(MyAccount())
 
         /**
          * restore from shared preferences
@@ -59,11 +59,11 @@ class UserAccount {
             }
 
             try {
-                user = GSON.fromJson(value, Models.MyAccount::class.java)?: Models.MyAccount();
+                user = GSON.fromJson(value, MyAccount::class.java)?: MyAccount();
             }
             catch(e: Exception) {
                 warn(TAG, "restore user account exception: " + e.message);
-                user = Models.MyAccount()
+                user = MyAccount()
             }
         }
 
