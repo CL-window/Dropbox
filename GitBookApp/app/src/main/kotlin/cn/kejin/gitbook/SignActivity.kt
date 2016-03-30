@@ -35,11 +35,11 @@ class SignActivity : BaseActivity()
     private fun startSignInToAccount()
     {
         val content = findViewById(android.R.id.content)
-        dismissSoftInputMethod(this, content.windowToken);
+        dismissSoftInputMethod(this, content!!.windowToken);
 
         val username = userNameEdit?.text?.trim()?: "";
         if (username.isNullOrEmpty()) {
-            cn.kejin.gitbook.common.snack(content, getString(R.string.user_name_is_empty))
+            snack(content, R.string.user_name_is_empty)
             return;
         }
 

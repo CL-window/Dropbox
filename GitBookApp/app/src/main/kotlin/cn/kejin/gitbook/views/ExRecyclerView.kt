@@ -19,15 +19,15 @@ class ExRecyclerView: RecyclerView {
 
     }
 
-    private val headerViews: MutableList<View> = mutableListOf();
+    private val headerViews: MutableList<View> = mutableListOf()
 
-    private val footerViews: MutableList<View> = mutableListOf();
+    private val footerViews: MutableList<View> = mutableListOf()
 
     var wrapperAdapter: Adapter<ViewHolder>? = null;
 
-    constructor(context: Context?) : super(context, null, 0)
+    constructor(context: Context?) : super(context)
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs, 0)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 
     constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 

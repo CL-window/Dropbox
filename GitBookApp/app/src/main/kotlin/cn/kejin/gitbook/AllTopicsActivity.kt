@@ -17,6 +17,7 @@ import cn.kejin.gitbook.networks.HttpException
 import cn.kejin.gitbook.networks.Net
 import cn.kejin.gitbook.networks.RestApi
 import kotlinx.android.synthetic.main.activity_all_topics.*
+import kotlinx.android.synthetic.main.layout_title_search.*
 
 /**
  * Author: Kejin ( Liang Ke Jin )

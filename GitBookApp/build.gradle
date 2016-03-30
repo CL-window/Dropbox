@@ -14,7 +14,6 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-apply plugin: 'kotlin'
 
 allprojects {
     repositories {
@@ -24,11 +23,5 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-repositories {
-    mavenCentral()
-}
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 

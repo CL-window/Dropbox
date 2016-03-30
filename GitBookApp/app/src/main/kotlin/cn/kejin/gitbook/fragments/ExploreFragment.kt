@@ -71,6 +71,7 @@ class ExploreFragment : BaseMainFragment()
         topicsHorList.adapter = topicsAdapter
 
         booksList = view.findViewById(R.id.booksRecyclerView) as ExRecyclerView
+        booksList.setHasFixedSize(true)
         booksList.layoutManager = GridLayoutManager(activity, 2)
         booksAdapter = BooksAdapter(mainActivity)
         booksList.adapter = booksAdapter

@@ -5,7 +5,7 @@
                                     android:layout_marginRight="5dp"
                                     android:layout_marginBottom="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:cardElevation="3dp"
     app:cardBackgroundColor="@color/white">
 
@@ -94,7 +94,7 @@
             android:paddingBottom="15dp"
             android:text="The resources and tools for learning about the practice of front-end development. Written by Cody Lindley "
             android:minLines="6"
-            android:maxLines="8"
+            android:maxLines="6"
             android:scrollbars="none"
             android:textColor="@color/textLogo"
             android:textSize="14sp"
