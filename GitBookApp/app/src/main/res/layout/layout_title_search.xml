@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/searchLayer"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#55000000"
+    android:visibility="visible">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:id="@+id/backSearchBtn"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|left"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vector_arrow_white_48dp"
+                android:tint="@color/textLogo"
+                android:visibility="visible" />
+
+            <cn.kejin.gitbook.views.CustomEditText
+                android:id="@+id/searchEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:cursorVisible="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_search_topic"
+                android:imeActionLabel="topic"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingLeft="45dp"
+                android:paddingRight="45dp"
+                android:singleLine="true"
+                android:text="abadfasdfasdfasdfasdfasfdasdfasdfasdfadfadfadfasdfa"
+                android:textColor="@color/textLogo"
+                android:textColorHint="@color/textLogo"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/clearButton"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vector_close_white_48dp"
+                android:tint="@color/textLogo"
+                android:visibility="visible" />
+
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/historyLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/textSecondary" />
+
+            <LinearLayout
+                android:id="@+id/historyList"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--<include layout="@layout/item_search_history" />-->
+                <!--<include layout="@layout/item_search_history" />-->
+            </LinearLayout>
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0.5dp"-->
+                <!--android:background="@color/textSecondary" />-->
+
+            <!--<cn.kejin.gitbook.views.CustomTextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:text="All History"-->
+                <!--android:textSize="12sp"-->
+                <!--android:gravity="center"/>-->
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <cn.kejin.gitbook.views.ExRecyclerView
+        android:id="@+id/historyResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+</android.support.design.widget.CoordinatorLayout>

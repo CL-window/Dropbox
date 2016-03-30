@@ -45,9 +45,11 @@
             android:layout_marginTop="10dp"
             android:gravity="center">
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_vector_star_gray_24dp"/>
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center_vertical"
+                android:tint="@color/textSecondary"
+                android:src="@drawable/ic_vector_star_gray_48dp"/>
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/starNum"
@@ -57,13 +59,17 @@
                 android:paddingRight="15dp"
                 android:singleLine="true"
                 android:text="123"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 android:textSize="12sp"
                 android:textColor="@color/textSecondary"/>
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_vector_time_gray_24dp"/>
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center_vertical"
+                android:tint="@color/textSecondary"
+                android:src="@drawable/ic_vector_time_white_48dp"/>
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/pubTime"

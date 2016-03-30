@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
 
-    <cn.kejin.gitbook.views.CustomTextView
-        android:id="@+id/topicName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Linux"
-        android:textSize="15sp"
-        android:textColor="@color/colorPrimary"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"/>
+        android:orientation="vertical"
+        android:background="?attr/selectableItemBackground">
 
-    <cn.kejin.gitbook.views.CustomTextView
-        android:id="@+id/topicNum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="20 Books"
-        android:textSize="13sp"
-        android:textColor="@color/textSecondary"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"/>
-</LinearLayout>
+        <cn.kejin.gitbook.views.CustomTextView
+            android:id="@+id/topicName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="Linux"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <cn.kejin.gitbook.views.CustomTextView
+            android:id="@+id/topicNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="5dp"
+            android:text="20 Books"
+            android:textColor="@color/textSecondary"
+            android:textSize="13sp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

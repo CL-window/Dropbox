@@ -17,7 +17,10 @@ import android.widget.TextView
 class CustomTextView : TextView
 {
     companion object {
-        val CUS_TYPEFACE_PATH = "Roboto-Regular.ttf"
+        val ROBOTO_THIN = "Roboto-Thin.ttf"
+        val ROBOTO_REGULAR = "Roboto-Regular.ttf"
+        val ROBOTO_LIGHT = "Roboto-Light.ttf"
+
         var customTypeface : Typeface? = null
     }
 
@@ -26,7 +29,7 @@ class CustomTextView : TextView
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
     init {
         if (customTypeface == null && context != null) {
-            customTypeface = Typeface.createFromAsset(context.assets, CUS_TYPEFACE_PATH)
+            customTypeface = Typeface.createFromAsset(context.assets, ROBOTO_LIGHT)
         }
 
         if (customTypeface != null) {

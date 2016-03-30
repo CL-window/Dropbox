@@ -66,22 +66,22 @@ class MainActivity : BaseActivity()
             TYPE_SEPARATOR to R.layout.layout_menu_separator
     )
 
-    private val mSignMenuItem = ListMenuItem(M_SIGN, R.string.action_sign, R.drawable.ic_vector_person_pin_24dp)
-    private val mMyBooksMenuItem = ListMenuItem(M_MY_BOOKS, R.string.action_my_books, R.drawable.ic_vector_book_white_24dp)
-    private val mMyProfileMenuItem = ListMenuItem(M_MY_PROFILE, R.string.action_my_profile, R.drawable.ic_vector_account_circle_white_24dp)
+    private val mSignMenuItem = ListMenuItem(M_SIGN, R.string.action_sign, R.drawable.ic_vector_person_pin_48dp)
+    private val mMyBooksMenuItem = ListMenuItem(M_MY_BOOKS, R.string.action_my_books, R.drawable.ic_vector_book_white_48dp)
+    private val mMyProfileMenuItem = ListMenuItem(M_MY_PROFILE, R.string.action_my_profile, R.drawable.ic_vector_account_circle_white_48dp)
 
     private val mMenuItems : MutableList<ListMenuItem> = mutableListOf(
             ListMenuItem(R.string.sub_menu_home),
 
             ListMenuItem(),
             ListMenuItem(R.string.sub_menu_gitbook),
-            ListMenuItem(M_EXPLORE, R.string.action_explore, R.drawable.ic_vector_explore_white_24dp),
-            ListMenuItem(M_HELP, R.string.actionn_help, R.drawable.ic_vector_help_white_24dp),
+            ListMenuItem(M_EXPLORE, R.string.action_explore, R.drawable.ic_vector_explore_white_48dp),
+            ListMenuItem(M_HELP, R.string.actionn_help, R.drawable.ic_vector_help_white_48dp),
 
             ListMenuItem(),
             ListMenuItem(R.string.sub_menu_more),
-            ListMenuItem(M_SETTING, R.string.action_settings, R.drawable.ic_vector_help_white_24dp),
-            ListMenuItem(M_ABOUT, R.string.action_about, R.drawable.ic_vector_book_white_24dp)
+            ListMenuItem(M_SETTING, R.string.action_settings, R.drawable.ic_vector_help_white_48dp),
+            ListMenuItem(M_ABOUT, R.string.action_about, R.drawable.ic_vector_book_white_48dp)
     )
 
 

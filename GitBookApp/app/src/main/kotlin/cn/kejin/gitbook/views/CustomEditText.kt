@@ -17,7 +17,7 @@ class CustomEditText: EditText
 
     init {
         if (CustomTextView.customTypeface == null && context != null) {
-            CustomTextView.customTypeface = Typeface.createFromAsset(context.assets, CustomTextView.CUS_TYPEFACE_PATH)
+            CustomTextView.customTypeface = Typeface.createFromAsset(context.assets, CustomTextView.ROBOTO_LIGHT)
         }
 
         if (CustomTextView.customTypeface != null) {

@@ -1,6 +1,7 @@
 package cn.kejin.gitbook
 
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,7 @@ class AllTopicsActivity : BaseActivity()
             true
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = topicsAdapter
 
         pageDriver = PageDriver(swipeRefresh, recyclerView, pageCallback)
