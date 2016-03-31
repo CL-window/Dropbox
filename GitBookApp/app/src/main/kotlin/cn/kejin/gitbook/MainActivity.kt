@@ -1,6 +1,7 @@
 package cn.kejin.gitbook
 
 import android.app.Fragment
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -8,15 +9,14 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.common.snack
 import cn.kejin.gitbook.entities.MyAccount
-import cn.kejin.gitbook.fragments.ExploreFragment
-import cn.kejin.gitbook.fragments.MyBooksFragment
-import cn.kejin.gitbook.fragments.ProfileFragment
+import cn.kejin.gitbook.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_nav_header.*
 
@@ -31,6 +31,109 @@ class MainActivity : BaseActivity()
 
 
         val REQ_SIGN = 100
+    }
+
+    /**
+     * A Navigation Menu Item
+     */
+    enum class MenuType(val layout: Int) {
+        ITEM(R.layout.layout_menu_normal),
+        GROUP(R.layout.layout_menu_subheader),
+        SEPARATOR(R.layout.layout_menu_separator)
+    }
+
+    inner class MenuItem {
+        val type: MenuType
+        var title: Int;
+        var icon:  Int;
+        var color: Int;
+        var target: Any;
+
+        var selected = false
+            set(value) {
+                if (type == MenuType.ITEM) {
+                    field = value
+                }
+            }
+
+        constructor() :
+            this(MenuType.SEPARATOR, 0, 0, 0, 0)
+
+        constructor(_title: Int):
+            this(MenuType.GROUP, 0, _title, 0, 0)
+
+        constructor(_icon: Int, _title: Int, _color: Int, _target: Any) :
+            this(MenuType.ITEM, _icon, _title, _color, _target)
+
+        private constructor(_type: MenuType, _icon: Int, _title: Int, _color: Int, _target: Any) {
+            type = _type
+            icon = _icon
+            title = _title
+            color = _color
+            target = _target
+        }
+
+        fun bindMenuItemView(context: Context, view: View?, parent: ViewGroup?): View? {
+            var itemView = view;
+            if (view == null) {
+                itemView = LayoutInflater.from(context).inflate(type.layout, parent, false);
+            }
+
+            if (itemView != null) {
+                when (type) {
+                    MenuType.ITEM -> {
+                        var iconView = itemView.findViewById(R.id.menuIcon) as ImageView
+                        var textView = itemView.findViewById(R.id.menuText) as TextView
+                        var icon = resources.getDrawable(icon);
+
+                        textView.text = getString(title) ?: ""
+                        iconView.setImageDrawable(icon)
+
+                        var bgColor = Color.TRANSPARENT
+                        var textColor = resources.getColor(R.color.textPrimary);
+                        var iconColor = resources.getColor(R.color.textSecondary);
+
+                        if (selected) {
+                            bgColor = Color.LTGRAY
+                            iconColor = resources.getColor(R.color.colorPrimary)
+                            textColor = iconColor
+                        }
+
+                        itemView.setBackgroundColor(bgColor)
+                        iconView.setColorFilter(iconColor)
+                        textView.setTextColor(textColor)
+                    }
+
+                    MenuType.GROUP -> {
+                        var textView = view as TextView
+                        textView.text = getString(title)?:""
+                    }
+
+                    MenuType.SEPARATOR -> {
+                        //
+                    }
+                }
+            }
+
+            return itemView
+        }
+
+        fun onSelected() : Boolean {
+            if (type == MenuType.ITEM) {
+                when (target) {
+                    is BaseMainFragment -> {
+                        replaceFragment(target as BaseMainFragment, target.toString())
+                        return true;
+                    }
+
+                    is BaseActivity -> {
+                        startActivity((target as BaseActivity).javaClass)
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 
     private val exploreFragment: ExploreFragment by lazy { ExploreFragment() }

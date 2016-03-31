@@ -15,68 +15,121 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways" />
-    </android.support.design.widget.AppBarLayout>
-    <!-- Topics -->
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="10dp"
-        app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways" >
 
-        <LinearLayout
-            android:id="@+id/topicsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/menuButton"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vector_menu_white_48dp"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/topicsHorList"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"/>
-
-            <LinearLayout
-                android:id="@+id/allTopics"
+            <cn.kejin.gitbook.views.CustomTextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_weight="0"
-                android:layout_gravity="right"
-                android:background="?attr/selectableItemBackground"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="70dp"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:singleLine="true"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
 
-                <cn.kejin.gitbook.views.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/all_topics"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="13sp"/>
+            <ImageView
+                android:id="@+id/searchButton"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vector_search_white_48dp"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/colorPrimary"/>
-            </LinearLayout>
-        </LinearLayout>
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
 
-    </android.support.v7.widget.CardView>
-    <cn.kejin.gitbook.views.ExRecyclerView
-        android:id="@+id/list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <!-- Topics -->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:id="@+id/topicsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/topicsHorList"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:id="@+id/allTopics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_weight="0"
+                    android:layout_gravity="right"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <cn.kejin.gitbook.views.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/all_topics"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/colorPrimary"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false">
+
+            <!-- Books-->
+            <cn.kejin.gitbook.views.ExRecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
