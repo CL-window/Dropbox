@@ -9,6 +9,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 
+import kotlin.collections.mutableListOf
+
 /**
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/22
