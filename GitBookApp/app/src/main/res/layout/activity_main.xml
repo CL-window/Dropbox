@@ -20,7 +20,7 @@
             <!--<include layout="@layout/layout_horizontal_logo" />-->
         </FrameLayout>
 
-        <ListView
+        <cn.kejin.gitbook.views.ExRecyclerView
             android:id="@+id/navList"
             android:layout_width="280dp"
             android:layout_height="match_parent"

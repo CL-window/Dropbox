@@ -37,6 +37,11 @@ abstract class BaseActivity : AppCompatActivity()
      */
     var progressDialog : AlertDialog? = null
 
+    /**
+     * application handler
+     */
+    val handler = MainApplication.handler
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

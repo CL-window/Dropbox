@@ -7,9 +7,9 @@ import cn.kejin.gitbook.R
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/10
  */
-class ProfileFragment : BaseMainFragment()
+class TopicsFragment : BaseMainFragment()
 {
-    override fun getLayoutId(): Int = R.layout.fragment_profile
+    override fun getLayoutId(): Int = R.layout.fragment_topics
 
     override fun initializeView(view: View)
     {

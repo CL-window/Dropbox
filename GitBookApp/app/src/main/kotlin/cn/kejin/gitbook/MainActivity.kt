@@ -1,5 +1,6 @@
 package cn.kejin.gitbook
 
+import android.app.Activity
 import android.app.Fragment
 import android.content.Context
 import android.content.Intent
@@ -7,18 +8,21 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import cn.kejin.gitbook.adapters.BaseRecyclerAdapter
 import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.common.snack
 import cn.kejin.gitbook.entities.MyAccount
 import cn.kejin.gitbook.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_nav_header.*
+import kotlin.reflect.KClass
 
 /**
  * Manager All Fragment
@@ -42,12 +46,13 @@ class MainActivity : BaseActivity()
         SEPARATOR(R.layout.layout_menu_separator)
     }
 
-    inner class MenuItem {
+    class MenuItem {
         val type: MenuType
         var title: Int;
         var icon:  Int;
         var color: Int;
-        var target: Any;
+        var fragment: Fragment?
+        var clazz: Class<*>?
 
         var selected = false
             set(value) {
@@ -57,147 +62,90 @@ class MainActivity : BaseActivity()
             }
 
         constructor() :
-            this(MenuType.SEPARATOR, 0, 0, 0, 0)
+            this(MenuType.SEPARATOR, 0, 0, 0, null, null)
 
         constructor(_title: Int):
-            this(MenuType.GROUP, 0, _title, 0, 0)
+            this(MenuType.GROUP, 0, _title, 0, null, null)
 
-        constructor(_icon: Int, _title: Int, _color: Int, _target: Any) :
-            this(MenuType.ITEM, _icon, _title, _color, _target)
+        constructor(_icon: Int, _title: Int, _color: Int, _fragment:Fragment) :
+            this(MenuType.ITEM, _icon, _title, _color, _fragment, null)
 
-        private constructor(_type: MenuType, _icon: Int, _title: Int, _color: Int, _target: Any) {
+        constructor(_icon: Int, _title: Int, _color: Int, _clazz: Class<*>) :
+            this(MenuType.ITEM, _icon, _title, _color, null, _clazz)
+
+        private constructor(
+                _type: MenuType,
+                _icon: Int,
+                _title: Int,
+                _color: Int,
+                _fragment:Fragment?,
+                _activity:Class<*>?) {
             type = _type
             icon = _icon
             title = _title
             color = _color
-            target = _target
-        }
-
-        fun bindMenuItemView(context: Context, view: View?, parent: ViewGroup?): View? {
-            var itemView = view;
-            if (view == null) {
-                itemView = LayoutInflater.from(context).inflate(type.layout, parent, false);
-            }
-
-            if (itemView != null) {
-                when (type) {
-                    MenuType.ITEM -> {
-                        var iconView = itemView.findViewById(R.id.menuIcon) as ImageView
-                        var textView = itemView.findViewById(R.id.menuText) as TextView
-                        var icon = resources.getDrawable(icon);
-
-                        textView.text = getString(title) ?: ""
-                        iconView.setImageDrawable(icon)
-
-                        var bgColor = Color.TRANSPARENT
-                        var textColor = resources.getColor(R.color.textPrimary);
-                        var iconColor = resources.getColor(R.color.textSecondary);
-
-                        if (selected) {
-                            bgColor = Color.LTGRAY
-                            iconColor = resources.getColor(R.color.colorPrimary)
-                            textColor = iconColor
-                        }
-
-                        itemView.setBackgroundColor(bgColor)
-                        iconView.setColorFilter(iconColor)
-                        textView.setTextColor(textColor)
-                    }
-
-                    MenuType.GROUP -> {
-                        var textView = view as TextView
-                        textView.text = getString(title)?:""
-                    }
-
-                    MenuType.SEPARATOR -> {
-                        //
-                    }
-                }
-            }
-
-            return itemView
-        }
-
-        fun onSelected() : Boolean {
-            if (type == MenuType.ITEM) {
-                when (target) {
-                    is BaseMainFragment -> {
-                        replaceFragment(target as BaseMainFragment, target.toString())
-                        return true;
-                    }
-
-                    is BaseActivity -> {
-                        startActivity((target as BaseActivity).javaClass)
-                    }
-                }
-            }
-
-            return false;
+            fragment = _fragment
+            clazz = _activity
         }
     }
 
-    private val exploreFragment: ExploreFragment by lazy { ExploreFragment() }
-    private val myBooksFragment: MyBooksFragment by lazy { MyBooksFragment() }
-    private val profileFragment: ProfileFragment by lazy { ProfileFragment() }
+    private val dashboard =
+            MenuItem(R.drawable.ic_vector_dashboard_white_48dp,
+                     R.string.action_dashboard,
+                     Color.GREEN,
+                     DashboardFragment())
+
+    private val explore =
+            MenuItem(R.drawable.ic_vector_explore_white_48dp,
+                     R.string.action_explore,
+                     Color.BLUE,
+                     ExploreFragment())
+
+    private val topics =
+            MenuItem(R.drawable.ic_vector_bookmark_white_48dp,
+                     R.string.action_topics,
+                     Color.CYAN,
+                     TopicsFragment())
+
+    private val sigin =
+            MenuItem(R.drawable.ic_vector_person_pin_48dp,
+                     R.string.action_sign,
+                     Color.MAGENTA,
+                     SignActivity::class.java)
+
+    private val settings =
+            MenuItem(R.drawable.ic_vector_settings_white_48dp,
+                     R.string.action_settings,
+                     Color.BLUE,
+                     SettingsActivity::class.java)
+
+    private val about =
+            MenuItem(R.drawable.ic_vector_info_white_48dp,
+                     R.string.action_about,
+                     Color.YELLOW,
+                     AboutActivity::class.java)
+
+    private val menuItems: MutableList<MenuItem> = mutableListOf(
+            MenuItem(),
+            dashboard,
+            MenuItem(),
+            explore,
+            topics,
+            MenuItem(),
+            settings,
+            about
+    )
 
     private var mBackFlag = false;
     private val mContentId = R.id.fragmentContent;
 
-    /**
-     * All Menu Items
-     */
-    private val M_SIGN = "Sign"
-    private val M_MY_BOOKS = "MyBooks"
-    private val M_MY_PROFILE = "MyProfile"
-
-    private val M_EXPLORE = "Explore"
-    private val M_HELP = "Help"
-
-    private val M_SETTING = "Setting"
-    private val M_ABOUT = "About"
-
-    private val mMenuKeys = listOf(
-            M_SIGN, M_MY_BOOKS, M_MY_PROFILE, M_EXPLORE, M_HELP, M_SETTING, M_ABOUT)
-
-
-    private val TYPE_NORMAL = 1
-    private val TYPE_NO_ICON = 2
-    private val TYPE_SEPARATOR = 3
-    private val mMenuTypes: Map<Int, Int> = mapOf(
-            TYPE_NORMAL to R.layout.layout_menu_normal,
-            TYPE_NO_ICON to R.layout.layout_menu_subheader,
-            TYPE_SEPARATOR to R.layout.layout_menu_separator
-    )
-
-    private val mSignMenuItem = ListMenuItem(M_SIGN, R.string.action_sign, R.drawable.ic_vector_person_pin_48dp)
-    private val mMyBooksMenuItem = ListMenuItem(M_MY_BOOKS, R.string.action_my_books, R.drawable.ic_vector_book_white_48dp)
-    private val mMyProfileMenuItem = ListMenuItem(M_MY_PROFILE, R.string.action_my_profile, R.drawable.ic_vector_account_circle_white_48dp)
-
-    private val mMenuItems : MutableList<ListMenuItem> = mutableListOf(
-            ListMenuItem(R.string.sub_menu_home),
-
-            ListMenuItem(),
-            ListMenuItem(R.string.sub_menu_gitbook),
-            ListMenuItem(M_EXPLORE, R.string.action_explore, R.drawable.ic_vector_explore_white_48dp),
-            ListMenuItem(M_HELP, R.string.actionn_help, R.drawable.ic_vector_help_white_48dp),
-
-            ListMenuItem(),
-            ListMenuItem(R.string.sub_menu_more),
-            ListMenuItem(M_SETTING, R.string.action_settings, R.drawable.ic_vector_help_white_48dp),
-            ListMenuItem(M_ABOUT, R.string.action_about, R.drawable.ic_vector_book_white_48dp)
-    )
-
-
-    private val mMenuAdapter : MenuItemAdapter by lazy { MenuItemAdapter() }
+    private val mMenuAdapter by lazy {  MenuItemAdapter()  }
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
 
         initializeNavigationView()
-        if (savedInstanceState == null) {
-            addFragment(exploreFragment, M_EXPLORE)
-        }
     }
 
     override fun getLayoutId(): Int = R.layout.activity_main
@@ -205,17 +153,13 @@ class MainActivity : BaseActivity()
     private fun initializeNavigationView()
     {
         // menu items
-        navList.addHeaderView(inflateView(R.layout.layout_nav_header), null, false)
-        navList.adapter = mMenuAdapter
-        navList.choiceMode = ListView.CHOICE_MODE_SINGLE
-        navList.onItemClickListener = AdapterView.OnItemClickListener {
-            adapterView, view, pos, id ->
-                var item = mMenuAdapter.getItem(pos-navList.headerViewsCount)
-                if (item != null) {
-                    item = item as ListMenuItem
-                    mMenuAdapter.mCurSelectedItemKey = item.key
-                }
+        val header = inflateView(R.layout.layout_nav_header)
+        if (header != null) {
+            navList.addHeader(header)
         }
+        navList.layoutManager = LinearLayoutManager(this)
+        navList.adapter = mMenuAdapter
+        mMenuAdapter.set(menuItems)
 
         exitAccount?.setOnClickListener {
             UserAccount.signOut()
@@ -223,14 +167,14 @@ class MainActivity : BaseActivity()
         }
 
         onUserStateChanged(MyAccount())
+        mMenuAdapter.selectMenuItem(explore)
     }
 
     override fun onUserStateChanged(last: MyAccount, now: MyAccount) {
         if (!now.isSingedIn()) {
             // signed out
-            mMenuItems.remove(mMyBooksMenuItem)
-            mMenuItems.remove(mMyProfileMenuItem)
-            mMenuItems.add(1, mSignMenuItem)
+            menuItems.remove(dashboard)
+            menuItems.add(1, sigin)
             mMenuAdapter.notifyDataSetChanged()
 
             userLayout?.visibility = View.GONE
@@ -238,12 +182,11 @@ class MainActivity : BaseActivity()
         }
 
         if (!last.isSingedIn()) {
-            mMenuItems.remove(mMyBooksMenuItem)
-            mMenuItems.remove(mMyProfileMenuItem)
-            mMenuItems.remove(mSignMenuItem)
+            menuItems.remove(dashboard)
+            menuItems.remove(sigin)
 
-            mMenuItems.add(1, mMyBooksMenuItem)
-            mMenuItems.add(2, mMyProfileMenuItem)
+            menuItems.add(1, dashboard)
+
             mMenuAdapter.notifyDataSetChanged()
 
             userLayout?.visibility = View.VISIBLE
@@ -260,14 +203,14 @@ class MainActivity : BaseActivity()
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
-            else if (mMenuAdapter.mCurSelectedItemKey != M_EXPLORE) {
+            else if (mMenuAdapter.mCurSelectedItem != explore) {
                 closeDrawer()
-                mMenuAdapter.mCurSelectedItemKey = M_EXPLORE
+                mMenuAdapter.selectMenuItem(explore)
             }
             else {
                 mBackFlag = true;
                 snack(drawerLayout, R.string.press_again)
-                MainApplication.handler.postDelayed({ mBackFlag = false }, 2000)
+                handler.postDelayed({ mBackFlag = false }, 2000)
             }
 
             true
@@ -289,28 +232,30 @@ class MainActivity : BaseActivity()
         }
     }
 
-    private fun addFragment(fragment: Fragment, tag : String) =
-            fragmentManager.beginTransaction().add(mContentId, fragment, tag).commit()
+    private fun addFragment(fragment: Fragment)
+            = fragmentManager.beginTransaction()
+                    .add(mContentId, fragment, fragment.toString()).commit()
 
+    private fun replaceFragment(fragment: Fragment)
+            = fragmentManager.beginTransaction()
+                    .replace(mContentId, fragment, fragment.toString())
+                    .addToBackStack(fragment.toString()).commit()
 
-    private fun replaceFragment(fragment: Fragment, tag: String) =
-            fragmentManager.beginTransaction().replace(mContentId, fragment, tag).addToBackStack(tag).commit()
+    fun openDrawer()
+            = drawerLayout.openDrawer(GravityCompat.START)
 
-    fun openDrawer() = drawerLayout.openDrawer(GravityCompat.START)
-    fun closeDrawer() =
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+    fun closeDrawer()
+            = if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else {}
 
 
-    private fun startSignInActivity()
-    {
+    private fun startSignInActivity() {
         val intent = Intent(this, SignActivity::class.java)
         startActivityForResult(intent, REQ_SIGN)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-    {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == RESULT_OK) {
@@ -323,169 +268,98 @@ class MainActivity : BaseActivity()
         }
     }
 
-    private inner class ListMenuItem(val key : String,
-                                     val strId : Int,
-                                     val icon : Int = 0,
-                                     val type : Int = TYPE_NORMAL)
+    private inner class MenuItemAdapter : BaseRecyclerAdapter<MenuItem, MenuItemAdapter.MenuViewHolder>(this)
     {
-        var selectable = true
-
-        constructor() : this("", 0, 0, TYPE_SEPARATOR)
-        constructor(strId : Int) : this("", strId, 0, TYPE_NO_ICON)
-
-        init {
-            selectable = type == TYPE_NORMAL
+        override fun getItemViewType(position: Int): Int {
+            return data[position].type.ordinal
         }
 
-        fun select() : Boolean
-        {
-            var result = false;
-
-            if (selectable) {
-                when (key) {
-                    M_SIGN -> {
-                        startSignInActivity()
-                    }
-                    M_MY_BOOKS -> {
-                        if (UserAccount.isSignedIn()) {
-                            replaceFragment(myBooksFragment, key)
-                            result =  true;
-                        }
-                        else {
-                            startSignInActivity()
-                        }
-                    }
-                    M_MY_PROFILE -> {
-                        if (UserAccount.isSignedIn()) {
-                            replaceFragment(profileFragment, key)
-                            result =  true;
-                        }
-                        else {
-                            startSignInActivity()
-                        }
-                    }
-
-                    M_EXPLORE -> {
-                        replaceFragment(exploreFragment, key)
-                        result =  true;
-                    }
-                    M_HELP -> {
-                        startActivity(HelpActivity::class.java)
-                    }
-
-                    M_SETTING -> startActivity(SettingsActivity::class.java)
-                    M_ABOUT -> startActivity(AboutActivity::class.java)
-                }
-                closeDrawer()
-            }
-
-            return result
-        }
-    }
-
-
-    private inner class MenuItemAdapter : BaseAdapter()
-    {
-        var mCurSelectedItemKey = M_EXPLORE
-            set(key) {
-                if (mCurSelectedItemKey != key) {
-                    var item = findItemByKey(key)
-                    if (item != null && item.select()) {
-                        field = key
-                        mMenuAdapter.notifyDataSetChanged()
-                    }
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MenuViewHolder? {
+            return when (viewType) {
+                MenuType.GROUP.ordinal -> MenuViewHolder(inflateView(MenuType.GROUP.layout))
+                MenuType.SEPARATOR.ordinal -> MenuViewHolder(inflateView(MenuType.SEPARATOR.layout))
+                else -> {
+                    MenuViewHolder(inflateView(MenuType.ITEM.layout))
                 }
             }
-
-        fun findItemByKey(key : String) : ListMenuItem?
-        {
-            for (item in mMenuItems) {
-                if (item.key == key) {
-                    return item;
-                }
-            }
-            return null
         }
 
-        override fun getView(pos: Int, convertView: View?, parent: ViewGroup?): View?
-        {
-            val item = mMenuItems[pos]
-            val view = inflateView(mMenuTypes[item.type] ?:0)
+        inner class MenuViewHolder(view: View) : BaseViewHolder<MenuItem>(view) {
+            override fun bindView(model: MenuItem, pos: Int) {
+                when (model.type) {
+                    MenuType.ITEM -> {
+                        itemView.isEnabled = true;
 
-            when(item.type) {
-                TYPE_NORMAL -> {
-                    if (view != null) {
-                        var iconView = view.findViewById(R.id.menuIcon) as ImageView
-                        var textView = view.findViewById(R.id.menuText) as TextView
-                        var icon = resources.getDrawable(item.icon);
+                        var iconView = itemView.findViewById(R.id.menuIcon) as ImageView
+                        var textView = itemView.findViewById(R.id.menuText) as TextView
 
-                        textView.text = getString(item.strId)?:""
-                        iconView.setImageDrawable(icon)
+                        textView.text = getString(model.title) ?: ""
+                        iconView.setImageResource(model.icon)
 
                         var bgColor = Color.TRANSPARENT
                         var textColor = resources.getColor(R.color.textPrimary);
-                        var iconColor = resources.getColor(R.color.textSecondary);
+                        var iconColor = model.color;
 
-                        if (item.selectable) {
-                            if (item.key == mCurSelectedItemKey) {
-                                bgColor = Color.LTGRAY
-                                iconColor = resources.getColor(R.color.colorPrimary)
-                                textColor = iconColor
-                            }
-                        }
-                        else {
-                            textColor = Color.LTGRAY
-                            iconColor = textColor
+                        if (model.selected) {
+                            bgColor = Color.LTGRAY
+                            iconColor = resources.getColor(R.color.colorPrimary)
+                            textColor = iconColor
                         }
 
-                        view.setBackgroundColor(bgColor)
+                        itemView.setBackgroundColor(bgColor)
                         iconView.setColorFilter(iconColor)
                         textView.setTextColor(textColor)
                     }
 
-                }
+                    MenuType.GROUP -> {
+                        itemView.isEnabled = false
 
-                TYPE_NO_ICON -> {
-                    if (view != null) {
-                        var textView = view as TextView
-                        textView.text = getString(item.strId)?:""
+                        var textView = itemView as TextView
+                        textView.text = getString(model.title)?:""
                     }
-                    view?.setBackgroundColor(Color.TRANSPARENT)
-                    view?.isClickable = false
-                    view?.isEnabled = false
+
+                    MenuType.SEPARATOR -> {
+                        itemView.isEnabled = false
+                    }
                 }
 
-                TYPE_SEPARATOR -> {
-                    view?.setBackgroundColor(Color.TRANSPARENT)
-                    view?.isClickable = false
-                    view?.isEnabled = false
+                itemView.setOnClickListener {
+                    selectMenuItem(pos)
                 }
             }
-            return view
         }
 
-        override fun getItem(pos: Int): Any? =
-                if (pos in 0..mMenuItems.size-1) {mMenuItems[pos] } else {null}
+        var mCurSelectedItem = explore
+            private set(value) {
+                if (value.type == MenuType.ITEM) {
 
-        override fun getItemId(pos: Int): Long = pos.toLong()
+                    if (value.fragment != null) {
+                        field.selected = false
+                        value.selected = true
+                        field = value
+                        replaceFragment(value.fragment as Fragment)
+                    }
+                    else if (value.clazz != null) {
+                        if (value.clazz == SignActivity::class.java) {
+                            startSignInActivity()
+                        }
+                        else {
+                            startActivity(value.clazz as Class<*>)
+                        }
+                    }
 
-        override fun getCount(): Int = mMenuItems.size
-
-//        override fun getItemViewType(pos: Int): Int = pos
-//
-//        override fun getViewTypeCount(): Int = mMenuTypes.size
-        override fun areAllItemsEnabled(): Boolean  = false
-        override fun isEnabled(pos :Int): Boolean
-        {
-            var item = getItem(pos)
-            if (item != null) {
-                item = item as ListMenuItem
-
-                return item.selectable
+                    notifyDataSetChanged()
+                }
             }
 
-            return false
+        fun selectMenuItem(pos: Int) {
+            selectMenuItem(data[pos])
         }
+
+        fun selectMenuItem(item: MenuItem) {
+            mCurSelectedItem = item
+        }
+
     }
 
 }

@@ -12,7 +12,8 @@ import android.view.ViewGroup
 abstract class BaseRecyclerAdapter<Model, Holder: BaseRecyclerAdapter.BaseViewHolder<Model>>
                                     (val activity : Activity) :RecyclerView.Adapter<Holder>()
 {
-    private var data : MutableList<Model> = mutableListOf()
+    var data : MutableList<Model> = mutableListOf()
+        private set
 
     fun set(list : Collection<Model>) {
         data.clear()
