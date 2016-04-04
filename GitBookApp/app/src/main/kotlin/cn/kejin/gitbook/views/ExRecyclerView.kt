@@ -8,6 +8,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import cn.kejin.gitbook.R
 
 import kotlin.collections.mutableListOf
 
@@ -27,11 +28,20 @@ class ExRecyclerView: RecyclerView {
 
     var wrapperAdapter: Adapter<ViewHolder>? = null;
 
-    constructor(context: Context?) : super(context)
+    constructor(context: Context?) : this(context, null, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
+    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle) {
+
+        super.setAdapter(AdapterWrapper())
+        if (context != null && attrs != null) {
+            val attr = context.obtainStyledAttributes(attrs, R.styleable.ExRecyclerView, defStyle, 0)
+            /**
+             * TODO: realize add header and footer in layout,  and can get header view in code
+             */
+        }
+    }
 
     init {
         super.setAdapter(AdapterWrapper())
@@ -43,7 +53,7 @@ class ExRecyclerView: RecyclerView {
         headerViews.add(view)
         setFullSpan(view)
 
-        adapter?.notifyItemInserted(headerViews.size)
+        adapter?.notifyItemInserted(getHeaderSize())
     }
 
     fun removeHeader(view: View) {
@@ -68,14 +78,24 @@ class ExRecyclerView: RecyclerView {
         if (index > 0) {
             footerViews.removeAt(index)
 
-            adapter?.notifyItemRemoved(headerViews.size + (wrapperAdapter?.itemCount ?: 0) + index)
+            adapter?.notifyItemRemoved(getHeaderSize() + (wrapperAdapter?.itemCount ?: 0) + index)
         }
     }
+    
+    fun getHeaderSize() = headerViews.size
+    fun getFooterSize() = footerViews.size
+    fun getItemCount() = {
+        getHeaderSize() + getFooterSize() + getWrapItemCount()
+    }
+    fun getWrapItemCount() = wrapperAdapter?.itemCount?:0
 
-    override fun setAdapter(adapter: Adapter<ViewHolder>?) {
+
+    override fun setAdapter(wrapAdapter: Adapter<ViewHolder>?) {
         wrapperAdapter?.unregisterAdapterDataObserver(adapterDataObserver)
-        wrapperAdapter = adapter
+        wrapperAdapter = wrapAdapter
         wrapperAdapter?.registerAdapterDataObserver(adapterDataObserver)
+
+        super.setAdapter(adapter)
     }
 
     override fun setLayoutManager(layout: LayoutManager?) {
@@ -97,7 +117,7 @@ class ExRecyclerView: RecyclerView {
                 if (isHeaderOrFooterPos(position)) {
                     return spanCount
                 }
-                return oldLookup.getSpanSize(position - headerViews.size)
+                return oldLookup.getSpanSize(position - getHeaderSize())
             }
         }
     }
@@ -124,7 +144,7 @@ class ExRecyclerView: RecyclerView {
     }
 
     private fun isHeaderOrFooterPos(pos: Int): Boolean {
-        return (pos < headerViews.size || pos >= headerViews.size + (wrapperAdapter?.itemCount ?: 0))
+        return (pos < getHeaderSize() || pos >= getHeaderSize() + (wrapperAdapter?.itemCount ?: 0))
     }
 
     inner class AdapterWrapper : Adapter<ViewHolder>() {
@@ -133,28 +153,29 @@ class ExRecyclerView: RecyclerView {
                 return -position - 1;
             }
 
-            return wrapperAdapter?.getItemViewType(position) ?: super.getItemViewType(position)
+            val pos = position - getHeaderSize()
+            return wrapperAdapter?.getItemViewType(pos) ?: 0;
         }
 
         override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
             if (!isHeaderOrFooterPos(position)) {
-                wrapperAdapter?.onBindViewHolder(holder, position - headerViews.size)
+                wrapperAdapter?.onBindViewHolder(holder, position - getHeaderSize())
             }
         }
 
         override fun getItemCount(): Int {
-            return headerViews.size + footerViews.size + (wrapperAdapter?.itemCount ?: 0)
+            return getHeaderSize() + getFooterSize() + getWrapItemCount()
         }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder? {
             if (viewType < 0) {
                 var pos = -(viewType + 1)
-                if (pos >= 0 && pos < headerViews.size) {
+                if (pos >= 0 && pos < getHeaderSize()) {
                     return WrapperViewHolder(headerViews[pos])
                 }
 
-                pos -= headerViews.size + (wrapperAdapter?.itemCount ?: 0)
-                if (pos >= 0 && pos < footerViews.size) {
+                pos -= getHeaderSize() + getWrapItemCount()
+                if (pos >= 0 && pos < getFooterSize()) {
                     return WrapperViewHolder(footerViews[pos])
                 }
                 return null;
@@ -172,13 +193,13 @@ class ExRecyclerView: RecyclerView {
     private val adapterDataObserver = object : AdapterDataObserver() {
         override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
             // TODO: support move
-            adapter.notifyItemMoved(headerViews.size + fromPosition, headerViews.size + toPosition)
+            adapter.notifyItemMoved(getHeaderSize() + fromPosition, getHeaderSize() + toPosition)
         }
 
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-            adapter.notifyItemRangeInserted(headerViews.size + positionStart, itemCount)
-            adapter.notifyItemRangeChanged(positionStart + headerViews.size + itemCount,
-                    adapter.itemCount - (headerViews.size + positionStart + itemCount) - footerViews.size)
+            adapter.notifyItemRangeInserted(getHeaderSize() + positionStart, itemCount)
+            adapter.notifyItemRangeChanged(positionStart + getHeaderSize() + itemCount,
+                    adapter.itemCount - (getHeaderSize() + positionStart + itemCount) - getFooterSize())
         }
 
         override fun onChanged() {
@@ -186,17 +207,17 @@ class ExRecyclerView: RecyclerView {
         }
 
         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-            adapter.notifyItemRangeRemoved(headerViews.size + positionStart, itemCount)
-            adapter.notifyItemRangeChanged(headerViews.size + positionStart,
-                    adapter.itemCount - headerViews.size - positionStart - footerViews.size)
+            adapter.notifyItemRangeRemoved(getHeaderSize() + positionStart, itemCount)
+            adapter.notifyItemRangeChanged(getHeaderSize() + positionStart,
+                    adapter.itemCount - getHeaderSize() - positionStart - getFooterSize())
         }
 
         override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
-            adapter.notifyItemRangeChanged(headerViews.size + positionStart, itemCount)
+            adapter.notifyItemRangeChanged(getHeaderSize() + positionStart, itemCount)
         }
 
         override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
-            adapter.notifyItemRangeChanged(headerViews.size + positionStart, itemCount, payload)
+            adapter.notifyItemRangeChanged(getHeaderSize() + positionStart, itemCount, payload)
         }
     }
 
@@ -254,7 +275,7 @@ class ExRecyclerView: RecyclerView {
         val wrapperSize = wrapperAdapter?.itemCount?:0
         if (!isLoadingMore && loadMoreListener != null && wrapperSize > 0) {
             val visPos = getVisiblePos()
-            if (visPos.second+1 >= headerViews.size+wrapperSize) {
+            if (visPos.second+1 >= getHeaderSize()+wrapperSize) {
                 isLoadingMore = true
                 loadMoreListener?.onLoadMore()
             }

@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="?attr/listPreferredItemHeightSmall"
-    android:minHeight="?attr/listPreferredItemHeightSmall">
+    android:layout_height="50dp"
+    android:minHeight="50dp">
 
-    <ImageView
-        android:id="@+id/menuIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_gravity="center_vertical"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_menu_camera"/>
-
-    <cn.kejin.gitbook.views.CustomTextView
-        android:id="@+id/menuText"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:gravity="center_vertical|start"
-        android:maxLines="1"
-        android:textSize="13sp"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:textColor="?android:attr/textColorPrimary"/>
-</LinearLayout>
+        android:background="?attr/selectableItemBackground">
+        <ImageView
+            android:id="@+id/menuIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_menu_camera"/>
+
+        <cn.kejin.gitbook.views.CustomTextView
+            android:id="@+id/menuText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical|start"
+            android:maxLines="1"
+            android:textSize="13sp"
+            android:textColor="?android:attr/textColorPrimary"/>
+
+    </LinearLayout>
+</FrameLayout>

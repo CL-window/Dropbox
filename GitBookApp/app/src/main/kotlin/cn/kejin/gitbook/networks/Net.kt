@@ -8,13 +8,13 @@ interface Net
 {
     companion object {
 
-        val restApi : RestApi = RestApiImpl.instance
-        val wwwApi : WWWApi = WWWApiImpl.instance
-
         /**
          * default http client
          */
         val defRequester = HttpRequester()
+
+        val restApi : RestApi by lazy {  RestApiImpl.instance }
+        val wwwApi : WWWApi by lazy { WWWApiImpl.instance }
 
 
         val BASE_API_URL = "https://api.gitbook.com/"

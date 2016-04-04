@@ -23,6 +23,7 @@ import cn.kejin.gitbook.entities.WWWExplorePage
 import cn.kejin.gitbook.entities.WWWTopic
 import cn.kejin.gitbook.networks.*
 import cn.kejin.gitbook.views.ExRecyclerView
+import kotlinx.android.synthetic.main.item_topic_tag.*
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -36,12 +37,24 @@ class ExploreFragment : BaseMainFragment()
         val ONE_PAGE_BOOKS_NUM = 9
     }
 
+    private val headerTopicView by lazy {
+        val view = View.inflate(mainActivity, R.layout.layout_explore_topics_header, null)
+        val list = view.findViewById(R.id.topicsHorList) as RecyclerView
+        list.layoutManager = LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false)
+        list.adapter = topicsAdapter
+        view
+    }
+
+    private val topicsLayout
+            by lazy { headerTopicView.findViewById(R.id.topicsLayout) as LinearLayout }
+
+    private val topicsAdapter
+            by lazy { TopicsAdapter(mainActivity) }
+    private val topicsHorList
+            by lazy { headerTopicView.findViewById(R.id.topicsHorList) as RecyclerView }
+
+
     lateinit var swipeRefresh : SwipeRefreshLayout
-
-    lateinit var topicsLayout : LinearLayout
-
-    lateinit var topicsHorList : RecyclerView
-    lateinit var topicsAdapter: TopicsAdapter
 
     lateinit var booksList : ExRecyclerView
     lateinit var booksAdapter : BooksAdapter
@@ -63,13 +76,6 @@ class ExploreFragment : BaseMainFragment()
         swipeRefresh = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
         swipeRefresh.setDistanceToTriggerSync(dpToPx(130f))
 
-        topicsLayout = view.findViewById(R.id.topicsLayout) as LinearLayout
-
-        topicsHorList = view.findViewById(R.id.topicsHorList) as RecyclerView
-        topicsHorList.layoutManager = LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false)
-        topicsAdapter = TopicsAdapter(mainActivity)
-        topicsHorList.adapter = topicsAdapter
-
         booksList = view.findViewById(R.id.booksRecyclerView) as ExRecyclerView
         booksList.setHasFixedSize(true)
         booksList.layoutManager = GridLayoutManager(activity, 2)
@@ -89,7 +95,7 @@ class ExploreFragment : BaseMainFragment()
         }
 
         override fun onLoading(page: Int) {
-            WWWApiImpl.instance.getExplorePage(page,
+            Net.wwwApi.getExplorePage(page,
                     object : HttpCallback<WWWExplorePage>(WWWExplorePage::class.java) {
                         override fun onResponse(model: WWWExplorePage?, exception: HttpException?) {
                             var result = PageController.Result.SUCCESS
@@ -116,6 +122,10 @@ class ExploreFragment : BaseMainFragment()
         if (page == 0) {
             topicsAdapter.set(model.topics)
             booksAdapter.set(model.books)
+
+            if (!booksList.containsHeader(headerTopicView)) {
+                booksList.addHeader(headerTopicView)
+            }
         }
         else {
             booksAdapter.addAll(model.books)

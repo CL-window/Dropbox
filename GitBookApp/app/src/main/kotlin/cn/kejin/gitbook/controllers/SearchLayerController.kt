@@ -6,6 +6,7 @@ import android.support.design.widget.CoordinatorLayout
 import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.view.View
+import android.widget.EditText
 import cn.kejin.gitbook.R
 import java.util.jar.Attributes
 
@@ -17,16 +18,43 @@ import java.util.jar.Attributes
 /**
  * view controller for title search layout
  */
-class SearchLayerController(_v: View, activity: Activity? = null) : BaseViewController(_v, activity)
+class SearchLayerController(_v: View,
+                            defVis: Boolean = false,
+                            activity: Activity? = null) : BaseViewController(_v, activity)
 {
     companion object {
         val TAG = "SearchLayer"
+    }
+
+    val editor by lazy {
+        rootView.findViewById(R.id.searchEdit) as EditText
     }
 
     init {
         if (rootView.id != R.id.searchLayer) {
             throw IllegalArgumentException("Need search layer!")
         }
+
+        if (defVis) {
+            rootView.visibility = View.VISIBLE
+        }
+        else {
+            rootView.visibility = View.GONE
+        }
+
+        rootView.setOnClickListener { dismissLayer() }
+        rootView.findViewById(R.id.backSearchBtn).setOnClickListener { dismissLayer() }
+        rootView.findViewById(R.id.clearButton).setOnClickListener { editor.setText("") }
+    }
+
+    fun showLayer() {
+        rootView.visibility = View.VISIBLE
+        editor.requestFocus()
+        // TODO: animation
+    }
+
+    fun dismissLayer() {
+        rootView.visibility = View.GONE
     }
 
     inner class SearchEditBehavior : CoordinatorLayout.Behavior<CardView> {
