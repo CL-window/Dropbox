@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import cn.kejin.android.views.ExRecyclerAdapter
+import cn.kejin.gitbook.activity.CustomStatusBarActivity
 import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.common.snack
 import cn.kejin.gitbook.entities.MyAccount
@@ -304,56 +305,5 @@ class MainActivity : CustomStatusBarActivity() {
 
     }
 
-    /**
-     * A Navigation Menu Item
-     */
-    enum class MenuType(val layout: Int) {
-        ITEM(R.layout.layout_menu_normal),
-        GROUP(R.layout.layout_menu_subheader),
-        SEPARATOR(R.layout.layout_menu_separator)
-    }
-
-    class MenuItem {
-        val type: MenuType
-        var title: Int;
-        var icon: Int;
-        var color: Int;
-        var fragment: Fragment?
-        var clazz: Class<*>?
-
-        var selected = false
-            set(value) {
-                if (type == MenuType.ITEM) {
-                    field = value
-                }
-            }
-
-        constructor() :
-        this(MenuType.SEPARATOR, 0, 0, 0, null, null)
-
-        constructor(_title: Int) :
-        this(MenuType.GROUP, 0, _title, 0, null, null)
-
-        constructor(_icon: Int, _title: Int, _color: Int, _fragment: Fragment) :
-        this(MenuType.ITEM, _icon, _title, _color, _fragment, null)
-
-        constructor(_icon: Int, _title: Int, _color: Int, _clazz: Class<*>) :
-        this(MenuType.ITEM, _icon, _title, _color, null, _clazz)
-
-        private constructor(
-                _type: MenuType,
-                _icon: Int,
-                _title: Int,
-                _color: Int,
-                _fragment: Fragment?,
-                _activity: Class<*>?) {
-            type = _type
-            icon = _icon
-            title = _title
-            color = _color
-            fragment = _fragment
-            clazz = _activity
-        }
-    }
 
 }

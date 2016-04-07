@@ -10,30 +10,36 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/bg_header"/>
-    <!--<FrameLayout-->
-    <!--android:gravity="top|center_horizontal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="@drawable/bg_header">-->
-    <!--<ImageView-->
-    <!--android:layout_width="48dp"-->
-    <!--android:layout_height="48dp"-->
-    <!--android:layout_margin="10dp"-->
-    <!--android:paddingTop="5dp"-->
-    <!--android:layout_gravity="bottom|right"-->
-    <!--android:scaleType="fitCenter"-->
-    <!--android:src="@drawable/ic_gitbook_logo"/>-->
-    <!--</FrameLayout>-->
+
+    <LinearLayout
+        android:id="@+id/loginLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_gitbook_logo"/>
+
+        <cn.kejin.gitbook.views.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign In GitBook"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/userLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
         android:layout_gravity="bottom"
+        android:visibility="gone"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 

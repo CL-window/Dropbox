@@ -98,11 +98,11 @@ abstract class BaseActivity: AppCompatActivity() {
                     .create()
         }
 
+        progressDialog?.setCancelable(cancelable)
+
         if (progressDialog?.isShowing ?:true) {
             return;
         }
-
-        progressDialog?.setCancelable(cancelable)
 
         progressDialog?.show()
     }
@@ -130,7 +130,7 @@ abstract class BaseActivity: AppCompatActivity() {
     fun startActivity(clz : Class<*>) = startActivity(Intent(this, clz))
 
     /**
-     * open browser
+     * 打开浏览器
      */
     fun startBrowser(uri : String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
 

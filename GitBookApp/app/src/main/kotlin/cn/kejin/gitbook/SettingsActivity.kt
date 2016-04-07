@@ -1,6 +1,7 @@
 package cn.kejin.gitbook
 
 import android.os.Bundle
+import cn.kejin.gitbook.activity.CustomStatusBarActivity
 
 /**
  * Author: Kejin ( Liang Ke Jin )

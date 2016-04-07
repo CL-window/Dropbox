@@ -2,6 +2,7 @@ package cn.kejin.gitbook
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import cn.kejin.gitbook.activity.CustomStatusBarActivity
 import cn.kejin.gitbook.common.dismissSoftInputMethod
 import cn.kejin.gitbook.common.snack
 import cn.kejin.gitbook.entities.MyAccount

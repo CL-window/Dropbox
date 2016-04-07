@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import cn.kejin.gitbook.activity.CustomStatusBarActivity
 import cn.kejin.gitbook.adapters.BaseRecyclerAdapter
 import cn.kejin.gitbook.common.dismissSoftInputMethod
 import cn.kejin.gitbook.common.error
