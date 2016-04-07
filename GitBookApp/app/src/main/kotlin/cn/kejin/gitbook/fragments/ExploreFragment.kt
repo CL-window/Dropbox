@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.AllTopicsActivity
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.SearchActivity
@@ -22,7 +23,6 @@ import cn.kejin.gitbook.controllers.PageDriver
 import cn.kejin.gitbook.entities.WWWExplorePage
 import cn.kejin.gitbook.entities.WWWTopic
 import cn.kejin.gitbook.networks.*
-import cn.kejin.gitbook.views.ExRecyclerView
 import kotlinx.android.synthetic.main.item_topic_tag.*
 
 /**
@@ -123,7 +123,7 @@ class ExploreFragment : BaseMainFragment()
             topicsAdapter.set(model.topics)
             booksAdapter.set(model.books)
 
-            if (!booksList.containsHeader(headerTopicView)) {
+            if (!booksList.hasHeader(headerTopicView)) {
                 booksList.addHeader(headerTopicView)
             }
         }

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_login.*
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/11
  */
-class SignActivity : BaseActivity()
+class SignActivity : CustomStatusBarActivity()
 {
     override fun getLayoutId(): Int = R.layout.activity_login
 

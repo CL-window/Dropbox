@@ -16,16 +16,17 @@ import cn.kejin.gitbook.networks.HttpCallback
 import cn.kejin.gitbook.networks.HttpException
 import cn.kejin.gitbook.networks.Net
 import cn.kejin.gitbook.networks.RestApi
-import kotlinx.android.synthetic.main.activity_all_topics.*
+import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.fragment_all_topics.*
 import kotlinx.android.synthetic.main.layout_title_search.*
 
 /**
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/22
  */
-class AllTopicsActivity : BaseActivity()
+class AllTopicsActivity : CustomStatusBarActivity()
 {
-    override fun getLayoutId(): Int = R.layout.activity_all_topics
+    override fun getLayoutId(): Int = R.layout.fragment_all_topics
 
     private lateinit var pageDriver : PageDriver
 

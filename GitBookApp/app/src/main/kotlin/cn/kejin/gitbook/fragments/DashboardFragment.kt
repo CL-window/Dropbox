@@ -2,6 +2,7 @@ package cn.kejin.gitbook.fragments
 
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.adapters.BooksAdapter
 import cn.kejin.gitbook.controllers.PageController
@@ -10,7 +11,6 @@ import cn.kejin.gitbook.networks.HttpCallback
 import cn.kejin.gitbook.networks.HttpException
 import cn.kejin.gitbook.networks.Net
 import cn.kejin.gitbook.networks.WWWApiImpl
-import cn.kejin.gitbook.views.ExRecyclerView
 
 /**
  * Author: Kejin ( Liang Ke Jin )

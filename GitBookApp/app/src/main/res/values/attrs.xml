@@ -7,9 +7,4 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
-    <!-- ExRecyclerView Custom property-->
-    <declare-styleable name="ExRecyclerView">
-        <attr name="header" format="reference" />
-        <attr name="footer" format="reference" />
-    </declare-styleable>
 </resources>

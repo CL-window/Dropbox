@@ -7,7 +7,7 @@ import android.os.PersistableBundle
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/10
  */
-class SearchActivity : BaseActivity()
+class SearchActivity : CustomStatusBarActivity()
 {
     override fun getLayoutId(): Int = R.layout.activity_search
 

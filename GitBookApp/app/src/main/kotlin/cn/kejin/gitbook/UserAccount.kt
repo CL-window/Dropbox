@@ -51,7 +51,7 @@ class UserAccount {
          * restore from shared preferences
          */
         fun restore() {
-            val pref = MainApplication.getSharedPref(PREF_NAME)
+            val pref = MainApp.getSharedPref(PREF_NAME)
 
             var value = pref.getString(KEY_PREF, "")
             if (value.isNullOrEmpty()){
@@ -71,7 +71,7 @@ class UserAccount {
          * save user info to shared preferences
          */
         private fun save() {
-            val pref = MainApplication.getSharedPref(PREF_NAME)
+            val pref = MainApp.getSharedPref(PREF_NAME)
             var editor = pref.edit();
             editor.putString(KEY_PREF, GSON.toJson(user))
             editor.commit()

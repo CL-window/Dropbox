@@ -2,8 +2,8 @@ package cn.kejin.gitbook.controllers
 
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.View
+import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.R
-import cn.kejin.gitbook.views.ExRecyclerView
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -20,9 +20,7 @@ class PageDriver(val refreshLayout: SwipeRefreshLayout?,
         refreshLayout?.setOnRefreshListener { refresh() }
 
         exListView.setOnLoadMoreListener {
-            if (!loadMore()) {
-                exListView.endLoadMore()
-            }
+            loadMore()
         };
     }
 
@@ -39,13 +37,13 @@ class PageDriver(val refreshLayout: SwipeRefreshLayout?,
     override fun onRefreshFinish(result: Result, lastResult: Result) {
         when (result) {
             Result.SUCCESS -> {
-                if (!exListView.containsFooter(footer))
+                if (!exListView.hasFooter(footer))
                     exListView.addFooter(footer)
                 showLoading()
             }
 
             Result.NO_MORE -> {
-                if (!exListView.containsFooter(footer))
+                if (!exListView.hasFooter(footer))
                     exListView.addFooter(footer)
                 showNoMore()
             }

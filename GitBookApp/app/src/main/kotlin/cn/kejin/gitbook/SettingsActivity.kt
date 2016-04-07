@@ -6,7 +6,7 @@ import android.os.Bundle
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/10
  */
-class SettingsActivity : BaseActivity()
+class SettingsActivity : CustomStatusBarActivity()
 {
     override fun getLayoutId(): Int = 0
 

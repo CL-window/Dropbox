@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
-import cn.kejin.gitbook.MainApplication
+import cn.kejin.gitbook.MainApp
 
 /**
  * Author: Kejin ( Liang Ke Jin )

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <cn.kejin.android.views.ExRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/layout_custom_status_bar" />
+        <FrameLayout
+            android:id="@+id/customTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+
+            <ImageView
+                android:id="@+id/menuButton"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|left"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vector_menu_white_48dp"
+                android:visibility="visible" />
+
+            <cn.kejin.gitbook.views.CustomTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="70dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/title_all_topics"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/searchButton"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vector_search_white_48dp"
+                android:visibility="visible" />
+
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>

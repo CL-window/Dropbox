@@ -11,7 +11,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
-import cn.kejin.gitbook.MainApplication
+import cn.kejin.gitbook.MainApp
 import cn.kejin.gitbook.R
 import com.google.gson.GsonBuilder
 import com.nostra13.universalimageloader.core.DisplayImageOptions
@@ -35,7 +35,7 @@ internal val GSON by lazy { GsonBuilder().create() }
  * Global snack show
  */
 internal fun snack(view: View, msg: Int, len : Int = Snackbar.LENGTH_SHORT) =
-        snack(view, MainApplication.instance.getString(msg), len)
+        snack(view, MainApp.instance.getString(msg), len)
 internal fun snack(view: View, msg : String, len : Int = Snackbar.LENGTH_SHORT) =
         Snackbar.make(view, msg, len).show()
 
@@ -43,14 +43,14 @@ internal fun snack(view: View, msg : String, len : Int = Snackbar.LENGTH_SHORT) 
  * Global toast show
  */
 internal fun toast(msg: Int, len: Int = Toast.LENGTH_SHORT) =
-        toast(MainApplication.instance.getString(msg), len)
+        toast(MainApp.instance.getString(msg), len)
 internal fun toast(msg :String, len : Int = Toast.LENGTH_SHORT) =
-        Toast.makeText(MainApplication.instance, msg, len).show()
+        Toast.makeText(MainApp.instance, msg, len).show()
 
 /**
  * get current process name
  */
-internal fun getCurProcessName(context: Context = MainApplication.instance) : String
+internal fun getCurProcessName(context: Context = MainApp.instance) : String
 {
     val pid = Process.myPid();
     val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager;
@@ -66,7 +66,7 @@ internal fun getCurProcessName(context: Context = MainApplication.instance) : St
 /**
  * whether the network is connected
  */
-internal fun isNetworkConnected(context: Context = MainApplication.instance) : Boolean
+internal fun isNetworkConnected(context: Context = MainApp.instance) : Boolean
 {
     val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -101,12 +101,12 @@ internal fun displayAvatar(url : String, view : ImageView)
  * Dp to px
  */
 internal fun dpToPx(dp : Float,
-                    density : Float = MainApplication.displayMetrics.density) : Int
+                    density : Float = MainApp.displayMetrics.density) : Int
                 = (dp * density + 0.5f).toInt();
 
 /**
  * Px to Dp
  */
 internal fun pxToDp(px : Float,
-                    density : Float = MainApplication.displayMetrics.density) : Int
+                    density : Float = MainApp.displayMetrics.density) : Int
                 = (px / density + 0.5f).toInt();

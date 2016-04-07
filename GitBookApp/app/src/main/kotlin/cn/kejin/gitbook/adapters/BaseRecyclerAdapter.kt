@@ -9,6 +9,7 @@ import android.view.ViewGroup
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/16
  */
+@Deprecated("")
 abstract class BaseRecyclerAdapter<Model, Holder: BaseRecyclerAdapter.BaseViewHolder<Model>>
                                     (val activity : Activity) :RecyclerView.Adapter<Holder>()
 {

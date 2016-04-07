@@ -3,7 +3,7 @@ package cn.kejin.gitbook.networks
 import android.os.Handler
 import android.view.View
 
-import cn.kejin.gitbook.MainApplication
+import cn.kejin.gitbook.MainApp
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.common.*
 import cn.kejin.gitbook.entities.BaseResp

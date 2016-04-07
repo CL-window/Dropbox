@@ -1,8 +1,6 @@
 package cn.kejin.gitbook
 
-import android.app.Activity
 import android.app.Fragment
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -11,24 +9,24 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import cn.kejin.gitbook.adapters.BaseRecyclerAdapter
+import android.widget.ImageView
+import android.widget.TextView
+import cn.kejin.android.views.ExRecyclerAdapter
 import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.common.snack
 import cn.kejin.gitbook.entities.MyAccount
-import cn.kejin.gitbook.fragments.*
+import cn.kejin.gitbook.fragments.DashboardFragment
+import cn.kejin.gitbook.fragments.ExploreFragment
+import cn.kejin.gitbook.fragments.TopicsFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_nav_header.*
-import kotlin.reflect.KClass
 
 /**
  * Manager All Fragment
  *
  */
-class MainActivity : BaseActivity() {
+class MainActivity : CustomStatusBarActivity() {
     companion object {
         val TAG = "MainActivity"
 
@@ -213,7 +211,11 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private inner class MenuItemAdapter : BaseRecyclerAdapter<MenuItem, MenuItemAdapter.MenuViewHolder>(this) {
+    private inner class MenuItemAdapter : ExRecyclerAdapter<MenuItem, MenuItemAdapter.MenuViewHolder>(this) {
+        override fun onBindViewHolder(holder: MenuViewHolder?, position: Int) {
+            holder?.bindView(data[position], position)
+        }
+
         override fun getItemViewType(position: Int): Int {
             return data[position].type.layout
         }
@@ -222,7 +224,7 @@ class MainActivity : BaseActivity() {
             return MenuViewHolder(inflateView(viewType, parent))
         }
 
-        inner class MenuViewHolder(view: View) : BaseViewHolder<MenuItem>(view) {
+        inner class MenuViewHolder(view: View) : ExViewHolder<MenuItem>(view) {
             override fun bindView(model: MenuItem, pos: Int) {
                 when (model.type) {
                     MenuType.ITEM -> {

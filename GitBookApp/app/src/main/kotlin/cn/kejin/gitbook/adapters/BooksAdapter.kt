@@ -7,6 +7,7 @@ import android.view.ViewParent
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import cn.kejin.android.views.ExRecyclerAdapter
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.entities.WWWBook
@@ -16,14 +17,18 @@ import cn.kejin.gitbook.entities.WWWBook
  * Date: 2016/3/16
  */
 class BooksAdapter(activity: Activity) :
-        BaseRecyclerAdapter<WWWBook, BooksAdapter.BookViewHolder>(activity)
+        ExRecyclerAdapter<WWWBook, BooksAdapter.BookViewHolder>(activity)
 {
+    override fun onBindViewHolder(holder: BookViewHolder?, position: Int) {
+        holder?.bindView(data[position], position)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup?, type: Int): BookViewHolder? {
         return BookViewHolder(inflateView(R.layout.item_book, parent))
     }
 
     inner class BookViewHolder(itemView: View) :
-            BaseRecyclerAdapter.BaseViewHolder<WWWBook>(itemView)
+            ExRecyclerAdapter.ExViewHolder<WWWBook>(itemView)
     {
         override fun bindView(model: WWWBook, pos: Int) {
             val title = findView(R.id.title) as TextView

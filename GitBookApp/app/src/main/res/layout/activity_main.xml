@@ -20,7 +20,7 @@
             <!--<include layout="@layout/layout_horizontal_logo" />-->
         </FrameLayout>
 
-        <cn.kejin.gitbook.views.ExRecyclerView
+        <cn.kejin.android.views.ExRecyclerView
             android:id="@+id/navList"
             android:layout_width="280dp"
             android:layout_height="match_parent"
@@ -28,8 +28,8 @@
             android:divider="@null"
             android:scrollbars="none"
             android:listSelector="?attr/selectableItemBackground"
-            android:background="@android:color/white"/>
-
+            android:background="@android:color/white"
+            app:header="@layout/layout_nav_header"/>
     </android.support.v4.widget.DrawerLayout>
 
     <include layout="@layout/layout_color_status_bar" />
