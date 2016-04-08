@@ -10,11 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import cn.kejin.android.views.ExRecyclerAdapter
 import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.AllTopicsActivity
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.SearchActivity
-import cn.kejin.gitbook.adapters.BaseRecyclerAdapter
 import cn.kejin.gitbook.adapters.BooksAdapter
 import cn.kejin.gitbook.common.dpToPx
 import cn.kejin.gitbook.common.error
@@ -23,7 +23,6 @@ import cn.kejin.gitbook.controllers.PageDriver
 import cn.kejin.gitbook.entities.WWWExplorePage
 import cn.kejin.gitbook.entities.WWWTopic
 import cn.kejin.gitbook.networks.*
-import kotlinx.android.synthetic.main.item_topic_tag.*
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -73,6 +72,7 @@ class ExploreFragment : BaseMainFragment()
         view.findViewById(R.id.searchButton)?.setOnClickListener({startActivity(SearchActivity::class.java)})
         view.findViewById(R.id.allTopics)?.setOnClickListener({startActivity(AllTopicsActivity::class.java)})
 
+        return ;
         swipeRefresh = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
         swipeRefresh.setDistanceToTriggerSync(dpToPx(130f))
 
@@ -133,13 +133,17 @@ class ExploreFragment : BaseMainFragment()
     }
 
     inner class TopicsAdapter(activity: Activity) :
-            BaseRecyclerAdapter<WWWTopic, TopicsAdapter.Holder>(activity)
+            ExRecyclerAdapter<WWWTopic, TopicsAdapter.Holder>(activity)
     {
+        override fun onBindViewHolder(holder: Holder?, position: Int) {
+            holder?.bindView(data[position], position)
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder? {
             return Holder(inflateView(R.layout.item_topic_tag, parent))
         }
 
-        inner class Holder(itemView: View) : BaseViewHolder<WWWTopic>(itemView) {
+        inner class Holder(itemView: View) : ExViewHolder<WWWTopic>(itemView) {
             override fun bindView(model: WWWTopic, pos: Int) {
                 val text = findView(R.id.topic) as TextView;
                 text.text = "${model.name}  | ${model.num}"

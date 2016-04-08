@@ -6,8 +6,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import cn.kejin.gitbook.activity.CustomStatusBarActivity
-import cn.kejin.gitbook.adapters.BaseRecyclerAdapter
+import cn.kejin.android.views.ExRecyclerAdapter
+import cn.kejin.gitbook.base.CustomStatusBarActivity
 import cn.kejin.gitbook.common.dismissSoftInputMethod
 import cn.kejin.gitbook.common.error
 import cn.kejin.gitbook.controllers.PageController
@@ -93,12 +93,16 @@ class AllTopicsActivity : CustomStatusBarActivity()
         swipeRefresh.postDelayed({ swipeRefresh.isRefreshing = false }, 2000)
     }
 
-    inner class TopicsAdapter : BaseRecyclerAdapter<ATopic, TopicsAdapter.TopicViewHolder>(this) {
+    inner class TopicsAdapter : ExRecyclerAdapter<ATopic, TopicsAdapter.TopicViewHolder>(this) {
+        override fun onBindViewHolder(holder: TopicViewHolder?, position: Int) {
+            //
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TopicViewHolder? {
             return TopicViewHolder(inflateView(R.layout.item_topic_normal, parent))
         }
 
-        inner class TopicViewHolder(itemView: View) : BaseViewHolder<ATopic>(itemView) {
+        inner class TopicViewHolder(itemView: View) : ExViewHolder<ATopic>(itemView) {
             override fun bindView(model: ATopic, pos: Int) {
                 (findView(R.id.topicName) as TextView).text = model.name
                 (findView(R.id.topicNum) as TextView).text = "${model.books} Books"

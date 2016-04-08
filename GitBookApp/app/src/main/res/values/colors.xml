@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#222222</color>
     <color name="colorAccent">#3B80BC</color>
     <color name="colorTitle">#FFFFFF</color>
+    <color name="colorSelected">#3B80BC</color>
     <color name="colorControlHight">#8801887B</color>
     <color name="black">#000000</color>
     <color name="textPrimary">#FF212121</color>

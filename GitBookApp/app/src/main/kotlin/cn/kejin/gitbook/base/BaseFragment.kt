@@ -1,4 +1,4 @@
-package cn.kejin.gitbook.fragments
+package cn.kejin.gitbook.base
 
 import android.app.Fragment
 import android.content.Intent
@@ -10,6 +10,10 @@ import android.view.ViewGroup
 /**
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/10
+ */
+
+/**
+ *
  */
 abstract class BaseFragment : Fragment()
 {

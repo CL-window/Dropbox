@@ -1,11 +1,11 @@
 package cn.kejin.gitbook
 
 import android.app.Application
+import android.content.SharedPreferences
+import android.content.res.Resources
 import android.os.Environment
 import android.os.Handler
 import android.util.DisplayMetrics
-import android.view.WindowManager
-import com.nostra13.universalimageloader.cache.disc.DiskCache
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache
 import com.nostra13.universalimageloader.core.DisplayImageOptions
 import com.nostra13.universalimageloader.core.ImageLoader
@@ -38,6 +38,23 @@ class MainApp : Application()
         val handler : Handler = Handler()
 
         val displayMetrics = DisplayMetrics()
+
+
+        /**
+         * get resources
+         */
+        val resources: Resources
+            get() = instance.resources
+
+        fun string(id: Int) = resources.getString(id)
+
+        fun color(id: Int) = resources.getColor(id)
+
+        /**
+         * default shared preferences
+         */
+        val sharedPref: SharedPreferences
+            get() = instance.getSharedPreferences(APP_SHARED_PREF, MODE_PRIVATE)
     }
 
     override fun onCreate() {
@@ -67,10 +84,10 @@ class MainApp : Application()
     }
 
     fun putString(key: String, value: String) {
-        getSharedPref(APP_SHARED_PREF)?.edit()?.putString(key, value)?.apply()
+        sharedPref.edit()?.putString(key, value)?.apply()
     }
 
     fun getString(key: String, defaultValue: String = ""): String {
-        return getSharedPref(APP_SHARED_PREF)?.getString(key, defaultValue)?:defaultValue
+        return sharedPref.getString(key, defaultValue)?:defaultValue
     }
 }

@@ -11,23 +11,30 @@
         android:scaleType="fitXY"
         android:src="@drawable/bg_header"/>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/loginLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_height="match_parent">
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/ic_gitbook_logo"/>
 
-        <cn.kejin.gitbook.views.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign In GitBook"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/login_in_to_gitbook"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_gravity="bottom"/>
+    </FrameLayout>
 
 
     <FrameLayout

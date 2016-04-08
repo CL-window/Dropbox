@@ -1,10 +1,11 @@
-package cn.kejin.gitbook.activity
+package cn.kejin.gitbook.base
 
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import cn.kejin.gitbook.R
+import cn.kejin.gitbook.base.BaseActivity
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -55,14 +56,13 @@ abstract class CustomStatusBarActivity : BaseActivity()
     }
 
     private fun configCustomStatusBar() {
-        if (!statusBarTranslucentFlag) {
-            customStatusBar?.visibility= View.GONE
+        if (statusBarTranslucentFlag) {
+            customStatusBar?.visibility= View.VISIBLE
         }
         else {
-            customStatusBar?.visibility= View.VISIBLE
+            customStatusBar?.visibility= View.GONE
         }
     }
 
-    abstract fun needTranslucentStatusBar(): Boolean
-
+    open fun needTranslucentStatusBar(): Boolean = true
 }

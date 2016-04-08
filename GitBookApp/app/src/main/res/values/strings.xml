@@ -51,4 +51,5 @@
     <string name="no_more_data">No More Data</string>
     <string name="hint_search_topic">Search Topic</string>
     <string name="title_all_topics">All Topics</string>
+    <string name="login_in_to_gitbook">Login in to GitBook</string>
 </resources>

@@ -22,22 +22,23 @@ class DashboardFragment: BaseMainFragment() {
 
     override fun initializeView(view: View) {
 
-        val list = view.findViewById(R.id.list) as ExRecyclerView
-        list.layoutManager = GridLayoutManager(mainActivity, 1)
-        val booksAdapter = BooksAdapter(mainActivity)
-        list.adapter = booksAdapter
-
-        Net.wwwApi.getExplorePage(0,
-                object : HttpCallback<WWWExplorePage>(WWWExplorePage::class.java) {
-                    override fun onResponse(model: WWWExplorePage?, exception: HttpException?) {
-                        var result = PageController.Result.SUCCESS
-                        if (exception == null) {
-                            booksAdapter.set(model!!.books)
-                        }
-                        else {
-                        }
-
-                    }
-                })
+//
+//        val list = view.findViewById(R.id.list) as ExRecyclerView
+//        list.layoutManager = GridLayoutManager(mainActivity, 1)
+//        val booksAdapter = BooksAdapter(mainActivity)
+//        list.adapter = booksAdapter
+//
+//        Net.wwwApi.getExplorePage(0,
+//                object : HttpCallback<WWWExplorePage>(WWWExplorePage::class.java) {
+//                    override fun onResponse(model: WWWExplorePage?, exception: HttpException?) {
+//                        var result = PageController.Result.SUCCESS
+//                        if (exception == null) {
+//                            booksAdapter.set(model!!.books)
+//                        }
+//                        else {
+//                        }
+//
+//                    }
+//                })
     }
 }

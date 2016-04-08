@@ -2,7 +2,9 @@ package cn.kejin.gitbook.navmenu
 
 import android.app.Activity
 import android.app.Fragment
+import android.content.Intent
 import android.graphics.Color
+import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,12 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import cn.kejin.android.views.ExRecyclerAdapter
 import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.*
-import cn.kejin.gitbook.fragments.DashboardFragment
-import cn.kejin.gitbook.fragments.ExploreFragment
-import cn.kejin.gitbook.fragments.TopicsFragment
+import cn.kejin.gitbook.common.displayAvatar
+import cn.kejin.gitbook.common.error
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -27,52 +28,86 @@ import cn.kejin.gitbook.fragments.TopicsFragment
 class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
 {
 
-    private val menuItems: List<MenuItem> = listOf(
-            MenuItem(R.string.sub_menu_home),
-            MenuItem(R.string.action_dashboard, R.drawable.ic_vector_dashboard_white_48dp, DashboardFragment::class.java),
-            MenuItem(),
-            MenuItem(R.string.sub_menu_gitbook),
-            MenuItem(R.string.action_explore, R.drawable.ic_vector_explore_white_48dp, ExploreFragment::class.java),
-            MenuItem(R.string.action_topics, R.drawable.ic_vector_bookmark_white_48dp, TopicsFragment::class.java),
-            MenuItem(),
-            MenuItem(R.string.sub_menu_more),
-            MenuItem(R.string.action_settings, R.drawable.ic_vector_settings_white_48dp, SettingsActivity::class.java),
-            MenuItem(R.string.action_about, R.drawable.ic_vector_info_white_48dp, AboutActivity::class.java)
-    )
-
     val menuAdapter = MenuItemAdapter()
 
     val exRecycler = drawer.findViewById(R.id.navList) as ExRecyclerView
 
     val navHeader = exRecycler.getHeader()
 
+    var curSelectedItemIndex = INavMenu.Item.explore
 
     init {
         exRecycler.setHasFixedSize(true)
         exRecycler.adapter = menuAdapter
         exRecycler.layoutManager = LinearLayoutManager(activity)
+
+        checkUserState()
+        menuAdapter.selectMenuItem(curSelectedItemIndex)
     }
 
+    /**
+     * 检查用户状态, 更新 nav Header
+     */
     override fun checkUserState() {
+        val loginLayout = navHeader?.findViewById(R.id.loginLayout)
+        val userLayout = navHeader?.findViewById(R.id.userLayout)
+
+        val loginBtn = loginLayout?.findViewById(R.id.loginButton)
+
         if (UserAccount.isSignedIn()) {
-            //
+            loginLayout?.visibility = View.GONE
+            userLayout?.visibility = View.VISIBLE
+
+            loginBtn?.setOnClickListener(null)
+
+            val avatar = userLayout?.findViewById(R.id.avatarImage) as ImageView
+            val userName = userLayout?.findViewById(R.id.userName) as TextView
+            val userEmail = userLayout?.findViewById(R.id.userEmail) as TextView
+
+            userEmail.text = UserAccount.user.email
+            userName.text = "${UserAccount.user.name} ( ${UserAccount.user.username} )"
+            displayAvatar(UserAccount.user.urls.avatar, avatar)
         }
         else {
-            //
+            loginLayout?.visibility = View.VISIBLE
+            userLayout?.visibility = View.GONE
+            loginBtn?.setOnClickListener {
+                activity.startActivity(Intent(activity, SignActivity::class.java))
+            }
         }
     }
 
-    override fun clickItem(item: INavMenu.Item) {
-        throw UnsupportedOperationException()
+    override fun clickItem(item: Int) {
+        menuAdapter.selectMenuItem(item)
     }
 
     override fun onBackPressed(): Boolean {
-        throw UnsupportedOperationException()
+        if (curSelectedItemIndex != INavMenu.Item.explore) {
+            menuAdapter.selectMenuItem(INavMenu.Item.explore)
+            return true;
+        }
+        return false
     }
 
-    inner class MenuItemAdapter : RecyclerView.Adapter<MenuItemAdapter.MenuViewHolder>()
+    override fun openDrawer() {
+        drawer.openDrawer(GravityCompat.START)
+    }
+
+    override fun closeDrawer() {
+        if (drawer.isDrawerOpen(GravityCompat.START))
+            drawer.closeDrawer(GravityCompat.START)
+    }
+
+    private fun replaceFragment(fragment: Fragment)
+            = activity.fragmentManager.beginTransaction()
+            .replace(R.id.fragmentContent, fragment).addToBackStack(fragment.toString()).commit()
+
+    inner class MenuItemAdapter :
+            RecyclerView.Adapter<MenuItemAdapter.MenuViewHolder>()
     {
-        override fun getItemCount(): Int = menuItems.size
+        val data = menuItems
+
+        override fun getItemCount(): Int = data.size
 
         override fun onBindViewHolder(holder: MenuViewHolder?, position: Int) {
             holder?.bindView(data[position], position)
@@ -83,33 +118,31 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
         }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MenuViewHolder? {
-            return MenuViewHolder(inflateView(viewType, parent))
+            return MenuViewHolder(activity.layoutInflater.inflate(viewType, parent, false))
         }
 
         inner class MenuViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             fun bindView(model: MenuItem, pos: Int) {
                 when (model.type) {
-                    MenuType.ITEM -> {
+                    MenuItem.Type.ITEM -> {
                         itemView.isEnabled = true;
 
                         var iconView = itemView.findViewById(R.id.menuIcon) as ImageView
                         var textView = itemView.findViewById(R.id.menuText) as TextView
 
-                        textView.text = getString(model.title) ?: ""
+                        textView.text = MainApp.string(model.title) ?: ""
                         iconView.setImageResource(model.icon)
 
                         var bgColor = Color.TRANSPARENT
-                        var textColor = resources.getColor(R.color.textPrimary);
-                        var iconColor = model.color;
+                        var textColor = MainApp.color(R.color.colorPrimary);
 
-                        if (model.selected) {
+                        if (pos == curSelectedItemIndex) {
                             bgColor = Color.LTGRAY
-                            iconColor = resources.getColor(R.color.colorPrimary)
-                            textColor = iconColor
+                            textColor =  MainApp.color(R.color.colorSelected)
                         }
 
                         itemView.setBackgroundColor(bgColor)
-                        iconView.setColorFilter(iconColor)
+                        iconView.setColorFilter(textColor)
                         textView.setTextColor(textColor)
 
                         itemView.setOnClickListener {
@@ -117,53 +150,43 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
                         }
                     }
 
-                    MenuType.GROUP -> {
+                    MenuItem.Type.GROUP -> {
                         itemView.isEnabled = false
 
                         var textView = itemView as TextView
-                        textView.text = getString(model.title) ?: ""
+                        textView.text = MainApp.string(model.title) ?: ""
                     }
 
-                    MenuType.SEPARATOR -> {
+                    MenuItem.Type.SEPARATOR -> {
                         itemView.isEnabled = false
                     }
                 }
-
             }
         }
-
-        var mCurSelectedItem = explore
-            private set(value) {
-                if (value.type == MenuType.ITEM) {
-
-                    if (value.fragment != null) {
-                        field.selected = false
-                        value.selected = true
-                        field = value
-                        replaceFragment(value.fragment as Fragment)
-                    }
-                    else if (value.clazz != null) {
-                        if (value.clazz == SignActivity::class.java) {
-                            startSignInActivity()
-                        }
-                        else {
-                            startActivity(value.clazz as Class<*>)
-                        }
-                    }
-
-                    closeDrawer()
-                    notifyDataSetChanged()
-                }
-            }
 
         fun selectMenuItem(pos: Int) {
-            selectMenuItem(data[pos])
-        }
+            if (pos !in 0..data.size-1) {
+                error("NavMenu", "invalid menu position")
+                return
+            }
 
-        fun selectMenuItem(item: MenuItem) {
-            mCurSelectedItem = item
-        }
+            val item = data[pos]
+            when (item.target) {
+                is Fragment-> {
+                    replaceFragment(item.target as Fragment)
+                    val old = curSelectedItemIndex
+                    curSelectedItemIndex = pos
+                    if (old != pos) {
+                        notifyItemChanged(old)
+                    }
+                    notifyItemChanged(pos)
+                }
 
+                is Class<*>-> {
+                    activity.startActivity(Intent(activity, item.target as Class<*>))
+                }
+            }
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 package cn.kejin.gitbook
 
-import cn.kejin.gitbook.activity.CustomStatusBarActivity
+import cn.kejin.gitbook.base.CustomStatusBarActivity
 
 /**
  * Author: Kejin ( Liang Ke Jin )

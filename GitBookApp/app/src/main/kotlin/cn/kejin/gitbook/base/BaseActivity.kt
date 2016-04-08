@@ -1,4 +1,4 @@
-package cn.kejin.gitbook.activity
+package cn.kejin.gitbook.base
 
 import android.content.Intent
 import android.net.Uri
