@@ -14,9 +14,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.*
-import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.common.error
-import kotlinx.android.synthetic.main.activity_main.*
+import com.bumptech.glide.Glide
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -54,7 +53,7 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
 
         val loginBtn = loginLayout?.findViewById(R.id.loginButton)
 
-        if (UserAccount.isSignedIn()) {
+        if (MainApp.isSignedIn()) {
             loginLayout?.visibility = View.GONE
             userLayout?.visibility = View.VISIBLE
 
@@ -64,15 +63,24 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
             val userName = userLayout?.findViewById(R.id.userName) as TextView
             val userEmail = userLayout?.findViewById(R.id.userEmail) as TextView
 
-            userEmail.text = UserAccount.user.email
-            userName.text = "${UserAccount.user.name} ( ${UserAccount.user.username} )"
-            displayAvatar(UserAccount.user.urls.avatar, avatar)
+            val user = MainApp.account
+            userEmail.text = user.email
+            userName.text = "${user.name} ( ${user.username} )"
+            Glide.with(activity)
+                    .load(user.urls.avatar)
+                    .placeholder(R.drawable.ic_default_avatar)
+                    .into(avatar)
+
+            userLayout?.findViewById(R.id.exitAccount)?.setOnClickListener {
+                MainApp.signOut()
+                checkUserState()
+            }
         }
         else {
             loginLayout?.visibility = View.VISIBLE
             userLayout?.visibility = View.GONE
             loginBtn?.setOnClickListener {
-                activity.startActivity(Intent(activity, SignActivity::class.java))
+                activity.startActivity(Intent(activity, LoginActivity::class.java))
             }
         }
     }
@@ -82,6 +90,10 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
     }
 
     override fun onBackPressed(): Boolean {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            closeDrawer()
+            return true
+        }
         if (curSelectedItemIndex != INavMenu.Item.explore) {
             menuAdapter.selectMenuItem(INavMenu.Item.explore)
             return true;
@@ -94,14 +106,17 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
     }
 
     override fun closeDrawer() {
-        if (drawer.isDrawerOpen(GravityCompat.START))
-            drawer.closeDrawer(GravityCompat.START)
+        drawer.closeDrawer(GravityCompat.START)
+//        if (drawer.isDrawerOpen(GravityCompat.START))
     }
 
     private fun replaceFragment(fragment: Fragment)
             = activity.fragmentManager.beginTransaction()
             .replace(R.id.fragmentContent, fragment).addToBackStack(fragment.toString()).commit()
 
+    /**
+     * Menu Adapter
+     */
     inner class MenuItemAdapter :
             RecyclerView.Adapter<MenuItemAdapter.MenuViewHolder>()
     {
@@ -186,6 +201,7 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
                     activity.startActivity(Intent(activity, item.target as Class<*>))
                 }
             }
+            closeDrawer()
         }
     }
 

@@ -5,7 +5,7 @@ import android.support.design.widget.Snackbar
 import cn.kejin.gitbook.base.CustomStatusBarActivity
 import cn.kejin.gitbook.common.dismissSoftInputMethod
 import cn.kejin.gitbook.common.snack
-import cn.kejin.gitbook.entities.MyAccount
+import cn.kejin.gitbook.entities.AppAccount
 import cn.kejin.gitbook.networks.*
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_login.*
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/11
  */
-class SignActivity : CustomStatusBarActivity()
+class LoginActivity : CustomStatusBarActivity()
 {
     override fun getLayoutId(): Int = R.layout.activity_login
 
@@ -51,17 +51,16 @@ class SignActivity : CustomStatusBarActivity()
         }
 
         showProgressDialog()
-        progressDialog?.setCanceledOnTouchOutside(false)
-        val call = RestApiImpl.instance.signIn(username.toString(), password.toString(),
-                object : HttpCallback<MyAccount>(MyAccount::class.java) {
-                    override fun onResponse(model: MyAccount?, exception: HttpException?) {
-                        if (exception == null) {
-                            UserAccount.set(model!!)
+        val call = Net.restApi.signIn(username.toString(), password.toString(),
+                object : HttpCallback<AppAccount>(AppAccount::class.java) {
+                    override fun onResponse(model: AppAccount?, exception: HttpException?) {
+                        if (MainApp.signIn(model)) {
                             snack(userNameEdit, R.string.login_success)
                             postDelay({ setResult(RESULT_OK); finish() }, 500)
                         }
                         else {
-                            snack(userNameEdit, R.string.login_failed, Snackbar.LENGTH_LONG)
+                            HttpException(HttpException.E_LOGIN_FAIL, exception?.msg?:"")
+                                    .process(userNameEdit, Snackbar.LENGTH_INDEFINITE)
                         }
                         dismissProgressDialog()
                     }

@@ -13,9 +13,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import cn.kejin.gitbook.MainApp
 import cn.kejin.gitbook.R
+import com.bumptech.glide.Glide
 import com.google.gson.GsonBuilder
-import com.nostra13.universalimageloader.core.DisplayImageOptions
-import com.nostra13.universalimageloader.core.ImageLoader
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -35,7 +34,7 @@ internal val GSON by lazy { GsonBuilder().create() }
  * Global snack show
  */
 internal fun snack(view: View, msg: Int, len : Int = Snackbar.LENGTH_SHORT) =
-        snack(view, MainApp.instance.getString(msg), len)
+        snack(view, MainApp.string(msg), len)
 internal fun snack(view: View, msg : String, len : Int = Snackbar.LENGTH_SHORT) =
         Snackbar.make(view, msg, len).show()
 
@@ -43,7 +42,7 @@ internal fun snack(view: View, msg : String, len : Int = Snackbar.LENGTH_SHORT) 
  * Global toast show
  */
 internal fun toast(msg: Int, len: Int = Toast.LENGTH_SHORT) =
-        toast(MainApp.instance.getString(msg), len)
+        toast(MainApp.string(msg), len)
 internal fun toast(msg :String, len : Int = Toast.LENGTH_SHORT) =
         Toast.makeText(MainApp.instance, msg, len).show()
 
@@ -84,18 +83,6 @@ internal fun  dismissSoftInputMethod(context: Context, windowToken : IBinder)
     imm.hideSoftInputFromWindow(windowToken, 0);
 }
 
-/**
- * Display Avatar
- */
-private val avatarDisplayOption = DisplayImageOptions.Builder()
-        .resetViewBeforeLoading(true)
-        .cacheInMemory(true)
-        .cacheOnDisk(true)
-        .showImageOnFail(R.drawable.ic_default_avatar)
-        .showImageOnLoading(R.drawable.ic_default_avatar)
-        .showImageForEmptyUri(R.drawable.ic_default_avatar).build()
-internal fun displayAvatar(url : String, view : ImageView)
-        = ImageLoader.getInstance().displayImage(url, view, avatarDisplayOption)
 
 /**
  * Dp to px

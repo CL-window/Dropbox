@@ -83,42 +83,51 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <cn.kejin.gitbook.views.CustomEditText
-                        android:id="@+id/userNameEdit"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/bg_login_input"
-                        android:cursorVisible="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:gravity="center_vertical"
-                        android:hint="@string/login_username"
-                        android:inputType="text"
-                        android:paddingLeft="15dp"
-                        android:singleLine="true"
-                        android:textColor="@color/textPrimary"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:textSize="15sp" />
+                    <!--<android.support.design.widget.TextInputLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+                        <cn.kejin.gitbook.views.CustomEditText
+                            android:id="@+id/userNameEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/bg_login_input"
+                            android:cursorVisible="true"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:gravity="center_vertical"
+                            android:hint="@string/login_username"
+                            android:inputType="text"
+                            android:paddingLeft="15dp"
+                            android:singleLine="true"
+                            android:textColor="@color/textPrimary"
+                            android:textCursorDrawable="@drawable/color_cursor"
+                            android:textSize="15sp" />
+                    <!--</android.support.design.widget.TextInputLayout>-->
 
-                    <cn.kejin.gitbook.views.CustomEditText
-                        android:id="@+id/passwordEdit"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/bg_login_input"
-                        android:cursorVisible="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:gravity="center_vertical"
-                        android:hint="@string/login_password"
-                        android:inputType="textPassword"
-                        android:paddingLeft="15dp"
-                        android:singleLine="true"
-                        android:textColor="@color/textPrimary"
-                        android:textCursorDrawable="@drawable/color_cursor"
-                        android:textSize="15sp" />
 
+                    <!--<android.support.design.widget.TextInputLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+                        <cn.kejin.gitbook.views.CustomEditText
+                            android:id="@+id/passwordEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/bg_login_input"
+                            android:cursorVisible="true"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:gravity="center_vertical"
+                            android:hint="@string/login_password"
+                            android:inputType="textPassword"
+                            android:paddingLeft="15dp"
+                            android:singleLine="true"
+                            android:textColor="@color/textPrimary"
+                            android:textCursorDrawable="@drawable/color_cursor"
+                            android:textSize="15sp" />
+
+                    <!--</android.support.design.widget.TextInputLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"

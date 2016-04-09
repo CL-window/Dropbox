@@ -11,8 +11,7 @@ import android.view.WindowManager
 import android.widget.ProgressBar
 import cn.kejin.gitbook.MainApp
 import cn.kejin.gitbook.R
-import cn.kejin.gitbook.UserAccount
-import cn.kejin.gitbook.entities.MyAccount
+import cn.kejin.gitbook.entities.AppAccount
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -35,7 +34,7 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * last user state
      */
-    var lastUserState = UserAccount.user
+    var lastUserState = MainApp.account
 
     /**
      * progress dialog
@@ -73,7 +72,7 @@ abstract class BaseActivity: AppCompatActivity() {
     }
 
     protected fun checkUserState() {
-        val cur = UserAccount.user
+        val cur = MainApp.account
         if (!lastUserState.equals(cur)) {
             onUserStateChanged(lastUserState, cur)
         }
@@ -83,13 +82,13 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * TODO: 细化状态变化
      */
-    open fun onUserStateChanged(last : MyAccount,
-            now : MyAccount = UserAccount.user) {}
+    open fun onUserStateChanged(last : AppAccount,
+                                now : AppAccount = MainApp.account) {}
 
     /**
      * show progress dialog
      */
-    fun showProgressDialog(cancelable: Boolean=true)
+    fun showProgressDialog(cancelable: Boolean=true, outSideCancel: Boolean=false)
     {
         if (progressDialog == null) {
             progressDialog = AlertDialog.Builder(this, R.style.TransDialog)
@@ -98,6 +97,7 @@ abstract class BaseActivity: AppCompatActivity() {
                     .create()
         }
 
+        progressDialog?.setCanceledOnTouchOutside(outSideCancel)
         progressDialog?.setCancelable(cancelable)
 
         if (progressDialog?.isShowing ?:true) {

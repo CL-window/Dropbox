@@ -5,6 +5,7 @@ import android.view.View
 import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.adapters.BooksAdapter
+import cn.kejin.gitbook.base.BaseMainFragment
 import cn.kejin.gitbook.controllers.PageController
 import cn.kejin.gitbook.entities.WWWExplorePage
 import cn.kejin.gitbook.networks.HttpCallback

@@ -44,6 +44,10 @@ abstract class HttpCallback<Model> (val cls : Class<Model>,
 
     override fun onResponse(call: Call?, resp: Response?) {
         if (resp != null) {
+            if (resp.code() != 200) {
+                onFailure(HttpException.E_OTHER, resp.message())
+                return;
+            }
             try {
                 val msg = resp.body()?.string()?:"";
                 onSuccess(msg)

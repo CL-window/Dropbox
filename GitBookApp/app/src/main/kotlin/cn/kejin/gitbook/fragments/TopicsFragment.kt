@@ -2,6 +2,7 @@ package cn.kejin.gitbook.fragments
 
 import android.view.View
 import cn.kejin.gitbook.R
+import cn.kejin.gitbook.base.BaseMainFragment
 
 /**
  * Author: Kejin ( Liang Ke Jin )

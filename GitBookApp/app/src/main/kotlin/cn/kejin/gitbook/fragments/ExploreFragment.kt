@@ -16,12 +16,14 @@ import cn.kejin.gitbook.AllTopicsActivity
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.SearchActivity
 import cn.kejin.gitbook.adapters.BooksAdapter
+import cn.kejin.gitbook.base.BaseMainFragment
 import cn.kejin.gitbook.common.dpToPx
 import cn.kejin.gitbook.common.error
 import cn.kejin.gitbook.controllers.PageController
 import cn.kejin.gitbook.controllers.PageDriver
 import cn.kejin.gitbook.entities.WWWExplorePage
 import cn.kejin.gitbook.entities.WWWTopic
+import cn.kejin.gitbook.navmenu.INavMenu
 import cn.kejin.gitbook.networks.*
 
 /**
@@ -36,28 +38,40 @@ class ExploreFragment : BaseMainFragment()
         val ONE_PAGE_BOOKS_NUM = 9
     }
 
+    /**
+     * Topics Header
+     */
+    val topicsAdapter
+            by lazy { TopicsAdapter(activity) }
+
     private val headerTopicView by lazy {
         val view = View.inflate(mainActivity, R.layout.layout_explore_topics_header, null)
         val list = view.findViewById(R.id.topicsHorList) as RecyclerView
         list.layoutManager = LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false)
         list.adapter = topicsAdapter
+
+        view.findViewById(R.id.allTopics)?.setOnClickListener {
+            navMenuCtrl.clickItem(INavMenu.Item.topics)
+        }
+
         view
     }
 
-    private val topicsLayout
-            by lazy { headerTopicView.findViewById(R.id.topicsLayout) as LinearLayout }
-
-    private val topicsAdapter
-            by lazy { TopicsAdapter(mainActivity) }
-    private val topicsHorList
-            by lazy { headerTopicView.findViewById(R.id.topicsHorList) as RecyclerView }
-
-
+    /**
+     * Main Book List
+     */
     lateinit var swipeRefresh : SwipeRefreshLayout
 
+    /**
+     * Grid Books
+     */
     lateinit var booksList : ExRecyclerView
-    lateinit var booksAdapter : BooksAdapter
+    val booksAdapter : BooksAdapter
+            by lazy { BooksAdapter(activity) }
 
+    /**
+     * Page Driver
+     */
     lateinit var pageDriver : PageDriver
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,23 +82,29 @@ class ExploreFragment : BaseMainFragment()
 
     override fun initializeView(view: View)
     {
-        view.findViewById(R.id.menuButton)?.setOnClickListener({ mainActivity.openDrawer() })
-        view.findViewById(R.id.searchButton)?.setOnClickListener({startActivity(SearchActivity::class.java)})
-        view.findViewById(R.id.allTopics)?.setOnClickListener({startActivity(AllTopicsActivity::class.java)})
+        view.findViewById(R.id.menuButton)?.setOnClickListener({
+            navMenuCtrl.openDrawer()
+        })
+        view.findViewById(R.id.searchButton)?.setOnClickListener({
+            startActivity(SearchActivity::class.java)
+        })
+        view.findViewById(R.id.allTopics)?.setOnClickListener({
+            startActivity(AllTopicsActivity::class.java)
+        })
 
-        return ;
         swipeRefresh = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
         swipeRefresh.setDistanceToTriggerSync(dpToPx(130f))
 
         booksList = view.findViewById(R.id.booksRecyclerView) as ExRecyclerView
         booksList.setHasFixedSize(true)
         booksList.layoutManager = GridLayoutManager(activity, 2)
-        booksAdapter = BooksAdapter(mainActivity)
+
         booksList.adapter = booksAdapter
 
         pageDriver = PageDriver(swipeRefresh, booksList, pageCallback)
         pageDriver.refresh()
     }
+
 
     /**
      * load data from server
@@ -123,9 +143,7 @@ class ExploreFragment : BaseMainFragment()
             topicsAdapter.set(model.topics)
             booksAdapter.set(model.books)
 
-            if (!booksList.hasHeader(headerTopicView)) {
-                booksList.addHeader(headerTopicView)
-            }
+            booksList.addHeader(headerTopicView)
         }
         else {
             booksAdapter.addAll(model.books)

@@ -26,7 +26,7 @@ class RestApiImpl private constructor(val requester: HttpRequester= HttpRequeste
      */
     override fun signIn(username: String,
                         pwd: String,
-                        callback: HttpCallback<MyAccount>): Call? {
+                        callback: HttpCallback<AppAccount>): Call? {
         val url = getAbsUrl("account")
         info(TAG, "URL: $url , UserName: $username, Pwd: $pwd")
 

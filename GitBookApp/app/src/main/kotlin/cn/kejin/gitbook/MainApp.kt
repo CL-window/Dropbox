@@ -6,10 +6,7 @@ import android.content.res.Resources
 import android.os.Environment
 import android.os.Handler
 import android.util.DisplayMetrics
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache
-import com.nostra13.universalimageloader.core.DisplayImageOptions
-import com.nostra13.universalimageloader.core.ImageLoader
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
+import cn.kejin.gitbook.entities.AppAccount
 import java.io.File
 
 /**
@@ -31,14 +28,20 @@ class MainApp : Application()
         lateinit var instance : MainApp
             private set
 
+        /**
+         * default shared preferences
+         */
+        val sharedPref: SharedPreferences
+            get() = instance.getSharedPreferences(APP_SHARED_PREF, MODE_PRIVATE)
+
         // global preference
         fun getSharedPref(name : String) = instance.getSharedPreferences(name, MODE_PRIVATE)
 
         // global handler
         val handler : Handler = Handler()
 
+        // for  dpToPx, pxToDp
         val displayMetrics = DisplayMetrics()
-
 
         /**
          * get resources
@@ -50,11 +53,39 @@ class MainApp : Application()
 
         fun color(id: Int) = resources.getColor(id)
 
+
         /**
-         * default shared preferences
+         * User Account Manage
          */
-        val sharedPref: SharedPreferences
-            get() = instance.getSharedPreferences(APP_SHARED_PREF, MODE_PRIVATE)
+        /**
+         * 保证不被改变
+         */
+        private val user : AppAccount by lazy {
+            val account = AppAccount()
+            account.restore()
+            account
+        }
+
+        /**
+         * 传递副本
+         */
+        val account : AppAccount
+            get() = user.copy()
+
+        /**
+         * 登录
+         */
+        fun signIn(ac: AppAccount?):Boolean
+                = if (ac != null && ac.isSingedIn()) { user.set(ac); true } else { false }
+
+        /**
+         * 登出
+         */
+        fun signOut() = user.signOut()
+
+        fun isSignedIn() = user.isSingedIn()
+
+        fun authValue() = user.authValue()
     }
 
     override fun onCreate() {
@@ -64,24 +95,9 @@ class MainApp : Application()
 
         displayMetrics.setTo(resources.displayMetrics)
 
-        UserAccount.restore()
-
-        initImageLoader()
+        user.restore()
     }
 
-    fun initImageLoader() {
-        val display = DisplayImageOptions.Builder()
-                .cacheOnDisk(true)
-                .build()
-
-        val conf = ImageLoaderConfiguration.Builder(this)
-                .diskCache(UnlimitedDiskCache(cacheDir))
-                .diskCacheSize(10 * 1024 * 1024)  // 10 MB
-                .defaultDisplayImageOptions(display)
-                .build()
-
-        ImageLoader.getInstance().init(conf)
-    }
 
     fun putString(key: String, value: String) {
         sharedPref.edit()?.putString(key, value)?.apply()

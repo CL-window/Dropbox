@@ -1,6 +1,6 @@
 package cn.kejin.gitbook.networks
 
-import cn.kejin.gitbook.UserAccount
+import cn.kejin.gitbook.MainApp
 import cn.kejin.gitbook.common.info
 import okhttp3.*
 import java.util.concurrent.TimeUnit
@@ -39,11 +39,11 @@ class HttpRequester
 
         val builder = Request.Builder().url(url).get()
         if (auth) {
-            if (!UserAccount.isSignedIn()) {
+            if (!MainApp.isSignedIn()) {
                 return null;
             }
 
-            builder.addHeader("Authorization", UserAccount.getAuthValue());
+            builder.addHeader("Authorization", MainApp.authValue());
         }
 
         return httpClient.newCall(builder.build()).execute()
@@ -58,12 +58,12 @@ class HttpRequester
 
         val builder = Request.Builder().url(url).get()
         if (auth) {
-            if (!UserAccount.isSignedIn()) {
+            if (!MainApp.isSignedIn()) {
                 callback.onFailure(HttpException.E_NOT_SIGN, "not singed")
                 return null;
             }
 
-            builder.addHeader("Authorization", UserAccount.getAuthValue());
+            builder.addHeader("Authorization", MainApp.authValue());
         }
 
         var call = httpClient.newCall(builder.build());
@@ -84,11 +84,11 @@ class HttpRequester
         val builder = Request.Builder();
 
         if (auth) {
-            if (!UserAccount.isSignedIn()) {
+            if (!MainApp.isSignedIn()) {
                 return null;
             }
 
-            builder.addHeader("Authorization", UserAccount.getAuthValue());
+            builder.addHeader("Authorization", MainApp.authValue());
         }
 
         builder.addHeader("Content-Type", "application/json").url(url).post(body);
@@ -108,12 +108,12 @@ class HttpRequester
         val builder = Request.Builder();
 
         if (auth) {
-            if (!UserAccount.isSignedIn()) {
+            if (!MainApp.isSignedIn()) {
                 callback.onFailure(HttpException.E_NOT_SIGN, "not singed")
                 return null;
             }
 
-            builder.addHeader("Authorization", UserAccount.getAuthValue());
+            builder.addHeader("Authorization", MainApp.authValue());
         }
 
         builder.addHeader("Content-Type", "application/json").url(url).post(body);

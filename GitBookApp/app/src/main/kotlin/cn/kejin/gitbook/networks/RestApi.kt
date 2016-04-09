@@ -25,7 +25,7 @@ interface RestApi : Net {
      */
     fun signIn(username: String,
                pwd: String,
-               callback: HttpCallback<MyAccount>): Call?
+               callback: HttpCallback<AppAccount>): Call?
 
     ////////////////////   Books  //////////////////////////////////////////////////////////
     /**

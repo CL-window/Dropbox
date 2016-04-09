@@ -12,14 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:fitsSystemWindows="true">
+        app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
-            <!--<include layout="@layout/layout_custom_status_bar"/>-->
+            android:layout_height="wrap_content">
+            <include layout="@layout/layout_custom_status_bar"/>
             <FrameLayout
                 android:id="@+id/customTitleBar"
                 android:layout_width="match_parent"
@@ -73,11 +72,10 @@
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="false">
+            android:layout_height="match_parent" >
 
             <!-- Books-->
-            <cn.kejin.gitbook.views.ExRecyclerView
+            <cn.kejin.android.views.ExRecyclerView
                 android:id="@+id/booksRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

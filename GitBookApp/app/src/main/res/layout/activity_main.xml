@@ -25,12 +25,16 @@
             android:layout_width="280dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:divider="@null"
             android:scrollbars="none"
-            android:listSelector="?attr/selectableItemBackground"
             android:background="@android:color/white"
             app:header="@layout/layout_nav_header"/>
     </android.support.v4.widget.DrawerLayout>
 
-    <include layout="@layout/layout_color_status_bar" />
+    <FrameLayout
+        android:id="@+id/customStatusBar"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="#33212121"
+        android:visibility="visible">
+    </FrameLayout>
 </FrameLayout>

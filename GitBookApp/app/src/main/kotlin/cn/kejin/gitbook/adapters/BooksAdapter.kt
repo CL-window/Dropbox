@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import cn.kejin.android.views.ExRecyclerAdapter
 import cn.kejin.gitbook.R
-import cn.kejin.gitbook.common.displayAvatar
 import cn.kejin.gitbook.entities.WWWBook
+import com.bumptech.glide.Glide
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -44,7 +44,7 @@ class BooksAdapter(activity: Activity) :
             summary.text = model.summary
 
             val avatar = findView(R.id.avatar) as ImageView
-            displayAvatar(model.author.avatar, avatar)
+            Glide.with(activity).load(model.author.avatar).into(avatar)
 
             val author = findView(R.id.author) as TextView
             author.text = model.author.name

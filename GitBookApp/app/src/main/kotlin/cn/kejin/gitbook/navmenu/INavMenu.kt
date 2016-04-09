@@ -16,6 +16,9 @@ import cn.kejin.gitbook.fragments.TopicsFragment
  */
 interface INavMenu {
 
+    /**
+     * 对应 menuItems 的 index
+     */
     object Item {
         const val dashboard = 0x01
         const val explore   = 0x04
@@ -54,8 +57,13 @@ interface INavMenu {
      */
     fun onBackPressed(): Boolean
 
-
+    /**
+     * 打开抽屉
+     */
     fun openDrawer()
 
+    /**
+     * 关闭抽屉
+     */
     fun closeDrawer()
 }

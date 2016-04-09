@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import cn.kejin.gitbook.base.CustomStatusBarActivity
 import cn.kejin.gitbook.common.snack
-import cn.kejin.gitbook.entities.MyAccount
+import cn.kejin.gitbook.entities.AppAccount
 import cn.kejin.gitbook.navmenu.INavMenu
 import cn.kejin.gitbook.navmenu.NavMenuCtrl
 import kotlinx.android.synthetic.main.activity_main.*
@@ -37,13 +37,7 @@ class MainActivity : CustomStatusBarActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         return if (keyCode == KeyEvent.KEYCODE_BACK && !mBackFlag) {
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                drawerLayout.closeDrawer(GravityCompat.START)
-            }
-            else if (navMenuCtrl.onBackPressed()) {
-                navMenuCtrl.closeDrawer()
-            }
-            else {
+            if (!navMenuCtrl.onBackPressed()) {
                 mBackFlag = true;
                 snack(drawerLayout, R.string.press_again)
                 handler.postDelayed({ mBackFlag = false }, 2000)
@@ -56,16 +50,20 @@ class MainActivity : CustomStatusBarActivity() {
         }
     }
 
-    override fun setSupportActionBar(toolbar: Toolbar?) {
-        super.setSupportActionBar(toolbar)
-
-        if (toolbar != null) {
-            val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                    R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-            drawerLayout.setDrawerListener(toggle)
-            toggle.syncState()
-        }
+    override fun onUserStateChanged(last: AppAccount, now: AppAccount) {
+        navMenuCtrl.checkUserState()
     }
 
-
+    //
+//    override fun setSupportActionBar(toolbar: Toolbar?) {
+//        super.setSupportActionBar(toolbar)
+//
+//        if (toolbar != null) {
+//            val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
+//                    R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+//            drawerLayout.setDrawerListener(toggle)
+//            toggle.syncState()
+//        }
+//    }
+//
 }

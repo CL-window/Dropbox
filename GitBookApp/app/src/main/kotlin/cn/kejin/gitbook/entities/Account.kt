@@ -8,7 +8,7 @@ package cn.kejin.gitbook.entities
 /**
  * Basic Account Info
  */
-open class Account {
+open class Account : BaseResp() {
     var id = ""
     var type = ""
     var username = ""
