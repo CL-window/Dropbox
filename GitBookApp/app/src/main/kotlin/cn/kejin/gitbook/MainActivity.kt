@@ -35,6 +35,10 @@ class MainActivity : CustomStatusBarActivity() {
         navMenuCtrl.checkUserState()
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         return if (keyCode == KeyEvent.KEYCODE_BACK && !mBackFlag) {
             if (!navMenuCtrl.onBackPressed()) {
@@ -50,9 +54,14 @@ class MainActivity : CustomStatusBarActivity() {
         }
     }
 
-    override fun onUserStateChanged(last: AppAccount, now: AppAccount) {
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onUserStateChanged(action: MainApp.UserStateListener.Action, oldState: AppAccount) {
         navMenuCtrl.checkUserState()
     }
+
 
     //
 //    override fun setSupportActionBar(toolbar: Toolbar?) {

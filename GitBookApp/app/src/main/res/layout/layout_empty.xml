@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="match_parent">
 
-</LinearLayout>
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <ImageView
+                android:id="@+id/backSearchBtn"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|left"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vector_arrow_white_48dp"
+                android:tint="@color/textLogo"
+                android:visibility="visible" />
+
+            <cn.kejin.gitbook.views.CustomEditText
+                android:id="@+id/searchEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:cursorVisible="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_search_topic"
+                android:imeActionLabel="topic"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingLeft="45dp"
+                android:paddingRight="45dp"
+                android:singleLine="true"
+                android:textColor="@color/textLogo"
+                android:textColorHint="@color/textLogo"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/clearButton"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_vector_close_white_48dp"
+                android:tint="@color/textLogo"
+                android:visibility="visible" />
+
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+</android.support.design.widget.CoordinatorLayout>

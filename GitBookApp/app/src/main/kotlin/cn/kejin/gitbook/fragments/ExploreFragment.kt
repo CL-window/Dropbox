@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import cn.kejin.android.views.ExRecyclerAdapter
 import cn.kejin.android.views.ExRecyclerView
-import cn.kejin.gitbook.AllTopicsActivity
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.SearchActivity
 import cn.kejin.gitbook.adapters.BooksAdapter
@@ -38,6 +37,8 @@ class ExploreFragment : BaseMainFragment()
         val ONE_PAGE_BOOKS_NUM = 9
     }
 
+    override fun getLayoutId(): Int = R.layout.fragment_explore
+
     /**
      * Topics Header
      */
@@ -50,9 +51,9 @@ class ExploreFragment : BaseMainFragment()
         list.layoutManager = LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false)
         list.adapter = topicsAdapter
 
-        view.findViewById(R.id.allTopics)?.setOnClickListener {
-            navMenuCtrl.clickItem(INavMenu.Item.topics)
-        }
+//        view.findViewById(R.id.allTopics)?.setOnClickListener {
+//            navMenuCtrl.clickItem(INavMenu.Item.topics)
+//        }
 
         view
     }
@@ -78,18 +79,10 @@ class ExploreFragment : BaseMainFragment()
         super.onCreate(savedInstanceState)
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_explore
-
     override fun initializeView(view: View)
     {
         view.findViewById(R.id.menuButton)?.setOnClickListener({
             navMenuCtrl.openDrawer()
-        })
-        view.findViewById(R.id.searchButton)?.setOnClickListener({
-            startActivity(SearchActivity::class.java)
-        })
-        view.findViewById(R.id.allTopics)?.setOnClickListener({
-            startActivity(AllTopicsActivity::class.java)
         })
 
         swipeRefresh = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout

@@ -15,6 +15,7 @@ import android.widget.TextView
 import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.*
 import cn.kejin.gitbook.common.error
+import cn.kejin.gitbook.common.glideAvatar
 import com.bumptech.glide.Glide
 
 /**
@@ -66,10 +67,7 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
             val user = MainApp.account
             userEmail.text = user.email
             userName.text = "${user.name} ( ${user.username} )"
-            Glide.with(activity)
-                    .load(user.urls.avatar)
-                    .placeholder(R.drawable.ic_default_avatar)
-                    .into(avatar)
+            glideAvatar(activity, user.urls.avatar, avatar)
 
             userLayout?.findViewById(R.id.exitAccount)?.setOnClickListener {
                 MainApp.signOut()
@@ -80,6 +78,7 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
             loginLayout?.visibility = View.VISIBLE
             userLayout?.visibility = View.GONE
             loginBtn?.setOnClickListener {
+                closeDrawer()
                 activity.startActivity(Intent(activity, LoginActivity::class.java))
             }
         }

@@ -40,6 +40,7 @@ class PageDriver(val refreshLayout: SwipeRefreshLayout?,
                 if (!exListView.hasFooter(footer))
                     exListView.addFooter(footer)
                 showLoading()
+                exListView.endLoadMore()
             }
 
             Result.NO_MORE -> {

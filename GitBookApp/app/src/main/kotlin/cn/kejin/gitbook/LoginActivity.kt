@@ -59,7 +59,15 @@ class LoginActivity : CustomStatusBarActivity()
                             postDelay({ setResult(RESULT_OK); finish() }, 500)
                         }
                         else {
-                            HttpException(HttpException.E_LOGIN_FAIL, exception?.msg?:"")
+                            /**
+                             * 除去可知的几种情况, 其他都认为是登录失败
+                             */
+                            var code = exception?.code?:HttpException.E_LOGIN_FAIL
+                            if (code >= 0) {
+                                code = HttpException.E_LOGIN_FAIL
+                            }
+
+                            HttpException(code, exception?.msg?:"")
                                     .process(userNameEdit, Snackbar.LENGTH_INDEFINITE)
                         }
                         dismissProgressDialog()

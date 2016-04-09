@@ -1,5 +1,6 @@
 package cn.kejin.gitbook.common
 
+import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
 import android.net.ConnectivityManager
@@ -97,3 +98,16 @@ internal fun dpToPx(dp : Float,
 internal fun pxToDp(px : Float,
                     density : Float = MainApp.displayMetrics.density) : Int
                 = (px / density + 0.5f).toInt();
+
+
+/**
+ * 显示头像
+ */
+internal fun glideAvatar(activity: Activity, url: String, view: ImageView) {
+    Glide.with(activity)
+            .load(url)
+            .error(R.drawable.ic_default_avatar)
+            .placeholder(R.drawable.ic_default_avatar)
+            .dontAnimate()
+            .into(view)
+}

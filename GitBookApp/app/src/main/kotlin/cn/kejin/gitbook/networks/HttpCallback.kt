@@ -45,7 +45,7 @@ abstract class HttpCallback<Model> (val cls : Class<Model>,
     override fun onResponse(call: Call?, resp: Response?) {
         if (resp != null) {
             if (resp.code() != 200) {
-                onFailure(HttpException.E_OTHER, resp.message())
+                onFailure(resp.code(), resp.message())
                 return;
             }
             try {

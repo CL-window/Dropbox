@@ -25,7 +25,7 @@ import cn.kejin.gitbook.entities.AppAccount
  *  3. progressDialog
  *  4. handler = MainApp.handler
  */
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
     /**
      * prevent start activity twice
      */
@@ -34,7 +34,7 @@ abstract class BaseActivity: AppCompatActivity() {
     /**
      * last user state
      */
-    var lastUserState = MainApp.account
+//    var lastUserState = MainApp.account
 
     /**
      * progress dialog
@@ -59,7 +59,16 @@ abstract class BaseActivity: AppCompatActivity() {
         super.onResume()
         startFlag = false;
 
-        checkUserState()
+        MainApp.registerUserStateListener(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        MainApp.unregisterUserStateListener(this)
+    }
+
+    override fun onUserStateChanged(action: MainApp.UserStateListener.Action, oldState: AppAccount) {
+        //
     }
 
     override fun startActivityForResult(intent: Intent?, requestCode: Int, options: Bundle?) {
@@ -71,19 +80,14 @@ abstract class BaseActivity: AppCompatActivity() {
         }
     }
 
-    protected fun checkUserState() {
-        val cur = MainApp.account
-        if (!lastUserState.equals(cur)) {
-            onUserStateChanged(lastUserState, cur)
-        }
-        lastUserState = cur;
-    }
+//    protected fun checkUserState() {
+//        val cur = MainApp.account
+//        if (!lastUserState.equals(cur)) {
+//            onUserStateChanged(lastUserState, cur)
+//            lastUserState.set(cur);
+//        }
+//    }
 
-    /**
-     * TODO: 细化状态变化
-     */
-    open fun onUserStateChanged(last : AppAccount,
-                                now : AppAccount = MainApp.account) {}
 
     /**
      * show progress dialog

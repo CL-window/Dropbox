@@ -10,6 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import java.util.*
 
 import kotlin.collections.mutableListOf
 
@@ -27,11 +28,13 @@ class ExRecyclerView: RecyclerView {
      */
     private var xmlHeader = 0
 
-    protected val headerViews: MutableList<View> = mutableListOf()
+    // 这里用 ArrayList 只是为了在 EditMode 的时候能 Android Studio 不报错
+    protected val headerViews: ArrayList<View> = ArrayList()
 
     private var xmlFooter = 0
 
-    protected val footerViews: MutableList<View> = mutableListOf()
+    protected val footerViews: ArrayList<View> = ArrayList()
+
 
     protected val wrapper = AdapterWrapper()
 

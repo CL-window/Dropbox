@@ -28,8 +28,14 @@ class MainApp : Application()
         lateinit var instance : MainApp
             private set
 
+        // global handler
+        val handler : Handler = Handler()
+
+        // for  dpToPx, pxToDp
+        val displayMetrics = DisplayMetrics()
+
         /**
-         * default shared preferences
+         * shared preferences
          */
         val sharedPref: SharedPreferences
             get() = instance.getSharedPreferences(APP_SHARED_PREF, MODE_PRIVATE)
@@ -37,11 +43,43 @@ class MainApp : Application()
         // global preference
         fun getSharedPref(name : String) = instance.getSharedPreferences(name, MODE_PRIVATE)
 
-        // global handler
-        val handler : Handler = Handler()
+        fun <Model> putValue(key:String, value: Model) {
+            when (value) {
+                is String -> {
+                    sharedPref.edit()?.putString(key, value)?.apply()
+                }
+                is Int -> {
+                    sharedPref.edit()?.putInt(key, value)?.apply()
+                }
+                is Float -> {
+                    sharedPref.edit()?.putFloat(key, value)?.apply()
+                }
+                is Boolean -> {
+                    sharedPref.edit()?.putBoolean(key, value)?.apply()
+                }
+            }
+        }
 
-        // for  dpToPx, pxToDp
-        val displayMetrics = DisplayMetrics()
+        @Suppress("UNCHECKED_CAST")
+        fun <Model> getValue(key: String, defValue: Model): Model {
+            when (defValue) {
+                is String -> {
+                    return sharedPref.getString(key, defValue) as Model
+                }
+                is Int -> {
+                    return sharedPref.getInt(key, defValue) as Model
+                }
+                is Float -> {
+                    return sharedPref.getFloat(key, defValue) as Model
+                }
+                is Boolean -> {
+                    return sharedPref.getBoolean(key, defValue) as Model
+                }
+            }
+
+            return defValue
+        }
+
 
         /**
          * get resources
@@ -57,6 +95,16 @@ class MainApp : Application()
         /**
          * User Account Manage
          */
+        private val userStateListeners = mutableSetOf<UserStateListener>()
+
+        fun registerUserStateListener(listener: UserStateListener) {
+            userStateListeners.add(listener)
+        }
+
+        fun unregisterUserStateListener(listener: UserStateListener) {
+            userStateListeners.remove(listener)
+        }
+
         /**
          * 保证不被改变
          */
@@ -73,19 +121,41 @@ class MainApp : Application()
             get() = user.copy()
 
         /**
-         * 登录
+         * 是否登录
          */
-        fun signIn(ac: AppAccount?):Boolean
-                = if (ac != null && ac.isSingedIn()) { user.set(ac); true } else { false }
-
-        /**
-         * 登出
-         */
-        fun signOut() = user.signOut()
-
         fun isSignedIn() = user.isSingedIn()
 
+        /**
+         * 授权值
+         */
         fun authValue() = user.authValue()
+
+
+        /**
+         * 登录,并保存数据到 xml
+         */
+        fun signIn(ac: AppAccount?):Boolean {
+            if (ac != null && ac.isSingedIn()) {
+                val old = user.copy()
+                user.set(ac).save();
+                userStateListeners.forEach {
+                    it.onUserStateChanged(UserStateListener.Action.SIGN_IN, old)
+                }
+                return true
+            }
+            return false
+        }
+
+        /**
+         * 登出, 清除用户数据
+         */
+        fun signOut() {
+            val old = user.copy()
+            user.save(true)
+            userStateListeners.forEach {
+                it.onUserStateChanged(UserStateListener.Action.SIGN_OUT, old)
+            }
+        }
     }
 
     override fun onCreate() {
@@ -94,16 +164,13 @@ class MainApp : Application()
         instance = this
 
         displayMetrics.setTo(resources.displayMetrics)
-
-        user.restore()
     }
 
+    interface UserStateListener {
+        enum class Action {
+            SIGN_IN, SIGN_OUT, INFO_CHANGE
+        }
 
-    fun putString(key: String, value: String) {
-        sharedPref.edit()?.putString(key, value)?.apply()
-    }
-
-    fun getString(key: String, defaultValue: String = ""): String {
-        return sharedPref.getString(key, defaultValue)?:defaultValue
+        fun onUserStateChanged(action: Action, oldState: AppAccount)
     }
 }

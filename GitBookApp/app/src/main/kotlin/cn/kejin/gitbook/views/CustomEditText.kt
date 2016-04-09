@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.widget.EditText
+import cn.kejin.gitbook.R
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -11,20 +12,25 @@ import android.widget.EditText
  */
 class CustomEditText: EditText
 {
-    constructor(context: Context?) : super(context, null, 0)
-    constructor(context: Context?, attrs: AttributeSet?) : super (context, attrs, 0)
+    constructor(context: Context?) : this(context, null, 0)
+    constructor(context: Context?, attrs: AttributeSet?) : this (context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    {
+        if (!isInEditMode && context != null && attrs != null) {
+            val typeArr = context.obtainStyledAttributes(attrs, R.styleable.CustomText, defStyleAttr, 0)
 
-    init {
-        if (CustomTextView.customTypeface == null && context != null) {
-            CustomTextView.customTypeface = Typeface.createFromAsset(context.assets, CustomTextView.ROBOTO_LIGHT)
+            val thin: Boolean = typeArr.getBoolean(R.styleable.CustomText_thin, false)
+            val regular: Boolean = typeArr.getBoolean(R.styleable.CustomText_regular, false)
+
+            if (regular) {
+                typeface = CustomTextView.robotoRegular
+            }
+            else if (thin) {
+                typeface = CustomTextView.robotoThin
+            }
+            else {
+                typeface = CustomTextView.robotoLight
+            }
         }
-
-        if (CustomTextView.customTypeface != null) {
-            typeface = CustomTextView.customTypeface
-        }
-
-        isFocusable=true
-        isFocusableInTouchMode=true
     }
 }

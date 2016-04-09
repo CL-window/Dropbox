@@ -1,6 +1,7 @@
 package cn.kejin.gitbook.adapters
 
 import android.app.Activity
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
@@ -8,7 +9,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import cn.kejin.android.views.ExRecyclerAdapter
+import cn.kejin.gitbook.BookDetailActivity
 import cn.kejin.gitbook.R
+import cn.kejin.gitbook.common.glideAvatar
+import cn.kejin.gitbook.entities.WWWAuthor
 import cn.kejin.gitbook.entities.WWWBook
 import com.bumptech.glide.Glide
 
@@ -44,21 +48,27 @@ class BooksAdapter(activity: Activity) :
             summary.text = model.summary
 
             val avatar = findView(R.id.avatar) as ImageView
-            Glide.with(activity).load(model.author.avatar).into(avatar)
+            glideAvatar(activity, model.author.avatar, avatar)
 
             val author = findView(R.id.author) as TextView
             author.text = model.author.name
 
-            itemView.setOnClickListener({ startBookDetailActivity() })
-            findView(R.id.authorLayout).setOnClickListener({ startAuthorActivity() })
+            itemView.setOnClickListener({
+                startBookDetailActivity(model)
+            })
+            findView(R.id.authorLayout).setOnClickListener({
+                startAuthorActivity(model.author)
+            })
         }
     }
 
-    fun startAuthorActivity(){
+    fun startAuthorActivity(author: WWWAuthor){
         // TODO:
     }
 
-    fun startBookDetailActivity() {
-        // TODO:
+    fun startBookDetailActivity(book: WWWBook) {
+        val intent = Intent(activity, BookDetailActivity::class.java)
+        intent.putExtra(BookDetailActivity.INTENT_KEY, book)
+        activity.startActivity(intent)
     }
 }

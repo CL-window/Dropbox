@@ -5,6 +5,8 @@ import android.graphics.Typeface
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.widget.TextView
+import cn.kejin.gitbook.MainApp
+import cn.kejin.gitbook.R
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -21,21 +23,37 @@ class CustomTextView : TextView
         val ROBOTO_REGULAR = "Roboto-Regular.ttf"
         val ROBOTO_LIGHT = "Roboto-Light.ttf"
 
-        var customTypeface : Typeface? = null
+        val robotoThin by lazy {
+            Typeface.createFromAsset(MainApp.instance.assets, ROBOTO_THIN)
+        }
+        val robotoRegular by lazy {
+            Typeface.createFromAsset(MainApp.instance.assets, ROBOTO_REGULAR)
+        }
+        val robotoLight by lazy {
+            Typeface.createFromAsset(MainApp.instance.assets, ROBOTO_LIGHT)
+        }
     }
 
-    constructor(context: Context?) : super(context, null, 0)
-    constructor(context: Context?, attrs: AttributeSet?) : super (context, attrs, 0)
+    constructor(context: Context?) : this(context, null, 0)
+    constructor(context: Context?, attrs: AttributeSet?) : this (context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-    init {
-        if (customTypeface == null && context != null) {
-            customTypeface = Typeface.createFromAsset(context.assets, ROBOTO_LIGHT)
-        }
+    {
+        if (!isInEditMode && context != null && attrs != null) {
+            val typeArr = context.obtainStyledAttributes(attrs, R.styleable.CustomText, defStyleAttr, 0)
 
-        if (customTypeface != null) {
-            typeface = customTypeface
-        }
+            val thin: Boolean = typeArr.getBoolean(R.styleable.CustomText_thin, false)
+            val regular: Boolean = typeArr.getBoolean(R.styleable.CustomText_regular, false)
 
-        ellipsize = TextUtils.TruncateAt.END
+            if (regular) {
+                typeface = robotoRegular
+            }
+            else if (thin) {
+                typeface = robotoThin
+            }
+            else {
+                typeface = robotoLight
+            }
+        }
     }
+
 }

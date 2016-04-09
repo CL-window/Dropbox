@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:minHeight="200dp">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="200dp"
+             android:minHeight="200dp">
 
     <ImageView
         android:layout_width="match_parent"
@@ -13,29 +13,32 @@
 
     <LinearLayout
         android:id="@+id/loginLayout"
-        android:orientation="vertical"
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
         <ImageView
             android:layout_width="70dp"
-            android:layout_height="72dp"
-            android:scaleType="fitXY"
+            android:layout_height="70dp"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_circle_logo_gitbook"/>
+            android:background="@drawable/bg_circle_image"
+            android:padding="10dp"
+            android:src="@drawable/ic_logo_gitbook"/>
 
-        <TextView
+
+        <cn.kejin.gitbook.views.CustomTextView
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:paddingLeft="20dp"
-            android:gravity="center_vertical"
-            android:text="@string/login_in_to_gitbook"
-            android:textSize="15sp"
-            android:textColor="@color/white"
             android:layout_gravity="bottom"
-            android:background="#88000000"/>
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/action_sign"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
     </LinearLayout>
 
 
@@ -43,13 +46,13 @@
         android:id="@+id/userLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="bottom"
         android:paddingBottom="8dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingTop="8dp"
-        android:layout_gravity="bottom"
-        android:visibility="gone"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:visibility="gone">
 
 
         <LinearLayout
@@ -64,29 +67,29 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_default_avatar" />
+                android:src="@drawable/ic_default_avatar"/>
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:singleLine="true"
                 android:paddingLeft="10dp"
+                android:singleLine="true"
                 android:text="Kejin"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/userEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
                 android:paddingLeft="10dp"
+                android:singleLine="true"
                 android:text="liungkejin@gmail.com"
                 android:textColor="#DDDDDD"
-                android:textSize="13sp" />
+                android:textSize="13sp"/>
         </LinearLayout>
 
 
@@ -97,7 +100,7 @@
             android:layout_gravity="bottom|right"
             android:contentDescription="@string/exit_account"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_vector_exit_white_48dp" />
+            android:src="@drawable/ic_vector_exit_white_48dp"/>
     </FrameLayout>
 
 </FrameLayout>

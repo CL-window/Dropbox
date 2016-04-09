@@ -1,10 +1,12 @@
 package cn.kejin.gitbook.entities
 
+import java.io.Serializable
+
 /**
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/3/29
  */
-open class WWW {
+open class WWW : Serializable{
     companion object {
         /**
          * parse first number string

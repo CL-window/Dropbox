@@ -11,13 +11,13 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+        android:orientation="vertical">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="">
             <include layout="@layout/layout_custom_status_bar"/>
             <FrameLayout
                 android:id="@+id/customTitleBar"

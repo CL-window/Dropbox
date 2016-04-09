@@ -2,8 +2,8 @@
 <cn.kejin.gitbook.views.CustomTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/listPreferredItemHeightSmall"
-    android:minHeight="?attr/listPreferredItemHeightSmall"
+    android:layout_height="45dp"
+    android:minHeight="45dp"
     android:gravity="center_vertical|start"
     android:maxLines="1"
     android:paddingLeft="15dp"

@@ -100,12 +100,6 @@ class AppAccount : Account() {
     }
 
     /**
-     * 登出, 清除用户数据
-     */
-    fun signOut() = save(true)
-
-
-    /**
      * 判断两个用户状态是否相同
      */
     override fun equals(other: Any?): Boolean {

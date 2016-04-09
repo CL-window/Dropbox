@@ -1,68 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="cn.kejin.gitbook.MainActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefresh"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <cn.kejin.android.views.ExRecyclerView
-            android:id="@+id/recyclerView"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent" >
+
+            <cn.kejin.android.views.ExRecyclerView
+                android:id="@+id/topicRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <include layout="@layout/layout_custom_status_bar" />
-        <FrameLayout
-            android:id="@+id/customTitleBar"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|snap|enterAlwaysCollapsed">
+            <include layout="@layout/layout_custom_status_bar"/>
+            <FrameLayout
+                android:id="@+id/customTitleBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary">
 
-            <ImageView
-                android:id="@+id/menuButton"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|left"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="15dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_vector_menu_white_48dp"
-                android:visibility="visible" />
+                <ImageView
+                    android:id="@+id/menuButton"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_vector_menu_white_48dp"/>
 
-            <cn.kejin.gitbook.views.CustomTextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="70dp"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/title_all_topics"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+                <cn.kejin.gitbook.views.CustomTextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="70dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@string/all_topics"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"/>
 
-            <ImageView
-                android:id="@+id/searchButton"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical|right"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="15dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_vector_search_white_48dp"
-                android:visibility="visible" />
+                <ImageView
+                    android:id="@+id/searchButton"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|right"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_vector_search_white_48dp"/>
 
-        </FrameLayout>
+            </FrameLayout>
+        </LinearLayout>
     </android.support.design.widget.AppBarLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

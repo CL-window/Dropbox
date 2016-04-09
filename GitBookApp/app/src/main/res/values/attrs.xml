@@ -7,4 +7,11 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="CustomText">
+        <attr name="light" format="boolean" />
+        <attr name="regular" format="boolean" />
+        <attr name="thin" format="boolean" />
+    </declare-styleable>
+
 </resources>
