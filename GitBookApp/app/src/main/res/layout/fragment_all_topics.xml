@@ -39,6 +39,7 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+            app:behavior_overlapTop="10dp"
             app:title="@string/all_topics"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 

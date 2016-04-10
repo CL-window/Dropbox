@@ -31,7 +31,7 @@ import cn.kejin.gitbook.common.error
 class TopicsFragment : BaseMainFragment()
 {
     override fun getLayoutId(): Int = R.layout.fragment_all_topics
-    override fun getOptionsMenu(): Int = R.menu.menu_topics
+    override fun getMenuLayoutId(): Int = R.menu.menu_topics
 
     private lateinit var pageDriver : PageDriver
 

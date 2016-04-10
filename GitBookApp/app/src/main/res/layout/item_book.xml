@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/white"
@@ -49,7 +49,7 @@
                 android:layout_height="14dp"
                 android:layout_gravity="center_vertical"
                 android:tint="@color/textSecondary"
-                android:src="@drawable/ic_vector_star_gray_48dp"/>
+                android:src="@drawable/ic_vector_star_white_48dp"/>
 
             <cn.kejin.gitbook.views.CustomTextView
                 android:id="@+id/starNum"

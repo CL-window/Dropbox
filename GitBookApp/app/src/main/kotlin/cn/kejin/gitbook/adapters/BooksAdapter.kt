@@ -53,22 +53,17 @@ class BooksAdapter(activity: Activity) :
             val author = findView(R.id.author) as TextView
             author.text = model.author.name
 
-            itemView.setOnClickListener({
-                startBookDetailActivity(model)
-            })
             findView(R.id.authorLayout).setOnClickListener({
                 startAuthorActivity(model.author)
+            })
+
+            itemView.setOnClickListener({
+                BookDetailActivity.startMe(activity, model)
             })
         }
     }
 
     fun startAuthorActivity(author: WWWAuthor){
         // TODO:
-    }
-
-    fun startBookDetailActivity(book: WWWBook) {
-        val intent = Intent(activity, BookDetailActivity::class.java)
-        intent.putExtra(BookDetailActivity.INTENT_KEY, book)
-        activity.startActivity(intent)
     }
 }

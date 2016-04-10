@@ -63,7 +63,7 @@
 
         <activity android:name=".BookDetailActivity"
                   android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme">
+                  android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 

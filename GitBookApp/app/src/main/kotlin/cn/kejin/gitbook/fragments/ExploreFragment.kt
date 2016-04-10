@@ -41,7 +41,7 @@ class ExploreFragment : BaseMainFragment()
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_explore
-    override fun getOptionsMenu(): Int = R.menu.menu_explore
+    override fun getMenuLayoutId(): Int = R.menu.menu_explore
 
     /**
      * Topics Header
@@ -120,6 +120,7 @@ class ExploreFragment : BaseMainFragment()
                         if (exception == null && model != null) {
                             topicsAdapter.set(model.list)
                             booksList.addHeader(headerTopicView)
+                            booksList.smoothScrollToPosition(0)
                         }
                     }
                 })

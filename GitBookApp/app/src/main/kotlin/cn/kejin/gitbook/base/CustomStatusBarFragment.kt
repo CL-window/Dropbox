@@ -8,6 +8,7 @@ import cn.kejin.gitbook.R
  * Author: Kejin ( Liang Ke Jin )
  * Date: 2016/4/8
  */
+@Deprecated("太麻烦, 不值得")
 abstract class CustomStatusBarFragment : BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {

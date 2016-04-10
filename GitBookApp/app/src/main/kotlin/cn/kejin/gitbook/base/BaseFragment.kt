@@ -30,7 +30,7 @@ abstract class BaseFragment : Fragment()
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
 
-        val id = getOptionsMenu()
+        val id = getMenuLayoutId()
         if (id > 0) {
             inflater?.inflate(id, menu)
         }
@@ -57,7 +57,7 @@ abstract class BaseFragment : Fragment()
 
     open fun hasOptionMenu() = true
 
-    open fun getOptionsMenu(): Int = 0
+    open fun getMenuLayoutId(): Int = 0
 
     abstract fun getLayoutId() : Int
 

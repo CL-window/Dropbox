@@ -16,6 +16,7 @@ import cn.kejin.gitbook.base.BaseActivity
  * 为了支持 19 的透明状态栏, 配合 R.layout.layout_custom_status_bar
  * 状态栏的 id 为 customStatusBar
  */
+@Deprecated("太麻烦。。。没必要")
 abstract class CustomStatusBarActivity : BaseActivity()
 {
     /**

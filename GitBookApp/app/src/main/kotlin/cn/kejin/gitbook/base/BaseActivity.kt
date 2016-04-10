@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.View
 import android.view.WindowManager
 import android.widget.ProgressBar
@@ -50,6 +51,11 @@ abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
      */
     val handler = MainApp.handler
 
+    /*******************************************FUN***************************************/
+    abstract fun getLayoutId() : Int;
+
+    open fun getMenuLayoutId(): Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,6 +63,15 @@ abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
         if (layoutId > 0) {
             setContentView(layoutId)
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val layoutId = getMenuLayoutId()
+        if (layoutId > 0) {
+            menuInflater.inflate(layoutId, menu)
+            return true
+        }
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onResume() {
@@ -71,8 +86,14 @@ abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
         MainApp.unregisterUserStateListener(this)
     }
 
+    /**
+     * 监听用户状态回调, 子类如果需要就override
+     */
     override fun onUserStateChanged(action: MainApp.UserStateListener.Action, oldState: AppAccount) { }
 
+    /**
+     * 防止点击两次
+     */
     override fun startActivityForResult(intent: Intent?, requestCode: Int, options: Bundle?) {
         if (!startFlag) {
             super.startActivityForResult(intent, requestCode, options)
@@ -82,16 +103,10 @@ abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
         }
     }
 
-    fun getIntentString(key: String, defValue: String) : String {
-        return intent?.getStringExtra(key)?:defValue
-    }
-
-
     /**
      * show progress dialog
      */
-    fun showProgressDialog(cancelable: Boolean=true, outSideCancel: Boolean=false)
-    {
+    fun showProgressDialog(cancelable: Boolean=true, outSideCancel: Boolean=false) {
         if (progressDialog == null) {
             progressDialog = AlertDialog.Builder(this, R.style.TransDialog)
                     .setView(ProgressBar(this))
@@ -109,8 +124,7 @@ abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
         progressDialog?.show()
     }
 
-    fun dismissProgressDialog()
-    {
+    fun dismissProgressDialog() {
         progressDialog?.dismiss()
     }
 
@@ -136,5 +150,4 @@ abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
      */
     fun startBrowser(uri : String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
 
-    abstract fun getLayoutId() : Int;
 }

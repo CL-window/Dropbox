@@ -1,78 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 android:id="@+id/main_content"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:fitsSystemWindows="true">
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/detail_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom"
-        android:background="?attr/colorPrimary"
-        app:layout_anchor="@+id/appbar"
-        app:layout_anchorGravity="bottom"
-        app:tabGravity="fill"
-        app:tabMode="fixed" />
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:CustomText="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
+        android:layout_height="150dp"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:title="ABC"
             app:titleEnabled="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:title="ABC"
+            app:expandedTitleGravity="top"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <ImageView
-                android:id="@+id/backdrop"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_vector_arrow_white_24dp"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+
         </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextAppearance="@style/TabText">
+            <android.support.design.widget.TabItem
+                android:id="@+id/aboutItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About this book"/>
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tableItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Table of contents"/>
+        </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <cn.kejin.gitbook.views.CustomTextView
+                android:id="@+id/bookTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Docker —— 从入门到实践 "
+                android:textSize="20sp"
+                android:textColor="@color/textPrimary"
+                android:maxLines="3"
+                android:padding="10dp"
+                CustomText:regular="true"
+                android:visibility="visible"/>
+
+            <cn.kejin.gitbook.views.CustomTextView
+                android:id="@+id/bookDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Help you understand and use docker,with practical cases"
+                android:textSize="15sp"
+                android:textColor="@color/textSecondary"
+                android:minLines="2"
+                android:maxLines="7"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:ellipsize="end"
+                CustomText:regular="true"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="right">
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="2px"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:background="@color/textPrimary"/>
+
+                <cn.kejin.gitbook.views.CustomTextView
+                    android:id="@+id/authorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="yeasy"
+                    android:textSize="15sp"
+                    android:textColor="@color/textPrimary"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 
-    <!--<include layout="@layout/nested_scrollview"/>-->
-
-
-    <!--<android.support.design.widget.FloatingActionButton
-        android:layout_height="wrap_content"
+    <!--TODO: 添加 star 和 subscribe 的功能-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/starFab"
+        android:visibility="gone"
         android:layout_width="wrap_content"
-        app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|right|end"
-        android:src="@drawable/ic_discuss"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"/>-->
+        android:layout_height="wrap_content"
+        android:layout_margin="60dp"
+        android:src="@drawable/ic_vector_star_white_48dp"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/scripFab"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_vector_subscriptions_white_48dp"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|end"/>
 
 </android.support.design.widget.CoordinatorLayout>
