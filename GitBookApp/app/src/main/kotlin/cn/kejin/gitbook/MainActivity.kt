@@ -5,6 +5,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
+import cn.kejin.gitbook.base.BaseActivity
 import cn.kejin.gitbook.base.CustomStatusBarActivity
 import cn.kejin.gitbook.common.snack
 import cn.kejin.gitbook.entities.AppAccount
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  * Manager All Fragment
  *
  */
-class MainActivity : CustomStatusBarActivity() {
+class MainActivity : BaseActivity() {
     companion object {
         val TAG = "MainActivity"
     }
@@ -58,21 +59,17 @@ class MainActivity : CustomStatusBarActivity() {
         super.onPause()
     }
 
-    override fun onUserStateChanged(action: MainApp.UserStateListener.Action, oldState: AppAccount) {
+    override fun onUserStateChanged(
+            action: MainApp.UserStateListener.Action, oldState: AppAccount) {
         navMenuCtrl.checkUserState()
     }
 
+    override fun setSupportActionBar(toolbar: Toolbar?) {
+        super.setSupportActionBar(toolbar)
 
-    //
-//    override fun setSupportActionBar(toolbar: Toolbar?) {
-//        super.setSupportActionBar(toolbar)
-//
-//        if (toolbar != null) {
-//            val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
-//                    R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-//            drawerLayout.setDrawerListener(toggle)
-//            toggle.syncState()
-//        }
-//    }
-//
+        if (toolbar != null) {
+            navMenuCtrl.setSupportActionBar(toolbar)
+        }
+    }
+
 }

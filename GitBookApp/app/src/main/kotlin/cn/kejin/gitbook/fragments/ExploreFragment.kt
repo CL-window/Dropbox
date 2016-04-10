@@ -6,20 +6,23 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.Toolbar
+import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
 import cn.kejin.android.views.ExRecyclerAdapter
 import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.SearchActivity
+import cn.kejin.gitbook.TopicBooksActivity
 import cn.kejin.gitbook.adapters.BooksAdapter
 import cn.kejin.gitbook.base.BaseMainFragment
 import cn.kejin.gitbook.common.dpToPx
 import cn.kejin.gitbook.common.error
 import cn.kejin.gitbook.controllers.PageController
 import cn.kejin.gitbook.controllers.PageDriver
+import cn.kejin.gitbook.entities.ATopic
+import cn.kejin.gitbook.entities.Topics
 import cn.kejin.gitbook.entities.WWWExplorePage
 import cn.kejin.gitbook.entities.WWWTopic
 import cn.kejin.gitbook.navmenu.INavMenu
@@ -38,25 +41,14 @@ class ExploreFragment : BaseMainFragment()
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_explore
+    override fun getOptionsMenu(): Int = R.menu.menu_explore
 
     /**
      * Topics Header
      */
-    val topicsAdapter
-            by lazy { TopicsAdapter(activity) }
+    lateinit var topicsAdapter: TopicsAdapter
 
-    private val headerTopicView by lazy {
-        val view = View.inflate(mainActivity, R.layout.layout_explore_topics_header, null)
-        val list = view.findViewById(R.id.topicsHorList) as RecyclerView
-        list.layoutManager = LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false)
-        list.adapter = topicsAdapter
-
-//        view.findViewById(R.id.allTopics)?.setOnClickListener {
-//            navMenuCtrl.clickItem(INavMenu.Item.topics)
-//        }
-
-        view
-    }
+    lateinit var headerTopicView :View
 
     /**
      * Main Book List
@@ -75,16 +67,20 @@ class ExploreFragment : BaseMainFragment()
      */
     lateinit var pageDriver : PageDriver
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun initializeView(view: View)
     {
-        view.findViewById(R.id.menuButton)?.setOnClickListener({
-            navMenuCtrl.openDrawer()
-        })
+        /**
+         * 初始化 header view
+         */
+        topicsAdapter = TopicsAdapter(activity)
+        headerTopicView = View.inflate(mainActivity, R.layout.layout_explore_topics_header, null)
+        val list = headerTopicView.findViewById(R.id.topicsHorList) as RecyclerView
+        list.layoutManager = LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false)
+        list.adapter = topicsAdapter
 
+        /**
+         * 初始化 swipe, recycler
+         */
         swipeRefresh = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
         swipeRefresh.setDistanceToTriggerSync(dpToPx(130f))
 
@@ -98,6 +94,15 @@ class ExploreFragment : BaseMainFragment()
         pageDriver.refresh()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.searchAction -> {
+                startActivity(SearchActivity::class.java)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     /**
      * load data from server
@@ -108,6 +113,18 @@ class ExploreFragment : BaseMainFragment()
         }
 
         override fun onLoading(page: Int) {
+            if (page == 0) {
+                Net.restApi.getAllTopics(page, RestApi.DEF_PAGE_LIMIT,
+                        object : HttpCallback<Topics>(Topics::class.java) {
+                    override fun onResponse(model: Topics?, exception: HttpException?) {
+                        if (exception == null && model != null) {
+                            topicsAdapter.set(model.list)
+                            booksList.addHeader(headerTopicView)
+                        }
+                    }
+                })
+            }
+
             Net.wwwApi.getExplorePage(page,
                     object : HttpCallback<WWWExplorePage>(WWWExplorePage::class.java) {
                         override fun onResponse(model: WWWExplorePage?, exception: HttpException?) {
@@ -133,10 +150,7 @@ class ExploreFragment : BaseMainFragment()
     fun bindModelToView(page : Int, model : WWWExplorePage)
     {
         if (page == 0) {
-            topicsAdapter.set(model.topics)
             booksAdapter.set(model.books)
-
-            booksList.addHeader(headerTopicView)
         }
         else {
             booksAdapter.addAll(model.books)
@@ -144,7 +158,7 @@ class ExploreFragment : BaseMainFragment()
     }
 
     inner class TopicsAdapter(activity: Activity) :
-            ExRecyclerAdapter<WWWTopic, TopicsAdapter.Holder>(activity)
+            ExRecyclerAdapter<ATopic, TopicsAdapter.Holder>(activity)
     {
         override fun onBindViewHolder(holder: Holder?, position: Int) {
             holder?.bindView(data[position], position)
@@ -154,10 +168,14 @@ class ExploreFragment : BaseMainFragment()
             return Holder(inflateView(R.layout.item_topic_tag, parent))
         }
 
-        inner class Holder(itemView: View) : ExViewHolder<WWWTopic>(itemView) {
-            override fun bindView(model: WWWTopic, pos: Int) {
+        inner class Holder(itemView: View) : ExViewHolder<ATopic>(itemView) {
+            override fun bindView(model: ATopic, pos: Int) {
                 val text = findView(R.id.topic) as TextView;
-                text.text = "${model.name}  | ${model.num}"
+                text.text = "${model.name}  | ${model.books}"
+
+                itemView.setOnClickListener {
+                    TopicBooksActivity.startMe(activity, model.name)
+                }
             }
         }
     }

@@ -26,6 +26,10 @@ import cn.kejin.gitbook.entities.AppAccount
  *  4. handler = MainApp.handler
  */
 abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
+
+    companion object {
+        val clz = 0
+    }
     /**
      * prevent start activity twice
      */
@@ -67,9 +71,7 @@ abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
         MainApp.unregisterUserStateListener(this)
     }
 
-    override fun onUserStateChanged(action: MainApp.UserStateListener.Action, oldState: AppAccount) {
-        //
-    }
+    override fun onUserStateChanged(action: MainApp.UserStateListener.Action, oldState: AppAccount) { }
 
     override fun startActivityForResult(intent: Intent?, requestCode: Int, options: Bundle?) {
         if (!startFlag) {
@@ -80,13 +82,9 @@ abstract class BaseActivity: AppCompatActivity(), MainApp.UserStateListener {
         }
     }
 
-//    protected fun checkUserState() {
-//        val cur = MainApp.account
-//        if (!lastUserState.equals(cur)) {
-//            onUserStateChanged(lastUserState, cur)
-//            lastUserState.set(cur);
-//        }
-//    }
+    fun getIntentString(key: String, defValue: String) : String {
+        return intent?.getStringExtra(key)?:defValue
+    }
 
 
     /**

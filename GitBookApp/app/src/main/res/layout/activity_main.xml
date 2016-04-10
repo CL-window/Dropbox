@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawerLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
+    <FrameLayout
+        android:id="@+id/fragmentContent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<include layout="@layout/layout_horizontal_logo"-->
+                 <!--android:layout_gravity="center"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:layout_width="wrap_content"/>-->
+    </FrameLayout>
+
+    <android.support.design.internal.ScrimInsetsFrameLayout
+        android:fitsSystemWindows="true"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
-        tools:openDrawer="start">
-
-        <FrameLayout
-            android:id="@+id/fragmentContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!--<include layout="@layout/layout_horizontal_logo" />-->
-        </FrameLayout>
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:insetForeground="#88212121">
 
         <cn.kejin.android.views.ExRecyclerView
             android:id="@+id/navList"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
             android:scrollbars="none"
-            android:background="@android:color/white"
             app:header="@layout/layout_nav_header"/>
-    </android.support.v4.widget.DrawerLayout>
+    </android.support.design.internal.ScrimInsetsFrameLayout>
 
-    <FrameLayout
-        android:id="@+id/customStatusBar"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="#33000000"
-        android:visibility="visible">
-    </FrameLayout>
-</FrameLayout>
+</android.support.v4.widget.DrawerLayout>

@@ -3,9 +3,7 @@ package cn.kejin.gitbook.base
 import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 
 /**
  * Author: Kejin ( Liang Ke Jin )
@@ -17,24 +15,25 @@ import android.view.ViewGroup
  */
 abstract class BaseFragment : Fragment()
 {
-//    fun configStatusBar(view: View, visible : Int = View.VISIBLE,
-//                        color : Int = Color.RED)
-//    {
-//        if (activity is BaseActivity) {
-//            var act = activity as BaseActivity
-//
-//            if (act.mStatusBarTranslucentFlag) {
-//                val statusBar = view.findViewById(R.id.customStatusBar)
-//                statusBar?.visibility = visible;
-//                statusBar?.setBackgroundColor(color)
-//            }
-//        }
-//    }
-
     protected var rootView : View? = null;
 
     fun startActivity(clz : Class<*>) {
         startActivity(Intent(activity, clz))
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(hasOptionMenu())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        val id = getOptionsMenu()
+        if (id > 0) {
+            inflater?.inflate(id, menu)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater?,
@@ -55,6 +54,10 @@ abstract class BaseFragment : Fragment()
 
         return rootView;
     }
+
+    open fun hasOptionMenu() = true
+
+    open fun getOptionsMenu(): Int = 0
 
     abstract fun getLayoutId() : Int
 

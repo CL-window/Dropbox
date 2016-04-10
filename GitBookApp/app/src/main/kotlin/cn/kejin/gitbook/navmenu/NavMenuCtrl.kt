@@ -6,8 +6,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -109,6 +111,13 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
 //        if (drawer.isDrawerOpen(GravityCompat.START))
     }
 
+    override fun setSupportActionBar(toolbar: Toolbar) {
+        val toggle = ActionBarDrawerToggle(activity, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.setDrawerListener(toggle)
+        toggle.syncState()
+    }
+
     private fun replaceFragment(fragment: Fragment)
             = activity.fragmentManager.beginTransaction()
             .replace(R.id.fragmentContent, fragment).addToBackStack(fragment.toString()).commit()
@@ -150,6 +159,9 @@ class NavMenuCtrl(val drawer: DrawerLayout, val activity: Activity) : INavMenu
                         var bgColor = Color.TRANSPARENT
                         var textColor = MainApp.color(R.color.colorPrimary);
 
+                        /**
+                         * ON Selected
+                         */
                         if (pos == curSelectedItemIndex) {
                             bgColor = Color.LTGRAY
                             textColor =  MainApp.color(R.color.colorSelected)

@@ -97,7 +97,7 @@
             android:maxLines="6"
             android:scrollbars="none"
             android:textColor="@color/textLogo"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:lineSpacingExtra="1.5dp"/>
 
         <LinearLayout

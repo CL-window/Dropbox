@@ -1,14 +1,18 @@
 package cn.kejin.gitbook.fragments
 
 import android.app.Activity
+import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.GridLayoutManager
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import cn.kejin.android.views.ExRecyclerAdapter
 import cn.kejin.android.views.ExRecyclerView
 import cn.kejin.gitbook.R
+import cn.kejin.gitbook.SearchActivity
+import cn.kejin.gitbook.TopicBooksActivity
 import cn.kejin.gitbook.base.BaseMainFragment
 import cn.kejin.gitbook.common.dismissSoftInputMethod
 import cn.kejin.gitbook.controllers.PageController
@@ -27,6 +31,7 @@ import cn.kejin.gitbook.common.error
 class TopicsFragment : BaseMainFragment()
 {
     override fun getLayoutId(): Int = R.layout.fragment_all_topics
+    override fun getOptionsMenu(): Int = R.menu.menu_topics
 
     private lateinit var pageDriver : PageDriver
 
@@ -34,7 +39,7 @@ class TopicsFragment : BaseMainFragment()
 
     override fun initializeView(view: View)
     {
-        view.findViewById(R.id.menuButton).setOnClickListener { navMenuCtrl.openDrawer() }
+//        view.findViewById(R.id.menuButton).setOnClickListener { navMenuCtrl.openDrawer() }
 
         val swipeRefresh = view.findViewById(R.id.swipeRefresh) as SwipeRefreshLayout
         val recyclerView = view.findViewById(R.id.topicRecyclerView) as ExRecyclerView
@@ -46,6 +51,15 @@ class TopicsFragment : BaseMainFragment()
         pageDriver.refresh()
     }
 
+    override fun onContextItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.searchAction -> {
+                startActivity(SearchActivity::class.java)
+                return true
+            }
+        }
+        return super.onContextItemSelected(item)
+    }
 
     private val pageCallback =  object : PageDriver.ICallback {
         override fun onRefreshFailed() {
@@ -91,6 +105,10 @@ class TopicsFragment : BaseMainFragment()
             override fun bindView(model: ATopic, pos: Int) {
                 (findView(R.id.topicName) as TextView).text = model.name
                 (findView(R.id.topicNum) as TextView).text = "${model.books} Books"
+
+                itemView?.setOnClickListener {
+                    TopicBooksActivity.startMe(activity, model.id)
+                }
             }
         }
     }

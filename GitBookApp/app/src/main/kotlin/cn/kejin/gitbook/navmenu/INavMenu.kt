@@ -1,5 +1,6 @@
 package cn.kejin.gitbook.navmenu
 
+import android.support.v7.widget.Toolbar
 import cn.kejin.gitbook.AboutActivity
 import cn.kejin.gitbook.R
 import cn.kejin.gitbook.SettingsActivity
@@ -66,4 +67,9 @@ interface INavMenu {
      * 关闭抽屉
      */
     fun closeDrawer()
+
+    /**
+     * 设置 Toolbar
+     */
+    fun setSupportActionBar(toolbar: Toolbar)
 }
