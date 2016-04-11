@@ -52,4 +52,10 @@ interface WWWApi : Net {
     fun getTopicBookPage(topic: String,
                          latest: Boolean,
                          callback: HttpCallback<WWWExplorePage>): Call?
+
+    /**
+     * get details of book
+     * 解析详情页面
+     */
+    fun getBookDetailPage(detailUrl: String)
 }

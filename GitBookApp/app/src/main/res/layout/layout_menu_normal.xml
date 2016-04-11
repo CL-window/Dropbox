@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:minHeight="45dp">
+             xmlns:CustomText="http://schemas.android.com/apk/res-auto"
+             android:orientation="horizontal"
+             android:layout_width="match_parent"
+             android:layout_height="45dp"
+             android:minHeight="45dp">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -29,7 +30,8 @@
             android:gravity="center_vertical|start"
             android:maxLines="1"
             android:textSize="13sp"
-            android:textColor="?android:attr/textColorPrimary"/>
+            android:textColor="?android:attr/textColorPrimary"
+            CustomText:regular="true"/>
 
     </LinearLayout>
 </FrameLayout>

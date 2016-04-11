@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="45dp"
+    xmlns:CustomText="http://schemas.android.com/apk/res-auto"
     android:minHeight="45dp"
     android:gravity="center_vertical|start"
     android:maxLines="1"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:textAppearance="?attr/textAppearanceListItem"
-    android:textColor="?android:textColorSecondary"
-    android:textSize="16sp"/>
+    android:textColor="@color/textLogo"
+    android:textSize="16sp"
+    CustomText:regular="true"/>
