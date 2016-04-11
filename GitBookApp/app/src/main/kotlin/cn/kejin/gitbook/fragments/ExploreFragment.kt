@@ -138,7 +138,7 @@ class ExploreFragment : BaseMainFragment()
                                 bindModelToView(page, model)
                             }
                             else {
-                                exception.process(view)
+                                exception.process(swipeRefresh)
                                 result = PageController.Result.FAILED
                             }
 
