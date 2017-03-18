@@ -77,6 +77,18 @@ class Rect {
             cout << "rd: " << rdx << ", " << rdy << endl;
             cout << "ld: " << ldx << ", " << ldy << endl;
 
+            float ow = (maxx - minx);
+            float oh = (maxy - miny);
+            float coord[8];
+            coord[0] = ltx / ow; coord[1] = lty / oh;
+            coord[2] = rtx / ow; coord[3] = rty / oh;
+            coord[4] = ldx / ow; coord[5] = ldy / oh;
+            coord[6] = rdx / ow; coord[7] = rdy / oh;
+
+            cout << "[1]: " << coord[0] << "," << coord[1] << endl;
+            cout << "[2]: " << coord[2] << "," << coord[3] << endl;
+            cout << "[3]: " << coord[4] << "," << coord[5] << endl;
+            cout << "[4]: " << coord[6] << "," << coord[7] << endl;
         }
         int width, height;
 };
@@ -85,7 +97,8 @@ int main(void) {
     std::cout << "run test" << std::endl;
 
     Rect rect(400, 300);
-    rect.rotate(90);
+    rect.rotate(45);
     return 0;
 }
+
 ```
